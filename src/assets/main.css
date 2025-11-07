@@ -1,0 +1,45 @@
+body{
+  margin: 0;
+  padding: 0;
+}
+section {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-weight: normal;
+}
+/* 去除a标签下划线 */
+a {
+  color: black;
+  text-decoration: none;
+}
+
+/* 去除未被访问的a标签的下划线 */
+a:link {
+  color: black;
+  text-decoration: none;
+}
+
+/* 去除已经被访问过的a标签的下划线 */
+a:visited {
+  color: black;
+  text-decoration: none;
+}
+
+/* 去除鼠标悬停时的a标签的下划线 */
+a:hover {
+  color: black;
+  text-decoration: none;
+}
+
+/* 去除正在点击的a标签的下划线（鼠标按下，尚未松开） */
+a:active {
+  color: black;
+  text-decoration: none;
+}
+
+/* 去除获得焦点的a标签的下划线（被鼠标点击过） */
+a:focus {
+  color: black;
+  text-decoration: none;
+}

@@ -1,0 +1,25 @@
+[
+  {
+    "name": "苍蓝魔女",
+    "skinId": 1,
+    "image": "Scheherazade_1",
+    "description": "攻击敌人7次，每次攻击时，造成相当于自身魔法力$$attributes1$$的魔法伤害。解除应用于敌人的增益效果。",
+    "sp": 0,
+    "cd": 0,
+    "attributes": "50%"
+  },
+  {
+    "name": "魔法学校教授",
+    "skinId": 2,
+    "image": "Scheherazade_2",
+    "description": "攻击敌人3次，每次攻击时，造成相当于自身魔法力$$attributes1$$的魔法伤害。解除应用于敌人的增益效果。$$attributes2$$回合内，对敌人应用沉默效果。",
+    "sp": 0,
+    "cd": 0,
+    "attributes": "185%;2"
+  },
+  {
+    "name": "苍蓝魔女",
+    "skinId": 1,
+    "image": "Scheherazade_3"
+  }
+]

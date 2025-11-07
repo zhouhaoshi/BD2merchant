@@ -1,0 +1,1511 @@
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+export const fs = require('fs');
+
+const express = require('express'); // 线程
+const app = express(); // 创建进程
+
+app.use(express.json());
+const pe = [{
+    itemId: "icon_food1001_1",
+    item: "獸肉",
+    item_en: "Beast Meat",
+    bdx_id: "1001",
+    minRate: "80",
+    maxRate: "120",
+    base: "5",
+    bdx_type: "5",
+    maxPrice: "5",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1002_2",
+    item: "鮭魚",
+    item_en: "Salmon",
+    bdx_id: "1002",
+    minRate: "80",
+    maxRate: "120",
+    base: "30",
+    bdx_type: "5",
+    maxPrice: "35",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1003_3",
+    item: "淡水蝦",
+    item_en: "Shrimp",
+    bdx_id: "1003",
+    minRate: "70",
+    maxRate: "130",
+    base: "30",
+    bdx_type: "5",
+    maxPrice: "38",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1004_4",
+    item: "小麥",
+    item_en: "Wheat",
+    bdx_id: "1004",
+    minRate: "70",
+    maxRate: "130",
+    base: "5",
+    bdx_type: "5",
+    maxPrice: "6",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1005_5",
+    item: "草藥",
+    item_en: "Herb",
+    bdx_id: "1005",
+    minRate: "70",
+    maxRate: "130",
+    base: "25",
+    bdx_type: "5",
+    maxPrice: "32",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1006_6",
+    item: "玉米",
+    item_en: "Corn",
+    bdx_id: "1006",
+    minRate: "70",
+    maxRate: "130",
+    base: "20",
+    bdx_type: "5",
+    maxPrice: "25",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1007_7",
+    item: "豆子",
+    item_en: "Bean",
+    bdx_id: "1007",
+    minRate: "70",
+    maxRate: "130",
+    base: "15",
+    bdx_type: "5",
+    maxPrice: "19",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1008_8",
+    item: "大麥",
+    item_en: "Barley",
+    bdx_id: "1008",
+    minRate: "70",
+    maxRate: "130",
+    base: "10",
+    bdx_type: "5",
+    maxPrice: "12",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1009_9",
+    item: "啤酒花",
+    item_en: "Hop",
+    bdx_id: "1009",
+    minRate: "70",
+    maxRate: "130",
+    base: "10",
+    bdx_type: "5",
+    maxPrice: "12",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1010_10",
+    item: "米",
+    item_en: "Rice",
+    bdx_id: "1010",
+    minRate: "70",
+    maxRate: "130",
+    base: "5",
+    bdx_type: "5",
+    maxPrice: "6",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1011_11",
+    item: "蘋果",
+    item_en: "Apple",
+    bdx_id: "1011",
+    minRate: "80",
+    maxRate: "120",
+    base: "20",
+    bdx_type: "5",
+    maxPrice: "23",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1012_12",
+    item: "葡萄",
+    item_en: "Grape",
+    bdx_id: "1012",
+    minRate: "80",
+    maxRate: "120",
+    base: "20",
+    bdx_type: "5",
+    maxPrice: "23",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1013_13",
+    item: "蘑菇",
+    item_en: "Mushroom",
+    bdx_id: "1013",
+    minRate: "80",
+    maxRate: "120",
+    base: "10",
+    bdx_type: "5",
+    maxPrice: "11",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1014_14",
+    item: "紅蘿蔔",
+    item_en: "Carrot",
+    bdx_id: "1014",
+    minRate: "80",
+    maxRate: "120",
+    base: "15",
+    bdx_type: "5",
+    maxPrice: "17",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1015_15",
+    item: "馬鈴薯",
+    item_en: "Potato",
+    bdx_id: "1015",
+    minRate: "80",
+    maxRate: "120",
+    base: "5",
+    bdx_type: "5",
+    maxPrice: "5",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1016_16",
+    item: "洋蔥",
+    item_en: "Onion",
+    bdx_id: "1016",
+    minRate: "80",
+    maxRate: "120",
+    base: "20",
+    bdx_type: "5",
+    maxPrice: "23",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1017_17",
+    item: "甜椒",
+    item_en: "Paprika",
+    bdx_id: "1017",
+    minRate: "80",
+    maxRate: "120",
+    base: "20",
+    bdx_type: "5",
+    maxPrice: "23",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1018_18",
+    item: "蘿蔔嬰",
+    item_en: "Radish",
+    bdx_id: "1018",
+    minRate: "80",
+    maxRate: "120",
+    base: "25",
+    bdx_type: "5",
+    maxPrice: "29",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1019_19",
+    item: "花椰菜",
+    item_en: "Broccoli",
+    bdx_id: "1019",
+    minRate: "80",
+    maxRate: "120",
+    base: "25",
+    bdx_type: "5",
+    maxPrice: "29",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1020_20",
+    item: "番茄",
+    item_en: "Tomato",
+    bdx_id: "1020",
+    minRate: "80",
+    maxRate: "120",
+    base: "25",
+    bdx_type: "5",
+    maxPrice: "29",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1022_22",
+    item: "咖啡豆",
+    item_en: "Coffee Bean",
+    bdx_id: "1022",
+    minRate: "80",
+    maxRate: "120",
+    base: "25",
+    bdx_type: "5",
+    maxPrice: "29",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1023_23",
+    item: "糖",
+    item_en: "Sugar",
+    bdx_id: "1023",
+    minRate: "80",
+    maxRate: "120",
+    base: "10",
+    bdx_type: "5",
+    maxPrice: "11",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1024_24",
+    item: "起司",
+    item_en: "Cheese",
+    bdx_id: "1024",
+    minRate: "80",
+    maxRate: "120",
+    base: "15",
+    bdx_type: "5",
+    maxPrice: "17",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1025_25",
+    item: "雞蛋",
+    item_en: "Egg",
+    bdx_id: "1025",
+    minRate: "80",
+    maxRate: "120",
+    base: "10",
+    bdx_type: "5",
+    maxPrice: "11",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1026_26",
+    item: "奶油",
+    item_en: "Butter",
+    bdx_id: "1026",
+    minRate: "80",
+    maxRate: "120",
+    base: "25",
+    bdx_type: "5",
+    maxPrice: "29",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1027_27",
+    item: "牛奶",
+    item_en: "Milk",
+    bdx_id: "1027",
+    minRate: "80",
+    maxRate: "120",
+    base: "15",
+    bdx_type: "5",
+    maxPrice: "17",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1028_28",
+    item: "鮪魚罐頭",
+    item_en: "Canned Tuna",
+    bdx_id: "1028",
+    minRate: "80",
+    maxRate: "120",
+    base: "5",
+    bdx_type: "5",
+    maxPrice: "5",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1029_29",
+    item: "雞胸肉袋",
+    item_en: "Chicken Breast Pack",
+    bdx_id: "1029",
+    minRate: "80",
+    maxRate: "120",
+    base: "5",
+    bdx_type: "5",
+    maxPrice: "5",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1030_30",
+    item: "巧克力",
+    item_en: "Chocolate",
+    bdx_id: "1030",
+    minRate: "80",
+    maxRate: "120",
+    base: "5",
+    bdx_type: "5",
+    maxPrice: "5",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1031_31",
+    item: "吐司",
+    item_en: "Bread",
+    bdx_id: "1031",
+    minRate: "80",
+    maxRate: "120",
+    base: "30",
+    bdx_type: "5",
+    maxPrice: "35",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1032_32",
+    item: "橄欖油",
+    item_en: "Olive Oil",
+    bdx_id: "1032",
+    minRate: "80",
+    maxRate: "120",
+    base: "50",
+    bdx_type: "5",
+    maxPrice: "59",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1033_33",
+    item: "辣醬",
+    item_en: "Chili Sauce",
+    bdx_id: "1033",
+    minRate: "80",
+    maxRate: "120",
+    base: "55",
+    bdx_type: "5",
+    maxPrice: "65",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1034_34",
+    item: "蜂蜜",
+    item_en: "Honey",
+    bdx_id: "1034",
+    minRate: "80",
+    maxRate: "120",
+    base: "50",
+    bdx_type: "5",
+    maxPrice: "59",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1035_35",
+    item: "鹽",
+    item_en: "Salt",
+    bdx_id: "1035",
+    minRate: "80",
+    maxRate: "120",
+    base: "5",
+    bdx_type: "5",
+    maxPrice: "5",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1036_36",
+    item: "哈密瓜",
+    item_en: "Melon",
+    bdx_id: "1036",
+    minRate: "80",
+    maxRate: "120",
+    base: "20",
+    bdx_type: "5",
+    maxPrice: "23",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1037_37",
+    item: "辣椒",
+    item_en: "Pepper",
+    bdx_id: "1037",
+    minRate: "80",
+    maxRate: "120",
+    base: "20",
+    bdx_type: "5",
+    maxPrice: "23",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1038_38",
+    item: "番紅花",
+    item_en: "Saffron",
+    bdx_id: "1038",
+    minRate: "80",
+    maxRate: "120",
+    base: "35",
+    bdx_type: "5",
+    maxPrice: "41",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1039_39",
+    item: "杏仁",
+    item_en: "Almond",
+    bdx_id: "1039",
+    minRate: "80",
+    maxRate: "120",
+    base: "65",
+    bdx_type: "5",
+    maxPrice: "77",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1040_40",
+    item: "水果罐頭",
+    item_en: "Canned Fruit",
+    bdx_id: "1040",
+    minRate: "80",
+    maxRate: "120",
+    base: "90",
+    bdx_type: "5",
+    maxPrice: "107",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1041_41",
+    item: "魚子醬罐頭",
+    item_en: "Canned Caviar",
+    bdx_id: "1041",
+    minRate: "80",
+    maxRate: "120",
+    base: "60",
+    bdx_type: "5",
+    maxPrice: "71",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1042_42",
+    item: "包裝好的海苔",
+    item_en: "Seasoned Seaweed",
+    bdx_id: "1042",
+    minRate: "80",
+    maxRate: "120",
+    base: "55",
+    bdx_type: "5",
+    maxPrice: "65",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1043_43",
+    item: "凱洛藥材",
+    item_en: "Kailac Medicine",
+    bdx_id: "1043",
+    minRate: "80",
+    maxRate: "120",
+    base: "70",
+    bdx_type: "5",
+    maxPrice: "83",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1044_44",
+    item: "薑黃",
+    item_en: "Turmeric",
+    bdx_id: "1044",
+    minRate: "80",
+    maxRate: "120",
+    base: "80",
+    bdx_type: "5",
+    maxPrice: "95",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1045_45",
+    item: "永恆龍舌蘭酒",
+    item_en: "Eternal Love",
+    bdx_id: "1045",
+    minRate: "80",
+    maxRate: "120",
+    base: "85",
+    bdx_type: "5",
+    maxPrice: "101",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1046_46",
+    item: "芥末",
+    item_en: "Wasabi",
+    bdx_id: "1046",
+    minRate: "80",
+    maxRate: "120",
+    base: "90",
+    bdx_type: "5",
+    maxPrice: "107",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1047_47",
+    item: "料酒",
+    item_en: "Cooking Wine",
+    bdx_id: "1047",
+    minRate: "80",
+    maxRate: "120",
+    base: "100",
+    bdx_type: "5",
+    maxPrice: "119",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1048_48",
+    item: "雷瓦汀火腿",
+    item_en: "Levatein Ham",
+    bdx_id: "1048",
+    minRate: "80",
+    maxRate: "120",
+    base: "65",
+    bdx_type: "5",
+    maxPrice: "77",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1050_50",
+    item: "辣椒素",
+    item_en: "Capsaicin",
+    bdx_id: "1050",
+    minRate: "80",
+    maxRate: "120",
+    base: "78",
+    bdx_type: "5",
+    maxPrice: "92",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1051_51",
+    item: "松露油",
+    item_en: "Truffle oil",
+    bdx_id: "1051",
+    minRate: "80",
+    maxRate: "120",
+    base: "75",
+    bdx_type: "5",
+    maxPrice: "89",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1052_52",
+    item: "美乃滋",
+    item_en: "Mayonnaise",
+    bdx_id: "1052",
+    minRate: "80",
+    maxRate: "120",
+    base: "75",
+    bdx_type: "5",
+    maxPrice: "89",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1053_53",
+    item: "盧戈山蔘",
+    item_en: "Lugo Ginseng",
+    bdx_id: "1053",
+    minRate: "80",
+    maxRate: "120",
+    base: "1875",
+    bdx_type: "5",
+    maxPrice: "2231",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1054_54",
+    item: "生命的木炭",
+    item_en: "Charcoal of Life",
+    bdx_id: "1054",
+    minRate: "80",
+    maxRate: "120",
+    base: "1875",
+    bdx_type: "5",
+    maxPrice: "2231",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1055_55",
+    item: "閃爍的粉末",
+    item_en: "Glittering Powder",
+    bdx_id: "1055",
+    minRate: "80",
+    maxRate: "120",
+    base: "1875",
+    bdx_type: "5",
+    maxPrice: "2231",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1056_56",
+    item: "透明的蘑菇",
+    item_en: "Transparent Mushroom",
+    bdx_id: "1056",
+    minRate: "80",
+    maxRate: "120",
+    base: "1875",
+    bdx_type: "5",
+    maxPrice: "2231",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1057_57",
+    item: "穿山甲的鱗片",
+    item_en: "Pangolin Scale",
+    bdx_id: "1057",
+    minRate: "80",
+    maxRate: "120",
+    base: "1875",
+    bdx_type: "5",
+    maxPrice: "2231",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1058_58",
+    item: "能量蘑菇",
+    item_en: "Energy Boost Mushroom",
+    bdx_id: "1058",
+    minRate: "80",
+    maxRate: "120",
+    base: "1875",
+    bdx_type: "5",
+    maxPrice: "2231",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1059_59",
+    item: "禿鷲的羽毛",
+    item_en: "Eagle's Feather",
+    bdx_id: "1059",
+    minRate: "80",
+    maxRate: "120",
+    base: "1875",
+    bdx_type: "5",
+    maxPrice: "2231",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1060_60",
+    item: "魅惑粉末",
+    item_en: "Charm Powder",
+    bdx_id: "1060",
+    minRate: "80",
+    maxRate: "120",
+    base: "1875",
+    bdx_type: "5",
+    maxPrice: "2231",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1061_61",
+    item: "黃金羅勒",
+    item_en: "Golden Basil",
+    bdx_id: "1061",
+    minRate: "80",
+    maxRate: "120",
+    base: "1875",
+    bdx_type: "5",
+    maxPrice: "2231",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1062_62",
+    item: "能量藥水",
+    item_en: "Energy Boost Potion",
+    bdx_id: "1062",
+    minRate: "80",
+    maxRate: "120",
+    base: "1875",
+    bdx_type: "5",
+    maxPrice: "2231",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1063_63",
+    item: "靈魂鮮奶油",
+    item_en: "Soul whipped Cream",
+    bdx_id: "1063",
+    minRate: "80",
+    maxRate: "120",
+    base: "1875",
+    bdx_type: "5",
+    maxPrice: "2231",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1064_64",
+    item: "維生素B濃縮溶液",
+    item_en: "Vita B Concentrated Solution",
+    bdx_id: "1064",
+    minRate: "80",
+    maxRate: "120",
+    base: "1875",
+    bdx_type: "5",
+    maxPrice: "2231",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1065_65",
+    item: "能量粉末",
+    item_en: "Energy Boost Powder",
+    bdx_id: "1065",
+    minRate: "80",
+    maxRate: "120",
+    base: "1875",
+    bdx_type: "5",
+    maxPrice: "2231",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food1066_66",
+    item: "地獄火醬汁",
+    item_en: "Hell's fire Sauce",
+    bdx_id: "1066",
+    minRate: "80",
+    maxRate: "120",
+    base: "1875",
+    bdx_type: "5",
+    maxPrice: "2231",
+    category: "Ingredients"
+}, {
+    itemId: "icon_food2002_2",
+    item: "蘑菇湯",
+    item_en: "Mushroom Soup",
+    bdx_id: "2002",
+    minRate: "80",
+    maxRate: "120",
+    base: "28",
+    bdx_type: "5",
+    maxPrice: "33",
+    category: "Recipe"
+}, {
+    itemId: "icon_food2003_3",
+    item: "炒蘑菇",
+    item_en: "Fried Mushroom",
+    bdx_id: "2003",
+    minRate: "80",
+    maxRate: "120",
+    base: "42",
+    bdx_type: "5",
+    maxPrice: "49",
+    category: "Recipe"
+}, {
+    itemId: "icon_food2004_4",
+    item: "烤菇串",
+    item_en: "Mushroom Skewer",
+    bdx_id: "2004",
+    minRate: "80",
+    maxRate: "120",
+    base: "46",
+    bdx_type: "5",
+    maxPrice: "54",
+    category: "Recipe"
+}, {
+    itemId: "icon_food2005_5",
+    item: "蘑菇烤牛肉火鍋",
+    item_en: "Mushroom Bulgogi Stew",
+    bdx_id: "2005",
+    minRate: "80",
+    maxRate: "120",
+    base: "104",
+    bdx_type: "5",
+    maxPrice: "123",
+    category: "Recipe"
+}, {
+    itemId: "icon_food2006_6",
+    item: "馬鈴薯湯",
+    item_en: "Potato Soup",
+    bdx_id: "2006",
+    minRate: "80",
+    maxRate: "120",
+    base: "43",
+    bdx_type: "5",
+    maxPrice: "51",
+    category: "Recipe"
+}, {
+    itemId: "icon_food2007_7",
+    item: "達雷普黑啤酒",
+    item_en: "Daref Black Beer",
+    bdx_id: "2007",
+    minRate: "80",
+    maxRate: "120",
+    base: "82",
+    bdx_type: "5",
+    maxPrice: "97",
+    category: "Recipe"
+}, {
+    itemId: "icon_food2008_8",
+    item: "黑啤酒燉鍋",
+    item_en: "Black Beer Stew",
+    bdx_id: "2008",
+    minRate: "80",
+    maxRate: "120",
+    base: "92",
+    bdx_type: "5",
+    maxPrice: "109",
+    category: "Recipe"
+}, {
+    itemId: "icon_food2009_9",
+    item: "烤蜂蜜蘋果",
+    item_en: "Baked Honey Apple",
+    bdx_id: "2009",
+    minRate: "80",
+    maxRate: "120",
+    base: "215",
+    bdx_type: "5",
+    maxPrice: "255",
+    category: "Recipe",
+    recommend: "1"
+}, {
+    itemId: "icon_food2010_10",
+    item: "桑格利亞酒",
+    item_en: "Sangria",
+    bdx_id: "2010",
+    minRate: "80",
+    maxRate: "120",
+    base: "137",
+    bdx_type: "5",
+    maxPrice: "163",
+    category: "Recipe"
+}, {
+    itemId: "icon_food2011_11",
+    item: "流浪美食家的烤肉",
+    item_en: "Wandering Gourmet's Barbeque",
+    bdx_id: "2011",
+    minRate: "80",
+    maxRate: "120",
+    base: "216",
+    bdx_type: "5",
+    maxPrice: "257",
+    category: "Recipe"
+}, {
+    itemId: "icon_food2012_12",
+    item: "喵拿鐵",
+    item_en: "Meow Latte",
+    bdx_id: "2012",
+    minRate: "80",
+    maxRate: "120",
+    base: "182",
+    bdx_type: "5",
+    maxPrice: "216",
+    category: "Recipe"
+}, {
+    itemId: "icon_food2013_13",
+    item: "炸鮭魚便當",
+    item_en: "Salmon Cutlet Lunchbox",
+    bdx_id: "2013",
+    minRate: "80",
+    maxRate: "120",
+    base: "201",
+    bdx_type: "5",
+    maxPrice: "239",
+    category: "Recipe",
+    recommend: "1"
+}, {
+    itemId: "icon_food2014_14",
+    item: "草藥三明治",
+    item_en: "Herb Sandwich",
+    bdx_id: "2014",
+    minRate: "80",
+    maxRate: "120",
+    base: "368",
+    bdx_type: "5",
+    maxPrice: "437",
+    category: "Recipe"
+}, {
+    itemId: "icon_food2015_15",
+    item: "哈密瓜雪酪",
+    item_en: "Melon Sherbet",
+    bdx_id: "2015",
+    minRate: "80",
+    maxRate: "120",
+    base: "143",
+    bdx_type: "5",
+    maxPrice: "170",
+    category: "Recipe"
+}, {
+    itemId: "icon_food2016_16",
+    item: "番紅花甜茶",
+    item_en: "Saffron Punch",
+    bdx_id: "2016",
+    minRate: "80",
+    maxRate: "120",
+    base: "314",
+    bdx_type: "5",
+    maxPrice: "373",
+    category: "Recipe"
+}, {
+    itemId: "icon_food2017_17",
+    item: "甜椒義式烘蛋",
+    item_en: "Bell Pepper Frittata",
+    bdx_id: "2017",
+    minRate: "80",
+    maxRate: "120",
+    base: "168",
+    bdx_type: "5",
+    maxPrice: "199",
+    category: "Recipe"
+}, {
+    itemId: "icon_food2018_18",
+    item: "鮮血布丁",
+    item_en: "Rare Bloody Pudding",
+    bdx_id: "2018",
+    minRate: "80",
+    maxRate: "120",
+    base: "180",
+    bdx_type: "5",
+    maxPrice: "214",
+    category: "Recipe"
+}, {
+    itemId: "icon_food2019_19",
+    item: "蔬菜三明治",
+    item_en: "Vegetable Sandwich",
+    bdx_id: "2019",
+    minRate: "80",
+    maxRate: "120",
+    base: "190",
+    bdx_type: "5",
+    maxPrice: "226",
+    category: "Recipe"
+}, {
+    itemId: "icon_food2020_20",
+    item: "鮭魚芥末壽司",
+    item_en: "Salmon Wasabi Sushi",
+    bdx_id: "2020",
+    minRate: "80",
+    maxRate: "120",
+    base: "547",
+    bdx_type: "5",
+    maxPrice: "650",
+    category: "Recipe"
+}, {
+    itemId: "icon_food2021_21",
+    item: "玉米起司",
+    item_en: "Corn Cheese",
+    bdx_id: "2021",
+    minRate: "80",
+    maxRate: "120",
+    base: "252",
+    bdx_type: "5",
+    maxPrice: "299",
+    category: "Recipe"
+}, {
+    itemId: "icon_food2022_22",
+    item: "豆奶醬義大利麵",
+    item_en: "Bean Cream Pasta",
+    bdx_id: "2022",
+    minRate: "80",
+    maxRate: "120",
+    base: "148",
+    bdx_type: "5",
+    maxPrice: "176",
+    category: "Recipe"
+}, {
+    itemId: "icon_food2023_23",
+    item: "炒馬鈴薯",
+    item_en: "Fried Potato",
+    bdx_id: "2023",
+    minRate: "80",
+    maxRate: "120",
+    base: "276",
+    bdx_type: "5",
+    maxPrice: "328",
+    category: "Recipe"
+}, {
+    itemId: "icon_food2024_24",
+    item: "醬炒牛排",
+    item_en: "Chop Steak",
+    bdx_id: "2024",
+    minRate: "80",
+    maxRate: "120",
+    base: "124",
+    bdx_type: "5",
+    maxPrice: "147",
+    category: "Recipe"
+}, {
+    itemId: "icon_food2025_25",
+    item: "甜辣鮮蝦",
+    item_en: "Chili Shrimp",
+    bdx_id: "2025",
+    minRate: "80",
+    maxRate: "120",
+    base: "655",
+    bdx_type: "5",
+    maxPrice: "779",
+    category: "Recipe"
+}, {
+    itemId: "icon_food2026_26",
+    item: "蜂蜜奶油杏仁",
+    item_en: "Honey Butter Almond",
+    bdx_id: "2026",
+    minRate: "80",
+    maxRate: "120",
+    base: "760",
+    bdx_type: "5",
+    maxPrice: "904",
+    category: "Recipe",
+    recommend: "1"
+}, {
+    itemId: "icon_food2027_27",
+    item: "凱洛養身湯",
+    item_en: "Kailac Health Soup",
+    bdx_id: "2027",
+    minRate: "80",
+    maxRate: "120",
+    base: "256",
+    bdx_type: "5",
+    maxPrice: "304",
+    category: "Recipe"
+}, {
+    itemId: "icon_food2028_28",
+    item: "巧克力麵包",
+    item_en: "Chocolate Bread",
+    bdx_id: "2028",
+    minRate: "80",
+    maxRate: "120",
+    base: "59",
+    bdx_type: "5",
+    maxPrice: "70",
+    category: "Recipe"
+}, {
+    itemId: "icon_food2029_29",
+    item: "鮪魚雞胸肉三明治",
+    item_en: "Tuna Chicken Breast Sandwich",
+    bdx_id: "2029",
+    minRate: "80",
+    maxRate: "120",
+    base: "148",
+    bdx_type: "5",
+    maxPrice: "176",
+    category: "Recipe"
+}, {
+    itemId: "icon_food2030_30",
+    item: "水果冰沙",
+    item_en: "Fruit Slushy",
+    bdx_id: "2030",
+    minRate: "80",
+    maxRate: "120",
+    base: "126",
+    bdx_type: "5",
+    maxPrice: "149",
+    category: "Recipe"
+}, {
+    itemId: "icon_food2031_31",
+    item: "火烤魚板棒",
+    item_en: "Smoky Fish Cake bar",
+    bdx_id: "2031",
+    minRate: "80",
+    maxRate: "120",
+    base: "608",
+    bdx_type: "5",
+    maxPrice: "723",
+    category: "Recipe",
+    recommend: "1"
+}, {
+    itemId: "icon_food2032_32",
+    item: "巧克力雞尾酒",
+    item_en: "Chocolat Cocktail",
+    bdx_id: "2032",
+    minRate: "80",
+    maxRate: "120",
+    base: "275",
+    bdx_type: "5",
+    maxPrice: "327",
+    category: "Recipe",
+    recommend: "1"
+}, {
+    itemId: "icon_food2033_33",
+    item: "魚子醬蛋包飯",
+    item_en: "Caviar Omelette",
+    bdx_id: "2033",
+    minRate: "80",
+    maxRate: "120",
+    base: "412",
+    bdx_type: "5",
+    maxPrice: "490",
+    category: "Recipe",
+    recommend: "1"
+}, {
+    itemId: "icon_food2034_34",
+    item: "三角美乃滋飯糰",
+    item_en: "Triangle Mayo Rice Ball",
+    bdx_id: "2034",
+    minRate: "80",
+    maxRate: "120",
+    base: "484",
+    bdx_type: "5",
+    maxPrice: "575",
+    category: "Recipe",
+    recommend: "1"
+}, {
+    itemId: "icon_food2035_35",
+    item: "雞肉捲",
+    item_en: "Chicken Roll",
+    bdx_id: "2035",
+    minRate: "80",
+    maxRate: "120",
+    base: "356",
+    bdx_type: "5",
+    maxPrice: "423",
+    category: "Recipe"
+}, {
+    itemId: "icon_food3001_1",
+    item: "盧戈烤山蔘串",
+    item_en: "Lugo Ginseng Grilled Skewer",
+    bdx_id: "3001",
+    minRate: "80",
+    maxRate: "120",
+    base: "6278",
+    bdx_type: "5",
+    maxPrice: "7470",
+    category: "Recipe",
+    recommend: "1"
+}, {
+    itemId: "icon_food3002_2",
+    item: "煤炭餅乾",
+    item_en: "Charcoal Cookie",
+    bdx_id: "3002",
+    minRate: "80",
+    maxRate: "120",
+    base: "6214",
+    bdx_type: "5",
+    maxPrice: "7394",
+    category: "Recipe",
+    recommend: "1"
+}, {
+    itemId: "icon_food3003_3",
+    item: "閃耀西班牙蒜味蝦",
+    item_en: "Shiny Gambas",
+    bdx_id: "3003",
+    minRate: "80",
+    maxRate: "120",
+    base: "6461",
+    bdx_type: "5",
+    maxPrice: "7688",
+    category: "Recipe",
+    recommend: "1"
+}, {
+    itemId: "icon_food3004_4",
+    item: "透明化沙拉",
+    item_en: "Transparent Salad",
+    bdx_id: "3004",
+    minRate: "80",
+    maxRate: "120",
+    base: "6437",
+    bdx_type: "5",
+    maxPrice: "7660",
+    category: "Recipe",
+    recommend: "1"
+}, {
+    itemId: "icon_food3014_14",
+    item: "地獄火海苔飯捲",
+    item_en: "Fire of Hell Kimbab",
+    bdx_id: "3014",
+    minRate: "80",
+    maxRate: "120",
+    base: "6557",
+    bdx_type: "5",
+    maxPrice: "7802",
+    category: "Recipe",
+    recommend: "1"
+}, {
+    itemId: "icon_resource201_27",
+    item: "鐵礦石",
+    item_en: "Iron ore",
+    bdx_id: "201",
+    minRate: "80",
+    maxRate: "120",
+    base: "5",
+    bdx_type: "8",
+    maxPrice: "5",
+    category: "CraftingMaterials"
+}, {
+    itemId: "icon_resource202_28",
+    item: "銅礦石",
+    item_en: "Copper ore",
+    bdx_id: "202",
+    minRate: "80",
+    maxRate: "120",
+    base: "15",
+    bdx_type: "8",
+    maxPrice: "17",
+    category: "CraftingMaterials"
+}, {
+    itemId: "icon_resource203_29",
+    item: "金礦石",
+    item_en: "Gold ore",
+    bdx_id: "203",
+    minRate: "80",
+    maxRate: "120",
+    base: "185",
+    bdx_type: "8",
+    maxPrice: "220",
+    category: "CraftingMaterials"
+}, {
+    itemId: "icon_resource204_30",
+    item: "泥炭",
+    item_en: "Peat",
+    bdx_id: "204",
+    minRate: "80",
+    maxRate: "120",
+    base: "5",
+    bdx_type: "8",
+    maxPrice: "5",
+    category: "CraftingMaterials"
+}, {
+    itemId: "icon_resource211_32",
+    item: "鐵塊",
+    item_en: "Iron ingot",
+    bdx_id: "211",
+    minRate: "80",
+    maxRate: "120",
+    base: "90",
+    bdx_type: "8",
+    maxPrice: "107",
+    category: "CraftingMaterials"
+}, {
+    itemId: "icon_resource212_33",
+    item: "銅塊",
+    item_en: "Copper ingot",
+    bdx_id: "212",
+    minRate: "80",
+    maxRate: "120",
+    base: "165",
+    bdx_type: "8",
+    maxPrice: "196",
+    category: "CraftingMaterials"
+}, {
+    itemId: "icon_resource213_34",
+    item: "金塊",
+    item_en: "Gold ingot",
+    bdx_id: "213",
+    minRate: "80",
+    maxRate: "120",
+    base: "1180",
+    bdx_type: "8",
+    maxPrice: "1404",
+    category: "CraftingMaterials"
+}, {
+    itemId: "icon_resource214_35",
+    item: "煤",
+    item_en: "Coal",
+    bdx_id: "214",
+    minRate: "80",
+    maxRate: "120",
+    base: "90",
+    bdx_type: "8",
+    maxPrice: "107",
+    category: "CraftingMaterials"
+}, {
+    itemId: "icon_resource221_36",
+    item: "鋼鐵塊",
+    item_en: "Steel ingot",
+    bdx_id: "221",
+    minRate: "80",
+    maxRate: "120",
+    base: "1180",
+    bdx_type: "8",
+    maxPrice: "1404",
+    category: "CraftingMaterials"
+}, {
+    itemId: "icon_resource222_37",
+    item: "黃銅塊",
+    item_en: "Brass ingot",
+    bdx_id: "222",
+    minRate: "80",
+    maxRate: "120",
+    base: "2080",
+    bdx_type: "8",
+    maxPrice: "2475",
+    category: "CraftingMaterials"
+}, {
+    itemId: "icon_resource223_38",
+    item: "白金塊",
+    item_en: "Platinum ingot",
+    bdx_id: "223",
+    minRate: "80",
+    maxRate: "120",
+    base: "14230",
+    bdx_type: "8",
+    maxPrice: "16933",
+    category: "CraftingMaterials"
+}, {
+    itemId: "icon_resource224_62",
+    item: "無煙煤",
+    item_en: "Anthracite",
+    bdx_id: "224",
+    minRate: "80",
+    maxRate: "120",
+    base: "1180",
+    bdx_type: "8",
+    maxPrice: "1404",
+    category: "CraftingMaterials"
+}, {
+    itemId: "icon_resource301_39",
+    item: "一般皮革",
+    item_en: "Plain leather",
+    bdx_id: "301",
+    minRate: "80",
+    maxRate: "120",
+    base: "5",
+    bdx_type: "8",
+    maxPrice: "5",
+    category: "CraftingMaterials"
+}, {
+    itemId: "icon_resource311_40",
+    item: "高級皮革",
+    item_en: "Fine leather",
+    bdx_id: "311",
+    minRate: "80",
+    maxRate: "120",
+    base: "90",
+    bdx_type: "8",
+    maxPrice: "107",
+    category: "CraftingMaterials"
+}, {
+    itemId: "icon_resource321_41",
+    item: "頂級皮革",
+    item_en: "Top quality leather",
+    bdx_id: "321",
+    minRate: "80",
+    maxRate: "120",
+    base: "1180",
+    bdx_type: "8",
+    maxPrice: "1404",
+    category: "CraftingMaterials"
+}, {
+    itemId: "icon_resource401_42",
+    item: "一般布料",
+    item_en: "Plain fabric",
+    bdx_id: "401",
+    minRate: "80",
+    maxRate: "120",
+    base: "5",
+    bdx_type: "8",
+    maxPrice: "5",
+    category: "CraftingMaterials"
+}, {
+    itemId: "icon_resource411_43",
+    item: "高級布料",
+    item_en: "Fine fabric",
+    bdx_id: "411",
+    minRate: "80",
+    maxRate: "120",
+    base: "90",
+    bdx_type: "8",
+    maxPrice: "107",
+    category: "CraftingMaterials"
+}, {
+    itemId: "icon_resource421_44",
+    item: "頂級布料",
+    item_en: "Top quality fabric",
+    bdx_id: "421",
+    minRate: "80",
+    maxRate: "120",
+    base: "1180",
+    bdx_type: "8",
+    maxPrice: "1404",
+    category: "CraftingMaterials"
+}, {
+    itemId: "icon_resource501_45",
+    item: "原木",
+    item_en: "Hardwood",
+    bdx_id: "501",
+    minRate: "80",
+    maxRate: "120",
+    base: "5",
+    bdx_type: "8",
+    maxPrice: "5",
+    category: "CraftingMaterials"
+}, {
+    itemId: "icon_resource511_46",
+    item: "夾板",
+    item_en: "Plywood",
+    bdx_id: "511",
+    minRate: "80",
+    maxRate: "120",
+    base: "90",
+    bdx_type: "8",
+    maxPrice: "107",
+    category: "CraftingMaterials"
+}, {
+    itemId: "icon_resource521_63",
+    item: "強化夾板",
+    item_en: "Reinforced plywood",
+    bdx_id: "521",
+    minRate: "80",
+    maxRate: "120",
+    base: "1180",
+    bdx_type: "8",
+    maxPrice: "1404",
+    category: "CraftingMaterials"
+}, {
+    itemId: "icon_resource111_15",
+    item: "火的聖石",
+    item_en: "Fire Magic Crystal",
+    bdx_id: "111",
+    minRate: "80",
+    maxRate: "120",
+    base: "160",
+    bdx_type: "8",
+    maxPrice: "190",
+    category: "MagicCrystals"
+}, {
+    itemId: "icon_resource112_16",
+    item: "水的聖石",
+    item_en: "Water Magic Crystal",
+    bdx_id: "112",
+    minRate: "80",
+    maxRate: "120",
+    base: "160",
+    bdx_type: "8",
+    maxPrice: "190",
+    category: "MagicCrystals"
+}, {
+    itemId: "icon_resource113_17",
+    item: "風的聖石",
+    item_en: "Wind Magic Crystal",
+    bdx_id: "113",
+    minRate: "80",
+    maxRate: "120",
+    base: "160",
+    bdx_type: "8",
+    maxPrice: "190",
+    category: "MagicCrystals"
+}, {
+    itemId: "icon_resource114_18",
+    item: "光的聖石",
+    item_en: "Light Magic Crystal",
+    bdx_id: "114",
+    minRate: "80",
+    maxRate: "120",
+    base: "160",
+    bdx_type: "8",
+    maxPrice: "190",
+    category: "MagicCrystals"
+}, {
+    itemId: "icon_resource115_19",
+    item: "暗的聖石",
+    item_en: "Darkness Magic Crystal",
+    bdx_id: "115",
+    minRate: "80",
+    maxRate: "120",
+    base: "160",
+    bdx_type: "8",
+    maxPrice: "190",
+    category: "MagicCrystals"
+}]
+
+// 读取文件
+export const readFile = async (url) => {
+  return new Promise(function (resolve, reject) {
+    fs.readFile(url, 'utf8',(err, data) => {
+      if (err) { reject(err) }
+      resolve({ code: 200, message: 'success', data: JSON.parse(data) })
+    });
+  })
+}
+
+// 写入文件
+export const writeFile = async (url, writeData) => {
+  return new Promise(function (resolve, reject) {
+    fs.writeFile(url, writeData, 'utf8', (err) => {
+      if (err) { reject(err) }
+      resolve({ code: 200, message: 'success', data: '完成修改,保存成功！' })
+    });
+  })
+}
+
+const setMa = async () => {
+//   const newDataList = Object.fromEntries(
+//     pe.map(item => [item['bdx_id'], {
+//         name: item.item,
+//         url: `/img/${item.itemId}.webp`,
+//         bdx_type: item.bdx_type,
+//         bdx_id: item.bdx_id,
+//         base: item.base,
+//         minRate: item.minRate,
+//         maxRate: item.maxRate,
+//         maxPrice: item.maxPrice,
+//     }])
+//   )
+//   console.log(newDataList, '---------newDataList-----------')
+//   writeFile('./tem.json', JSON.stringify(newDataList))
+  
+  const dataataList = Object.fromEntries(
+    pe.map(item => [item['item'], item])
+  )
+  const materialList = await readFile('./material.json')
+    const buyList = []
+    for(let index = 1; index <= 17; index++) {
+        buyList.push(`S${index}`)
+    }
+    for(let index = 1; index <= 7; index++) {
+        buyList.push(`C${index}`)
+    }
+    console.log(buyList, 'buyList')
+  let buyAllList = []
+  await buyList.forEach(async (item, index) => {
+    const url = `./${item}/buy.json`
+    const { data } = await readFile(url)
+    const temp = data.map(mItem => ({
+        "id": dataataList[materialList.data[mItem.id].name].bdx_id,
+        "shopId": item.includes("C") ? (1000 + index - 16) : (index + 1),
+        "price": mItem.price,
+        "type": mItem.type
+    }))
+    console.log(url, 'url')
+    buyAllList = [...buyAllList, ...temp]
+    //   吧pe素材对象组合成一个名称开头的对象数组
+    writeFile('./buyAll.json', JSON.stringify(buyAllList))
+    }
+  )
+}
+
+setMa()
+app.listen(3004, () => {
+  console.log('Server is running on port 3005');
+});

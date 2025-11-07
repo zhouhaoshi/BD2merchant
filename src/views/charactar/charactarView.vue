@@ -1,0 +1,62 @@
+<template>
+  <!-- 属性筛选  ----- 新增角色 ---- 新增角色皮肤 ---- 皮肤填写数据（?待定） --- 技能访问用二维坐标记录，攻击点为原点（0，0）左x-1右x+1 前y+1后y-1 -->
+  <el-card>
+    <div
+      v-for="value in characterList"
+      :key="value.name"
+      @click="clickCharacter(value)"
+      class="character_box"
+    >
+      <img
+        :src="splicingqImage(value.Skill[Object.keys(value.Skill)[0]].qimage, 'qimage')"
+        alt=""
+      />
+      <div>
+        {{ value.cName }}
+      </div>
+    </div>
+    <CharactarDetails
+      :data="charactarData"
+      :dialogVisible="dialogVisible"
+      ref="charactarDetails"
+      @close="charactarDetailsClose()"
+    />
+  </el-card>
+</template>
+
+<script lang="ts" setup>
+import CharactarDetails from './charactarDetails.vue'
+import characterList from '@/utils/allCharacter'
+import { splicingqImage } from '@/utils/utils'
+
+const charactarData = ref<characterDataObj>()
+const dialogVisible = ref<boolean>(false)
+const clickCharacter = (value: characterDataObj) => {
+  charactarData.value = value
+  dialogVisible.value = true
+}
+const charactarDetailsClose = () => {
+  dialogVisible.value = false
+  charactarData.value = undefined
+}
+</script>
+
+<style lang="less" scoped>
+.character_box {
+  width: 150px;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  padding: 10px;
+  box-shadow: var(--el-box-shadow-light);
+  transition: transform 0.2s;
+  border-radius: 20px;
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--el-box-shadow);
+  }
+}
+.character_box + .character_box {
+  margin-left: 10px;
+}
+</style>

@@ -1,0 +1,20 @@
+[
+  {
+    "name": "艾莉丝",
+    "id": 1,
+    "class": "Mage",
+    "element": "fire"
+  },
+  {
+    "name": "雷克斯",
+    "id": 2,
+    "class": "Warrior",
+    "element": "light"
+  },
+  {
+    "name": "米娅",
+    "id": 3,
+    "class": "Archer",
+    "element": "wind"
+  }
+]

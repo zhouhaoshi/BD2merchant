@@ -1,0 +1,1292 @@
+{
+  "1001": {
+    "name": "獸肉",
+    "url": "/img/icon_food1001_1.webp",
+    "bdx_type": "5",
+    "bdx_id": "1001",
+    "base": "5",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "5"
+  },
+  "1002": {
+    "name": "鮭魚",
+    "url": "/img/icon_food1002_2.webp",
+    "bdx_type": "5",
+    "bdx_id": "1002",
+    "base": "30",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "35"
+  },
+  "1003": {
+    "name": "淡水蝦",
+    "url": "/img/icon_food1003_3.webp",
+    "bdx_type": "5",
+    "bdx_id": "1003",
+    "base": "30",
+    "minRate": "70",
+    "maxRate": "130",
+    "maxPrice": "38"
+  },
+  "1004": {
+    "name": "小麥",
+    "url": "/img/icon_food1004_4.webp",
+    "bdx_type": "5",
+    "bdx_id": "1004",
+    "base": "5",
+    "minRate": "70",
+    "maxRate": "130",
+    "maxPrice": "6"
+  },
+  "1005": {
+    "name": "草藥",
+    "url": "/img/icon_food1005_5.webp",
+    "bdx_type": "5",
+    "bdx_id": "1005",
+    "base": "25",
+    "minRate": "70",
+    "maxRate": "130",
+    "maxPrice": "32"
+  },
+  "1006": {
+    "name": "玉米",
+    "url": "/img/icon_food1006_6.webp",
+    "bdx_type": "5",
+    "bdx_id": "1006",
+    "base": "20",
+    "minRate": "70",
+    "maxRate": "130",
+    "maxPrice": "25"
+  },
+  "1007": {
+    "name": "豆子",
+    "url": "/img/icon_food1007_7.webp",
+    "bdx_type": "5",
+    "bdx_id": "1007",
+    "base": "15",
+    "minRate": "70",
+    "maxRate": "130",
+    "maxPrice": "19"
+  },
+  "1008": {
+    "name": "大麥",
+    "url": "/img/icon_food1008_8.webp",
+    "bdx_type": "5",
+    "bdx_id": "1008",
+    "base": "10",
+    "minRate": "70",
+    "maxRate": "130",
+    "maxPrice": "12"
+  },
+  "1009": {
+    "name": "啤酒花",
+    "url": "/img/icon_food1009_9.webp",
+    "bdx_type": "5",
+    "bdx_id": "1009",
+    "base": "10",
+    "minRate": "70",
+    "maxRate": "130",
+    "maxPrice": "12"
+  },
+  "1010": {
+    "name": "米",
+    "url": "/img/icon_food1010_10.webp",
+    "bdx_type": "5",
+    "bdx_id": "1010",
+    "base": "5",
+    "minRate": "70",
+    "maxRate": "130",
+    "maxPrice": "6"
+  },
+  "1011": {
+    "name": "蘋果",
+    "url": "/img/icon_food1011_11.webp",
+    "bdx_type": "5",
+    "bdx_id": "1011",
+    "base": "20",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "23"
+  },
+  "1012": {
+    "name": "葡萄",
+    "url": "/img/icon_food1012_12.webp",
+    "bdx_type": "5",
+    "bdx_id": "1012",
+    "base": "20",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "23"
+  },
+  "1013": {
+    "name": "蘑菇",
+    "url": "/img/icon_food1013_13.webp",
+    "bdx_type": "5",
+    "bdx_id": "1013",
+    "base": "10",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "11"
+  },
+  "1014": {
+    "name": "紅蘿蔔",
+    "url": "/img/icon_food1014_14.webp",
+    "bdx_type": "5",
+    "bdx_id": "1014",
+    "base": "15",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "17"
+  },
+  "1015": {
+    "name": "馬鈴薯",
+    "url": "/img/icon_food1015_15.webp",
+    "bdx_type": "5",
+    "bdx_id": "1015",
+    "base": "5",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "5"
+  },
+  "1016": {
+    "name": "洋蔥",
+    "url": "/img/icon_food1016_16.webp",
+    "bdx_type": "5",
+    "bdx_id": "1016",
+    "base": "20",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "23"
+  },
+  "1017": {
+    "name": "甜椒",
+    "url": "/img/icon_food1017_17.webp",
+    "bdx_type": "5",
+    "bdx_id": "1017",
+    "base": "20",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "23"
+  },
+  "1018": {
+    "name": "蘿蔔嬰",
+    "url": "/img/icon_food1018_18.webp",
+    "bdx_type": "5",
+    "bdx_id": "1018",
+    "base": "25",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "29"
+  },
+  "1019": {
+    "name": "花椰菜",
+    "url": "/img/icon_food1019_19.webp",
+    "bdx_type": "5",
+    "bdx_id": "1019",
+    "base": "25",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "29"
+  },
+  "1020": {
+    "name": "番茄",
+    "url": "/img/icon_food1020_20.webp",
+    "bdx_type": "5",
+    "bdx_id": "1020",
+    "base": "25",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "29"
+  },
+  "1022": {
+    "name": "咖啡豆",
+    "url": "/img/icon_food1022_22.webp",
+    "bdx_type": "5",
+    "bdx_id": "1022",
+    "base": "25",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "29"
+  },
+  "1023": {
+    "name": "糖",
+    "url": "/img/icon_food1023_23.webp",
+    "bdx_type": "5",
+    "bdx_id": "1023",
+    "base": "10",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "11"
+  },
+  "1024": {
+    "name": "起司",
+    "url": "/img/icon_food1024_24.webp",
+    "bdx_type": "5",
+    "bdx_id": "1024",
+    "base": "15",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "17"
+  },
+  "1025": {
+    "name": "雞蛋",
+    "url": "/img/icon_food1025_25.webp",
+    "bdx_type": "5",
+    "bdx_id": "1025",
+    "base": "10",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "11"
+  },
+  "1026": {
+    "name": "奶油",
+    "url": "/img/icon_food1026_26.webp",
+    "bdx_type": "5",
+    "bdx_id": "1026",
+    "base": "25",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "29"
+  },
+  "1027": {
+    "name": "牛奶",
+    "url": "/img/icon_food1027_27.webp",
+    "bdx_type": "5",
+    "bdx_id": "1027",
+    "base": "15",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "17"
+  },
+  "1028": {
+    "name": "鮪魚罐頭",
+    "url": "/img/icon_food1028_28.webp",
+    "bdx_type": "5",
+    "bdx_id": "1028",
+    "base": "5",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "5"
+  },
+  "1029": {
+    "name": "雞胸肉袋",
+    "url": "/img/icon_food1029_29.webp",
+    "bdx_type": "5",
+    "bdx_id": "1029",
+    "base": "5",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "5"
+  },
+  "1030": {
+    "name": "巧克力",
+    "url": "/img/icon_food1030_30.webp",
+    "bdx_type": "5",
+    "bdx_id": "1030",
+    "base": "5",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "5"
+  },
+  "1031": {
+    "name": "吐司",
+    "url": "/img/icon_food1031_31.webp",
+    "bdx_type": "5",
+    "bdx_id": "1031",
+    "base": "30",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "35"
+  },
+  "1032": {
+    "name": "橄欖油",
+    "url": "/img/icon_food1032_32.webp",
+    "bdx_type": "5",
+    "bdx_id": "1032",
+    "base": "50",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "59"
+  },
+  "1033": {
+    "name": "辣醬",
+    "url": "/img/icon_food1033_33.webp",
+    "bdx_type": "5",
+    "bdx_id": "1033",
+    "base": "55",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "65"
+  },
+  "1034": {
+    "name": "蜂蜜",
+    "url": "/img/icon_food1034_34.webp",
+    "bdx_type": "5",
+    "bdx_id": "1034",
+    "base": "50",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "59"
+  },
+  "1035": {
+    "name": "鹽",
+    "url": "/img/icon_food1035_35.webp",
+    "bdx_type": "5",
+    "bdx_id": "1035",
+    "base": "5",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "5"
+  },
+  "1036": {
+    "name": "哈密瓜",
+    "url": "/img/icon_food1036_36.webp",
+    "bdx_type": "5",
+    "bdx_id": "1036",
+    "base": "20",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "23"
+  },
+  "1037": {
+    "name": "辣椒",
+    "url": "/img/icon_food1037_37.webp",
+    "bdx_type": "5",
+    "bdx_id": "1037",
+    "base": "20",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "23"
+  },
+  "1038": {
+    "name": "番紅花",
+    "url": "/img/icon_food1038_38.webp",
+    "bdx_type": "5",
+    "bdx_id": "1038",
+    "base": "35",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "41"
+  },
+  "1039": {
+    "name": "杏仁",
+    "url": "/img/icon_food1039_39.webp",
+    "bdx_type": "5",
+    "bdx_id": "1039",
+    "base": "65",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "77"
+  },
+  "1040": {
+    "name": "水果罐頭",
+    "url": "/img/icon_food1040_40.webp",
+    "bdx_type": "5",
+    "bdx_id": "1040",
+    "base": "90",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "107"
+  },
+  "1041": {
+    "name": "魚子醬罐頭",
+    "url": "/img/icon_food1041_41.webp",
+    "bdx_type": "5",
+    "bdx_id": "1041",
+    "base": "60",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "71"
+  },
+  "1042": {
+    "name": "包裝好的海苔",
+    "url": "/img/icon_food1042_42.webp",
+    "bdx_type": "5",
+    "bdx_id": "1042",
+    "base": "55",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "65"
+  },
+  "1043": {
+    "name": "凱洛藥材",
+    "url": "/img/icon_food1043_43.webp",
+    "bdx_type": "5",
+    "bdx_id": "1043",
+    "base": "70",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "83"
+  },
+  "1044": {
+    "name": "薑黃",
+    "url": "/img/icon_food1044_44.webp",
+    "bdx_type": "5",
+    "bdx_id": "1044",
+    "base": "80",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "95"
+  },
+  "1045": {
+    "name": "永恆龍舌蘭酒",
+    "url": "/img/icon_food1045_45.webp",
+    "bdx_type": "5",
+    "bdx_id": "1045",
+    "base": "85",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "101"
+  },
+  "1046": {
+    "name": "芥末",
+    "url": "/img/icon_food1046_46.webp",
+    "bdx_type": "5",
+    "bdx_id": "1046",
+    "base": "90",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "107"
+  },
+  "1047": {
+    "name": "料酒",
+    "url": "/img/icon_food1047_47.webp",
+    "bdx_type": "5",
+    "bdx_id": "1047",
+    "base": "100",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "119"
+  },
+  "1048": {
+    "name": "雷瓦汀火腿",
+    "url": "/img/icon_food1048_48.webp",
+    "bdx_type": "5",
+    "bdx_id": "1048",
+    "base": "65",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "77"
+  },
+  "1050": {
+    "name": "辣椒素",
+    "url": "/img/icon_food1050_50.webp",
+    "bdx_type": "5",
+    "bdx_id": "1050",
+    "base": "78",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "92"
+  },
+  "1051": {
+    "name": "松露油",
+    "url": "/img/icon_food1051_51.webp",
+    "bdx_type": "5",
+    "bdx_id": "1051",
+    "base": "75",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "89"
+  },
+  "1052": {
+    "name": "美乃滋",
+    "url": "/img/icon_food1052_52.webp",
+    "bdx_type": "5",
+    "bdx_id": "1052",
+    "base": "75",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "89"
+  },
+  "1053": {
+    "name": "盧戈山蔘",
+    "url": "/img/icon_food1053_53.webp",
+    "bdx_type": "5",
+    "bdx_id": "1053",
+    "base": "1875",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "2231"
+  },
+  "1054": {
+    "name": "生命的木炭",
+    "url": "/img/icon_food1054_54.webp",
+    "bdx_type": "5",
+    "bdx_id": "1054",
+    "base": "1875",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "2231"
+  },
+  "1055": {
+    "name": "閃爍的粉末",
+    "url": "/img/icon_food1055_55.webp",
+    "bdx_type": "5",
+    "bdx_id": "1055",
+    "base": "1875",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "2231"
+  },
+  "1056": {
+    "name": "透明的蘑菇",
+    "url": "/img/icon_food1056_56.webp",
+    "bdx_type": "5",
+    "bdx_id": "1056",
+    "base": "1875",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "2231"
+  },
+  "1057": {
+    "name": "穿山甲的鱗片",
+    "url": "/img/icon_food1057_57.webp",
+    "bdx_type": "5",
+    "bdx_id": "1057",
+    "base": "1875",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "2231"
+  },
+  "1058": {
+    "name": "能量蘑菇",
+    "url": "/img/icon_food1058_58.webp",
+    "bdx_type": "5",
+    "bdx_id": "1058",
+    "base": "1875",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "2231"
+  },
+  "1059": {
+    "name": "禿鷲的羽毛",
+    "url": "/img/icon_food1059_59.webp",
+    "bdx_type": "5",
+    "bdx_id": "1059",
+    "base": "1875",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "2231"
+  },
+  "1060": {
+    "name": "魅惑粉末",
+    "url": "/img/icon_food1060_60.webp",
+    "bdx_type": "5",
+    "bdx_id": "1060",
+    "base": "1875",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "2231"
+  },
+  "1061": {
+    "name": "黃金羅勒",
+    "url": "/img/icon_food1061_61.webp",
+    "bdx_type": "5",
+    "bdx_id": "1061",
+    "base": "1875",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "2231"
+  },
+  "1062": {
+    "name": "能量藥水",
+    "url": "/img/icon_food1062_62.webp",
+    "bdx_type": "5",
+    "bdx_id": "1062",
+    "base": "1875",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "2231"
+  },
+  "1063": {
+    "name": "靈魂鮮奶油",
+    "url": "/img/icon_food1063_63.webp",
+    "bdx_type": "5",
+    "bdx_id": "1063",
+    "base": "1875",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "2231"
+  },
+  "1064": {
+    "name": "維生素B濃縮溶液",
+    "url": "/img/icon_food1064_64.webp",
+    "bdx_type": "5",
+    "bdx_id": "1064",
+    "base": "1875",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "2231"
+  },
+  "1065": {
+    "name": "能量粉末",
+    "url": "/img/icon_food1065_65.webp",
+    "bdx_type": "5",
+    "bdx_id": "1065",
+    "base": "1875",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "2231"
+  },
+  "1066": {
+    "name": "地獄火醬汁",
+    "url": "/img/icon_food1066_66.webp",
+    "bdx_type": "5",
+    "bdx_id": "1066",
+    "base": "1875",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "2231"
+  },
+  "2002": {
+    "name": "蘑菇湯",
+    "url": "/img/icon_food2002_2.webp",
+    "bdx_type": "5",
+    "bdx_id": "2002",
+    "base": "28",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "33"
+  },
+  "2003": {
+    "name": "炒蘑菇",
+    "url": "/img/icon_food2003_3.webp",
+    "bdx_type": "5",
+    "bdx_id": "2003",
+    "base": "42",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "49"
+  },
+  "2004": {
+    "name": "烤菇串",
+    "url": "/img/icon_food2004_4.webp",
+    "bdx_type": "5",
+    "bdx_id": "2004",
+    "base": "46",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "54"
+  },
+  "2005": {
+    "name": "蘑菇烤牛肉火鍋",
+    "url": "/img/icon_food2005_5.webp",
+    "bdx_type": "5",
+    "bdx_id": "2005",
+    "base": "104",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "123"
+  },
+  "2006": {
+    "name": "馬鈴薯湯",
+    "url": "/img/icon_food2006_6.webp",
+    "bdx_type": "5",
+    "bdx_id": "2006",
+    "base": "43",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "51"
+  },
+  "2007": {
+    "name": "達雷普黑啤酒",
+    "url": "/img/icon_food2007_7.webp",
+    "bdx_type": "5",
+    "bdx_id": "2007",
+    "base": "82",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "97"
+  },
+  "2008": {
+    "name": "黑啤酒燉鍋",
+    "url": "/img/icon_food2008_8.webp",
+    "bdx_type": "5",
+    "bdx_id": "2008",
+    "base": "92",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "109"
+  },
+  "2009": {
+    "name": "烤蜂蜜蘋果",
+    "url": "/img/icon_food2009_9.webp",
+    "bdx_type": "5",
+    "bdx_id": "2009",
+    "base": "215",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "255"
+  },
+  "2010": {
+    "name": "桑格利亞酒",
+    "url": "/img/icon_food2010_10.webp",
+    "bdx_type": "5",
+    "bdx_id": "2010",
+    "base": "137",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "163"
+  },
+  "2011": {
+    "name": "流浪美食家的烤肉",
+    "url": "/img/icon_food2011_11.webp",
+    "bdx_type": "5",
+    "bdx_id": "2011",
+    "base": "216",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "257"
+  },
+  "2012": {
+    "name": "喵拿鐵",
+    "url": "/img/icon_food2012_12.webp",
+    "bdx_type": "5",
+    "bdx_id": "2012",
+    "base": "182",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "216"
+  },
+  "2013": {
+    "name": "炸鮭魚便當",
+    "url": "/img/icon_food2013_13.webp",
+    "bdx_type": "5",
+    "bdx_id": "2013",
+    "base": "201",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "239"
+  },
+  "2014": {
+    "name": "草藥三明治",
+    "url": "/img/icon_food2014_14.webp",
+    "bdx_type": "5",
+    "bdx_id": "2014",
+    "base": "368",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "437"
+  },
+  "2015": {
+    "name": "哈密瓜雪酪",
+    "url": "/img/icon_food2015_15.webp",
+    "bdx_type": "5",
+    "bdx_id": "2015",
+    "base": "143",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "170"
+  },
+  "2016": {
+    "name": "番紅花甜茶",
+    "url": "/img/icon_food2016_16.webp",
+    "bdx_type": "5",
+    "bdx_id": "2016",
+    "base": "314",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "373"
+  },
+  "2017": {
+    "name": "甜椒義式烘蛋",
+    "url": "/img/icon_food2017_17.webp",
+    "bdx_type": "5",
+    "bdx_id": "2017",
+    "base": "168",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "199"
+  },
+  "2018": {
+    "name": "鮮血布丁",
+    "url": "/img/icon_food2018_18.webp",
+    "bdx_type": "5",
+    "bdx_id": "2018",
+    "base": "180",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "214"
+  },
+  "2019": {
+    "name": "蔬菜三明治",
+    "url": "/img/icon_food2019_19.webp",
+    "bdx_type": "5",
+    "bdx_id": "2019",
+    "base": "190",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "226"
+  },
+  "2020": {
+    "name": "鮭魚芥末壽司",
+    "url": "/img/icon_food2020_20.webp",
+    "bdx_type": "5",
+    "bdx_id": "2020",
+    "base": "547",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "650"
+  },
+  "2021": {
+    "name": "玉米起司",
+    "url": "/img/icon_food2021_21.webp",
+    "bdx_type": "5",
+    "bdx_id": "2021",
+    "base": "252",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "299"
+  },
+  "2022": {
+    "name": "豆奶醬義大利麵",
+    "url": "/img/icon_food2022_22.webp",
+    "bdx_type": "5",
+    "bdx_id": "2022",
+    "base": "148",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "176"
+  },
+  "2023": {
+    "name": "炒馬鈴薯",
+    "url": "/img/icon_food2023_23.webp",
+    "bdx_type": "5",
+    "bdx_id": "2023",
+    "base": "276",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "328"
+  },
+  "2024": {
+    "name": "醬炒牛排",
+    "url": "/img/icon_food2024_24.webp",
+    "bdx_type": "5",
+    "bdx_id": "2024",
+    "base": "124",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "147"
+  },
+  "2025": {
+    "name": "甜辣鮮蝦",
+    "url": "/img/icon_food2025_25.webp",
+    "bdx_type": "5",
+    "bdx_id": "2025",
+    "base": "655",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "779"
+  },
+  "2026": {
+    "name": "蜂蜜奶油杏仁",
+    "url": "/img/icon_food2026_26.webp",
+    "bdx_type": "5",
+    "bdx_id": "2026",
+    "base": "760",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "904"
+  },
+  "2027": {
+    "name": "凱洛養身湯",
+    "url": "/img/icon_food2027_27.webp",
+    "bdx_type": "5",
+    "bdx_id": "2027",
+    "base": "256",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "304"
+  },
+  "2028": {
+    "name": "巧克力麵包",
+    "url": "/img/icon_food2028_28.webp",
+    "bdx_type": "5",
+    "bdx_id": "2028",
+    "base": "59",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "70"
+  },
+  "2029": {
+    "name": "鮪魚雞胸肉三明治",
+    "url": "/img/icon_food2029_29.webp",
+    "bdx_type": "5",
+    "bdx_id": "2029",
+    "base": "148",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "176"
+  },
+  "2030": {
+    "name": "水果冰沙",
+    "url": "/img/icon_food2030_30.webp",
+    "bdx_type": "5",
+    "bdx_id": "2030",
+    "base": "126",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "149"
+  },
+  "2031": {
+    "name": "火烤魚板棒",
+    "url": "/img/icon_food2031_31.webp",
+    "bdx_type": "5",
+    "bdx_id": "2031",
+    "base": "608",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "723"
+  },
+  "2032": {
+    "name": "巧克力雞尾酒",
+    "url": "/img/icon_food2032_32.webp",
+    "bdx_type": "5",
+    "bdx_id": "2032",
+    "base": "275",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "327"
+  },
+  "2033": {
+    "name": "魚子醬蛋包飯",
+    "url": "/img/icon_food2033_33.webp",
+    "bdx_type": "5",
+    "bdx_id": "2033",
+    "base": "412",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "490"
+  },
+  "2034": {
+    "name": "三角美乃滋飯糰",
+    "url": "/img/icon_food2034_34.webp",
+    "bdx_type": "5",
+    "bdx_id": "2034",
+    "base": "484",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "575"
+  },
+  "2035": {
+    "name": "雞肉捲",
+    "url": "/img/icon_food2035_35.webp",
+    "bdx_type": "5",
+    "bdx_id": "2035",
+    "base": "356",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "423"
+  },
+  "3001": {
+    "name": "盧戈烤山蔘串",
+    "url": "/img/icon_food3001_1.webp",
+    "bdx_type": "5",
+    "bdx_id": "3001",
+    "base": "6278",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "7470"
+  },
+  "3002": {
+    "name": "煤炭餅乾",
+    "url": "/img/icon_food3002_2.webp",
+    "bdx_type": "5",
+    "bdx_id": "3002",
+    "base": "6214",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "7394"
+  },
+  "3003": {
+    "name": "閃耀西班牙蒜味蝦",
+    "url": "/img/icon_food3003_3.webp",
+    "bdx_type": "5",
+    "bdx_id": "3003",
+    "base": "6461",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "7688"
+  },
+  "3004": {
+    "name": "透明化沙拉",
+    "url": "/img/icon_food3004_4.webp",
+    "bdx_type": "5",
+    "bdx_id": "3004",
+    "base": "6437",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "7660"
+  },
+  "3014": {
+    "name": "地獄火海苔飯捲",
+    "url": "/img/icon_food3014_14.webp",
+    "bdx_type": "5",
+    "bdx_id": "3014",
+    "base": "6557",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "7802"
+  },
+  "201": {
+    "name": "鐵礦石",
+    "url": "/img/icon_resource201_27.webp",
+    "bdx_type": "8",
+    "bdx_id": "201",
+    "base": "5",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "5"
+  },
+  "202": {
+    "name": "銅礦石",
+    "url": "/img/icon_resource202_28.webp",
+    "bdx_type": "8",
+    "bdx_id": "202",
+    "base": "15",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "17"
+  },
+  "203": {
+    "name": "金礦石",
+    "url": "/img/icon_resource203_29.webp",
+    "bdx_type": "8",
+    "bdx_id": "203",
+    "base": "185",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "220"
+  },
+  "204": {
+    "name": "泥炭",
+    "url": "/img/icon_resource204_30.webp",
+    "bdx_type": "8",
+    "bdx_id": "204",
+    "base": "5",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "5"
+  },
+  "211": {
+    "name": "鐵塊",
+    "url": "/img/icon_resource211_32.webp",
+    "bdx_type": "8",
+    "bdx_id": "211",
+    "base": "90",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "107"
+  },
+  "212": {
+    "name": "銅塊",
+    "url": "/img/icon_resource212_33.webp",
+    "bdx_type": "8",
+    "bdx_id": "212",
+    "base": "165",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "196"
+  },
+  "213": {
+    "name": "金塊",
+    "url": "/img/icon_resource213_34.webp",
+    "bdx_type": "8",
+    "bdx_id": "213",
+    "base": "1180",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "1404"
+  },
+  "214": {
+    "name": "煤",
+    "url": "/img/icon_resource214_35.webp",
+    "bdx_type": "8",
+    "bdx_id": "214",
+    "base": "90",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "107"
+  },
+  "221": {
+    "name": "鋼鐵塊",
+    "url": "/img/icon_resource221_36.webp",
+    "bdx_type": "8",
+    "bdx_id": "221",
+    "base": "1180",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "1404"
+  },
+  "222": {
+    "name": "黃銅塊",
+    "url": "/img/icon_resource222_37.webp",
+    "bdx_type": "8",
+    "bdx_id": "222",
+    "base": "2080",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "2475"
+  },
+  "223": {
+    "name": "白金塊",
+    "url": "/img/icon_resource223_38.webp",
+    "bdx_type": "8",
+    "bdx_id": "223",
+    "base": "14230",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "16933"
+  },
+  "224": {
+    "name": "無煙煤",
+    "url": "/img/icon_resource224_62.webp",
+    "bdx_type": "8",
+    "bdx_id": "224",
+    "base": "1180",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "1404"
+  },
+  "301": {
+    "name": "一般皮革",
+    "url": "/img/icon_resource301_39.webp",
+    "bdx_type": "8",
+    "bdx_id": "301",
+    "base": "5",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "5"
+  },
+  "311": {
+    "name": "高級皮革",
+    "url": "/img/icon_resource311_40.webp",
+    "bdx_type": "8",
+    "bdx_id": "311",
+    "base": "90",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "107"
+  },
+  "321": {
+    "name": "頂級皮革",
+    "url": "/img/icon_resource321_41.webp",
+    "bdx_type": "8",
+    "bdx_id": "321",
+    "base": "1180",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "1404"
+  },
+  "401": {
+    "name": "一般布料",
+    "url": "/img/icon_resource401_42.webp",
+    "bdx_type": "8",
+    "bdx_id": "401",
+    "base": "5",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "5"
+  },
+  "411": {
+    "name": "高級布料",
+    "url": "/img/icon_resource411_43.webp",
+    "bdx_type": "8",
+    "bdx_id": "411",
+    "base": "90",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "107"
+  },
+  "421": {
+    "name": "頂級布料",
+    "url": "/img/icon_resource421_44.webp",
+    "bdx_type": "8",
+    "bdx_id": "421",
+    "base": "1180",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "1404"
+  },
+  "501": {
+    "name": "原木",
+    "url": "/img/icon_resource501_45.webp",
+    "bdx_type": "8",
+    "bdx_id": "501",
+    "base": "5",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "5"
+  },
+  "511": {
+    "name": "夾板",
+    "url": "/img/icon_resource511_46.webp",
+    "bdx_type": "8",
+    "bdx_id": "511",
+    "base": "90",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "107"
+  },
+  "521": {
+    "name": "強化夾板",
+    "url": "/img/icon_resource521_63.webp",
+    "bdx_type": "8",
+    "bdx_id": "521",
+    "base": "1180",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "1404"
+  },
+  "111": {
+    "name": "火的聖石",
+    "url": "/img/icon_resource111_15.webp",
+    "bdx_type": "8",
+    "bdx_id": "111",
+    "base": "160",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "190"
+  },
+  "112": {
+    "name": "水的聖石",
+    "url": "/img/icon_resource112_16.webp",
+    "bdx_type": "8",
+    "bdx_id": "112",
+    "base": "160",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "190"
+  },
+  "113": {
+    "name": "風的聖石",
+    "url": "/img/icon_resource113_17.webp",
+    "bdx_type": "8",
+    "bdx_id": "113",
+    "base": "160",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "190"
+  },
+  "114": {
+    "name": "光的聖石",
+    "url": "/img/icon_resource114_18.webp",
+    "bdx_type": "8",
+    "bdx_id": "114",
+    "base": "160",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "190"
+  },
+  "115": {
+    "name": "暗的聖石",
+    "url": "/img/icon_resource115_19.webp",
+    "bdx_type": "8",
+    "bdx_id": "115",
+    "base": "160",
+    "minRate": "80",
+    "maxRate": "120",
+    "maxPrice": "190"
+  }
+}
