@@ -16,7 +16,7 @@
         </div>
         <!-- 展示面板 选择头像当技能用。可以选择普攻 展示技能访问计算cd 展示预期伤害 -->
         <div
-          v-for="valueSkill in { ...item.commonSkill, ...item.skill }"
+          v-for="valueSkill in item.skill"
           :key="valueSkill.name"
           style="display: inline-block; margin-right: 10px"
         >
@@ -30,33 +30,21 @@
             <img
               :src="
                 valueSkill.name === 'general'
-                  ? 'https://www.souseihaku.com/common/svg/icon_atk.svg'
+                  ? valueSkill.image
                   : splicingqImage(valueSkill.qimage, 'qimage')
               "
               alt=""
             />
           </div>
         </div>
-        <div v-if="selectCharactarData.skill && selectCharactarData.commonSkill">
-          {{
-            selectSikll === 'general'
-              ? selectCharactarData.commonSkill[selectSikll].cName
-              : selectCharactarData.skill[selectSikll].cName
-          }}
+        <div v-if="selectCharactarData.skill">
+          {{ selectCharactarData.skill[selectSikll].cName }}
         </div>
-        <div v-if="selectCharactarData.skill && selectCharactarData.commonSkill">
-          {{
-            selectSikll === 'general' ? '普攻' : selectCharactarData.skill[selectSikll].description
-          }}
+        <div v-if="selectCharactarData.skill">
+          {{ selectCharactarData.skill[selectSikll].description }}
         </div>
-        <div v-if="selectCharactarData.skill && selectCharactarData.commonSkill">
-          <skillScope
-            :scopeList="
-              selectSikll === 'general'
-                ? selectCharactarData.commonSkill[selectSikll].scope
-                : selectCharactarData.skill[selectSikll].scope
-            "
-          />
+        <div v-if="selectCharactarData.skill">
+          <skillScope :scopeList="selectCharactarData.skill[selectSikll].scope" />
         </div>
       </div>
       <template v-slot:reference>
@@ -99,7 +87,6 @@ const clickSelectSikll = (data: editableCharactar, skill: editableCharactarSkill
 // 选中角色
 const selectCharactar = (data: editableCharactar) => {
   selectCharactarData.value = data
-  console.log(data.selectSikll, 'data.selectSikll')
   selectSikll.value = data.selectSikll || Object.keys(data.skill as object)[0]
 }
 const selectCharactarData = ref<editableCharactar>({}) // 当前选择的角色

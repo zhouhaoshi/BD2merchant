@@ -32,7 +32,11 @@ const yuridata: characterDataObj = {
       cd: 0,
       sp: 0,
       chain: 1,
+      image: 'https://www.souseihaku.com/common/svg/icon_atk.svg',
       scope: [[0, 0]],
+      skillEffect: {
+        multiplying: 100,
+      },
     },
   },
   // 服装技能

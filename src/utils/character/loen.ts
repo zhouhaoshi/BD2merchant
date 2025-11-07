@@ -33,6 +33,10 @@ const loen = {
       sp: 0,
       chain: 1,
       scope: [[0, 0]],
+      image: 'https://www.souseihaku.com/common/svg/icon_atk.svg',
+      skillEffect: {
+        multiplying: 100,
+      },
     },
   },
   // 服装技能

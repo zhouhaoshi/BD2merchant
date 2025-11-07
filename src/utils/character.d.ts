@@ -67,6 +67,8 @@ interface commonSkill {
   cd: number // 技能冷却
   chain: number // 连锁次数
   target: string // 目标 enemy 敌方 friendly 友军
+  image: string // 图片形象
+  qimage?: string // q版形象
   scope: number[][] // 攻击范围，二维坐标系存储。直接命中目标为[0,0]
 }
 
@@ -110,7 +112,7 @@ interface editableCharactar {
   attackType?: string // 攻击类型
   selectSikll?: string // 选中的皮肤
   commonSkill?: Record<string, commonSkillObj> // 通用技能 普攻和击退
-  skill: Record<string, editableCharactarSkill> // 技能
+  skill?: Record<string, editableCharactarSkill> // 技能
 }
 
 interface editableCharactarSkill {

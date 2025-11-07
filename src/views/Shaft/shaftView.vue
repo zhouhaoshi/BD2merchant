@@ -160,7 +160,6 @@ const setEditableTabs = (data: Record<string, selectCharacterDataObj>) => {
     editableCharactar.attributeDamage = item.attributeDamage
     editableCharactar.element = item.element
     editableCharactar.attackType = item.attackType // attackType: 'skip', // 攻击类型 front为最前 skip为跳过
-    editableCharactar.commonSkill = item.commonSkill
     editableCharactar.skill = setSkill(item)
     editableCharactarList.value?.push(editableCharactar)
   })
@@ -169,6 +168,7 @@ const setEditableTabs = (data: Record<string, selectCharacterDataObj>) => {
     editableCharactarList.value,
     editableBattleGroundList.value,
   )
+  console.log(editableCharactarList.value, 'editableCharactarList')
   editableTabs.value = editableTabs.value.map((item) => ({
     name: item.name,
     charactarList: JSON.parse(JSON.stringify(editableCharactarList.value)),
@@ -189,6 +189,8 @@ const setSkill = (skillData: selectCharacterDataObj) => {
   const skillDataList = Object.values(skillData.Skill).filter((item) =>
     skillData.skillBoxList.includes(item.name),
   )
+  const commonSkill = skillData.commonSkill
+  commonSkill['general'].qimage = skillDataList[0] ? skillDataList[0].qimage : commonSkill.image
   skillDataList.forEach((item) => {
     const temp: editableCharactarSkill = {
       skillEffect: {},
@@ -232,7 +234,7 @@ const setSkill = (skillData: selectCharacterDataObj) => {
     )
     Reflect.set(skill, item.name, temp)
   })
-  return skill
+  return { ...commonSkill, ...skill }
 }
 
 const setSkillEffect = (effect: effectObj, potentials: effectObj) => {
