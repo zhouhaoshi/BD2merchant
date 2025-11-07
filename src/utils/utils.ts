@@ -67,7 +67,7 @@ function replacePathPlaceholders(
     const value = getValueByPath(data, path.trim(), breakthrough, potentials)
     // 如果找不到对应的值，可以选择保留原占位符或替换成空字符串
     // 这里选择保留原占位符，以便于调试
-    return value !== undefined ? value : match
+    return value !== undefined ? Math.abs(value) : match
   })
 }
 

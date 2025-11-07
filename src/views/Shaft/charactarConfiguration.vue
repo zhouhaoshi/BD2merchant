@@ -131,7 +131,7 @@ const selectSkill = ref<string>() // 先默认选中第一个技能，后续可�
 const breakthrough = ref<number>(0) // 突破等级
 
 const activeName = ref('first')
-const userdata = ref<buffObj>({
+const userdata = ref<damageObj>({
   panel: 0,
   critical: 0,
   attributeDamage: 0,

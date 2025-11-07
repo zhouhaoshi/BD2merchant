@@ -40,6 +40,11 @@
         <div v-if="selectCharactarData.skill">
           {{ selectCharactarData.skill[selectSikll].cName }}
         </div>
+        <div v-if="selectCharactarData.skill && selectSikll !== 'general'">
+          cd:{{ selectCharactarData.skill[selectSikll].cd }} sp:{{
+            selectCharactarData.skill[selectSikll].sp
+          }}
+        </div>
         <div v-if="selectCharactarData.skill">
           {{ selectCharactarData.skill[selectSikll].description }}
         </div>
@@ -62,6 +67,9 @@
             "
             alt=""
           />
+          <div class="general_box" v-if="item.selectSikll === 'general' || !item.selectSikll">
+            普攻
+          </div>
         </div>
       </template>
     </el-popover>
@@ -146,6 +154,19 @@ onMounted(() => {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -45%);
+  }
+  .general_box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 .team_character_box + .team_character_box {

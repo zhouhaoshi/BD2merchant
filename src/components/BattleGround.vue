@@ -54,16 +54,24 @@ import { splicingqImage, transformationCoordinates, transformationIndex } from '
 import calculateDamage from '@/utils/damage'
 const props = defineProps({
   battleGroundList: {
+    // 角色场地位置
     type: Array,
     default: () => [],
   },
   warcraftData: {
+    // 魔兽数据
     type: Object,
     default: () => {},
   },
   attackSequence: {
+    // 角色攻击顺序
     type: Array,
     default: () => [],
+  },
+  turnNumber: {
+    // 回合数。用来处理buff
+    type: Number,
+    default: 0,
   },
 })
 interface battleGroundObj {
@@ -74,9 +82,12 @@ interface battleGroundObj {
   element: string
   name: string
   panel: number
+  buff: unknown[]
   selectSikll: string
   skill: Record<string, editableCharactarSkill>
 }
+
+const userBuff = ref({}) // 用来记录本回合角色身上的buff
 const tempEnemyList = ref() // 初始状态下的魔兽情况
 const afterTempEnemyList = ref() // 攻击后的魔兽状态
 const attackPosition = ref<number[]>([]) // 攻击到的位置的下标 展示用
@@ -319,7 +330,7 @@ const autoGetAllAttackPosition = (
 const setDamageData = (
   attackPosition: number[],
   attackUser: battleGroundObj,
-  multiplier: number,
+  charactarSkill: editableCharactarSkill,
 ) => {
   // console.log(attackPosition, attackUser)
   let damageNumber: number = 0
@@ -327,17 +338,24 @@ const setDamageData = (
     panel: attackUser.panel,
     attackAdd: getAttackAdd(attackUser), // 需要计算
     critical: getCritical(attackUser),
-    multiplier: multiplier,
+    multiplier: 0,
     increasedDamage: getIncreasedDamage(attackUser),
     attributeDamage: getAttributeDamage(attackUser),
   }
-  attackPosition.forEach((item) => {
+  attackPosition.forEach((item, index) => {
     const warcraftBoxData = afterTempEnemyList.value[item]
     const warcraftData: warcraftBuff = {
       chainCount: warcraftBoxData.chainCount,
       chainDamageAdd: warcraftBoxData.chainDamageAdd,
       weakPointDamageAdd: warcraftBoxData.weakPointDamageAdd,
     }
+    // 主目标
+    if (index === 0) {
+      charactarData.multiplier = getMultiplier(charactarSkill, attackPosition.length, index)
+    } else {
+      charactarData.multiplier = getMultiplier(charactarSkill, attackPosition.length)
+    }
+    console.log(charactarData.multiplier, 'charactarData', index)
     // 问魔兽的
     // enemyWeakness?: number // 易伤/脆弱
     // enemyDefence?: number // 防御/魔抗
@@ -346,7 +364,7 @@ const setDamageData = (
     // chainDamageAdd?: number // 连锁伤害加成
     // attributeResistance?: number // 属性抵抗
     // weakPointDamageAdd?: number // 弱点加伤
-    const damageData: buffObj = {
+    const damageData: damageObj = {
       ...charactarData,
       ...warcraftData,
     }
@@ -358,14 +376,58 @@ const setDamageData = (
 }
 
 const getAttackAdd = (attackUser: battleGroundObj) => {
-  return 0
+  // 自拐
+  const charactarSkill =
+    attackUser.skill[attackUser.selectSikll || Object.keys(attackUser.skill)[0]] // 角色技能
+  const buffList = attackUser.buff || [] // 先拿本身存在的buff 没有就拿空数组
+  let skillBuff = charactarSkill.skillEffect.buff || [] // 再拿角色技能的buff
+  skillBuff = skillBuff.map((item, index) => ({
+    addTurn: props.turnNumber, // 上buff的回合
+    key: `${charactarSkill.name}_${index}`, // buffid，防止同一个buff上多次
+    ...item,
+  }))
+  const allBuff = [...buffList, ...skillBuff]
+  Reflect.set(userBuff.value, attackUser.name, allBuff)
+  const attackAddBuffNumber = allBuff
+    .map((item) => (item.attackAdd ? item.attackAdd : undefined))
+    .filter((item) => !!item)
+  console.log(attackAddBuffNumber, 'attackAddBuffNumber')
+  // 给角色添加buff
+  return attackAddBuffNumber.length > 0 ? attackAddBuffNumber.reduce((prev, cur) => prev + cur) : 0
 }
 const getCritical = (attackUser: battleGroundObj) => {
-  return attackUser.critical
+  // 自拐
+  const charactarSkill =
+    attackUser.skill[attackUser.selectSikll || Object.keys(attackUser.skill)[0]] // 角色技能
+  const buffList = attackUser.buff || [] // 先拿本身存在的buff 没有就拿空数组
+  let skillBuff = charactarSkill.skillEffect.buff || [] // 再拿角色技能的buff
+  skillBuff = skillBuff.map((item, index) => ({
+    addTurn: props.turnNumber, // 上buff的回合
+    key: `${charactarSkill.name}_${index}`, // buffid，防止同一个buff上多次
+    ...item,
+  }))
+  const allBuff = [...buffList, ...skillBuff]
+  Reflect.set(userBuff.value, attackUser.name, allBuff)
+  const attackAddBuffNumber = allBuff
+    .map((item) => (item.critical ? item.critical : undefined))
+    .filter((item) => !!item)
+  const critical =
+    attackAddBuffNumber.length > 0 ? attackAddBuffNumber.reduce((prev, cur) => prev + cur) : 0
+  return attackUser.critical + critical
 }
-const getMultiplier = (charactarSkill: editableCharactarSkill) => {
-  console.log(charactarSkill.skillEffect.multiplying, 'charactarSkill')
-  return charactarSkill.skillEffect.multiplying || 100
+const getMultiplier = (
+  charactarSkill: editableCharactarSkill,
+  attackNumber: number = 1,
+  index?: number,
+) => {
+  let multiply = charactarSkill.skillEffect.multiplying
+  if (index === 0 && charactarSkill.skillEffect.mainMultiplying) {
+    multiply = charactarSkill.skillEffect.mainMultiplying
+  }
+  if (charactarSkill.skillEffect.extraMultiplying) {
+    multiply = multiply + charactarSkill.skillEffect.extraMultiplying * attackNumber
+  }
+  return multiply
 }
 const getIncreasedDamage = (attackUser: battleGroundObj) => {
   return 0
@@ -377,7 +439,7 @@ const getAttributeDamage = (attackUser: battleGroundObj) => {
 const damageList = ref<Record<string, number>>({})
 const alldamage = () => {
   const damageNumberList = Object.values(damageList.value) || []
-  console.log(damageList.value, 'damageList')
+  console.log(damageNumberList, 'damageNumberList')
   return damageNumberList.length > 0 ? damageNumberList.reduce((prev, cur) => prev + cur) : 0
 }
 // 伤害计算
@@ -398,9 +460,8 @@ const damageCalculation = async () => {
       let damageNumber = 0
       let number = charactarSkill.chain || 0
       while (number > 0) {
-        damageNumber =
-          damageNumber +
-          setDamageData(attackPosition[data.name], data, getMultiplier(charactarSkill))
+        damageNumber = damageNumber + setDamageData(attackPosition[data.name], data, charactarSkill)
+        console.log(damageNumber, 'number', number)
         number--
       }
       damageList.value[data.name] = damageNumber

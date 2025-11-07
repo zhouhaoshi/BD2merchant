@@ -1,5 +1,5 @@
 // 伤害计算相关增益属性
-interface buffObj extends userBuff, warcraftBuff {}
+interface damageObj extends userBuff, warcraftBuff {}
 // 角色的属性
 interface userBuff {
   panel?: number // 面板攻击力/魔法力
@@ -24,6 +24,7 @@ interface characterDataObj {
   name: string // 英文名称 / key
   cName: string // 中文名称
   element: string // 元素属性
+  attackAttribute: string // 攻击属性
   ATK?: number // 攻击力
   MATK?: number // 魔力值
   HP: number // 生命值
@@ -53,7 +54,7 @@ interface characterDataObj {
   Skill: Record<string, skillObj> // 技能列表
 }
 
-interface selectCharacterDataObj extends characterDataObj, buffObj {
+interface selectCharacterDataObj extends characterDataObj, damageObj {
   skillBoxList: string[]
   allBreakthrough: Record<string, number>
   allCheckList: Record<string, string>
@@ -92,8 +93,18 @@ interface skillObj {
 interface effectObj {
   sp?: number // 消耗
   cd?: number
-  buff?: Record<string, number | number[][]>[] // 各类加成
+  buff?: buffObj[] // 各类加成
   multiplying?: number // 倍率
+  mainMultiplying?: number // 特殊倍率 - 主目标倍率
+  extraMultiplying?: number // 额外倍率
+}
+
+interface buffObj {
+  duration: number // 持续回合
+  scope: number[][] // 范围
+  attribute?: 'atk' | 'matk' // 效果类型
+  attackAdd?: number // 效果值
+  critical?: number // 暴击伤害
 }
 
 interface editableTabsObj {
@@ -131,5 +142,12 @@ interface editableCharactarSkill {
   allBreakthrough?: Record<string, number> // 所有选中的技能的突破次数
   allCheckList?: Record<string, string> //技能的觉醒
   allPotentials?: Record<string, effectObj> // 技能觉醒后的效果
-  skillEffect: Record<string, number> // 行动条展示倍率
+  skillEffect: skillEffectObj // 行动条展示倍率
+}
+
+interface skillEffectObj {
+  buff: buffObj[]
+  extraMultiplying: number
+  multiplying: number
+  mainMultiplying?: number // 主目标倍率
 }

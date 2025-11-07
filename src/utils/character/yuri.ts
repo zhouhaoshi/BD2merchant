@@ -2,6 +2,7 @@ const yuridata: characterDataObj = {
   name: 'yuri',
   cName: '尤里',
   element: 'light',
+  attackAttribute: 'atk', // 攻击属性 matk 魔法 atk为物理
   ATK: 363, // 攻击力
   HP: 1995, // 生命值
   DEF: 0, // 防御力
@@ -9,9 +10,9 @@ const yuridata: characterDataObj = {
   CR: 10, // 暴击率
   CDMG: 50, // 暴击伤害
   DMG: 50, // 属性伤害
-  panel: 2295,
-  critical: 686.32,
-  attributeDamage: 90,
+  panel: 2223,
+  critical: 605.12,
+  attributeDamage: 0,
   engraving: {
     // 刻印
     HP: 243, // 生命值
@@ -66,6 +67,7 @@ const yuridata: characterDataObj = {
           buff: [
             {
               duration: 4,
+              attribute: 'atk',
               attackAdd: 150,
               scope: [[0, 0]],
             },
@@ -77,6 +79,7 @@ const yuridata: characterDataObj = {
           buff: [
             {
               duration: 4,
+              attribute: 'atk',
               attackAdd: 150,
               scope: [[0, 0]],
             },
@@ -88,6 +91,7 @@ const yuridata: characterDataObj = {
           buff: [
             {
               duration: 4,
+              attribute: 'atk',
               attackAdd: 150,
               scope: [[0, 0]],
             },
@@ -99,6 +103,7 @@ const yuridata: characterDataObj = {
           buff: [
             {
               duration: 4,
+              attribute: 'atk',
               attackAdd: 150,
               scope: [[0, 0]],
             },
@@ -110,6 +115,7 @@ const yuridata: characterDataObj = {
           buff: [
             {
               duration: 4,
+              attribute: 'atk',
               attackAdd: 150,
               scope: [[0, 0]],
             },
@@ -121,6 +127,7 @@ const yuridata: characterDataObj = {
           buff: [
             {
               duration: 4,
+              attribute: 'atk',
               attackAdd: 150,
               scope: [[0, 0]],
             },

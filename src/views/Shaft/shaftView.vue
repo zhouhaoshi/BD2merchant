@@ -37,6 +37,7 @@
           />
           <ActionBattleGroundBar
             ref="actionBattleGroundBar"
+            :turnNumber="editableTabsValue"
             :attackSequence="item.charactarList"
             :battleGroundList="item.battleGroundList"
             :warcraftData="warcraftList['pumpkin1106']"
@@ -127,7 +128,7 @@ const editableTabs = ref<editableTabsObj[]>([
 ])
 const editableCharactarList = ref<editableCharactar[]>([])
 const editableBattleGroundList = ref()
-const userdata = ref<buffObj>({
+const userdata = ref<damageObj>({
   panel: 0,
   attackAdd: 0,
   critical: 0,
@@ -192,9 +193,7 @@ const setSkill = (skillData: selectCharacterDataObj) => {
   const commonSkill = skillData.commonSkill
   commonSkill['general'].qimage = skillDataList[0] ? skillDataList[0].qimage : commonSkill.image
   skillDataList.forEach((item) => {
-    const temp: editableCharactarSkill = {
-      skillEffect: {},
-    }
+    const temp: editableCharactarSkill = {}
     temp.allBreakthrough = skillData.allBreakthrough
     temp.allCheckList = skillData.allCheckList
     temp.allPotentials = skillData.allPotentials

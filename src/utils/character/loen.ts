@@ -1,7 +1,8 @@
-const loen = {
+const loen: characterDataObj = {
   name: 'loen',
   cName: '罗安',
   element: 'fire',
+  attackAttribute: 'matk', // 攻击属性 matk 魔法 atk为物理
   MATK: 319, // 攻击力
   HP: 2520, // 生命值
   DEF: 0, // 防御力
@@ -152,6 +153,7 @@ const loen = {
           buff: [
             {
               duration: 4,
+              attribute: 'matk',
               attackAdd: 40,
               scope: [[0, 0]],
             },
@@ -164,6 +166,7 @@ const loen = {
           buff: [
             {
               duration: 4,
+              attribute: 'matk',
               attackAdd: 40,
               scope: [[0, 0]],
             },
@@ -176,6 +179,7 @@ const loen = {
           buff: [
             {
               duration: 4,
+              attribute: 'matk',
               attackAdd: 60,
               scope: [[0, 0]],
             },
@@ -188,6 +192,7 @@ const loen = {
           buff: [
             {
               duration: 4,
+              attribute: 'matk',
               attackAdd: 60,
               scope: [[0, 0]],
             },
@@ -200,6 +205,7 @@ const loen = {
           buff: [
             {
               duration: 4,
+              attribute: 'matk',
               attackAdd: 80,
               scope: [[0, 0]],
             },
@@ -212,6 +218,7 @@ const loen = {
           buff: [
             {
               duration: 4,
+              attribute: 'matk',
               attackAdd: 80,
               scope: [[0, 0]],
             },
@@ -251,7 +258,7 @@ const loen = {
       name: 'celebrityBunny',
       cName: '名人兔女郎',
       target: 'enemy',
-      sp: -6,
+      sp: -7,
       cd: 9,
       chain: 1,
       scope: [

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="transform: rotateZ(180deg)">
     <!-- 循环列表分别拿到x轴列表和y轴列表，冒泡排序分别拿到最大和最小值。最大最小值绝对值相加就是矩形图像的访问 -->
     <div
       v-for="(row, rowIndex) in sizeList.width"
@@ -86,5 +86,6 @@ calculateSize()
 }
 .scope_box {
   background-color: #2dd4bfd9;
+  transform: rotateZ(180deg);
 }
 </style>

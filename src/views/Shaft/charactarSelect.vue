@@ -21,10 +21,12 @@
         @click="clickCharacter(value)"
         class="character_box"
       >
-        <img
-          :src="splicingqImage(value.Skill[Object.keys(value.Skill)[0]].qimage, 'qimage')"
-          alt=""
-        />
+        <div class="img_box">
+          <img
+            :src="splicingqImage(value.Skill[Object.keys(value.Skill)[0]].qimage, 'qimage')"
+            alt=""
+          />
+        </div>
         <div>
           {{ value.cName }}
         </div>
@@ -125,6 +127,19 @@ const deleteCharactar = (key: string) => {
   &:hover {
     transform: translateY(-5px);
     box-shadow: var(--el-box-shadow);
+  }
+  .img_box {
+    width: 118px;
+    height: 118px;
+    margin: auto;
+    position: relative;
+    & > img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 118px;
+      transform: translate(-50%, -50%);
+    }
   }
 }
 .character_box + .character_box {
