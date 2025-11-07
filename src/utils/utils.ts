@@ -94,8 +94,11 @@ function getValueByPath(
   pathList.forEach((item, index) => {
     if (item in potentials) {
       if (item === 'buff') {
-        const buff = potentials['buff'][pathList[index + 1]][pathList[pathList.length - 1]]
-        potentialsCurrent = buff || 0
+        // 有就处理，突破没提升就不处理
+        if (potentials['buff'][pathList[index + 1]]) {
+          const buff = potentials['buff'][pathList[index + 1]][pathList[pathList.length - 1]]
+          potentialsCurrent = buff || 0
+        }
       } else {
         potentialsCurrent = potentials[item]
       }

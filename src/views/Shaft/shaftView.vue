@@ -306,6 +306,7 @@ const handleTabsEdit = (targetName: number, action: string) => {
       margin-left: 20px;
       .team_character_box {
         width: 60px;
+        height: 60px;
         display: inline-block;
         text-align: center;
         cursor: pointer;
@@ -315,7 +316,11 @@ const handleTabsEdit = (targetName: number, action: string) => {
         border-radius: 5px;
         position: relative;
         & > img {
-          width: 50px;
+          position: absolute;
+          width: 100%;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
         }
       }
       .team_character_box + .team_character_box {

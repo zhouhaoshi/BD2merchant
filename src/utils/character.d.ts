@@ -38,16 +38,20 @@ interface characterDataObj {
   attributeDamage: number // 默认属伤
   engraving: {
     // 刻印
-    HP: number // 生命值
+    HP?: number // 生命值
     ATK?: number // 攻击力
     MATK?: number // 魔力值
-    DEF: number // 防御力
+    DEF?: number // 防御力
+    MRES?: number // 魔抗
   }
   Awakening: {
     // 觉醒
     PATK?: number // 百分比攻击力
     PMATK?: number // 百分比攻击力
-    DMG: number // 属性伤害
+    DMG?: number // 属性伤害
+    DEF?: number // 防御
+    MRES?: number // 魔抗
+    PHP?: number // 百分比生命
   }
   attackType: string // 攻击类型 front为最前 skip为跳过
   commonSkill: Record<string, commonSkillObj> // 通用技能 普攻和击退
@@ -96,7 +100,9 @@ interface effectObj {
   buff?: buffObj[] // 各类加成
   multiplying?: number // 倍率
   mainMultiplying?: number // 特殊倍率 - 主目标倍率
+  ThreeMultiplying?: number // 特殊倍率 -- 三的倍数
   extraMultiplying?: number // 额外倍率
+  special?: Record<string, number>[] // 特殊类型 比如sp回复
 }
 
 interface buffObj {
@@ -105,6 +111,17 @@ interface buffObj {
   attribute?: 'atk' | 'matk' // 效果类型
   attackAdd?: number // 效果值
   critical?: number // 暴击伤害
+  attributeDamage?: number // 属性伤害
+  lightAttributeDamage?: number // 光属性伤害 芮彼特有
+  chainAddNumber?: number // 连锁增强
+  CRAdd?: number // 暴击率
+  increasedDamage?: number // 增强--增伤
+  damageReduction?: number // 减伤
+  minChainCount?: number // 最低连锁数量
+  maxChainCount?: number // 最高连锁数量
+  spReduce?: number // sp减少
+  shield?: number // 护盾 以后再处理 目前的护盾有自身最大生命值的盾 法强盾 和buff人最大生命值的盾
+  HPAdd?: number // 回复 以后再处理 魔法回复。自身值生命回复 buff人生命值回复
 }
 
 interface editableTabsObj {
@@ -150,4 +167,5 @@ interface skillEffectObj {
   extraMultiplying: number
   multiplying: number
   mainMultiplying?: number // 主目标倍率
+  ThreeMultiplying?: number // 卢班希亚3x倍率
 }

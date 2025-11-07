@@ -86,6 +86,7 @@ const deleteCharactar = (key: string) => {
   margin-bottom: 20px;
   .team_character_box {
     width: 60px;
+    height: 60px;
     display: inline-block;
     text-align: center;
     cursor: pointer;
@@ -95,7 +96,11 @@ const deleteCharactar = (key: string) => {
     border-radius: 5px;
     position: relative;
     & > img {
-      width: 50px;
+      position: absolute;
+      width: 100%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
     &:hover {
       .icon_delete {

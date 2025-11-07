@@ -1,5 +1,5 @@
 <template>
-  <div style="transform: rotateZ(180deg)">
+  <div style="transform: rotateZ(180deg); position: relative">
     <!-- 循环列表分别拿到x轴列表和y轴列表，冒泡排序分别拿到最大和最小值。最大最小值绝对值相加就是矩形图像的访问 -->
     <div
       v-for="(row, rowIndex) in sizeList.width"
@@ -16,6 +16,7 @@
         }"
       ></div>
     </div>
+    <div class="All_box" v-if="props.scopeList.length === 0">All</div>
   </div>
 </template>
 <script lang="ts" setup>
@@ -43,21 +44,25 @@ const sizeList = ref<Size>({
 const scopeStringList = ref<string[]>()
 
 const calculateSize = () => {
-  const scopeListX = props.scopeList
-    .map((item: unknown) => item[0])
-    .sort((a: number, b: number) => a - b)
-  const scopeListY = props.scopeList
-    .map((item: unknown) => item[1])
-    .sort((a: number, b: number) => a - b)
-  scopeStringList.value = props.scopeList.map((item: unknown) => `${item[0]}, ${item[1]}`)
-  const xMin = Math.abs(scopeListX[0])
-  const xMax = Math.abs(scopeListX[scopeListX.length - 1])
-  const yMin = Math.abs(scopeListY[0])
-  const yMax = Math.abs(scopeListY[scopeListY.length - 1])
-  const x = xMin + xMax + 1
-  const y = yMin + yMax + 1
-  sizeList.value.min = Math.min(...[scopeListX[0], xMax, scopeListY[0], yMax]) - 1 // -1 添加0,0轴
-  sizeList.value.height = sizeList.value.width = x > y ? x : y
+  if (props.scopeList.length > 0) {
+    const scopeListX = props.scopeList
+      .map((item: unknown) => item[0])
+      .sort((a: number, b: number) => a - b)
+    const scopeListY = props.scopeList
+      .map((item: unknown) => item[1])
+      .sort((a: number, b: number) => a - b)
+    scopeStringList.value = props.scopeList.map((item: unknown) => `${item[0]}, ${item[1]}`)
+    const xMin = Math.abs(scopeListX[0])
+    const xMax = Math.abs(scopeListX[scopeListX.length - 1])
+    const yMin = Math.abs(scopeListY[0])
+    const yMax = Math.abs(scopeListY[scopeListY.length - 1])
+    const x = xMin + xMax + 1
+    const y = yMin + yMax + 1
+    sizeList.value.min = Math.min(...[scopeListX[0], xMax, scopeListY[0], yMax]) - 1 // -1 添加0,0轴
+    sizeList.value.height = sizeList.value.width = x > y ? x : y
+  } else {
+    sizeList.value.height = sizeList.value.width = 3
+  }
 }
 calculateSize()
 </script>
@@ -87,5 +92,18 @@ calculateSize()
 .scope_box {
   background-color: #2dd4bfd9;
   transform: rotateZ(180deg);
+}
+.All_box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotateZ(180deg);
+  width: 150px;
+  height: 150px;
+  background-color: rgba(0, 0, 0, 0.5);
+  text-align: center;
+  line-height: 150px;
+  font-size: 80px;
+  color: red;
 }
 </style>

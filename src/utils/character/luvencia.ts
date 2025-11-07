@@ -10,8 +10,8 @@ const luvencia: characterDataObj = {
   CR: 10, // 暴击率
   CDMG: 100, // 暴击伤害
   DMG: 50, // 属性伤害
-  panel: 2241,
-  critical: 657.92,
+  panel: 2592,
+  critical: 650.56,
   attributeDamage: 90,
   engraving: {
     // 刻印
@@ -135,6 +135,94 @@ const luvencia: characterDataObj = {
           ATK: 80, // 攻击力
           DEF: 5, // 防御
           CDMG: 47.2, // 爆伤
+        },
+      },
+    },
+    wildDog: {
+      name: 'wildDog',
+      cName: '野犬',
+      target: 'enemy',
+      sp: -5,
+      cd: 5,
+      chain: 8,
+      scope: [
+        [0, 0],
+        [-1, 0],
+        [1, 0],
+        [0, 1],
+        [-1, 1],
+        [1, 1],
+      ], // 攻击访问，二维坐标系存储。直接命中目标为[0,0]
+      image: 'Luvencia_2_large', // 图片形象
+      qimage: 'Luvencia_2_idle', // q版形象
+      description:
+        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。若对目标应用的连携是3的倍数，则改为造成相当于自身攻击力&-effect/ThreeMultiplying-&%的物理伤害。',
+      effect: {
+        // 技能效果
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 30,
+          ThreeMultiplying: 40,
+        },
+        1: {
+          sp: 1,
+          cd: 0,
+          multiplying: 30,
+          ThreeMultiplying: 40,
+        },
+        2: {
+          sp: 1,
+          cd: 0,
+          multiplying: 40,
+          ThreeMultiplying: 65,
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 50,
+          ThreeMultiplying: 90,
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 60,
+          ThreeMultiplying: 115,
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 70,
+          ThreeMultiplying: 140,
+        },
+      },
+      // 技能觉醒效果
+      skillPotentials: {
+        potentials1: {
+          multiplying: 10,
+          description: '每次攻击的技能伤害增加10%',
+        },
+        potentials2: {
+          ThreeMultiplying: 20,
+          description: '连锁为3的倍数时，技能伤害增加20%',
+        },
+        potentials3: {
+          cd: -2,
+          description: '冷却时间减少2次',
+        },
+      },
+      // 服装能力
+      ability: {
+        Permanent: {
+          // 通用属性
+          PATK: 5.2, // 百分比攻击力
+        },
+        Bonding: {
+          // 绑定属性
+          ATK: 44, // 攻击力
+          PATK: 23.6, // 攻击力
+          CDMG: 28.4,
+          DMG: 30,
         },
       },
     },

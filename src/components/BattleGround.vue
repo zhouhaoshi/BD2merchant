@@ -350,12 +350,18 @@ const setDamageData = (
       weakPointDamageAdd: warcraftBoxData.weakPointDamageAdd,
     }
     // 主目标
-    if (index === 0) {
+    if (charactarSkill.skillEffect.mainMultiplying) {
       charactarData.multiplier = getMultiplier(charactarSkill, attackPosition.length, index)
+    } else if (charactarSkill.skillEffect.ThreeMultiplying) {
+      charactarData.multiplier = getMultiplier(
+        charactarSkill,
+        attackPosition.length,
+        undefined,
+        warcraftBoxData.chainCount,
+      )
     } else {
       charactarData.multiplier = getMultiplier(charactarSkill, attackPosition.length)
     }
-    console.log(charactarData.multiplier, 'charactarData', index)
     // 问魔兽的
     // enemyWeakness?: number // 易伤/脆弱
     // enemyDefence?: number // 防御/魔抗
@@ -419,10 +425,16 @@ const getMultiplier = (
   charactarSkill: editableCharactarSkill,
   attackNumber: number = 1,
   index?: number,
+  chainCount: number = 0, // 连锁数
+  chainAddNumber: number = 1, // 连锁增长值。默认1
 ) => {
   let multiply = charactarSkill.skillEffect.multiplying
   if (index === 0 && charactarSkill.skillEffect.mainMultiplying) {
     multiply = charactarSkill.skillEffect.mainMultiplying
+  }
+  // 卢班希亚野犬倍率，打击后连锁是3x
+  if (charactarSkill.skillEffect.ThreeMultiplying && (chainCount + chainAddNumber) % 3 === 0) {
+    multiply = charactarSkill.skillEffect.ThreeMultiplying
   }
   if (charactarSkill.skillEffect.extraMultiplying) {
     multiply = multiply + charactarSkill.skillEffect.extraMultiplying * attackNumber
