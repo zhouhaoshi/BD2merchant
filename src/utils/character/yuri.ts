@@ -12,7 +12,7 @@ const yuridata: characterDataObj = {
   DMG: 50, // 属性伤害
   panel: 2223,
   critical: 605.12,
-  attributeDamage: 0,
+  attributeDamage: 90,
   engraving: {
     // 刻印
     HP: 243, // 生命值

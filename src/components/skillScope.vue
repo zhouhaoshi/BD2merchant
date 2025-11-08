@@ -61,6 +61,7 @@ const calculateSize = () => {
     sizeList.value.min = Math.min(...[scopeListX[0], xMax, scopeListY[0], yMax]) - 1 // -1 添加0,0轴
     sizeList.value.height = sizeList.value.width = x > y ? x : y
   } else {
+    scopeStringList.value = []
     sizeList.value.height = sizeList.value.width = 3
   }
 }

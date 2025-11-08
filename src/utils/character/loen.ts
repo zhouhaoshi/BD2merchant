@@ -12,7 +12,7 @@ const loen: characterDataObj = {
   DMG: 50, // 属性伤害
   panel: 1548,
   critical: 446,
-  attributeDamage: 0,
+  attributeDamage: 90,
   engraving: {
     // 刻印
     HP: 243, // 生命值

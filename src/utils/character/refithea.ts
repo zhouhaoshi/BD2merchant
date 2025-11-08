@@ -249,7 +249,7 @@ const refithea: characterDataObj = {
       image: 'Refithea_1_large', // 图片形象
       qimage: 'Refithea_1_idle', // q版形象
       description:
-        '&-effect/buff/0/duration-&回合期間，我軍的致命傷害增加&-effect/buff/0/critical-&%。&-effect/buff/1/duration-&回合期間，對自身套用光環效果。光環效果內，我軍將套用&-effect/buff/1/damageReduction-&%的減傷效果。我軍的SP恢復&-effect/special/0/spAdd-&點。',
+        '&-effect/buff/0/duration-&回合期間，我軍的致命傷害增加&-effect/buff/0/critical-&%。&-effect/buff/1/duration-&回合期間，對自身套用光環效果。光環效果內，我軍將套用&-effect/aureole/0/damageReduction-&%的減傷效果。我軍的SP恢復&-effect/special/0/spAdd-&點。',
       effect: {
         // 技能效果
         0: {
@@ -260,6 +260,12 @@ const refithea: characterDataObj = {
               spAdd: 3,
             },
           ],
+          aureole: [
+            {
+              damageReduction: 25,
+              scope: [],
+            },
+          ],
           buff: [
             {
               duration: 6,
@@ -268,8 +274,8 @@ const refithea: characterDataObj = {
             },
             {
               duration: 6,
-              damageReduction: 25,
-              scope: [], // 攻击访问，二维坐标系存储。范围为空就是全部
+              aureole: 1,
+              scope: [[0, 0]], // 攻击访问，二维坐标系存储。范围为空就是全部
             },
           ],
         },
@@ -281,6 +287,12 @@ const refithea: characterDataObj = {
               spAdd: 3,
             },
           ],
+          aureole: [
+            {
+              damageReduction: 25,
+              scope: [],
+            },
+          ],
           buff: [
             {
               duration: 6,
@@ -289,8 +301,8 @@ const refithea: characterDataObj = {
             },
             {
               duration: 6,
-              damageReduction: 25,
-              scope: [], // 攻击访问，二维坐标系存储。范围为空就是全部
+              aureole: 1,
+              scope: [[0, 0]], // 攻击访问，二维坐标系存储。范围为空就是全部
             },
           ],
         },
@@ -302,6 +314,12 @@ const refithea: characterDataObj = {
               spAdd: 3,
             },
           ],
+          aureole: [
+            {
+              damageReduction: 25,
+              scope: [],
+            },
+          ],
           buff: [
             {
               duration: 6,
@@ -310,8 +328,8 @@ const refithea: characterDataObj = {
             },
             {
               duration: 6,
-              damageReduction: 25,
-              scope: [], // 攻击访问，二维坐标系存储。范围为空就是全部
+              aureole: 1,
+              scope: [[0, 0]], // 攻击访问，二维坐标系存储。范围为空就是全部
             },
           ],
         },
@@ -323,6 +341,12 @@ const refithea: characterDataObj = {
               spAdd: 3,
             },
           ],
+          aureole: [
+            {
+              damageReduction: 25,
+              scope: [],
+            },
+          ],
           buff: [
             {
               duration: 6,
@@ -331,8 +355,8 @@ const refithea: characterDataObj = {
             },
             {
               duration: 6,
-              damageReduction: 25,
-              scope: [], // 攻击访问，二维坐标系存储。范围为空就是全部
+              aureole: 1,
+              scope: [[0, 0]], // 攻击访问，二维坐标系存储。范围为空就是全部
             },
           ],
         },
@@ -344,6 +368,12 @@ const refithea: characterDataObj = {
               spAdd: 5,
             },
           ],
+          aureole: [
+            {
+              damageReduction: 25,
+              scope: [],
+            },
+          ],
           buff: [
             {
               duration: 6,
@@ -352,8 +382,8 @@ const refithea: characterDataObj = {
             },
             {
               duration: 6,
-              damageReduction: 25,
-              scope: [], // 攻击访问，二维坐标系存储。范围为空就是全部
+              aureole: 1,
+              scope: [[0, 0]], // 攻击访问，二维坐标系存储。范围为空就是全部
             },
           ],
         },
@@ -365,6 +395,12 @@ const refithea: characterDataObj = {
               spAdd: 5,
             },
           ],
+          aureole: [
+            {
+              damageReduction: 50,
+              scope: [],
+            },
+          ],
           buff: [
             {
               duration: 6,
@@ -373,8 +409,8 @@ const refithea: characterDataObj = {
             },
             {
               duration: 6,
-              damageReduction: 50,
-              scope: [], // 攻击访问，二维坐标系存储。范围为空就是全部
+              aureole: 1,
+              scope: [[0, 0]], // 攻击访问，二维坐标系存储。范围为空就是全部
             },
           ],
         },

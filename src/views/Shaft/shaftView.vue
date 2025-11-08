@@ -160,6 +160,7 @@ const setEditableTabs = (data: Record<string, selectCharacterDataObj>) => {
     editableCharactar.cName = item.cName
     editableCharactar.attributeDamage = item.attributeDamage
     editableCharactar.element = item.element
+    editableCharactar.attackAttribute = item.attackAttribute
     editableCharactar.attackType = item.attackType // attackType: 'skip', // 攻击类型 front为最前 skip为跳过
     editableCharactar.skill = setSkill(item)
     editableCharactarList.value?.push(editableCharactar)
@@ -241,11 +242,10 @@ const setSkillEffect = (effect: effectObj, potentials: effectObj) => {
   for (const value in effect) {
     if (value === 'cd' || value === 'sp') {
       // break
-    } else if (value === 'buff') {
+    } else if (value === 'buff' || value === 'special') {
       const tempBuff = JSON.parse(JSON.stringify(effect[value]))
       const potentialsList = potentials[value] || []
       potentialsList?.forEach((item, index) => {
-        console.log(item, index, tempBuff)
         Object.keys(item).forEach((keyItem) => {
           ;(tempBuff[index][keyItem] as number) += item[keyItem] as number
         })

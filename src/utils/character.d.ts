@@ -23,8 +23,8 @@ interface warcraftBuff {
 interface characterDataObj {
   name: string // 英文名称 / key
   cName: string // 中文名称
-  element: string // 元素属性
-  attackAttribute: string // 攻击属性
+  element: 'light' | 'dark' | 'fire' | 'wind' | 'water' // 元素属性
+  attackAttribute: 'atk' | 'matk' // 攻击属性
   ATK?: number // 攻击力
   MATK?: number // 魔力值
   HP: number // 生命值
@@ -98,6 +98,7 @@ interface effectObj {
   sp?: number // 消耗
   cd?: number
   buff?: buffObj[] // 各类加成
+  aureole?: aureoleObj[] // 光环
   multiplying?: number // 倍率
   mainMultiplying?: number // 特殊倍率 - 主目标倍率
   ThreeMultiplying?: number // 特殊倍率 -- 三的倍数
@@ -107,12 +108,13 @@ interface effectObj {
 
 interface buffObj {
   duration: number // 持续回合
-  scope: number[][] // 范围
+  scope: number[][] // 范围 // 如果为空继技能本身访问
   attribute?: 'atk' | 'matk' // 效果类型
   attackAdd?: number // 效果值
   critical?: number // 暴击伤害
   attributeDamage?: number // 属性伤害
   lightAttributeDamage?: number // 光属性伤害 芮彼特有
+  aureole?: number // 是否有光环 1为有其他为0 光环只能套给自己
   chainAddNumber?: number // 连锁增强
   CRAdd?: number // 暴击率
   increasedDamage?: number // 增强--增伤
@@ -124,6 +126,13 @@ interface buffObj {
   HPAdd?: number // 回复 以后再处理 魔法回复。自身值生命回复 buff人生命值回复
 }
 
+interface aureoleObj {
+  CRAdd?: number // 暴击率
+  attributeDamage?: number // 属性伤害
+  damageReduction?: number // 减伤
+  scope: number[][] // 范围 // 如果为空继技能本身访问
+}
+
 interface editableTabsObj {
   name: number
   charactarList: editableCharactar[]
@@ -131,16 +140,17 @@ interface editableTabsObj {
 }
 
 interface editableCharactar {
-  name?: string // 名称
+  name: string // 名称
   cName?: string // 中文名称
   panel?: number // 面板攻击力/魔法力
   critical?: number // 爆伤
   attributeDamage?: number // 属性伤害
-  element?: string // 属性
+  element?: 'light' | 'dark' | 'fire' | 'wind' | 'water' // 元素属性
+  attackAttribute?: 'atk' | 'matk' // 攻击属性
   attackType?: string // 攻击类型
   selectSikll?: string // 选中的皮肤
   commonSkill?: Record<string, commonSkillObj> // 通用技能 普攻和击退
-  skill?: Record<string, editableCharactarSkill> // 技能
+  skill: Record<string, editableCharactarSkill> // 技能
 }
 
 interface editableCharactarSkill {
@@ -149,7 +159,7 @@ interface editableCharactarSkill {
   cd?: number
   chain?: number
   sp?: number
-  target?: string
+  target?: 'friendly' | 'enemy' // 作用目标 友军或者敌人
   image?: string
   qimage?: string
   multiplier?: number
@@ -168,4 +178,31 @@ interface skillEffectObj {
   multiplying: number
   mainMultiplying?: number // 主目标倍率
   ThreeMultiplying?: number // 卢班希亚3x倍率
+}
+
+interface warcraftBuffListObj {
+  scope?: number[] // 确定是那个部位的buff
+  buff?: warcraftBuffObj[]
+}
+
+interface warcraftBuffObj {
+  chainDamageAdd?: chainDamageAddBuffObj[]
+  enemyWeakness?: enemyWeaknessBuffObj[]
+}
+
+interface chainDamageAddBuffObj {
+  addTurn: number // 上buff的回合
+  key: string // buffid，防止同一个buff上多次
+  duration: number // 持续回合
+  chainDamageAdd: number
+}
+
+interface enemyWeaknessBuffObj {
+  addTurn: number // 上buff的回合
+  key: string // buffid，防止同一个buff上多次
+  duration: number // 持续回合
+  enemyWeakness: number
+  type?: number // 是那种增伤buff
+  attribute?: 'atk' | 'matk' // 效果类型 为空就是全是
+  attributeElement?: 'light' | 'dark' | 'fire' | 'wind' | 'water'
 }

@@ -3,6 +3,7 @@
     :model-value="dialogVisible"
     title="角色选择"
     :before-close="BeforeClose"
+    style="width: 80%"
     append-to-body
   >
     <div class="team_list">
@@ -14,7 +15,7 @@
         <el-icon class="icon_delete" @click="deleteCharactar(value.name)"><Delete /></el-icon>
       </div>
     </div>
-    <el-card>
+    <el-card class="charactar_list">
       <div
         v-for="value in characterList"
         :key="value.name"
@@ -147,7 +148,11 @@ const deleteCharactar = (key: string) => {
     }
   }
 }
-.character_box + .character_box {
-  margin-left: 10px;
+.charactar_list {
+  :deep(.el-card__body) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
 }
 </style>

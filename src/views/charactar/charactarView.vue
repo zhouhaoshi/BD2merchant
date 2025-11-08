@@ -1,6 +1,6 @@
 <template>
   <!-- 属性筛选  ----- 新增角色 ---- 新增角色皮肤 ---- 皮肤填写数据（?待定） --- 技能访问用二维坐标记录，攻击点为原点（0，0）左x-1右x+1 前y+1后y-1 -->
-  <el-card>
+  <el-card class="charactar_list">
     <div
       v-for="value in characterList"
       :key="value.name"
@@ -71,7 +71,11 @@ const charactarDetailsClose = () => {
     }
   }
 }
-.character_box + .character_box {
-  margin-left: 10px;
+.charactar_list {
+  :deep(.el-card__body) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
 }
 </style>

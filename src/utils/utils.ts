@@ -182,3 +182,20 @@ export function setCharacterLocation(
   })
   return battleGroundList
 }
+
+export function upsertObjectByKey(
+  arr: Record<string, unknown>[],
+  newObj: Record<string, unknown>,
+  key: string = 'key',
+) {
+  const arrList = JSON.parse(JSON.stringify(arr))
+  const index = arr.findIndex((item) => item[key] === newObj[key])
+  if (index !== -1) {
+    // 找到了，覆盖
+    arrList[index] = newObj // 可选：合并旧值和新值；如果要完全替换，直接 arr[index] = newObj;
+  } else {
+    // 没找到，新增
+    arrList.push(newObj)
+  }
+  return arrList // 可选：返回修改后的数组（注意这是原地修改）
+}
