@@ -111,15 +111,11 @@ interface effectObj {
   special?: Record<string, number>[] // 特殊类型 比如sp回复
 }
 
-interface buffObj {
-  duration: number // 持续回合
-  scope: number[][] // 范围 // 如果为空继技能本身访问
-  attribute?: 'atk' | 'matk' // 效果类型
+interface buffElement {
   attackAdd?: number // 效果值
   critical?: number // 暴击伤害
   attributeDamage?: number // 属性伤害
   lightAttributeDamage?: number // 光属性伤害 芮彼特有
-  aureole?: number // 是否有光环 1为有其他为0 光环只能套给自己
   chainAddNumber?: number // 连锁增强
   CRAdd?: number // 暴击率
   increasedDamage?: number // 增强--增伤
@@ -129,10 +125,18 @@ interface buffObj {
   spReduce?: number // sp减少
   shield?: number // 护盾 以后再处理 目前的护盾有自身最大生命值的盾 法强盾 和buff人最大生命值的盾
   HPAdd?: number // 回复 以后再处理 魔法回复。自身值生命回复 buff人生命值回复
+  aureole?: number // 是否有光环 1为有其他为0 光环只能套给自己
+}
+
+interface buffObj extends buffElement {
+  duration: number // 持续回合
+  scope: number[][] // 范围 // 如果为空继技能本身访问
+  attribute?: 'atk' | 'matk' // 效果类型
 }
 
 interface aureoleObj {
   CRAdd?: number // 暴击率
+  shield?: number // 护盾
   attributeDamage?: number // 属性伤害
   damageReduction?: number // 减伤
   scope: number[][] // 范围 // 如果为空继技能本身访问
@@ -165,6 +169,7 @@ interface editableCharactarSkill extends commonSkill, skillSelectShow {
 
 interface skillEffectObj {
   buff: buffObj[]
+  aureole: aureoleObj[]
   extraMultiplying: number
   multiplying: number
   mainMultiplying?: number // 主目标倍率
@@ -172,10 +177,7 @@ interface skillEffectObj {
 }
 
 // 角色身上的buff
-interface userBuffObj extends buffComonElement {
-  attackAdd?: number
-  CRAdd?: number
-}
+interface userBuffObj extends buffComonElement, buffElement {}
 
 // 魔兽身上的buff
 interface warcraftBuffListObj {

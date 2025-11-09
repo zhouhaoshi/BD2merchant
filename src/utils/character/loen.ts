@@ -236,7 +236,7 @@ const loen: characterDataObj = {
           description: '技能伤害增加15%',
         },
         potentials3: {
-          description: '冷却时间减少两回合',
+          description: '冷却时间减少2次',
           cd: -2,
         },
       },

@@ -16,7 +16,7 @@
       </div>
       <div class="select_btn" @click="dialogVisible = true">选择角色</div>
     </div>
-    <!-- 具体排轴 tab页选择回合数 --- 可以新增tab --- tab内容为3x4的格子可以拖到和选择角色 左侧为出手列表 --可拖到，默认队伍排序 --- 鼠标经过角色格展示角色buff -->
+    <!-- 鼠标经过角色格展示角色buff -->
     <div></div>
     <!-- 列表话展示轴，行线展示回合，列为角色技能-->
     <div></div>
@@ -126,6 +126,7 @@ import {
   conversionDescription,
   conversionCommon,
   setCharacterLocation,
+  specialKey,
 } from '@/utils/utils'
 const editableTabsValue = ref(1)
 const tabIndex = ref(1)
@@ -258,7 +259,7 @@ const setSkillEffect = (effect: effectObj, potentials: effectObj) => {
   for (const value in effect) {
     if (value === 'cd' || value === 'sp') {
       // break
-    } else if (value === 'buff' || value === 'special') {
+    } else if (specialKey.includes(value)) {
       const tempBuff = JSON.parse(JSON.stringify(effect[value]))
       const potentialsList = potentials[value] || []
       potentialsList?.forEach((item, index) => {

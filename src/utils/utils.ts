@@ -14,6 +14,9 @@ export function formatDate(date: Date) {
   return `${year}-${month}-${day}`
 }
 
+// 需要特殊处理的key
+export const specialKey = ['buff', 'special', 'aureole']
+
 /**
  * 查询并更新对象数组 B 中与 A 的 id 匹配的项
  * @param {Array} urlId - 源数据数组（包含要复制的值）
@@ -93,10 +96,10 @@ function getValueByPath(
   let potentialsCurrent: undefined | number = undefined // 觉醒属性
   pathList.forEach((item, index) => {
     if (item in potentials) {
-      if (item === 'buff') {
+      if (specialKey.includes(item)) {
         // 有就处理，突破没提升就不处理
-        if (potentials['buff'][pathList[index + 1]]) {
-          const buff = potentials['buff'][pathList[index + 1]][pathList[pathList.length - 1]]
+        if (potentials[item][pathList[index + 1]]) {
+          const buff = potentials[item][pathList[index + 1]][pathList[pathList.length - 1]]
           potentialsCurrent = buff || 0
         }
       } else {
@@ -184,7 +187,7 @@ export function setCharacterLocation(
 }
 
 export function upsertObjectByKey(
-  arr: buffObj[] = [],
+  arr: userBuffObj[] = [],
   newObj: Record<string, unknown>,
   key: string = 'key',
 ) {
@@ -198,4 +201,44 @@ export function upsertObjectByKey(
     arrList.push(newObj)
   }
   return arrList // 可选：返回修改后的数组（注意这是原地修改）
+}
+
+// 处理选中的觉醒
+export function setPotentials(checkList: unknown[], skillPotentials: Record<string, unknown>) {
+  const tempPotentials = {}
+  checkList.forEach((item) => {
+    if (skillPotentials[item] && typeof skillPotentials[item] === 'object') {
+      for (const value in skillPotentials[item]) {
+        if (value !== 'description' && value !== 'scope' && !specialKey.includes(value)) {
+          tempPotentials[value] = (tempPotentials[value] || 0) + skillPotentials[item][value]
+        } else if (specialKey.includes(value)) {
+          for (const buffValue in skillPotentials[item][value]) {
+            if (buffValue !== 'index') {
+              const index = skillPotentials[item][value].index
+              // 如果不存在则赋值
+              if (!tempPotentials[value]) {
+                tempPotentials[value] = []
+              }
+              if (!tempPotentials[value][index]) {
+                tempPotentials[value][index] = {}
+              }
+              tempPotentials[value][index][buffValue] =
+                (tempPotentials[value][index][buffValue] || 0) +
+                skillPotentials[item][value][buffValue]
+
+              if (tempPotentials[value].length === 0) {
+                delete tempPotentials[value]
+              }
+            }
+          }
+        } else if (value === 'scope') {
+          tempPotentials[value] = [
+            ...(tempPotentials[value] || []),
+            ...skillPotentials[item][value],
+          ]
+        }
+      }
+    }
+  })
+  return tempPotentials
 }

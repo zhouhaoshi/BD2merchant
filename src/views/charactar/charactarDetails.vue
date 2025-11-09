@@ -89,7 +89,7 @@
               'scope',
               breakthrough,
               potentials,
-            )
+            ) as unknown as unknown[]
           "
         />
       </div>
@@ -98,7 +98,12 @@
 </template>
 
 <script lang="ts" setup>
-import { splicingqImage, conversionDescription, conversionCommon } from '@/utils/utils'
+import {
+  splicingqImage,
+  conversionDescription,
+  conversionCommon,
+  setPotentials,
+} from '@/utils/utils'
 import skillScope from '@/components/skillScope.vue'
 const props = defineProps(['dialogVisible', 'data'])
 const emit = defineEmits(['close'])
@@ -112,41 +117,7 @@ const changeSkillPotentials = () => {
   const skillPotentials =
     props.data.Skill[selectSkill.value || Object.keys(props.data.Skill)[select.value]]
       .skillPotentials
-  const tempPotentials = {
-    buff: [],
-  }
-  // 处理选中的觉醒
-  checkList.value.forEach((item) => {
-    if (skillPotentials[item] && typeof skillPotentials[item] === 'object') {
-      for (const value in skillPotentials[item]) {
-        if (value !== 'description' && value !== 'buff' && value !== 'scope') {
-          tempPotentials[value] = (tempPotentials[value] || 0) + skillPotentials[item][value]
-        } else if (value === 'buff') {
-          for (const buffValue in skillPotentials[item]['buff']) {
-            if (buffValue !== 'index') {
-              const index = skillPotentials[item]['buff'].index
-              // 如果不存在则赋值
-              if (!tempPotentials.buff[index]) {
-                tempPotentials.buff[index] = {}
-              }
-              tempPotentials.buff[index][buffValue] =
-                (tempPotentials['buff'][index][buffValue] || 0) +
-                skillPotentials[item]['buff'][buffValue]
-            }
-          }
-        } else if (value === 'scope') {
-          tempPotentials[value] = [
-            ...(tempPotentials[value] || []),
-            ...skillPotentials[item][value],
-          ]
-        }
-      }
-    }
-  })
-  if (tempPotentials.buff.length === 0) {
-    delete tempPotentials.buff
-  }
-  potentials.value = tempPotentials
+  potentials.value = setPotentials(checkList.value, skillPotentials)
 }
 const clickSelectSkill = (value: string) => {
   selectSkill.value = value

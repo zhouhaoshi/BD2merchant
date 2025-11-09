@@ -61,7 +61,7 @@ const props = defineProps({
   battleGroundList: {
     // 角色场地位置
     type: Array,
-    default: () => [] as editableCharactar[],
+    default: () => [],
   },
   warcraftData: {
     // 魔兽数据
@@ -86,7 +86,7 @@ const props = defineProps({
 })
 const emit = defineEmits(['changeBuff'])
 
-const userBuff = ref<Record<string, buffObj[]>>({}) // 用来记录本回合角色身上的buff 回合结束后统一更新
+const userBuff = ref<Record<string, userBuffObj[]>>({}) // 用来记录本回合角色身上的buff 回合结束后统一更新
 const warcraftBuff = ref({}) // 用来记录本回合魔兽身上的buff 回合结束后统一更新
 const tempEnemyList = ref() // 初始状态下的魔兽情况
 const afterTempEnemyList = ref() // 攻击后的魔兽状态
@@ -108,7 +108,7 @@ const changeLocation = (index: number) => {
     dataList[index] = tempIndex
     selectIndex.value = undefined
     // 位置替换了就重新计算伤害
-    damageCalculation()
+    initialization(true)
   }
   if (!!props.battleGroundList[index] && (!!selectIndex.value || selectIndex.value === 0)) {
     // 如果选到了角色
@@ -489,7 +489,6 @@ const getMultiplier = (
 }
 // 计算真实增伤
 const getIncreasedDamage = (attackUser: editableCharactar, chainCount: number) => {
-  console.log(chainCount, 'chainCount')
   // 是否有自拐
   ourSelfBuff(attackUser)
   const attackAddBuffNumber = (userBuff.value[attackUser.name] || [])
@@ -641,12 +640,13 @@ const ourSelfBuff = (attackUser: editableCharactar) => {
 
 // 给角色添加buff
 const appendBuff = (
-  attackPosition: number[],
+  attackPosition: number[], // 需要上buff的位置的下标
   charactarSkill: editableCharactarSkill,
   attackUser: editableCharactar,
+  key: 'buff' | 'aureole' = 'buff',
 ) => {
-  const buffList = charactarSkill.skillEffect.buff || []
-  buffList.forEach((item: buffObj, index) => {
+  const buffList = charactarSkill.skillEffect[key] || []
+  buffList.forEach((item: buffObj | aureoleObj, index) => {
     // 继承主目标范围，否则单独计算范围
     if (item.scope.length === 0) {
       // 给范围内的角色上buff
@@ -654,11 +654,15 @@ const appendBuff = (
         if (props.battleGroundList[nItem]) {
           const selectCharactar = props.battleGroundList[nItem] as editableCharactar
           const temp = JSON.parse(JSON.stringify(item))
+          if (key === 'aureole') {
+            // 光环buff默认2回合 戴安娜的盾还需要单独处理到时候再说吧
+            temp.duration = 2
+          }
           delete temp.scope
           if (!temp.attribute) {
             const tempBuff = {
               addTurn: props.turnNumber, // 上buff的回合
-              key: `${charactarSkill.name}_${index}`, // buffid，防止同一个buff上多次
+              key: `${charactarSkill.name}_${index}_${key}`, // buffid，防止同一个buff上多次
               ...temp,
             }
             userBuff.value[selectCharactar.name] = upsertObjectByKey(
@@ -669,7 +673,7 @@ const appendBuff = (
             delete temp.attribute
             const tempBuff = {
               addTurn: props.turnNumber, // 上buff的回合
-              key: `${charactarSkill.name}_${index}`, // buffid，防止同一个buff上多次
+              key: `${charactarSkill.name}_${index}_${key}`, // buffid，防止同一个buff上多次
               ...temp,
             }
             userBuff.value[selectCharactar.name] = upsertObjectByKey(
@@ -687,13 +691,18 @@ const appendBuff = (
         delete temp.attribute
         const tempBuff = {
           addTurn: props.turnNumber, // 上buff的回合
-          key: `${charactarSkill.name}_${index}`, // buffid，防止同一个buff上多次
+          key: `${charactarSkill.name}_${index}_${key}`, // buffid，防止同一个buff上多次
           ...temp,
         }
         userBuff.value[attackUser.name] = upsertObjectByKey(
           userBuff.value[attackUser.name],
           tempBuff,
         )
+      }
+      // 自身有光环单独再去上一次光环buff
+      const temp = JSON.parse(JSON.stringify(item)) as buffObj
+      if (!!temp.aureole && temp.aureole === 1) {
+        appendBuff(attackPosition, charactarSkill, attackUser, 'aureole')
       }
     }
   })
@@ -702,13 +711,35 @@ const appendBuff = (
 const getUserBuffList = () => {
   nextTick(() => {
     const tempBuffList = JSON.parse(JSON.stringify(props.beforeBuffList))
-    const effectiveBuffList: Record<string, buffObj[]> = {}
+    const effectiveBuffList: Record<string, userBuffObj[]> = {}
+    // 处理需要继承的buff
     for (const value in tempBuffList) {
       effectiveBuffList[value] = tempBuffList[value].filter(
         (item: buffComonElement) => props.turnNumber - item.addTurn < item.duration,
       )
     }
     userBuff.value = effectiveBuffList
+    console.log(effectiveBuffList, 'effectiveBuffList')
+    // 单独处理光环buff
+    for (const value in effectiveBuffList) {
+      effectiveBuffList[value].forEach((item: userBuffObj) => {
+        if (!!item.aureole && item.aureole === 1) {
+          const userList = props.battleGroundList as editableCharactar[]
+          userList.forEach(async (Bitem: editableCharactar, Bindex: number) => {
+            if (Bitem && Bitem.name === value) {
+              const selectSkill = item.key.split('_')[0]
+              const mainTarget = transformationCoordinates(Bindex)
+                .split(',')
+                .map((item) => +item)
+              const selectCharactar = JSON.parse(JSON.stringify(Bitem))
+              selectCharactar.selectSikll = selectSkill
+              const attackPosition = await autoGetAllAttackPosition(mainTarget, selectCharactar)
+              appendBuff(attackPosition, Bitem.skill[selectSkill], Bitem, 'aureole')
+            }
+          })
+        }
+      })
+    }
   })
 }
 
@@ -716,12 +747,16 @@ const getWarcraftBuffList = () => {
   warcraftBuff.value = props.warcraftData.buffList || []
 }
 // 回合开始初始化
-const initialization = async () => {
+const initialization = async (recoed?: boolean) => {
   // 清空遗留数据
-  attackPosition.value = []
-  friendlyPosition.value = []
-  selectIndex.value = undefined
+  if (!recoed) {
+    attackPosition.value = []
+    friendlyPosition.value = []
+    selectIndex.value = undefined
+  }
   damageList.value = {}
+  // 先清空buff重新计算
+  userBuff.value = {}
   // 获取角色身上的遗留buff
   await getUserBuffList()
   // 获取魔兽身上的遗留buff
