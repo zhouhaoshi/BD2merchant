@@ -411,7 +411,7 @@ const setDamageData = (
     multiplier: 0,
     attackAdd: getAttackAdd(attackUser), // 需要计算
     critical: getCritical(attackUser),
-    increasedDamage: getIncreasedDamage(attackUser),
+    increasedDamage: 0,
     attributeDamage: getAttributeDamage(attackUser),
   }
   attackPosition.forEach((item, index) => {
@@ -437,6 +437,7 @@ const setDamageData = (
     } else {
       charactarData.multiplier = getMultiplier(charactarSkill, attackPosition.length)
     }
+    charactarData.increasedDamage = getIncreasedDamage(attackUser, warcraftBoxData.chainCount)
     // 问魔兽的
     // enemyWeakness?: number // 易伤/脆弱
     // enemyDefence?: number // 防御/魔抗
@@ -457,18 +458,8 @@ const setDamageData = (
 }
 // 计算面板加成比例
 const getAttackAdd = (attackUser: editableCharactar) => {
-  // 自拐
-  const charactarSkill =
-    attackUser.skill[attackUser.selectSikll || Object.keys(attackUser.skill)[0]] // 角色技能
-  // 计算buff
-  appendBuff([], charactarSkill, attackUser)
-  const attackAddBuffNumber = (userBuff.value[attackUser.name] || [])
-    .map((item) => (item.attackAdd ? item.attackAdd : undefined))
-    .filter((item) => !!item)
-  // 给角色添加buff
-  return attackAddBuffNumber.length > 0
-    ? attackAddBuffNumber.reduce((prev, cur) => (prev || 0) + (cur || 0))
-    : 0
+  const attackAddNumber = (getBuffNumber(attackUser, 'attackAdd') || 0) as number
+  return attackAddNumber
 }
 // 计算真实爆伤
 const getCritical = (attackUser: editableCharactar) => {
@@ -497,8 +488,33 @@ const getMultiplier = (
   return multiply
 }
 // 计算真实增伤
-const getIncreasedDamage = (attackUser: editableCharactar) => {
-  return 0
+const getIncreasedDamage = (attackUser: editableCharactar, chainCount: number) => {
+  console.log(chainCount, 'chainCount')
+  // 是否有自拐
+  ourSelfBuff(attackUser)
+  const attackAddBuffNumber = (userBuff.value[attackUser.name] || [])
+    .map((item) => {
+      if (item.increasedDamage) {
+        const limitKeyList = ['minChainCount', 'maxChainCount']
+        const hasOwn = Object.prototype.hasOwnProperty
+        if (!limitKeyList.some((key) => hasOwn.call(item, key))) {
+          // 没限制条件的增伤则直接使用
+          return item.increasedDamage
+        } else if (item.minChainCount && chainCount >= item.minChainCount) {
+          return item.increasedDamage
+        } else if (item.maxChainCount && chainCount <= item.maxChainCount) {
+          return item.increasedDamage
+        } else {
+          return undefined
+        }
+      } else {
+        return undefined
+      }
+    })
+    .filter((item) => !!item)
+  return attackAddBuffNumber.length > 0
+    ? attackAddBuffNumber.reduce((prev, cur) => (prev || 0) + (cur || 0))
+    : 0
 }
 // 连锁增强
 const getchainAddNumber = (attackUser: editableCharactar) => {
@@ -519,10 +535,7 @@ const getAttributeDamage = (attackUser: editableCharactar) => {
     beneficialElementList[elementIndex + 1] === props.warcraftData.element // 是克制属性
   ) {
     // 是否有自拐
-    const charactarSkill =
-      attackUser.skill[attackUser.selectSikll || Object.keys(attackUser.skill)[0]] // 角色技能
-    // 计算buff
-    appendBuff([], charactarSkill, attackUser)
+    ourSelfBuff(attackUser)
     // 计算有buff后的属性伤害
     const attackAddBuffNumberList = (userBuff.value[attackUser.name] || [])
       .map((item) =>
@@ -543,10 +556,7 @@ const getAttributeDamage = (attackUser: editableCharactar) => {
 }
 // 获取buff增强值 通用模块封装
 const getBuffNumber = (attackUser: editableCharactar, key: string) => {
-  const charactarSkill =
-    attackUser.skill[attackUser.selectSikll || Object.keys(attackUser.skill)[0]] // 角色技能
-  // 计算buff
-  appendBuff([], charactarSkill, attackUser)
+  ourSelfBuff(attackUser)
   const buffNumberList = (userBuff.value[attackUser.name] || [])
     .map((item) => (item[key] ? item[key] : undefined))
     .filter((item) => !!item) as unknown as number[]
@@ -617,7 +627,16 @@ const damageCalculation = async () => {
       }
     }
   })
+  console.log(userBuff.value, '------userBuff-------')
   emit('changeBuff', userBuff.value)
+}
+
+// 判断是否有自拐
+const ourSelfBuff = (attackUser: editableCharactar) => {
+  const charactarSkill =
+    attackUser.skill[attackUser.selectSikll || Object.keys(attackUser.skill)[0]] // 角色技能
+  // 计算buff
+  appendBuff([], charactarSkill, attackUser)
 }
 
 // 给角色添加buff
