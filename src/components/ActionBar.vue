@@ -84,6 +84,11 @@ const props = defineProps({
     type: Object || Array,
     default: () => [],
   },
+  turnNumber: {
+    // 回合数。用来处理buff
+    type: Number,
+    default: 0,
+  },
 })
 const emit = defineEmits(['change'])
 // 选择角色皮肤
@@ -102,26 +107,30 @@ const selectSikll = ref<string>('') // 当前选中的技能
 const ActionBarBox = ref()
 // 初始化拖动
 const initDropTable = () => {
-  const el = document.querySelector('.action_bar_box')
+  const el = document.querySelectorAll('.action_bar_box')
   interface evtObj {
     newIndex: number
     oldIndex: number
   }
-  Sortable.create(el, {
-    handle: '.character_box', //设置指定列作为拖拽
-    onEnd(evt: evtObj) {
-      const { newIndex, oldIndex } = evt
-      const dataList = props.charactarList
-      const currRow = dataList?.splice(oldIndex, 1)[0] as editableCharactar
-      dataList?.splice(newIndex, 0, currRow)
-      emit('change')
-      // 重新绑定拖动
-      nextTick(() => {
-        initDropTable()
-      })
-    },
+  // 给所有都绑定一下
+  el.forEach((item) => {
+    Sortable.create(item, {
+      handle: '.character_box', //设置指定列作为拖拽
+      onEnd(evt: evtObj) {
+        const { newIndex, oldIndex } = evt
+        const dataList = props.charactarList
+        const currRow = dataList?.splice(oldIndex, 1)[0] as editableCharactar
+        dataList?.splice(newIndex, 0, currRow)
+        emit('change')
+        // 重新绑定拖动
+        nextTick(() => {
+          initDropTable()
+        })
+      },
+    })
   })
 }
+defineExpose({ initDropTable })
 onMounted(() => {
   initDropTable()
 })

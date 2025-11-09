@@ -1,3 +1,36 @@
+// buff的通用属性
+interface buffComonElement {
+  addTurn: number // 上buff的回合
+  key: string // buffid，防止同一个buff上多次
+  duration: number // 持续回合
+}
+
+// buff的通用属性
+interface userComonElement {
+  element: 'light' | 'dark' | 'fire' | 'wind' | 'water' // 元素属性
+  attackAttribute?: 'atk' | 'matk' // 攻击属性
+}
+// 通用的技能属性
+interface commonSkill {
+  name: string // 英文名称 / key
+  cName: string // 中文名称
+  sp: number // 技能消耗
+  cd: number // 技能冷却
+  chain: number // 连锁次数
+  target?: 'friendly' | 'enemy' // 作用目标 友军或者敌人
+  image: string // 图片形象
+  qimage?: string // q版形象
+  scope: number[][] // 攻击范围，二维坐标系存储。直接命中目标为[0,0]
+}
+
+// 角色选中后的回显属性
+interface skillSelectShow {
+  skillBoxList: string[] // 选中的技能
+  allBreakthrough: Record<string, number> // 所有选中的技能的突破次数
+  allCheckList: Record<string, string> //技能的觉醒
+  allPotentials: Record<string, effectObj> // 技能觉醒后的效果
+}
+
 // 伤害计算相关增益属性
 interface damageObj extends userBuff, warcraftBuff {}
 // 角色的属性
@@ -20,11 +53,9 @@ interface warcraftBuff {
   weakPointDamageAdd?: number // 弱点加伤
 }
 // 角色数据结构定义
-interface characterDataObj {
+interface characterDataObj extends userComonElement {
   name: string // 英文名称 / key
   cName: string // 中文名称
-  element: 'light' | 'dark' | 'fire' | 'wind' | 'water' // 元素属性
-  attackAttribute: 'atk' | 'matk' // 攻击属性
   ATK?: number // 攻击力
   MATK?: number // 魔力值
   HP: number // 生命值
@@ -58,36 +89,10 @@ interface characterDataObj {
   Skill: Record<string, skillObj> // 技能列表
 }
 
-interface selectCharacterDataObj extends characterDataObj, damageObj {
-  skillBoxList: string[]
-  allBreakthrough: Record<string, number>
-  allCheckList: Record<string, string>
-  allPotentials: Record<string, effectObj>
-}
-
-interface commonSkill {
-  name: string // 英文名称 / key
-  cName: string // 中文名称
-  sp: number // 技能消耗
-  cd: number // 技能冷却
-  chain: number // 连锁次数
-  target: string // 目标 enemy 敌方 friendly 友军
-  image: string // 图片形象
-  qimage?: string // q版形象
-  scope: number[][] // 攻击范围，二维坐标系存储。直接命中目标为[0,0]
-}
+interface selectCharacterDataObj extends characterDataObj, damageObj, skillSelectShow {}
 
 // 角色技能数据结构定义
-interface skillObj {
-  name: string // 英文名称 / key
-  cName: string // 中文名称
-  sp: number // 技能消耗
-  cd: number // 技能冷却
-  chain: number // 连锁次数
-  target: string // 目标 enemy 敌方 friendly 友军
-  scope: number[][] // 攻击范围，二维坐标系存储。直接命中目标为[0,0]
-  image: string // 图片形象
-  qimage: string // q版形象
+interface skillObj extends commonSkill {
   description: string // 技能描述
   effect: Record<number, effectObj> // 技能效果
   skillPotentials: Record<string, unknown> // 技能觉醒效果
@@ -136,39 +141,25 @@ interface aureoleObj {
 interface editableTabsObj {
   name: number
   charactarList: editableCharactar[]
-  battleGroundList: unknown[] // 角色场地位置
+  battleGroundList: editableCharactar[] // 角色场地位置
+  buffList: Record<string, userBuffObj> // 角色buff列表
 }
 
-interface editableCharactar {
+interface editableCharactar extends userComonElement {
   name: string // 名称
   cName?: string // 中文名称
   panel?: number // 面板攻击力/魔法力
-  critical?: number // 爆伤
-  attributeDamage?: number // 属性伤害
-  element?: 'light' | 'dark' | 'fire' | 'wind' | 'water' // 元素属性
-  attackAttribute?: 'atk' | 'matk' // 攻击属性
+  critical: number // 爆伤
+  attributeDamage: number // 属性伤害
   attackType?: string // 攻击类型
   selectSikll?: string // 选中的皮肤
   commonSkill?: Record<string, commonSkillObj> // 通用技能 普攻和击退
   skill: Record<string, editableCharactarSkill> // 技能
 }
 
-interface editableCharactarSkill {
-  cName?: string
-  name?: string
-  cd?: number
-  chain?: number
-  sp?: number
-  target?: 'friendly' | 'enemy' // 作用目标 友军或者敌人
-  image?: string
-  qimage?: string
+interface editableCharactarSkill extends commonSkill, skillSelectShow {
   multiplier?: number
   description?: string
-  scope?: number[][]
-  skillBoxList?: string[] // 选中的技能
-  allBreakthrough?: Record<string, number> // 所有选中的技能的突破次数
-  allCheckList?: Record<string, string> //技能的觉醒
-  allPotentials?: Record<string, effectObj> // 技能觉醒后的效果
   skillEffect: skillEffectObj // 行动条展示倍率
 }
 
@@ -180,6 +171,13 @@ interface skillEffectObj {
   ThreeMultiplying?: number // 卢班希亚3x倍率
 }
 
+// 角色身上的buff
+interface userBuffObj extends buffComonElement {
+  attackAdd?: number
+  CRAdd?: number
+}
+
+// 魔兽身上的buff
 interface warcraftBuffListObj {
   scope?: number[] // 确定是那个部位的buff
   buff?: warcraftBuffObj[]
@@ -190,17 +188,11 @@ interface warcraftBuffObj {
   enemyWeakness?: enemyWeaknessBuffObj[]
 }
 
-interface chainDamageAddBuffObj {
-  addTurn: number // 上buff的回合
-  key: string // buffid，防止同一个buff上多次
-  duration: number // 持续回合
+interface chainDamageAddBuffObj extends buffComonElement {
   chainDamageAdd: number
 }
 
-interface enemyWeaknessBuffObj {
-  addTurn: number // 上buff的回合
-  key: string // buffid，防止同一个buff上多次
-  duration: number // 持续回合
+interface enemyWeaknessBuffObj extends buffComonElement {
   enemyWeakness: number
   type?: number // 是那种增伤buff
   attribute?: 'atk' | 'matk' // 效果类型 为空就是全是

@@ -50,7 +50,7 @@ function replacePathPlaceholders(
   str: string,
   data: skillObj,
   breakthrough: number,
-  potentials: Record<string, unknown> = {},
+  potentials: effectObj = {},
   prefix = '&-',
   suffix = '-&',
 ) {
@@ -82,7 +82,7 @@ function getValueByPath(
   obj: skillObj, // 技能对象
   path: string, // 路径字符串
   breakthrough: number = 0, // 突破等级
-  potentials: Record<string, undefined | number> = {}, // 觉醒加成
+  potentials: effectObj = {}, // 觉醒加成
   separator = '/',
 ) {
   if (!obj || typeof obj !== 'object' || !path) {
@@ -120,7 +120,7 @@ function getValueByPath(
 export function conversionDescription(
   skillData: skillObj, // 技能对象
   breakthrough: number = 0, // 突破等级
-  potentials: Record<string, unknown> = {}, // 觉醒加成
+  potentials: effectObj = {}, // 觉醒加成
 ) {
   const description = skillData.description
   return replacePathPlaceholders(description, skillData, breakthrough, potentials)
@@ -137,7 +137,7 @@ export function conversionCommon(
   data: skillObj,
   key: string,
   breakthrough: number = 0, // 突破等级
-  potentials: Record<string, unknown> = {},
+  potentials: effectObj = {},
 ) {
   let result = undefined
   if (key === 'scope') {
@@ -184,7 +184,7 @@ export function setCharacterLocation(
 }
 
 export function upsertObjectByKey(
-  arr: Record<string, unknown>[],
+  arr: buffObj[] = [],
   newObj: Record<string, unknown>,
   key: string = 'key',
 ) {

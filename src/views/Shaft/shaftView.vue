@@ -22,7 +22,13 @@
     <div></div>
   </el-card>
   <el-card style="margin-top: 20px">
-    <el-tabs v-model="editableTabsValue" type="card" editable @edit="handleTabsEdit">
+    <el-tabs
+      v-model="editableTabsValue"
+      type="card"
+      editable
+      @tab-change="handleTabChange"
+      @edit="handleTabsEdit"
+    >
       <el-tab-pane
         :key="item.name"
         v-for="(item, index) in editableTabs"
@@ -31,16 +37,22 @@
       >
         <div class="shaft_box">
           <ActionBar
+            ref="actionBar"
+            :key="`ActionBar_${index}`"
             :charactarList="item.charactarList"
+            :turnNumber="editableTabsValue"
             v-if="item.charactarList.length"
             @change="changeCharactarList"
           />
           <ActionBattleGroundBar
             ref="actionBattleGroundBar"
+            :key="`actionBattleGroundBar_${index}`"
             :turnNumber="editableTabsValue"
             :attackSequence="item.charactarList"
             :battleGroundList="item.battleGroundList"
+            :beforeBuffList="index === 0 ? {} : editableTabs[index - 1].buffList"
             :warcraftData="warcraftList['pumpkin1106']"
+            @changeBuff="changeBuff"
           />
         </div>
       </el-tab-pane>
@@ -124,6 +136,7 @@ const editableTabs = ref<editableTabsObj[]>([
     name: 1,
     charactarList: [],
     battleGroundList: [],
+    buffList: {},
   },
 ])
 const editableCharactarList = ref<editableCharactar[]>([])
@@ -144,6 +157,7 @@ const userdata = ref<damageObj>({
   weakPointDamageAdd: 0,
 })
 
+const actionBar = ref()
 const actionBattleGroundBar = ref()
 
 // 设置轴的初始值
@@ -152,17 +166,16 @@ const setEditableTabs = (data: Record<string, selectCharacterDataObj>) => {
   const dataList = Object.values(data)
   dataList.forEach((item) => {
     const editableCharactar: editableCharactar = {
-      skill: {},
+      panel: item.panel,
+      critical: item.critical,
+      name: item.name,
+      cName: item.cName,
+      attributeDamage: item.attributeDamage,
+      element: item.element,
+      attackAttribute: item.attackAttribute,
+      attackType: item.attackType, // attackType: 'skip', // 攻击类型 front为最前 skip为跳过
+      skill: setSkill(item),
     }
-    editableCharactar.panel = item.panel
-    editableCharactar.critical = item.critical
-    editableCharactar.name = item.name
-    editableCharactar.cName = item.cName
-    editableCharactar.attributeDamage = item.attributeDamage
-    editableCharactar.element = item.element
-    editableCharactar.attackAttribute = item.attackAttribute
-    editableCharactar.attackType = item.attackType // attackType: 'skip', // 攻击类型 front为最前 skip为跳过
-    editableCharactar.skill = setSkill(item)
     editableCharactarList.value?.push(editableCharactar)
   })
   editableBattleGroundList.value = new Array(12)
@@ -175,6 +188,7 @@ const setEditableTabs = (data: Record<string, selectCharacterDataObj>) => {
     name: item.name,
     charactarList: JSON.parse(JSON.stringify(editableCharactarList.value)),
     battleGroundList: JSON.parse(JSON.stringify(editableBattleGroundList.value)),
+    buffList: {},
   }))
 }
 // 角色数据发生变化，同步更新场地角色情况
@@ -184,7 +198,8 @@ const changeCharactarList = () => {
   editableTabs.value[index].battleGroundList = setCharacterLocation(
     editableTabs.value[index].charactarList,
     editableBattleGroundList,
-  )
+  ) as editableCharactar[]
+  actionBattleGroundBar.value[index].initialization()
 }
 const setSkill = (skillData: selectCharacterDataObj) => {
   const skill: Record<string, editableCharactarSkill> = {}
@@ -194,44 +209,45 @@ const setSkill = (skillData: selectCharacterDataObj) => {
   const commonSkill = skillData.commonSkill
   commonSkill['general'].qimage = skillDataList[0] ? skillDataList[0].qimage : commonSkill.image
   skillDataList.forEach((item) => {
-    const temp: editableCharactarSkill = {}
-    temp.allBreakthrough = skillData.allBreakthrough
-    temp.allCheckList = skillData.allCheckList
-    temp.allPotentials = skillData.allPotentials
-    temp.skillBoxList = skillData.skillBoxList
-    temp.cName = item.cName
-    temp.name = item.name
-    temp.cd = conversionCommon(
-      item,
-      'cd',
-      skillData.allBreakthrough[item.name],
-      skillData.allPotentials[item.name],
-    ) as number
-    temp.chain = item.chain
-    temp.sp = conversionCommon(
-      item,
-      'sp',
-      skillData.allBreakthrough[item.name] || 0,
-      skillData.allPotentials[item.name],
-    ) as number
-    temp.description = conversionDescription(
-      item,
-      skillData.allBreakthrough[item.name] || 0,
-      skillData.allPotentials[item.name],
-    )
-    temp.target = item.target
-    temp.image = item.image
-    temp.qimage = item.qimage
-    temp.scope = conversionCommon(
-      item,
-      'scope',
-      skillData.allBreakthrough[item.name],
-      skillData.allPotentials[item.name],
-    ) as number[][]
-    temp.skillEffect = setSkillEffect(
-      item.effect[skillData.allBreakthrough[item.name] || 0],
-      skillData.allPotentials[item.name] || {},
-    )
+    const temp: editableCharactarSkill = {
+      allBreakthrough: skillData.allBreakthrough,
+      allCheckList: skillData.allCheckList,
+      allPotentials: skillData.allPotentials,
+      skillBoxList: skillData.skillBoxList,
+      cName: item.cName,
+      name: item.name,
+      cd: conversionCommon(
+        item,
+        'cd',
+        skillData.allBreakthrough[item.name],
+        skillData.allPotentials[item.name],
+      ) as number,
+      chain: item.chain,
+      sp: conversionCommon(
+        item,
+        'sp',
+        skillData.allBreakthrough[item.name] || 0,
+        skillData.allPotentials[item.name],
+      ) as number,
+      description: conversionDescription(
+        item,
+        skillData.allBreakthrough[item.name] || 0,
+        skillData.allPotentials[item.name],
+      ),
+      target: item.target as 'friendly' | 'enemy',
+      image: item.image,
+      qimage: item.qimage,
+      scope: conversionCommon(
+        item,
+        'scope',
+        skillData.allBreakthrough[item.name],
+        skillData.allPotentials[item.name],
+      ) as number[][],
+      skillEffect: setSkillEffect(
+        item.effect[skillData.allBreakthrough[item.name] || 0],
+        skillData.allPotentials[item.name] || {},
+      ) as unknown as skillEffectObj,
+    }
     Reflect.set(skill, item.name, temp)
   })
   return { ...commonSkill, ...skill }
@@ -269,8 +285,9 @@ const handleTabsEdit = (targetName: number, action: string) => {
     const newTabName = (tabIndex.value = tabIndex.value + 2)
     editableTabs.value.push({
       name: newTabName,
-      charactarList: JSON.parse(JSON.stringify(editableCharactarList.value)),
-      battleGroundList: JSON.parse(JSON.stringify(editableBattleGroundList.value)),
+      charactarList: JSON.parse(JSON.stringify(editableCharactarList.value || [])),
+      battleGroundList: JSON.parse(JSON.stringify(editableBattleGroundList.value || [])),
+      buffList: {},
     })
     editableTabsValue.value = newTabName
   }
@@ -291,6 +308,18 @@ const handleTabsEdit = (targetName: number, action: string) => {
     editableTabsValue.value = activeName
     editableTabs.value = tabs.filter((tab) => tab.name !== targetName)
   }
+}
+
+// 每次更新都初始化，防止buff遗留问题
+const handleTabChange = () => {
+  const index = (editableTabsValue.value - 1) / 2
+  actionBattleGroundBar.value[index].initialization()
+}
+
+const changeBuff = (buffList: Record<string, userBuffObj>) => {
+  // 回合结束时传递buff向后续回合。先循环buff对象。拿到角色的buff duration - addTurn >= editableTabsValue（回合数） 则代表可以进入该回合否则移除buff
+  const index = (editableTabsValue.value - 1) / 2
+  editableTabs.value[index].buffList = JSON.parse(JSON.stringify(buffList))
 }
 </script>
 

@@ -61,7 +61,7 @@ const props = defineProps({
   battleGroundList: {
     // 角色场地位置
     type: Array,
-    default: () => [],
+    default: () => [] as editableCharactar[],
   },
   warcraftData: {
     // 魔兽数据
@@ -78,20 +78,13 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
+  beforeBuffList: {
+    // 上个回合的有效buff
+    type: Object,
+    default: () => {},
+  },
 })
-interface battleGroundObj {
-  attackType: string
-  attributeDamage: number
-  cName: string
-  critical: number
-  element: string
-  name: string
-  panel: number
-  buff: unknown[]
-  attackAttribute: 'atk' | 'matk' // 攻击类型
-  selectSikll: string
-  skill: Record<string, editableCharactarSkill>
-}
+const emit = defineEmits(['changeBuff'])
 
 const userBuff = ref<Record<string, buffObj[]>>({}) // 用来记录本回合角色身上的buff 回合结束后统一更新
 const warcraftBuff = ref({}) // 用来记录本回合魔兽身上的buff 回合结束后统一更新
@@ -114,6 +107,8 @@ const changeLocation = (index: number) => {
     dataList[selectIndex.value] = dataList[index]
     dataList[index] = tempIndex
     selectIndex.value = undefined
+    // 位置替换了就重新计算伤害
+    damageCalculation()
   }
   if (!!props.battleGroundList[index] && (!!selectIndex.value || selectIndex.value === 0)) {
     // 如果选到了角色
@@ -406,7 +401,7 @@ const autoGetAllAttackPosition = (
 
 const setDamageData = (
   attackPosition: number[],
-  attackUser: battleGroundObj,
+  attackUser: editableCharactar,
   charactarSkill: editableCharactarSkill,
 ) => {
   // console.log(attackPosition, attackUser)
@@ -457,29 +452,27 @@ const setDamageData = (
     damageNumber = damageNumber + +calculateDamage(damageData)
     // 连锁+1 有buff还要计算
     afterTempEnemyList.value[item].chainCount += chainAddNumber
-    console.log(
-      afterTempEnemyList.value[item].chainCount,
-      'afterTempEnemyList.value[item].chainCount',
-    )
   })
   return damageNumber
 }
 // 计算面板加成比例
-const getAttackAdd = (attackUser: battleGroundObj) => {
+const getAttackAdd = (attackUser: editableCharactar) => {
   // 自拐
   const charactarSkill =
     attackUser.skill[attackUser.selectSikll || Object.keys(attackUser.skill)[0]] // 角色技能
   // 计算buff
   appendBuff([], charactarSkill, attackUser)
-  const attackAddBuffNumber = userBuff.value[attackUser.name]
+  const attackAddBuffNumber = (userBuff.value[attackUser.name] || [])
     .map((item) => (item.attackAdd ? item.attackAdd : undefined))
     .filter((item) => !!item)
   // 给角色添加buff
-  return attackAddBuffNumber.length > 0 ? attackAddBuffNumber.reduce((prev, cur) => prev + cur) : 0
+  return attackAddBuffNumber.length > 0
+    ? attackAddBuffNumber.reduce((prev, cur) => (prev || 0) + (cur || 0))
+    : 0
 }
 // 计算真实爆伤
-const getCritical = (attackUser: battleGroundObj) => {
-  const critical = getBuffNumber(attackUser, 'critical') || 0
+const getCritical = (attackUser: editableCharactar) => {
+  const critical = (getBuffNumber(attackUser, 'critical') || 0) as number
   return attackUser.critical + critical
 }
 // 计算真实倍率
@@ -504,17 +497,17 @@ const getMultiplier = (
   return multiply
 }
 // 计算真实增伤
-const getIncreasedDamage = (attackUser: battleGroundObj) => {
+const getIncreasedDamage = (attackUser: editableCharactar) => {
   return 0
 }
 // 连锁增强
-const getchainAddNumber = (attackUser: battleGroundObj) => {
+const getchainAddNumber = (attackUser: editableCharactar) => {
   const common = 1
-  const chainAddNumber = getBuffNumber(attackUser, 'chainAddNumber') || 0
+  const chainAddNumber = (getBuffNumber(attackUser, 'chainAddNumber') || 0) as number
   return common + chainAddNumber
 }
 // 计算真实属伤
-const getAttributeDamage = (attackUser: battleGroundObj) => {
+const getAttributeDamage = (attackUser: editableCharactar) => {
   // light -> dark -> light           water -> fire -> wind -> water
   const beneficialElementList = ['light', 'dark', 'light', 'water', 'fire', 'wind', 'water']
   let attributeDamageNumber = 0
@@ -531,7 +524,7 @@ const getAttributeDamage = (attackUser: battleGroundObj) => {
     // 计算buff
     appendBuff([], charactarSkill, attackUser)
     // 计算有buff后的属性伤害
-    const attackAddBuffNumberList = userBuff.value[attackUser.name]
+    const attackAddBuffNumberList = (userBuff.value[attackUser.name] || [])
       .map((item) =>
         item.lightAttributeDamage && attackUser.element === 'light'
           ? item.lightAttributeDamage
@@ -542,30 +535,30 @@ const getAttributeDamage = (attackUser: battleGroundObj) => {
       .filter((item) => !!item)
     const attributeDamage =
       attackAddBuffNumberList.length > 0
-        ? attackAddBuffNumberList.reduce((prev, cur) => prev + cur) || 0
+        ? attackAddBuffNumberList.reduce((prev, cur) => prev || 0 + (cur || 0)) || 0
         : 0
     attributeDamageNumber = attackUser.attributeDamage + attributeDamage
   }
-  console.log(attributeDamageNumber, 'attributeDamageNumber')
   return attributeDamageNumber
 }
 // 获取buff增强值 通用模块封装
-const getBuffNumber = (attackUser: battleGroundObj, key: string) => {
-  console.log(attackUser, 'attackUser')
+const getBuffNumber = (attackUser: editableCharactar, key: string) => {
   const charactarSkill =
     attackUser.skill[attackUser.selectSikll || Object.keys(attackUser.skill)[0]] // 角色技能
   // 计算buff
   appendBuff([], charactarSkill, attackUser)
-  const buffNumberList = userBuff.value[attackUser.name]
+  const buffNumberList = (userBuff.value[attackUser.name] || [])
     .map((item) => (item[key] ? item[key] : undefined))
-    .filter((item) => !!item)
-  return buffNumberList.length > 0 ? buffNumberList.reduce((prev, cur) => prev + cur) : 0
+    .filter((item) => !!item) as unknown as number[]
+  return buffNumberList.length > 0
+    ? buffNumberList.reduce((prev, cur) => (prev || 0) + (cur || 0))
+    : 0
 }
 
 const damageList = ref<Record<string, number>>({})
 const alldamage = () => {
-  console.log(damageList.value, '----角色伤害详情-----')
-  console.log(userBuff.value, '----角色所有的buff----')
+  // console.log(damageList.value, '----角色伤害详情-----', props.turnNumber)
+  // console.log(userBuff.value, '----角色所有的buff----', props.turnNumber)
   const damageNumberList = Object.values(damageList.value) || []
   return damageNumberList.length > 0 ? damageNumberList.reduce((prev, cur) => prev + cur) : 0
 }
@@ -582,7 +575,7 @@ const damageCalculation = async () => {
   // 获取需要计算伤害的角色攻击范围
   await props.battleGroundList.forEach(async (item, index) => {
     if (!!item) {
-      const data = item as battleGroundObj
+      const data = item as editableCharactar
       const selectCharactar = props.battleGroundList[index] as editableCharactar
       const selectSikll = selectCharactar.selectSikll || Object.keys(selectCharactar.skill)[0]
       const target: 'friendly' | 'enemy' = selectCharactar.skill[selectSikll].target || 'enemy'
@@ -607,12 +600,12 @@ const damageCalculation = async () => {
   })
   props.attackSequence.forEach(async (item) => {
     if (!!item) {
-      const data = item as battleGroundObj
+      const data = item as editableCharactar
       const charactarSkill = data.skill[data.selectSikll || Object.keys(data.skill)[0]]
       let damageNumber = 0
       if (attackPosition[data.name].target === 'friendly') {
         // 作用访问为友军
-        await appendBuff(attackPosition[data.name].scope, charactarSkill)
+        await appendBuff(attackPosition[data.name].scope, charactarSkill, data)
       } else {
         let number = charactarSkill.chain || 0
         while (number > 0) {
@@ -624,13 +617,14 @@ const damageCalculation = async () => {
       }
     }
   })
+  emit('changeBuff', userBuff.value)
 }
 
 // 给角色添加buff
 const appendBuff = (
   attackPosition: number[],
   charactarSkill: editableCharactarSkill,
-  attackUser: battleGroundObj,
+  attackUser: editableCharactar,
 ) => {
   const buffList = charactarSkill.skillEffect.buff || []
   buffList.forEach((item: buffObj, index) => {
@@ -687,8 +681,15 @@ const appendBuff = (
 }
 
 const getUserBuffList = () => {
-  props.attackSequence.forEach((item) => {
-    Reflect.set(userBuff.value, item.name, item.buffList || [])
+  nextTick(() => {
+    const tempBuffList = JSON.parse(JSON.stringify(props.beforeBuffList))
+    const effectiveBuffList: Record<string, buffObj[]> = {}
+    for (const value in tempBuffList) {
+      effectiveBuffList[value] = tempBuffList[value].filter(
+        (item: buffComonElement) => props.turnNumber - item.addTurn < item.duration,
+      )
+    }
+    userBuff.value = effectiveBuffList
   })
 }
 
@@ -710,13 +711,7 @@ const initialization = async () => {
   damageCalculation()
 }
 
-watch(
-  props,
-  () => {
-    initialization()
-  },
-  { immediate: true, deep: true },
-)
+defineExpose({ initialization })
 </script>
 <style lang="less" scoped>
 .battle_ground {
