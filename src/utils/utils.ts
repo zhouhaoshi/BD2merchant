@@ -15,7 +15,7 @@ export function formatDate(date: Date) {
 }
 
 // 需要特殊处理的key
-export const specialKey = ['buff', 'special', 'aureole']
+export const specialKey = ['buff', 'special', 'aureole', 'deBuff', 'specialInjuryBuff']
 
 /**
  * 查询并更新对象数组 B 中与 A 的 id 匹配的项
@@ -132,13 +132,13 @@ export function conversionDescription(
 /**
  * 根据路径字符串从对象中获取值
  * @param {skillObj} data - 源对象
- * @param {string} key -
+ * @param {skillObjKeys} key -
  * @param {string} potentials 觉醒值
  * @returns {*} - 找到的值，如果路径不存在则返回 undefined
  */
 export function conversionCommon(
   data: skillObj,
-  key: string,
+  key: skillObjKeys,
   breakthrough: number = 0, // 突破等级
   potentials: effectObj = {},
 ) {
@@ -187,9 +187,9 @@ export function setCharacterLocation(
 }
 
 export function upsertObjectByKey(
-  arr: userBuffObj[] = [],
+  arr: userBuffObj[] | enemyWeaknessBuffObj[] | chainDamageAddBuffObj[] = [],
   newObj: Record<string, unknown>,
-  key: string = 'key',
+  key: userBuffObjKeys | chainDamageAddBuffObjKeys | enemyWeaknessBuffObjKeys = 'key',
 ) {
   const arrList = JSON.parse(JSON.stringify(arr))
   const index = arr.findIndex((item) => item[key] === newObj[key])
@@ -241,4 +241,22 @@ export function setPotentials(checkList: unknown[], skillPotentials: Record<stri
     }
   })
   return tempPotentials
+}
+
+export function sumMaxNumbersByType(arr: enemyWeaknessBuffObj[]) {
+  const maxMap = new Map()
+  // 遍历数组，记录每个 type 对应的最大 number
+  for (const item of arr) {
+    const { type, enemyWeakness } = item
+    if (!maxMap.has(type) || enemyWeakness > maxMap.get(type)) {
+      maxMap.set(type, enemyWeakness)
+    }
+  }
+  // 对所有最大值求和
+  let sum = 0
+  for (const maxNumber of maxMap.values()) {
+    sum += maxNumber
+  }
+
+  return sum
 }

@@ -51,6 +51,7 @@
             :attackSequence="item.charactarList"
             :battleGroundList="item.battleGroundList"
             :beforeBuffList="index === 0 ? {} : editableTabs[index - 1].buffList"
+            :beforeWarcraftBuffList="index === 0 ? {} : editableTabs[index - 1].warcraftBuffList"
             :warcraftData="warcraftList['pumpkin1106']"
             @changeBuff="changeBuff"
           />
@@ -138,6 +139,7 @@ const editableTabs = ref<editableTabsObj[]>([
     charactarList: [],
     battleGroundList: [],
     buffList: {},
+    warcraftBuffList: {},
   },
 ])
 const editableCharactarList = ref<editableCharactar[]>([])
@@ -190,6 +192,7 @@ const setEditableTabs = (data: Record<string, selectCharacterDataObj>) => {
     charactarList: JSON.parse(JSON.stringify(editableCharactarList.value)),
     battleGroundList: JSON.parse(JSON.stringify(editableBattleGroundList.value)),
     buffList: {},
+    warcraftBuffList: {},
   }))
 }
 // 角色数据发生变化，同步更新场地角色情况
@@ -289,6 +292,7 @@ const handleTabsEdit = (targetName: number, action: string) => {
       charactarList: JSON.parse(JSON.stringify(editableCharactarList.value || [])),
       battleGroundList: JSON.parse(JSON.stringify(editableBattleGroundList.value || [])),
       buffList: {},
+      warcraftBuffList: {},
     })
     editableTabsValue.value = newTabName
   }
@@ -317,10 +321,20 @@ const handleTabChange = () => {
   actionBattleGroundBar.value[index].initialization()
 }
 
-const changeBuff = (buffList: Record<string, userBuffObj>) => {
+interface allBuffList {
+  userBuff: Record<string, userBuffObj[]>
+  warcraftBuff: Record<number, warcraftBuffObj>
+}
+
+const changeBuff = ({ userBuff, warcraftBuff }: allBuffList) => {
   // 回合结束时传递buff向后续回合。先循环buff对象。拿到角色的buff duration - addTurn >= editableTabsValue（回合数） 则代表可以进入该回合否则移除buff
   const index = (editableTabsValue.value - 1) / 2
-  editableTabs.value[index].buffList = JSON.parse(JSON.stringify(buffList))
+  if (!!userBuff) {
+    editableTabs.value[index].buffList = JSON.parse(JSON.stringify(userBuff))
+  }
+  if (!!warcraftBuff) {
+    editableTabs.value[index].warcraftBuffList = JSON.parse(JSON.stringify(warcraftBuff))
+  }
 }
 </script>
 

@@ -91,6 +91,7 @@ interface characterDataObj extends userComonElement {
 
 interface selectCharacterDataObj extends characterDataObj, damageObj, skillSelectShow {}
 
+type skillObjKeys = keyof skillObj
 // 角色技能数据结构定义
 interface skillObj extends commonSkill {
   description: string // 技能描述
@@ -103,6 +104,8 @@ interface effectObj {
   sp?: number // 消耗
   cd?: number
   buff?: buffObj[] // 各类加成
+  deBuff?: deBuffObj[] // 各类减益Buff
+  specialInjuryBuff?: specialInjuryBuffSkillObj[] // 特殊伤害buff
   aureole?: aureoleObj[] // 光环
   multiplying?: number // 倍率
   mainMultiplying?: number // 特殊倍率 - 主目标倍率
@@ -134,6 +137,27 @@ interface buffObj extends buffElement {
   attribute?: 'atk' | 'matk' // 效果类型
 }
 
+interface deBuffElement {
+  attribute?: 'atk' | 'matk' // 效果类型
+  type?: number // 那种类型的 易伤/脆弱
+  minChainCount?: number // 限制条件
+  enemyWeakness?: number // 易伤/脆弱
+  darkEnemyWeakness?: number //暗属性脆弱
+  chainDamageAdd?: number // 连锁伤害加成
+}
+
+interface deBuffObj extends deBuffElement {
+  duration: number // 持续回合
+  scope?: number[][] // 范围 // 如果为空继技能本身访问
+}
+
+interface specialInjuryBuffSkillObj {
+  duration: number // 持续回合
+  scope?: number[][] // 范围 // 如果为空继技能本身访问
+  type?: number //  特殊持续buff枚举
+  specialMultiplying: number // 特殊效果倍率
+}
+
 interface aureoleObj {
   CRAdd?: number // 暴击率
   shield?: number // 护盾
@@ -147,6 +171,7 @@ interface editableTabsObj {
   charactarList: editableCharactar[]
   battleGroundList: editableCharactar[] // 角色场地位置
   buffList: Record<string, userBuffObj> // 角色buff列表
+  warcraftBuffList: Record<number, warcraftBuffObj> // 魔兽buff列表
 }
 
 interface editableCharactar extends userComonElement {
@@ -174,29 +199,36 @@ interface skillEffectObj {
   multiplying: number
   mainMultiplying?: number // 主目标倍率
   ThreeMultiplying?: number // 卢班希亚3x倍率
+  deBuff?: deBuffObj[] // 负面buff
+  specialInjuryBuff?: specialInjuryBuffObj[] // 特殊伤害buff
 }
-
+type userBuffObjKeys = keyof userBuffObj
 // 角色身上的buff
 interface userBuffObj extends buffComonElement, buffElement {}
 
-// 魔兽身上的buff
-interface warcraftBuffListObj {
-  scope?: number[] // 确定是那个部位的buff
-  buff?: warcraftBuffObj[]
-}
+type warcraftBuffObjKeys = keyof warcraftBuffObj
 
+// 魔兽身上的buff
 interface warcraftBuffObj {
   chainDamageAdd?: chainDamageAddBuffObj[]
   enemyWeakness?: enemyWeaknessBuffObj[]
+  specialInjuryBuff?: specialInjuryBuffObj[] // 给魔兽上特殊伤害类型buff
 }
 
+type chainDamageAddBuffObjKeys = keyof chainDamageAddBuffObj
 interface chainDamageAddBuffObj extends buffComonElement {
   chainDamageAdd: number
 }
 
+type enemyWeaknessBuffObjKeys = keyof enemyWeaknessBuffObj
 interface enemyWeaknessBuffObj extends buffComonElement {
   enemyWeakness: number
   type?: number // 是那种增伤buff
   attribute?: 'atk' | 'matk' // 效果类型 为空就是全是
   attributeElement?: 'light' | 'dark' | 'fire' | 'wind' | 'water'
+}
+
+interface specialInjuryBuffObj extends buffComonElement {
+  specialMultiplying?: number // 特殊伤害的倍率
+  type?: number // 是那种特殊buff 1为恶魔
 }

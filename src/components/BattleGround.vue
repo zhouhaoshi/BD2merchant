@@ -55,7 +55,9 @@ import {
   transformationCoordinates,
   transformationIndex,
   upsertObjectByKey,
+  sumMaxNumbersByType,
 } from '@/utils/utils'
+import { specialInjuryBuffType } from '@/utils/globals'
 import calculateDamage from '@/utils/damage'
 const props = defineProps({
   battleGroundList: {
@@ -83,11 +85,16 @@ const props = defineProps({
     type: Object,
     default: () => {},
   },
+  beforeWarcraftBuffList: {
+    // 上个回合的有效魔兽debuff
+    type: Object,
+    default: () => {},
+  },
 })
 const emit = defineEmits(['changeBuff'])
 
 const userBuff = ref<Record<string, userBuffObj[]>>({}) // 用来记录本回合角色身上的buff 回合结束后统一更新
-const warcraftBuff = ref({}) // 用来记录本回合魔兽身上的buff 回合结束后统一更新
+const warcraftBuff = ref<Record<number, warcraftBuffObj>>({}) // 用来记录本回合魔兽身上的buff 回合结束后统一更新
 const tempEnemyList = ref() // 初始状态下的魔兽情况
 const afterTempEnemyList = ref() // 攻击后的魔兽状态
 const attackPosition = ref<number[]>([]) // 攻击到的位置的下标 展示用
@@ -400,12 +407,14 @@ const autoGetAllAttackPosition = (
 }
 
 const setDamageData = (
-  attackPosition: number[],
-  attackUser: editableCharactar,
-  charactarSkill: editableCharactarSkill,
+  attackPosition: number[], // 攻击的范围
+  attackUser: editableCharactar, // 攻击的角色
+  charactarSkill: editableCharactarSkill, // 角色使用的技能
+  specialDamage: number = 0, // 是否有特殊伤害
 ) => {
   // console.log(attackPosition, attackUser)
   let damageNumber: number = 0
+  // 造成伤害的角色自身的各类属性加成
   const charactarData: userBuff = {
     panel: attackUser.panel,
     multiplier: 0,
@@ -414,48 +423,207 @@ const setDamageData = (
     increasedDamage: 0,
     attributeDamage: getAttributeDamage(attackUser),
   }
+  // 循环造成伤害的点位分别计算其伤害
   attackPosition.forEach((item, index) => {
     const warcraftBoxData = afterTempEnemyList.value[item]
     const warcraftData: warcraftBuff = {
       chainCount: warcraftBoxData.chainCount, // 连锁伤害
       weakPointDamageAdd: warcraftBoxData.weakPointDamageAdd, // 弱点加伤
     }
-    const chainAddNumber = getchainAddNumber(attackUser)
-    // 倍率计算
-    if (charactarSkill.skillEffect.mainMultiplying) {
-      // 主目标单独倍率
-      charactarData.multiplier = getMultiplier(charactarSkill, attackPosition.length, index)
-    } else if (charactarSkill.skillEffect.ThreeMultiplying) {
-      // 摩托的3x连锁
-      charactarData.multiplier = getMultiplier(
-        charactarSkill,
-        attackPosition.length,
-        undefined,
-        warcraftBoxData.chainCount,
-        chainAddNumber,
-      )
-    } else {
-      charactarData.multiplier = getMultiplier(charactarSkill, attackPosition.length)
+    // 有特殊伤害并且不是特殊伤害的判断
+    if (warcraftBuff.value[item] && warcraftBuff.value[item].specialInjuryBuff && !specialDamage) {
+      const specialInjuryBuffData = warcraftBuff.value[item].specialInjuryBuff
+      specialInjuryBuffData.forEach((specialItem: specialInjuryBuffObj) => {
+        // 噩梦伤害
+        if (specialItem.type === specialInjuryBuffType.Nightmare) {
+          let specialAttackUser = {} as editableCharactar
+          let key = ''
+          const specialAttackSkill = specialItem.key.split('_')[0]
+          props.attackSequence.forEach(async (item) => {
+            if (!!item) {
+              const data = item as editableCharactar
+              const charactarSkillList = Object.keys(data.skill)
+              if (charactarSkillList.includes(specialAttackSkill)) {
+                specialAttackUser = JSON.parse(JSON.stringify(data))
+                key = `${data.name}_${specialAttackSkill}`
+              }
+            }
+          })
+          damageList.value[key] =
+            (damageList.value[key] || 0) +
+            setDamageData(
+              [item],
+              specialAttackUser,
+              {} as editableCharactarSkill,
+              specialItem.specialMultiplying,
+            )
+        }
+      })
     }
+    const chainAddNumber = getchainAddNumber(attackUser)
+    // 噩梦伤害情况下的伤害逻辑
+    if (!!specialDamage) {
+      charactarData.multiplier = specialDamage
+    } else {
+      // 给魔兽上debuff
+      setAbnormalState(attackUser, charactarSkill.skillEffect, item, warcraftBoxData.chainCount)
+      // 倍率计算
+      if (charactarSkill.skillEffect.mainMultiplying) {
+        // 主目标单独倍率
+        charactarData.multiplier = getMultiplier(charactarSkill, attackPosition.length, index)
+      } else if (charactarSkill.skillEffect.ThreeMultiplying) {
+        // 摩托的3x连锁
+        charactarData.multiplier = getMultiplier(
+          charactarSkill,
+          attackPosition.length,
+          undefined,
+          warcraftBoxData.chainCount,
+          chainAddNumber,
+        )
+      } else {
+        charactarData.multiplier = getMultiplier(charactarSkill, attackPosition.length)
+      }
+    }
+    // 增伤
     charactarData.increasedDamage = getIncreasedDamage(attackUser, warcraftBoxData.chainCount)
+    // 魔兽的易伤值
+    warcraftData.enemyWeakness = getEnemyWeakness(attackUser, item)
     // 问魔兽的
-    // enemyWeakness?: number // 易伤/脆弱
     // enemyDefence?: number // 防御/魔抗
     // damageReduction?: number // 减伤
-    // chainCount?: number // 当前连锁数
     // chainDamageAdd?: number // 连锁伤害加成
     // attributeResistance?: number // 属性抵抗
-    // weakPointDamageAdd?: number // 弱点加伤
     const damageData: damageObj = {
       ...charactarData,
       ...warcraftData,
     }
     damageNumber = damageNumber + +calculateDamage(damageData)
-    // 连锁+1 有buff还要计算
-    afterTempEnemyList.value[item].chainCount += chainAddNumber
+
+    // 连锁+1 有buff还要计算 如果是特殊的伤害buff则不记录连锁
+    if (!specialDamage) {
+      afterTempEnemyList.value[item].chainCount += chainAddNumber
+    }
   })
   return damageNumber
 }
+
+// 给魔兽上异常状态
+const setAbnormalState = (
+  attackUser: editableCharactar,
+  skillEffect: skillEffectObj,
+  targetLocation: number,
+  chainCount: number = 1,
+) => {
+  // 上debuff的情况
+  if (skillEffect.deBuff) {
+    const charactarSkill =
+      attackUser.skill[attackUser.selectSikll || Object.keys(attackUser.skill)[0]] // 角色技能
+    const deBuffList = skillEffect.deBuff
+    deBuffList.forEach((deBuffObj: deBuffObj, deBuffIndex: number) => {
+      const temp = JSON.parse(JSON.stringify(deBuffObj))
+      const tempBuff = {
+        addTurn: props.turnNumber, // 上buff的回合
+        key: `${charactarSkill.name}_${deBuffIndex}`, // buffid，防止同一个buff上多次
+        ...temp,
+      }
+      delete tempBuff.scope
+      // 虚弱或者脆弱
+      if (tempBuff.enemyWeakness) {
+        initializeWarcraftBuff(warcraftBuff.value, targetLocation, 'enemyWeakness')
+        // 索菲亚的暗属性易伤
+        if (tempBuff.darkEnemyWeakness) {
+          if (tempBuff.minChainCount <= chainCount) {
+            tempBuff.enemyWeakness = tempBuff.darkEnemyWeakness
+            tempBuff.attributeElement = 'dark'
+          }
+          delete tempBuff.darkEnemyWeakness
+          delete tempBuff.minChainCount
+        }
+        warcraftBuff.value[targetLocation].enemyWeakness = upsertObjectByKey(
+          warcraftBuff.value[targetLocation].enemyWeakness,
+          tempBuff,
+        )
+      }
+      // 连锁伤害加成
+      if (tempBuff.chainDamageAdd) {
+        initializeWarcraftBuff(warcraftBuff.value, targetLocation, 'chainDamageAdd')
+        warcraftBuff.value[targetLocation].chainDamageAdd = upsertObjectByKey(
+          warcraftBuff.value[targetLocation].chainDamageAdd,
+          tempBuff,
+        )
+      }
+      // console.log(tempBuff, 'setAbnormalState', index)
+    })
+  }
+  if (skillEffect.specialInjuryBuff) {
+    const charactarSkill =
+      attackUser.skill[attackUser.selectSikll || Object.keys(attackUser.skill)[0]] // 角色技能
+    const specialInjuryBuffList = skillEffect.specialInjuryBuff
+    specialInjuryBuffList.forEach(
+      (specialInjuryBuffObj: specialInjuryBuffObj, deBuffIndex: number) => {
+        const temp = JSON.parse(JSON.stringify(specialInjuryBuffObj))
+        const tempBuff = {
+          addTurn: props.turnNumber, // 上buff的回合
+          key: `${charactarSkill.name}_${deBuffIndex}`, // buffid，防止同一个buff上多次
+          ...temp,
+        }
+        delete tempBuff.scope
+        initializeWarcraftBuff(warcraftBuff.value, targetLocation, 'specialInjuryBuff')
+        warcraftBuff.value[targetLocation].specialInjuryBuff = upsertObjectByKey(
+          warcraftBuff.value[targetLocation].specialInjuryBuff,
+          tempBuff,
+        )
+        // console.log(tempBuff, 'setAbnormalState', index)
+      },
+    )
+  }
+}
+
+// 给魔兽debuff一个初始值
+const initializeWarcraftBuff = (
+  data: Record<number, warcraftBuffObj>,
+  index: number,
+  key: warcraftBuffObjKeys,
+) => {
+  if (!data[index]) {
+    Reflect.set(data, index, { [key]: [] })
+  }
+  if (!!data[index] && !data[index][key]) {
+    Reflect.set(data[index], key, [])
+  }
+}
+
+// 魔兽的增伤状态计算
+const getEnemyWeakness = (
+  { element, attackAttribute }: editableCharactar,
+  targetLocation: number,
+) => {
+  let enemyWeakness = 0
+  if (
+    warcraftBuff.value[targetLocation] &&
+    warcraftBuff.value[targetLocation].enemyWeakness &&
+    warcraftBuff.value[targetLocation].enemyWeakness?.length > 0
+  ) {
+    let enemyWeaknessList = JSON.parse(
+      JSON.stringify(warcraftBuff.value[targetLocation].enemyWeakness),
+    )
+    enemyWeaknessList = enemyWeaknessList.filter((item: enemyWeaknessBuffObj) => {
+      if (item.attributeElement && item.attributeElement === element) {
+        return true
+      }
+      if (item.attribute && item.attribute === attackAttribute) {
+        return true
+      }
+      if (!item.attributeElement && !item.attribute) {
+        return true
+      }
+      return false
+    })
+    enemyWeakness = enemyWeakness + sumMaxNumbersByType(enemyWeaknessList)
+  }
+  return enemyWeakness
+}
+
 // 计算面板加成比例
 const getAttackAdd = (attackUser: editableCharactar) => {
   const attackAddNumber = (getBuffNumber(attackUser, 'attackAdd') || 0) as number
@@ -547,14 +715,14 @@ const getAttributeDamage = (attackUser: editableCharactar) => {
       .filter((item) => !!item)
     const attributeDamage =
       attackAddBuffNumberList.length > 0
-        ? attackAddBuffNumberList.reduce((prev, cur) => prev || 0 + (cur || 0)) || 0
+        ? attackAddBuffNumberList.reduce((prev, cur) => (prev || 0) + (cur || 0)) || 0
         : 0
     attributeDamageNumber = attackUser.attributeDamage + attributeDamage
   }
   return attributeDamageNumber
 }
 // 获取buff增强值 通用模块封装
-const getBuffNumber = (attackUser: editableCharactar, key: string) => {
+const getBuffNumber = (attackUser: editableCharactar, key: userBuffObjKeys) => {
   ourSelfBuff(attackUser)
   const buffNumberList = (userBuff.value[attackUser.name] || [])
     .map((item) => (item[key] ? item[key] : undefined))
@@ -566,7 +734,7 @@ const getBuffNumber = (attackUser: editableCharactar, key: string) => {
 
 const damageList = ref<Record<string, number>>({})
 const alldamage = () => {
-  // console.log(damageList.value, '----角色伤害详情-----', props.turnNumber)
+  console.log(damageList.value, '----角色伤害详情-----', props.turnNumber)
   // console.log(userBuff.value, '----角色所有的buff----', props.turnNumber)
   const damageNumberList = Object.values(damageList.value) || []
   return damageNumberList.length > 0 ? damageNumberList.reduce((prev, cur) => prev + cur) : 0
@@ -622,12 +790,17 @@ const damageCalculation = async () => {
             damageNumber + setDamageData(attackPosition[data.name].scope, data, charactarSkill)
           number--
         }
-        damageList.value[data.name] = damageNumber
+        const keys = `${data.name}_${charactarSkill.name}`
+        damageList.value[keys] = damageNumber
       }
     }
   })
   console.log(userBuff.value, '------userBuff-------')
-  emit('changeBuff', userBuff.value)
+  console.log(warcraftBuff.value, '------warcraftBuff-------')
+  emit('changeBuff', {
+    userBuff: userBuff.value,
+    warcraftBuff: warcraftBuff.value,
+  })
 }
 
 // 判断是否有自拐
@@ -719,7 +892,6 @@ const getUserBuffList = () => {
       )
     }
     userBuff.value = effectiveBuffList
-    console.log(effectiveBuffList, 'effectiveBuffList')
     // 单独处理光环buff
     for (const value in effectiveBuffList) {
       effectiveBuffList[value].forEach((item: userBuffObj) => {
@@ -744,7 +916,29 @@ const getUserBuffList = () => {
 }
 
 const getWarcraftBuffList = () => {
-  warcraftBuff.value = props.warcraftData.buffList || []
+  nextTick(() => {
+    const tempBuffList = JSON.parse(JSON.stringify(props.beforeWarcraftBuffList)) as Record<
+      number,
+      warcraftBuffObj
+    >
+    const effectiveBuffList: Record<number, warcraftBuffObj> = {}
+    // 处理需要继承的buff
+    for (const value in tempBuffList) {
+      initializeWarcraftBuff(effectiveBuffList, +value, 'chainDamageAdd')
+      effectiveBuffList[value].chainDamageAdd = (tempBuffList[value].chainDamageAdd || []).filter(
+        (item: buffComonElement) => props.turnNumber - item.addTurn < item.duration,
+      )
+      initializeWarcraftBuff(effectiveBuffList, +value, 'enemyWeakness')
+      effectiveBuffList[value].enemyWeakness = (tempBuffList[value].enemyWeakness || []).filter(
+        (item: buffComonElement) => props.turnNumber - item.addTurn < item.duration,
+      )
+      initializeWarcraftBuff(effectiveBuffList, +value, 'specialInjuryBuff')
+      effectiveBuffList[value].specialInjuryBuff = (
+        tempBuffList[value].specialInjuryBuff || []
+      ).filter((item: buffComonElement) => props.turnNumber - item.addTurn < item.duration)
+    }
+    warcraftBuff.value = effectiveBuffList
+  })
 }
 // 回合开始初始化
 const initialization = async (recoed?: boolean) => {
