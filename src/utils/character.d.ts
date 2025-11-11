@@ -149,6 +149,9 @@ interface deBuffElement {
 
 interface deBuffObj extends deBuffElement {
   duration: number // 持续回合
+  attackReduce?: number // 面板减少
+  DEFReduce?: number // 防御减少
+  MRESReduce?: number // 魔抗减少
   scope?: number[][] // 范围 // 如果为空继技能本身访问
 }
 
@@ -214,6 +217,7 @@ interface warcraftBuffObj {
   chainDamageAdd?: chainDamageAddBuffObj[]
   enemyWeakness?: enemyWeaknessBuffObj[]
   specialInjuryBuff?: specialInjuryBuffObj[] // 给魔兽上特殊伤害类型buff
+  othersDebuff?: Record<string, number>[] // 给魔兽上特殊伤害类型buff
 }
 
 type chainDamageAddBuffObjKeys = keyof chainDamageAddBuffObj

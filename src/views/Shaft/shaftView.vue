@@ -219,6 +219,7 @@ const setSkill = (skillData: selectCharacterDataObj) => {
   const commonSkill = skillData.commonSkill
   commonSkill['general'].qimage = skillDataList[0] ? skillDataList[0].qimage : commonSkill.image
   skillDataList.forEach((item) => {
+    console.log(skillData.allPotentials, '-------skillData.allPotentials--------')
     const temp: editableCharactarSkill = {
       allBreakthrough: skillData.allBreakthrough,
       allCheckList: skillData.allCheckList,
@@ -266,19 +267,36 @@ const setSkill = (skillData: selectCharacterDataObj) => {
 const setSkillEffect = (effect: effectObj, potentials: effectObj) => {
   const skill: Record<string, number> = {}
   for (const value in effect) {
+    const effectObjKey = value as keyof effectObj
     if (value === 'cd' || value === 'sp') {
       // break
     } else if (specialKey.includes(value)) {
-      const tempBuff = JSON.parse(JSON.stringify(effect[value]))
-      const potentialsList = potentials[value] || []
+      const tempBuff = JSON.parse(JSON.stringify(effect[effectObjKey]))
+      const potentialsList = (potentials[effectObjKey] || []) as
+        | Record<string, number>[]
+        | aureoleObj[]
+        | deBuffObj[]
+        | specialInjuryBuffSkillObj[]
       potentialsList?.forEach((item, index) => {
-        Object.keys(item).forEach((keyItem) => {
-          ;(tempBuff[index][keyItem] as number) += item[keyItem] as number
-        })
+        if (!!item) {
+          const temp = JSON.parse(JSON.stringify(item))
+          const keyList = Object.keys(item)
+          if (keyList.includes('extra')) {
+            delete temp.extraDescription
+            delete temp.extra
+            tempBuff[tempBuff.length] = temp
+          } else {
+            keyList.forEach((keyItem) => {
+              ;(tempBuff[index][keyItem] as number) += temp[keyItem] as number
+            })
+          }
+        }
       })
       skill[value] = tempBuff
     } else {
-      skill[value] = (effect[value] || 0) + (potentials[value] || 0)
+      const number = effect[effectObjKey] as number
+      const potentialsNumber = potentials[effectObjKey] as number
+      skill[value] = number + potentialsNumber
     }
   }
   return skill

@@ -71,6 +71,7 @@ const BeforeClose = () => {
 // 选择的队伍角色
 const selectCharactarList = ref<Record<string, selectCharacterDataObj>>({})
 const primary = (charactarData: selectCharacterDataObj) => {
+  console.log(charactarData, '-------charactarData----------')
   if (charactarData.name in selectCharactarList.value) {
     selectCharactarList.value[charactarData.name] = charactarData
   } else {

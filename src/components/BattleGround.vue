@@ -569,16 +569,20 @@ const setAbnormalState = (
           warcraftBuff.value[targetLocation].enemyWeakness,
           tempBuff,
         )
-      }
-      // 连锁伤害加成
-      if (tempBuff.chainDamageAdd) {
+      } else if (tempBuff.chainDamageAdd) {
+        // 连锁伤害加成
         initializeWarcraftBuff(warcraftBuff.value, targetLocation, 'chainDamageAdd')
         warcraftBuff.value[targetLocation].chainDamageAdd = upsertObjectByKey(
           warcraftBuff.value[targetLocation].chainDamageAdd,
           tempBuff,
         )
+      } else {
+        initializeWarcraftBuff(warcraftBuff.value, targetLocation, 'othersDebuff')
+        warcraftBuff.value[targetLocation].othersDebuff = upsertObjectByKey(
+          warcraftBuff.value[targetLocation].othersDebuff,
+          tempBuff,
+        )
       }
-      // console.log(tempBuff, 'setAbnormalState', index)
     })
   }
   if (skillEffect.specialInjuryBuff) {

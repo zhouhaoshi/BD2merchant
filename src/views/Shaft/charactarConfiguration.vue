@@ -180,7 +180,7 @@ const clilckbreakthrough = (value: number) => {
   allBreakthrough.value[key] = value
 }
 
-const clickSelectSkill = (value: string, init: boolean) => {
+const clickSelectSkill = (value: string, init?: boolean) => {
   selectSkill.value = value
   resetData()
   // 初始化的时候不使用

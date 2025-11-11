@@ -18,7 +18,7 @@ const sonya: characterDataObj = {
     // 刻印
     HP: 243, // 生命值
     MATK: 34, // 攻击力
-    DEF: 8, // 防御力
+    MRES: 8, // 防御力
   },
   Awakening: {
     // 觉醒

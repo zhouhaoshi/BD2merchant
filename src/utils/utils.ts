@@ -125,7 +125,18 @@ export function conversionDescription(
   breakthrough: number = 0, // 突破等级
   potentials: effectObj = {}, // 觉醒加成
 ) {
-  const description = skillData.description
+  let description = skillData.description
+  const potentialsObj = JSON.parse(JSON.stringify(potentials))
+  // 额外能力处理
+  for (const extra in potentials) {
+    if (Array.isArray(potentialsObj[extra])) {
+      potentialsObj[extra].forEach((item) => {
+        if (!!item && item.extra === 1) {
+          description = description + item.extraDescription
+        }
+      })
+    }
+  }
   return replacePathPlaceholders(description, skillData, breakthrough, potentials)
 }
 
@@ -143,6 +154,7 @@ export function conversionCommon(
   potentials: effectObj = {},
 ) {
   let result = undefined
+  console.log(potentials, 'potentials')
   if (key === 'scope') {
     result = [
       ...data[key],
@@ -185,9 +197,11 @@ export function setCharacterLocation(
   })
   return battleGroundList
 }
+type ValueOf<T> = T[keyof T]
+type warcraftBuffObjValues = ValueOf<warcraftBuffObj>
 
 export function upsertObjectByKey(
-  arr: userBuffObj[] | enemyWeaknessBuffObj[] | chainDamageAddBuffObj[] = [],
+  arr: warcraftBuffObjValues = [],
   newObj: Record<string, unknown>,
   key: userBuffObjKeys | chainDamageAddBuffObjKeys | enemyWeaknessBuffObjKeys = 'key',
 ) {
@@ -212,23 +226,36 @@ export function setPotentials(checkList: unknown[], skillPotentials: Record<stri
         if (value !== 'description' && value !== 'scope' && !specialKey.includes(value)) {
           tempPotentials[value] = (tempPotentials[value] || 0) + skillPotentials[item][value]
         } else if (specialKey.includes(value)) {
-          for (const buffValue in skillPotentials[item][value]) {
-            if (buffValue !== 'index') {
-              const index = skillPotentials[item][value].index
-              // 如果不存在则赋值
-              if (!tempPotentials[value]) {
-                tempPotentials[value] = []
-              }
-              if (!tempPotentials[value][index]) {
-                tempPotentials[value][index] = {}
-              }
-              tempPotentials[value][index][buffValue] =
-                (tempPotentials[value][index][buffValue] || 0) +
-                skillPotentials[item][value][buffValue]
+          const keyList = Object.keys(skillPotentials[item][value])
+          if (!keyList.includes('extra')) {
+            for (const buffValue in skillPotentials[item][value]) {
+              if (buffValue !== 'index') {
+                const index = skillPotentials[item][value].index
+                // 如果不存在则赋值
+                if (!tempPotentials[value]) {
+                  tempPotentials[value] = []
+                }
+                if (!tempPotentials[value][index]) {
+                  tempPotentials[value][index] = {}
+                }
+                tempPotentials[value][index][buffValue] =
+                  (tempPotentials[value][index][buffValue] || 0) +
+                  skillPotentials[item][value][buffValue]
 
-              if (tempPotentials[value].length === 0) {
-                delete tempPotentials[value]
+                if (tempPotentials[value].length === 0) {
+                  delete tempPotentials[value]
+                }
               }
+            }
+          } else {
+            const index = skillPotentials[item][value].index
+            const tempData = JSON.parse(JSON.stringify(skillPotentials[item][value]))
+            delete tempData.index
+            if (!!tempPotentials[value]) {
+              tempPotentials[value][index] = tempData
+            } else {
+              Reflect.set(tempPotentials, value, [])
+              tempPotentials[value][index] = tempData
             }
           }
         } else if (value === 'scope') {
