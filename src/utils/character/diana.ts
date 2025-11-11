@@ -3,6 +3,7 @@ const diana: characterDataObj = {
   cName: '黛安娜',
   element: 'wind',
   attackAttribute: 'matk', // 攻击属性 matk 魔法 atk为物理
+  attackType: 'skip', // 攻击类型 front为最前 skip为跳过
   MATK: 176, // 攻击力
   HP: 4011, // 生命值
   DEF: 0, // 防御力
@@ -24,7 +25,6 @@ const diana: characterDataObj = {
     MRES: 4, // 百分比攻击力
     PHP: 14, //
   },
-  attackType: 'skip', // 攻击类型 front为最前 skip为跳过
   commonSkill: {
     general: {
       name: 'general',

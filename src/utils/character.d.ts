@@ -5,10 +5,11 @@ interface buffComonElement {
   duration: number // 持续回合
 }
 
-// buff的通用属性
+// 角色通用属性
 interface userComonElement {
   element: 'light' | 'dark' | 'fire' | 'wind' | 'water' // 元素属性
   attackAttribute?: 'atk' | 'matk' // 攻击属性
+  attackType: 'front' | 'skip' // 攻击类型 front为最前 skip为跳过
 }
 // 通用的技能属性
 interface commonSkill {
@@ -84,7 +85,6 @@ interface characterDataObj extends userComonElement {
     MRES?: number // 魔抗
     PHP?: number // 百分比生命
   }
-  attackType: string // 攻击类型 front为最前 skip为跳过
   commonSkill: Record<string, commonSkillObj> // 通用技能 普攻和击退
   Skill: Record<string, skillObj> // 技能列表
 }
@@ -123,12 +123,13 @@ interface buffElement {
   CRAdd?: number // 暴击率
   increasedDamage?: number // 增强--增伤
   damageReduction?: number // 减伤
-  minChainCount?: number // 最低连锁数量
-  maxChainCount?: number // 最高连锁数量
   spReduce?: number // sp减少
   shield?: number // 护盾 以后再处理 目前的护盾有自身最大生命值的盾 法强盾 和buff人最大生命值的盾
   HPAdd?: number // 回复 以后再处理 魔法回复。自身值生命回复 buff人生命值回复
   aureole?: number // 是否有光环 1为有其他为0 光环只能套给自己
+  minChainCount?: number // 最低连锁数量
+  maxChainCount?: number // 最高连锁数量
+  maxchainAddNumber?: number // 限制条件 最大连锁数
 }
 
 interface buffObj extends buffElement {
@@ -180,7 +181,6 @@ interface editableCharactar extends userComonElement {
   panel?: number // 面板攻击力/魔法力
   critical: number // 爆伤
   attributeDamage: number // 属性伤害
-  attackType?: string // 攻击类型
   selectSikll?: string // 选中的皮肤
   commonSkill?: Record<string, commonSkillObj> // 通用技能 普攻和击退
   skill: Record<string, editableCharactarSkill> // 技能
@@ -231,4 +231,47 @@ interface enemyWeaknessBuffObj extends buffComonElement {
 interface specialInjuryBuffObj extends buffComonElement {
   specialMultiplying?: number // 特殊伤害的倍率
   type?: number // 是那种特殊buff 1为恶魔
+}
+
+interface warcraftData extends userComonElement {
+  name: string
+  cName: string
+  attributeResistance: number // 属性抵抗
+  sp: number // 魔兽每回合回复sp
+  // 魔兽坐标位置
+  scope: number[][]
+  // 弱点位置
+  scopeWeaknesses: warcraftScopeWeaknessesData[]
+  // 魔兽技能
+  Skill: warcraftSkillData[]
+  // 魔兽特殊技能
+  specialSkill: warcraftSpecialSkillData[]
+  levelData: Record<string, warcraftLevelData>
+}
+// 魔兽弱点
+interface warcraftScopeWeaknessesData {
+  weaknesses: number
+  scope: number[][]
+}
+
+// 魔兽弱点
+interface warcraftSkillData {
+  name: string
+  cname: string
+  chain: number // 攻击次数
+  scope: number[][]
+  multiplying: number
+  description?: string
+  buff?: buffObj[]
+  fixed?: number // 打击位置是否固定 1为固定
+}
+
+// 魔兽弱点
+interface warcraftSpecialSkillData extends warcraftSkillData {
+  condition: Record<string, number> // 触发条件
+}
+
+interface warcraftLevelData {
+  hp: number
+  panel: number
 }

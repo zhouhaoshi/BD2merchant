@@ -186,7 +186,6 @@ const setEditableTabs = (data: Record<string, selectCharacterDataObj>) => {
     editableCharactarList.value,
     editableBattleGroundList.value,
   )
-  console.log(editableCharactarList.value, 'editableCharactarList')
   editableTabs.value = editableTabs.value.map((item) => ({
     name: item.name,
     charactarList: JSON.parse(JSON.stringify(editableCharactarList.value)),

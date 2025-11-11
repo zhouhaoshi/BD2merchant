@@ -1,10 +1,38 @@
 <template>
   <div ref="BattleGround" class="battle_ground_box">
-    <el-form :model="form" label-width="auto">
-      <el-form-item label="场地范围" prop="type">
+    <el-form :inline="true" :model="form" label-width="auto">
+      <el-form-item label="场地范围" prop="type" style="width: 200px">
         <el-select v-model="form.size" placeholder="选择场地范围">
-          <el-option label="3x4" :value="1" />
+          <el-option label="3x4" :value="12" />
+          <el-option label="5x5" :value="25" />
         </el-select>
+      </el-form-item>
+      <el-form-item label="魔兽等级" prop="type" style="width: 200px">
+        <el-select v-model="form.level" placeholder="选择魔兽等级">
+          <el-option
+            v-for="item in Object.keys(warcraftLevelList).map((item) => +item)"
+            :key="item"
+            :label="`${item}级`"
+            :value="item"
+          />
+        </el-select>
+      </el-form-item>
+      <el-form-item
+        label="魔兽信息"
+        prop="type"
+        style="width: calc(100% - 496px)"
+        v-if="form.level"
+      >
+        魔兽血量： {{ warcraftLevelList[form.level].hp - alldamage() }}/{{
+          warcraftLevelList[form.level].hp
+        }}
+        ({{
+          Math.round(
+            ((warcraftLevelList[form.level].hp - alldamage()) / warcraftLevelList[form.level].hp) *
+              100 *
+              100,
+          ) / 100
+        }}%) 使用技能
       </el-form-item>
     </el-form>
     <!-- 作战场地 -->
@@ -123,8 +151,12 @@ const changeLocation = (index: number) => {
   }
 }
 const form = ref({
-  size: 1,
+  size: 12,
+  level: undefined,
 })
+
+const warcraftLevelList = ref<Record<string, warcraftLevelData>>({})
+
 interface scopeWeaknessesObj {
   scope: number[][]
   weaknesses: number
@@ -133,6 +165,7 @@ interface scopeWeaknessesObj {
 const setTempEnemyList = () => {
   tempEnemyList.value = new Array(12)
   const scopeList = props.warcraftData.scope
+  warcraftLevelList.value = props.warcraftData.levelData
   scopeList.forEach((item: number[]) => {
     tempEnemyList.value[transformationIndex(item)] = {
       chainCount: 0, // 当前连锁数量
@@ -795,12 +828,6 @@ const damageCalculation = async () => {
       }
     }
   })
-  console.log(userBuff.value, '------userBuff-------')
-  console.log(warcraftBuff.value, '------warcraftBuff-------')
-  emit('changeBuff', {
-    userBuff: userBuff.value,
-    warcraftBuff: warcraftBuff.value,
-  })
 }
 
 // 判断是否有自拐
@@ -955,8 +982,14 @@ const initialization = async (recoed?: boolean) => {
   await getUserBuffList()
   // 获取魔兽身上的遗留buff
   await getWarcraftBuffList()
-  // 开始计算伤害
-  damageCalculation()
+  // 开始计算伤害角色回合
+  await damageCalculation()
+  console.log(userBuff.value, '------userBuff-------')
+  console.log(warcraftBuff.value, '------warcraftBuff-------')
+  emit('changeBuff', {
+    userBuff: userBuff.value,
+    warcraftBuff: warcraftBuff.value,
+  })
 }
 
 defineExpose({ initialization })
