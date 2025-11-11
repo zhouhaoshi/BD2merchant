@@ -10,9 +10,9 @@ const helena: characterDataObj = {
   CR: 10, // 暴击率
   CDMG: 50, // 暴击伤害
   DMG: 50, // 属性伤害
-  panel: 2592,
-  critical: 650.56,
-  attributeDamage: 90,
+  panel: 2086,
+  critical: 143.6,
+  attributeDamage: 50,
   engraving: {
     // 刻印
     HP: 243, // 生命值

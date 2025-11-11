@@ -48,7 +48,7 @@ import CharactarConfiguration from './charactarConfiguration.vue'
 import characterList from '@/utils/allCharacter'
 import { splicingqImage } from '@/utils/utils'
 
-const props = defineProps(['dialogVisible'])
+defineProps(['dialogVisible'])
 const emit = defineEmits(['close', 'select'])
 
 const dialogValue = ref<boolean>(false)

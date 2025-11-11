@@ -40,7 +40,7 @@ const pumpkin1106: warcraftData = {
     },
     {
       name: 'skill_2',
-      cname: '邪焰',
+      cname: '暗影斩',
       scope: [
         [0, 0],
         [1, 0],
@@ -78,7 +78,7 @@ const pumpkin1106: warcraftData = {
     },
     {
       name: 'skill_4',
-      cname: '邪焰',
+      cname: '長袍華爾滋',
       scope: [
         [0, 0],
         [0, 1],

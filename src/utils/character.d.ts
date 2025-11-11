@@ -173,6 +173,7 @@ interface editableTabsObj {
   battleGroundList: editableCharactar[] // 角色场地位置
   buffList: Record<string, userBuffObj> // 角色buff列表
   warcraftBuffList: Record<number, warcraftBuffObj> // 魔兽buff列表
+  warcraftCanUseSkill: warcraftCanUseSkillObj // 魔兽可使用的技能队列
 }
 
 interface editableCharactar extends userComonElement {
@@ -274,4 +275,9 @@ interface warcraftSpecialSkillData extends warcraftSkillData {
 interface warcraftLevelData {
   hp: number
   panel: number
+}
+
+interface warcraftCanUseSkillObj {
+  Skill?: warcraftSkillData[]
+  specialSkill?: warcraftSpecialSkillData[]
 }

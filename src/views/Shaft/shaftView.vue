@@ -53,6 +53,10 @@
             :beforeBuffList="index === 0 ? {} : editableTabs[index - 1].buffList"
             :beforeWarcraftBuffList="index === 0 ? {} : editableTabs[index - 1].warcraftBuffList"
             :warcraftData="warcraftList['pumpkin1106']"
+            :warcraftCanUseSkill="editableTabs[index].warcraftCanUseSkill"
+            :alldamageList="alldamageList"
+            @changeSkill="changeSkill"
+            @set-turm-damage="setTurmDamage"
             @changeBuff="changeBuff"
           />
         </div>
@@ -140,8 +144,10 @@ const editableTabs = ref<editableTabsObj[]>([
     battleGroundList: [],
     buffList: {},
     warcraftBuffList: {},
+    warcraftCanUseSkill: {},
   },
 ])
+const alldamageList = ref<Record<string, number>[]>([])
 const editableCharactarList = ref<editableCharactar[]>([])
 const editableBattleGroundList = ref()
 const userdata = ref<damageObj>({
@@ -192,6 +198,7 @@ const setEditableTabs = (data: Record<string, selectCharacterDataObj>) => {
     battleGroundList: JSON.parse(JSON.stringify(editableBattleGroundList.value)),
     buffList: {},
     warcraftBuffList: {},
+    warcraftCanUseSkill: {},
   }))
 }
 // 角色数据发生变化，同步更新场地角色情况
@@ -292,6 +299,7 @@ const handleTabsEdit = (targetName: number, action: string) => {
       battleGroundList: JSON.parse(JSON.stringify(editableBattleGroundList.value || [])),
       buffList: {},
       warcraftBuffList: {},
+      warcraftCanUseSkill: {},
     })
     editableTabsValue.value = newTabName
   }
@@ -334,6 +342,27 @@ const changeBuff = ({ userBuff, warcraftBuff }: allBuffList) => {
   if (!!warcraftBuff) {
     editableTabs.value[index].warcraftBuffList = JSON.parse(JSON.stringify(warcraftBuff))
   }
+}
+
+// 魔兽可使用技能队列
+const changeSkill = (warcraftCanUseSkill: warcraftCanUseSkillObj) => {
+  const index = (editableTabsValue.value - 1) / 2
+  // 最后一根回合不需要往下传递
+  if (index + 1 < editableTabs.value.length) {
+    // 下个回合魔兽可以使用的技能
+    editableTabs.value[index + 1].warcraftCanUseSkill = JSON.parse(
+      JSON.stringify(warcraftCanUseSkill),
+    )
+  }
+}
+
+// 设置指定回合的伤害
+const setTurmDamage = (damage: Record<string, number>) => {
+  const index = (editableTabsValue.value - 1) / 2
+  if (alldamageList.value.length - 1 < index) {
+    alldamageList.value.length = index
+  }
+  alldamageList.value[index] = damage
 }
 </script>
 

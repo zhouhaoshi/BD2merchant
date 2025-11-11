@@ -23,16 +23,8 @@
         style="width: calc(100% - 496px)"
         v-if="form.level"
       >
-        魔兽血量： {{ warcraftLevelList[form.level].hp - alldamage() }}/{{
-          warcraftLevelList[form.level].hp
-        }}
-        ({{
-          Math.round(
-            ((warcraftLevelList[form.level].hp - alldamage()) / warcraftLevelList[form.level].hp) *
-              100 *
-              100,
-          ) / 100
-        }}%) 使用技能
+        <span>{{ warcraftDataMessage() }}</span>
+        <span v-if="warcraftUseSkillData?.cname">使用技能 {{ warcraftUseSkillData?.cname }}</span>
       </el-form-item>
     </el-form>
     <!-- 作战场地 -->
@@ -118,13 +110,32 @@ const props = defineProps({
     type: Object,
     default: () => {},
   },
+  warcraftCanUseSkill: {
+    // 魔兽可以使用的技能
+    type: Object,
+    default: () => {},
+  },
+  alldamageList: {
+    // 所有回合的伤害
+    type: Array,
+    default: () => [],
+  },
 })
-const emit = defineEmits(['changeBuff'])
+const emit = defineEmits(['changeBuff', 'changeSkill', 'setTurmDamage'])
+
+interface tempEnemyObj {
+  chainCount: number // 当前连锁数量
+  chainDamageAdd: []
+  enemyWeakness: []
+  attributeResistance: number
+  element: 'light' | 'dark' | 'fire' | 'wind' | 'water'
+  weakPointDamageAdd: number // 弱点增伤
+}
 
 const userBuff = ref<Record<string, userBuffObj[]>>({}) // 用来记录本回合角色身上的buff 回合结束后统一更新
 const warcraftBuff = ref<Record<number, warcraftBuffObj>>({}) // 用来记录本回合魔兽身上的buff 回合结束后统一更新
-const tempEnemyList = ref() // 初始状态下的魔兽情况
-const afterTempEnemyList = ref() // 攻击后的魔兽状态
+const tempEnemyList = ref<tempEnemyObj[]>([]) // 初始状态下的魔兽情况
+const afterTempEnemyList = ref<tempEnemyObj[]>([]) // 攻击后的魔兽状态
 const attackPosition = ref<number[]>([]) // 攻击到的位置的下标 展示用
 const friendlyPosition = ref<number[]>([]) // buff效果位置，展示用
 const selectIndex = ref<number>()
@@ -150,7 +161,7 @@ const changeLocation = (index: number) => {
     selectCharactarBox()
   }
 }
-const form = ref({
+const form = ref<Record<string, number | undefined>>({
   size: 12,
   level: undefined,
 })
@@ -163,34 +174,16 @@ interface scopeWeaknessesObj {
 }
 // 魔兽位置设置
 const setTempEnemyList = () => {
-  tempEnemyList.value = new Array(12)
+  tempEnemyList.value = new Array(form.value.size)
   const scopeList = props.warcraftData.scope
+  // 魔兽不同级别的面板记录
   warcraftLevelList.value = props.warcraftData.levelData
+  form.value.level = Object.keys(warcraftLevelList.value).map((item) => +item)[0] // 默认使用第一个面板
   scopeList.forEach((item: number[]) => {
     tempEnemyList.value[transformationIndex(item)] = {
       chainCount: 0, // 当前连锁数量
-      chainDamageAdd: [
-        // {
-        //   key: '',
-        //   duration: 4,
-        //   chainDamageAdd: 0,
-        // },
-      ],
-      enemyWeakness: [
-        // 当前受到了所有易伤buff
-        // {
-        //   type: 1,
-        //   enemyWeakness: 100,
-        // },
-        // {
-        //   type: 2,
-        //   enemyWeakness: 93,
-        // },
-        // {
-        //   type: 1,
-        //   enemyWeakness: 80,
-        // },
-      ],
+      chainDamageAdd: [],
+      enemyWeakness: [],
       attributeResistance: props.warcraftData.attributeResistance,
       element: props.warcraftData.element,
       weakPointDamageAdd: 0, // 弱点增伤
@@ -765,12 +758,36 @@ const getBuffNumber = (attackUser: editableCharactar, key: userBuffObjKeys) => {
     : 0
 }
 
+// 当前回合血量
 const damageList = ref<Record<string, number>>({})
 const alldamage = () => {
-  console.log(damageList.value, '----角色伤害详情-----', props.turnNumber)
-  // console.log(userBuff.value, '----角色所有的buff----', props.turnNumber)
   const damageNumberList = Object.values(damageList.value) || []
   return damageNumberList.length > 0 ? damageNumberList.reduce((prev, cur) => prev + cur) : 0
+}
+
+// 魔兽所有伤害
+const warcraftDataMessage = () => {
+  const warcraftHp = form.value.level ? warcraftLevelList.value[form.value.level].hp : 0
+  const tIndex = (props.turnNumber - 1) / 2
+  const allDamageNumberList = props.alldamageList.filter((_, index) => index <= tIndex)
+  const allDamageNumberObj: Record<string, number> = {}
+  allDamageNumberList.forEach((item) => {
+    const temp = JSON.parse(JSON.stringify(item)) as Record<string, number>
+    const damageUserList = Object.keys(temp)
+    damageUserList.forEach((dItem) => {
+      if (allDamageNumberObj[dItem]) {
+        allDamageNumberObj[dItem] = allDamageNumberObj[dItem] + temp[dItem]
+      } else {
+        allDamageNumberObj[dItem] = temp[dItem]
+      }
+    })
+  })
+  const damageList = Object.values(allDamageNumberObj) as number[]
+  const damageData =
+    damageList.length > 0 ? damageList.reduce((prev, cur) => (prev || 0) + (cur || 0)) : 0
+  const percentageHp = Math.round(((warcraftHp - damageData) / warcraftHp) * 10000) / 100
+  console.log(allDamageNumberObj, '---------allDamageNumberObj----------')
+  return `魔兽血量： ${warcraftHp - damageData}/${warcraftHp} (${percentageHp}%) 总伤害:${damageData.toLocaleString()}`
 }
 
 interface positionObj {
@@ -967,6 +984,233 @@ const getWarcraftBuffList = () => {
     warcraftBuff.value = effectiveBuffList
   })
 }
+
+// 魔兽的回合
+const warcraftTurn = () => {
+  // 判断魔兽使用的技能
+  setWarcraftSkill()
+  // 魔兽回合清空连锁
+  afterTempEnemyList.value.forEach((item) => {
+    if (item && item.chainCount) {
+      item.chainCount = 0
+    }
+  })
+  // 魔兽开始攻击
+  warcraftAttack()
+}
+
+const warcraftUseSkillData = ref<warcraftSpecialSkillData | warcraftSkillData>({})
+
+// 判断本轮魔兽攻击技能
+const setWarcraftSkill = () => {
+  // 所有的连锁列表
+  const chainCountList = afterTempEnemyList.value
+    .map((item) => (item ? item.chainCount : undefined))
+    .filter((item: number | undefined) => typeof item === 'number')
+  // 最大连锁数
+  const maxChainCount = Math.max.apply(null, chainCountList)
+  // 最小连锁数量
+  const minChainCount = Math.min.apply(null, chainCountList)
+  console.log('角色回合后的魔兽信息', maxChainCount, minChainCount)
+  const warcraftSkillList = JSON.parse(JSON.stringify(props.warcraftCanUseSkill))
+  if (props.turnNumber === 1) {
+    warcraftSkillList.Skill = props.warcraftData.Skill
+    warcraftSkillList.specialSkill = props.warcraftData.specialSkill
+  }
+  console.log(warcraftSkillList, '---------可使用技能-----------')
+  // 默认使用通用队列中的第一个 如果没有则设置空
+  warcraftUseSkillData.value = warcraftSkillList.Skill ? warcraftSkillList.Skill[0] : {}
+  // 如果有特殊技能，看是否触发条件技能
+  if (warcraftSkillList.specialSkill && warcraftSkillList.specialSkill.length > 0) {
+    warcraftSkillList.specialSkill.forEach((item: warcraftSpecialSkillData) => {
+      if (item.condition.minChainCount && item.condition.minChainCount < maxChainCount) {
+        warcraftUseSkillData.value = item
+      }
+    })
+  }
+  // 删除已经使用的技能
+  if (warcraftUseSkillData.value?.name && warcraftUseSkillData.value?.name.includes('special')) {
+    warcraftSkillList.specialSkill = warcraftSkillList.specialSkill.filter(
+      (item: warcraftSpecialSkillData) => item.name !== warcraftUseSkillData.value?.name,
+    )
+  } else if (
+    warcraftUseSkillData.value?.name &&
+    warcraftUseSkillData.value?.name.includes('skill')
+  ) {
+    warcraftSkillList.Skill = warcraftSkillList.Skill.filter(
+      (item: warcraftSkillData) => item.name !== warcraftUseSkillData.value?.name,
+    )
+  }
+  emit('changeSkill', warcraftSkillList)
+}
+// 魔兽攻击位置
+const warcraftAttack = async () => {
+  // 魔兽使用了技能
+  if (warcraftUseSkillData.value) {
+    // 角色占用位置
+    const userScopeIndexList = props.battleGroundList
+      .map((item, index) => (!!item ? index : undefined))
+      .filter((item) => typeof item === 'number')
+    let attackScope: number[] = []
+    // 魔兽攻击的不是固定位置
+    if (!warcraftUseSkillData.value.fixed) {
+      attackScope = await autoGetMainAttackPositionByWarcraft(userScopeIndexList)
+    } else {
+      attackScope =
+        warcraftUseSkillData.value.scope.map((tTtem: number[]) => transformationIndex(tTtem)) || [] // 转化为下标
+    }
+    attackScope.forEach((item) => {
+      // 如果攻击范围内有目标
+      if (userScopeIndexList.includes(item)) {
+        let number = warcraftUseSkillData.value.chain || 0
+        while (number > 0) {
+          // 触发魔兽打击
+          setWarcraftDamageData(item)
+          // 获取被攻击角色信息
+          const attackUser = props.battleGroundList[item] as editableCharactar
+          const attackUserBuff = userBuff.value[attackUser.name]
+          // 如果有反击触发反击伤害 使徒公主
+          // 如果有特殊buff触发特殊buff 塞尔
+          // 魔兽上buff
+          if (!!warcraftUseSkillData.value?.buff) {
+            warcraftUseSkillData.value?.buff.forEach((item: buffObj, index) => {
+              // 限制条件连锁增加为0
+              if (typeof item.maxchainAddNumber === 'number' && !!attackUserBuff) {
+                let chainAddNumber = 0
+                attackUserBuff.forEach((item) => {
+                  if (item.chainAddNumber) {
+                    chainAddNumber += item.chainAddNumber
+                  }
+                })
+                if (chainAddNumber <= item.maxchainAddNumber) {
+                  const temp = JSON.parse(JSON.stringify(item))
+                  delete temp.scope
+                  delete temp.maxchainAddNumber
+                  const tempBuff = {
+                    addTurn: props.turnNumber + 1, // 上buff的回合
+                    key: `${warcraftUseSkillData.value.name}_${index}`, // buffid，防止同一个buff上多次
+                    ...temp,
+                  }
+                  userBuff.value[attackUser.name] = upsertObjectByKey(
+                    userBuff.value[attackUser.name],
+                    tempBuff,
+                  )
+                }
+                console.log(chainAddNumber, 'chainAddNumber')
+              } else {
+                const temp = JSON.parse(JSON.stringify(item))
+                delete temp.scope
+                const tempBuff = {
+                  addTurn: props.turnNumber + 1, // 上buff的回合
+                  key: `${warcraftUseSkillData.value.name}_${index}`, // buffid，防止同一个buff上多次
+                  ...temp,
+                }
+                userBuff.value[attackUser.name] = upsertObjectByKey(
+                  userBuff.value[attackUser.name],
+                  tempBuff,
+                )
+              }
+            })
+          }
+          number--
+        }
+      }
+    })
+  }
+}
+
+const setWarcraftDamageData = (item: number) => {
+  console.log('打击了目标，位置为：', item)
+}
+
+// 获取选中的皮肤攻击到的主目标位置
+const autoGetMainAttackPositionByWarcraft = async (
+  userScopeIndexList: number[],
+  column: number = 4,
+  row: number = 3,
+) => {
+  let nowColumn = Math.floor(row / 2) // 魔兽攻击默认从中间一列开始
+  const rowRange = Array.from({ length: row }, (_, index) => ({
+    // 各列额下标范围
+    max: column * (index + 1) - 1,
+    min: column * index,
+  }))
+  const attackType = props.warcraftData.attackType
+  // 皮肤攻击范围 皮肤攻击类型 魔兽范围进行匹配
+  let attackMaintarget: number[] = [] // 主目标位置
+  let firstTarget: string[] = [] // 第一次触碰到的目标
+  let secondTarget: string[] = [] // 第二次触碰到的目标 攻击类型为跳过的时候
+  let value = rowRange[nowColumn].min
+  let CycleNumber = 0 // 控制循环次数
+  while (CycleNumber < row) {
+    if (attackMaintarget.length > 0) {
+      // 找到了目标
+      break
+    }
+    while (value <= rowRange[nowColumn].max) {
+      if (userScopeIndexList.includes(value)) {
+        if (firstTarget.length > 0) {
+          secondTarget = transformationCoordinates(value).split(',')
+        } else {
+          firstTarget = transformationCoordinates(value).split(',')
+        }
+      }
+      if (firstTarget.length > 0 && attackType === 'front') {
+        attackMaintarget = firstTarget.map((item) => +item)
+        break
+      }
+      if (secondTarget.length > 0 && attackType === 'skip') {
+        attackMaintarget = secondTarget.map((item) => +item)
+        break
+      }
+      value++
+      if (value > rowRange[nowColumn].max && firstTarget.length > 0) {
+        attackMaintarget = firstTarget.map((item) => +item)
+        break
+      }
+    }
+    // 如果当前列没有匹配到目标则往下一列查询
+    nowColumn++
+    // 如果是最后一列则重头开始，因为row是值，nowCloumn是下标
+    if (nowColumn === row) {
+      nowColumn = 0
+    }
+    value = rowRange[nowColumn].min
+    CycleNumber++
+  }
+  if (attackMaintarget.length === 0) {
+    return []
+  } else {
+    return autoGetAllWarcraftAttackPosition(attackMaintarget)
+  }
+}
+
+// 获取所有打击位置， 应对嘲讽的情况。嘲讽的时候主目标固定为嘲讽单位
+const autoGetAllWarcraftAttackPosition = (
+  attackMaintarget: number[], // 主目标位置
+  column: number = 4, // 场地大小
+  row: number = 3,
+) => {
+  const charactarSkillScope = warcraftUseSkillData.value.scope || []
+  let realSkillScope: number[] = []
+  if (charactarSkillScope?.length === 0) {
+    // 没有设置范围那就是全部，
+    realSkillScope = Array.from({ length: column * row }, (_, index) => index)
+  } else {
+    realSkillScope =
+      charactarSkillScope
+        ?.map(
+          (
+            item: number[], //坐标都加上真实主目标的偏移量
+          ) => item.map((val: number, i: number) => val + (attackMaintarget[i] || 0)),
+        )
+        .filter(
+          (item) => 0 <= item[0] && item[0] <= row - 1 && 0 <= item[1] && item[1] <= column - 1,
+        ) // 过滤超出地图的点位
+        .map((tTtem: number[]) => transformationIndex(tTtem)) || [] // 转化为下标
+  }
+  return realSkillScope || []
+}
 // 回合开始初始化
 const initialization = async (recoed?: boolean) => {
   // 清空遗留数据
@@ -984,6 +1228,9 @@ const initialization = async (recoed?: boolean) => {
   await getWarcraftBuffList()
   // 开始计算伤害角色回合
   await damageCalculation()
+  emit('setTurmDamage', damageList.value)
+  // 魔兽的回合开始
+  await warcraftTurn()
   console.log(userBuff.value, '------userBuff-------')
   console.log(warcraftBuff.value, '------warcraftBuff-------')
   emit('changeBuff', {
