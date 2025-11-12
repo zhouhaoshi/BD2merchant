@@ -125,7 +125,7 @@
 <script lang="ts" setup>
 import { ElMessageBox } from 'element-plus'
 
-import warcraftList from '@/utils/warcraft'
+import { warcraftList } from '@/utils/warcraft'
 import calculateDamage from '@/utils/damage'
 import ActionBar from '@/components/ActionBar.vue'
 import ActionBattleGroundBar from '@/components/BattleGround.vue'

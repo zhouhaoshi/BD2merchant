@@ -28,7 +28,7 @@
 
 <script lang="ts" setup>
 import CharactarDetails from './charactarDetails.vue'
-import characterList from '@/utils/allCharacter'
+import { characterList } from '@/utils/allCharacter'
 import { splicingqImage } from '@/utils/utils'
 
 const charactarData = ref<characterDataObj>()

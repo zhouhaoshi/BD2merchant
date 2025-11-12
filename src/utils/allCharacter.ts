@@ -20,7 +20,8 @@ async function getAllCharacter() {
   }
   return characterList // 返回一个包含所有插件的数组
 }
-// 直接导出方法会导致页面卡死。只能导出数据
-const characterList = await getAllCharacter()
-
-export default characterList
+export let characterList: Record<string, characterDataObj> = {}
+;(async () => {
+  // 直接导出方法会导致页面卡死。只能导出数据
+  characterList = await getAllCharacter()
+})()

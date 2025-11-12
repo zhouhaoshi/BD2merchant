@@ -45,7 +45,7 @@
 
 <script lang="ts" setup>
 import CharactarConfiguration from './charactarConfiguration.vue'
-import characterList from '@/utils/allCharacter'
+import { characterList } from '@/utils/allCharacter'
 import { splicingqImage } from '@/utils/utils'
 
 defineProps(['dialogVisible'])

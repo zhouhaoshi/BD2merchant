@@ -63,14 +63,14 @@ function replacePathPlaceholders(
   const escapedSuffix = suffix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
   const regex = new RegExp(`${escapedPrefix}(.*?)${escapedSuffix}`, 'g')
   // 使用 replace 方法进行全局替换
-  return str.replace(regex, (match, path) => {
+  return str.replace(regex, (match: string, path: string) => {
     // match 是完整的匹配项，例如 "&-buff/duration-&"
     // path 是括号捕获组的内容，即 "buff/duration"
     // 根据路径从 data 对象中获取值
     const value = getValueByPath(data, path.trim(), breakthrough, potentials)
     // 如果找不到对应的值，可以选择保留原占位符或替换成空字符串
     // 这里选择保留原占位符，以便于调试
-    return value !== undefined ? Math.abs(value) : match
+    return value !== undefined ? String(Math.abs(Number(value))) : match
   })
 }
 
@@ -85,7 +85,8 @@ function getValueByPath(
   obj: skillObj, // 技能对象
   path: string, // 路径字符串
   breakthrough: number = 0, // 突破等级
-  potentials: effectObj = {}, // 觉醒加成
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  potentials: effectObj & { [key: string]: any } = {}, // 觉醒加成
   separator = '/',
 ) {
   if (!obj || typeof obj !== 'object' || !path) {
@@ -107,12 +108,24 @@ function getValueByPath(
       }
     }
     if (item === 'effect') {
-      current = obj[item][breakthrough]
+      // 只在 effect[breakthrough] 是对象且 pathList 最后一个 key 存在时取 number
+      const effectObj = obj[item]?.[breakthrough]
+      if (typeof effectObj === 'object' && effectObj !== null && pathList[index + 1]) {
+        // Add index signature to effectObj for safe string indexing
+        const effectObjWithIndex = effectObj as { [key: string]: number }
+        current = effectObjWithIndex[pathList[index + 1]]
+      } else if (typeof effectObj === 'number') {
+        current = effectObj
+      } else {
+        current = 0
+      }
     } else if (current && typeof current === 'object' && item in current) {
       // item in current 代替 current.hasOwnProperty(item)
       current = (current as Record<string, undefined | number>)[item]
     } else if (item in obj) {
-      current = obj[item]
+      type keys = keyof skillObj
+      const keyString = item as keys
+      current = obj[keyString] as number | undefined
     } else {
       current = undefined
     }
@@ -239,7 +252,10 @@ export function upsertObjectByKey(
   key: userBuffObjKeys | chainDamageAddBuffObjKeys | enemyWeaknessBuffObjKeys = 'key',
 ) {
   const arrList = JSON.parse(JSON.stringify(arr))
-  const index = arr.findIndex((item) => item[key] === newObj[key])
+  const k = String(key)
+  const index = (arr as unknown as Array<Record<string, unknown>>).findIndex(
+    (item) => (item as Record<string, unknown>)[k] === (newObj as Record<string, unknown>)[k],
+  )
   if (index !== -1) {
     // 找到了，覆盖
     arrList[index] = newObj // 可选：合并旧值和新值；如果要完全替换，直接 arr[index] = newObj;

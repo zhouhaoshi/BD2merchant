@@ -20,7 +20,9 @@ async function getAllWarcraft() {
   }
   return warcraftList // 返回一个包含所有插件的数组
 }
-// 直接导出方法会导致页面卡死。只能导出数据
-const warcraftList = await getAllWarcraft()
 
-export default warcraftList
+export let warcraftList: Record<string, characterDataObj> = {}
+;(async () => {
+  // 直接导出方法会导致页面卡死。只能导出数据
+  warcraftList = await getAllWarcraft()
+})()

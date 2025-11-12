@@ -84,12 +84,12 @@
       <div v-if="data && data.Skill">
         <skillScope
           :scopeList="
-            conversionCommon(
+            conversionScopeCommon(
               data.Skill[selectSkill || Object.keys(data.Skill)[select]],
               'scope',
               breakthrough,
               potentials,
-            ) as unknown as unknown[]
+            ) as number[][]
           "
         />
       </div>
@@ -102,6 +102,7 @@ import {
   splicingqImage,
   conversionDescription,
   conversionCommon,
+  conversionScopeCommon,
   setPotentials,
 } from '@/utils/utils'
 import skillScope from '@/components/skillScope.vue'

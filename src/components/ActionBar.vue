@@ -37,18 +37,18 @@
             />
           </div>
         </div>
-        <div v-if="selectCharactarData.skill">
+        <div v-if="selectCharactarData.skill[selectSikll]">
           {{ selectCharactarData.skill[selectSikll].cName }}
         </div>
-        <div v-if="selectCharactarData.skill && selectSikll !== 'general'">
+        <div v-if="selectCharactarData.skill[selectSikll] && selectSikll !== 'general'">
           cd:{{ selectCharactarData.skill[selectSikll].cd }} sp:{{
             selectCharactarData.skill[selectSikll].sp
           }}
         </div>
-        <div v-if="selectCharactarData.skill">
+        <div v-if="selectCharactarData.skill[selectSikll]">
           {{ selectCharactarData.skill[selectSikll].description }}
         </div>
-        <div v-if="selectCharactarData.skill">
+        <div v-if="selectCharactarData.skill[selectSikll]">
           <skillScope :scopeList="selectCharactarData.skill[selectSikll].scope" />
         </div>
       </div>
@@ -102,7 +102,16 @@ const selectCharactar = (data: editableCharactar) => {
   selectCharactarData.value = data
   selectSikll.value = data.selectSikll || Object.keys(data.skill as object)[0]
 }
-const selectCharactarData = ref<editableCharactar>({}) // 当前选择的角色
+const selectCharactarData = ref<editableCharactar>({
+  name: '',
+  critical: 0,
+  attributeDamage: 0,
+  skill: {},
+  panel: 0,
+  selectSikll: '',
+  element: 'light', // Set default value to a valid element
+  attackType: 'skip', // Add default value for attackType
+}) // 当前选择的角色
 const selectSikll = ref<string>('') // 当前选中的技能
 const ActionBarBox = ref()
 // 初始化拖动
