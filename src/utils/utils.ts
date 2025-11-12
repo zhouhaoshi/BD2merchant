@@ -153,17 +153,40 @@ export function conversionCommon(
   breakthrough: number = 0, // 突破等级
   potentials: effectObj = {},
 ) {
-  let result = undefined
-  if (key === 'scope') {
-    result = [
-      ...data[key],
-      ...(potentials[key] || []),
-      ...(data['effect'][breakthrough][key] || []),
-    ]
-  } else {
-    result = data[key] + (potentials[key] || 0) + (data['effect'][breakthrough][key] || 0)
-  }
-  return result instanceof Array ? result : Math.abs(result)
+  // Ensure numeric result and use safe indexing with assertions to avoid TS index errors
+  let result: number = 0
+  const base = (data as never)[key] ?? 0
+  const pot = (potentials as never)[key] ?? 0
+  const eff = (data['effect'] as never)?.[breakthrough]?.[key] ?? 0
+  result = Number(base) + Number(pot) + Number(eff)
+  return Math.abs(result)
+}
+
+/**
+ * 根据路径字符串从对象中获取值
+ * @param {skillObj} data - 源对象
+ * @param {skillObjKeys} key -
+ * @param {string} potentials 觉醒值
+ * @returns {*} - 找到的值，如果路径不存在则返回 undefined
+ */
+export function conversionScopeCommon(
+  data: skillObj,
+  key: skillObjKeys,
+  breakthrough: number = 0, // 突破等级
+  potentials: effectObj = {},
+) {
+  const toArray = (v: unknown) => (Array.isArray(v) ? v : v !== undefined && v !== null ? [v] : [])
+  const baseArr = toArray((data as unknown as Record<string, unknown>)[key as string])
+  const potArr = toArray((potentials as unknown as Record<string, unknown>)[key as string])
+  // 先安全地取出 effect[breakthrough]（作为对象），再按 key 取值并传入 toArray
+  const effectByBreak = (
+    (data as unknown as Record<string, unknown>)['effect'] as unknown as
+      | Record<number, unknown>
+      | undefined
+  )?.[breakthrough] as unknown as Record<string, unknown> | undefined
+  const effArr = toArray(effectByBreak?.[key as string])
+
+  return [...baseArr, ...potArr, ...(effArr || [])]
 }
 
 export function transformationCoordinates(number: number, row: number = 4) {
@@ -229,18 +252,27 @@ export function upsertObjectByKey(
 
 // 处理选中的觉醒
 export function setPotentials(checkList: unknown[], skillPotentials: Record<string, unknown>) {
-  const tempPotentials = {}
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const tempPotentials: Record<string, any> = {}
   checkList.forEach((item) => {
-    if (skillPotentials[item] && typeof skillPotentials[item] === 'object') {
-      for (const value in skillPotentials[item]) {
+    const itemKey = String(item)
+    const potItem = skillPotentials[itemKey]
+    if (potItem && typeof potItem === 'object') {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const potRecord = potItem as Record<string, any>
+      for (const value in potRecord) {
+        const val = potRecord[value]
         if (value !== 'description' && value !== 'scope' && !specialKey.includes(value)) {
-          tempPotentials[value] = (tempPotentials[value] || 0) + skillPotentials[item][value]
+          tempPotentials[value] = (tempPotentials[value] || 0) + (Number(val) || 0)
         } else if (specialKey.includes(value)) {
-          const keyList = Object.keys(skillPotentials[item][value])
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const keyList = Object.keys(val as Record<string, any>)
           if (!keyList.includes('extra')) {
-            for (const buffValue in skillPotentials[item][value]) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            for (const buffValue in val as Record<string, any>) {
               if (buffValue !== 'index') {
-                const index = skillPotentials[item][value].index
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                const index = (val as Record<string, any>).index
                 // 如果不存在则赋值
                 if (!tempPotentials[value]) {
                   tempPotentials[value] = []
@@ -250,7 +282,8 @@ export function setPotentials(checkList: unknown[], skillPotentials: Record<stri
                 }
                 tempPotentials[value][index][buffValue] =
                   (tempPotentials[value][index][buffValue] || 0) +
-                  skillPotentials[item][value][buffValue]
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  (val as Record<string, any>)[buffValue]
 
                 if (tempPotentials[value].length === 0) {
                   delete tempPotentials[value]
@@ -258,8 +291,9 @@ export function setPotentials(checkList: unknown[], skillPotentials: Record<stri
               }
             }
           } else {
-            const index = skillPotentials[item][value].index
-            const tempData = JSON.parse(JSON.stringify(skillPotentials[item][value]))
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const index = (val as Record<string, any>).index
+            const tempData = JSON.parse(JSON.stringify(val))
             delete tempData.index
             if (!!tempPotentials[value]) {
               tempPotentials[value][index] = tempData
@@ -269,10 +303,8 @@ export function setPotentials(checkList: unknown[], skillPotentials: Record<stri
             }
           }
         } else if (value === 'scope') {
-          tempPotentials[value] = [
-            ...(tempPotentials[value] || []),
-            ...skillPotentials[item][value],
-          ]
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          tempPotentials[value] = [...(tempPotentials[value] || []), ...((val as any) || [])]
         }
       }
     }

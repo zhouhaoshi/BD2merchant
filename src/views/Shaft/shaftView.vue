@@ -136,6 +136,7 @@ import {
   conversionCommon,
   setCharacterLocation,
   specialKey,
+  conversionScopeCommon,
 } from '@/utils/utils'
 
 // Provide a local variable with a relaxed type for the pumpkin warcraft entry
@@ -256,7 +257,7 @@ const setSkill = (skillData: selectCharacterDataObj) => {
       target: item.target as 'friendly' | 'enemy',
       image: item.image,
       qimage: item.qimage,
-      scope: conversionCommon(
+      scope: conversionScopeCommon(
         item,
         'scope',
         skillData.allBreakthrough[item.name],

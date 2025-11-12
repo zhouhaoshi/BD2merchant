@@ -87,12 +87,12 @@
           <div v-if="data && data.Skill">
             <skillScope
               :scopeList="
-                conversionCommon(
+                conversionScopeCommon(
                   data.Skill[selectSkill || Object.keys(data.Skill)[select]],
                   'scope',
                   breakthrough,
                   potentials,
-                )
+                ) as number[][]
               "
             />
           </div>
@@ -125,6 +125,7 @@ import {
   splicingqImage,
   conversionDescription,
   conversionCommon,
+  conversionScopeCommon,
   setPotentials,
 } from '@/utils/utils'
 import skillScope from '@/components/skillScope.vue'
@@ -141,10 +142,13 @@ const userdata = ref<damageObj>({
   critical: 0,
   attributeDamage: 0,
 })
-const checkList = ref([])
-const allCheckList = ref({})
-const allBreakthrough = ref({})
-const allPotentials = ref({})
+const checkList = ref<never[]>([])
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const allCheckList = ref<Record<string, any>>({})
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const allBreakthrough = ref<Record<string, any>>({})
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const allPotentials = ref<Record<string, any>>({})
 const potentials = ref()
 const changeSkillPotentials = () => {
   const skillPotentials =

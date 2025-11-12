@@ -20,12 +20,15 @@
   </div>
 </template>
 <script lang="ts" setup>
-const props = defineProps({
-  scopeList: {
-    type: Array,
-    default: () => [],
+const props = withDefaults(
+  defineProps<{
+    scopeList: number[][]
+  }>(),
+  {
+    scopeList: () => [],
   },
-})
+)
+
 watch(props, () => {
   calculateSize()
 })
@@ -46,12 +49,12 @@ const scopeStringList = ref<string[]>()
 const calculateSize = () => {
   if (props.scopeList.length > 0) {
     const scopeListX = props.scopeList
-      .map((item: unknown) => item[0])
+      .map((item: number[]) => item[0])
       .sort((a: number, b: number) => a - b)
     const scopeListY = props.scopeList
-      .map((item: unknown) => item[1])
+      .map((item: number[]) => item[1])
       .sort((a: number, b: number) => a - b)
-    scopeStringList.value = props.scopeList.map((item: unknown) => `${item[0]}, ${item[1]}`)
+    scopeStringList.value = props.scopeList.map((item: number[]) => `${item[0]}, ${item[1]}`)
     const xMin = Math.abs(scopeListX[0])
     const xMax = Math.abs(scopeListX[scopeListX.length - 1])
     const yMin = Math.abs(scopeListY[0])
