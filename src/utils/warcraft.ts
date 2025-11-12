@@ -21,5 +21,7 @@ async function getAllWarcraft() {
   return warcraftList // 返回一个包含所有插件的数组
 }
 
-const warcraftList = await getAllWarcraft()
-export default warcraftList
+export async function setWarcraftList() {
+  const warcraftList = await getAllWarcraft()
+  return warcraftList
+}

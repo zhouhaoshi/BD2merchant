@@ -17,7 +17,7 @@
     </div>
     <el-card class="charactar_list">
       <div
-        v-for="value in characterList"
+        v-for="value in store.characterList"
         :key="value.name"
         @click="clickCharacter(value)"
         class="character_box"
@@ -45,9 +45,10 @@
 
 <script lang="ts" setup>
 import CharactarConfiguration from './charactarConfiguration.vue'
-import characterList from '@/utils/allCharacter'
 import { splicingqImage } from '@/utils/utils'
+import { useCharacterStore } from '@/stores/character'
 
+const store = useCharacterStore()
 defineProps(['dialogVisible'])
 const emit = defineEmits(['close', 'select'])
 
@@ -71,7 +72,6 @@ const BeforeClose = () => {
 // 选择的队伍角色
 const selectCharactarList = ref<Record<string, selectCharacterDataObj>>({})
 const primary = (charactarData: selectCharacterDataObj) => {
-  console.log(charactarData, '-------charactarData----------')
   if (charactarData.name in selectCharactarList.value) {
     selectCharactarList.value[charactarData.name] = charactarData
   } else {

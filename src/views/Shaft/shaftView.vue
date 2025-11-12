@@ -35,7 +35,7 @@
         :label="`T${index * 2 + 1}`"
         :name="item.name"
       >
-        <div class="shaft_box">
+        <div class="shaft_box" v-if="!isEmpty(warcraftPumpkin)">
           <ActionBar
             ref="actionBar"
             :key="`ActionBar_${index}`"
@@ -52,9 +52,9 @@
             :battleGroundList="item.battleGroundList"
             :beforeBuffList="index === 0 ? {} : editableTabs[index - 1].buffList"
             :beforeWarcraftBuffList="index === 0 ? {} : editableTabs[index - 1].warcraftBuffList"
-            :warcraftData="warcraftPumpkin"
             :warcraftCanUseSkill="editableTabs[index].warcraftCanUseSkill"
             :alldamageList="alldamageList"
+            :warcraftData="warcraftPumpkin"
             :canUseSp="index === 0 ? 14 : editableTabs[index].canUseSp"
             @changeSkill="changeSkill"
             @set-turm-damage="setTurmDamage"
@@ -125,11 +125,12 @@
 <script lang="ts" setup>
 import { ElMessageBox } from 'element-plus'
 
-import warcraftList from '@/utils/warcraft'
 import calculateDamage from '@/utils/damage'
 import ActionBar from '@/components/ActionBar.vue'
 import ActionBattleGroundBar from '@/components/BattleGround.vue'
 import charactarSelect from './charactarSelect.vue'
+import { setCharacterList } from '@/utils/allCharacter'
+import { setWarcraftList } from '@/utils/warcraft'
 import {
   splicingqImage,
   conversionDescription,
@@ -137,11 +138,19 @@ import {
   setCharacterLocation,
   specialKey,
   conversionScopeCommon,
+  isEmpty,
 } from '@/utils/utils'
+
+import { useWarcraftListStore } from '@/stores/warcraft'
+
+const store = useWarcraftListStore()
+
+import { useCharacterStore } from '@/stores/character'
+
+const characterStore = useCharacterStore()
 
 // Provide a local variable with a relaxed type for the pumpkin warcraft entry
 // to satisfy the component prop type (use a more precise type here if available).
-const warcraftPumpkin = warcraftList['pumpkin1106'] as unknown as warcraftData
 const editableTabsValue = ref(1)
 const tabIndex = ref(1)
 const dialogVisible = ref<boolean>(false)
@@ -404,6 +413,22 @@ const setTurmDamage = (damage: Record<string, number>) => {
   }
   alldamageList.value[index] = damage
 }
+
+const warcraftPumpkin = ref<warcraftData>()
+
+onMounted(async () => {
+  if (isEmpty(characterStore.characterList)) {
+    const characterList = await setCharacterList()
+    characterStore.setCharacterList(characterList)
+  }
+  if (isEmpty(store.warcraftList)) {
+    const warcraftList = await setWarcraftList()
+    store.setWarcraftList(warcraftList)
+    warcraftPumpkin.value = store.warcraftList['pumpkin1106'] as unknown as warcraftData
+  } else {
+    warcraftPumpkin.value = store.warcraftList['pumpkin1106'] as unknown as warcraftData
+  }
+})
 </script>
 
 <style lang="less" scoped>

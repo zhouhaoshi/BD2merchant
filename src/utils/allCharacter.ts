@@ -21,5 +21,7 @@ async function getAllCharacter() {
   return characterList // 返回一个包含所有插件的数组
 }
 
-const characterList = await getAllCharacter()
-export default characterList
+export async function setCharacterList() {
+  const characterList = await getAllCharacter()
+  return characterList
+}

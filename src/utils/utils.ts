@@ -38,9 +38,9 @@ export function splicingqImage(url?: string, value: string = 'qimage') {
     ? `https://www.souseihaku.com/characters/${url}.webp`
     : `https://www.souseihaku.com/characters-large/${url}.webp`
 }
-// function isEmpty(obj: Record<string, unknown> = {}) {
-//   return Object.keys(obj).length === 0
-// }
+export function isEmpty(obj: Record<string, unknown> | warcraftData = {}) {
+  return Object.keys(obj).length === 0
+}
 /**
  * 替换字符串中由特定分隔符包裹的路径占位符
  * @param {string} str - 需要处理的原始字符串

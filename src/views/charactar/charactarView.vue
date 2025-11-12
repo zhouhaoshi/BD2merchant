@@ -2,7 +2,7 @@
   <!-- 属性筛选  ----- 新增角色 ---- 新增角色皮肤 ---- 皮肤填写数据（?待定） --- 技能访问用二维坐标记录，攻击点为原点（0，0）左x-1右x+1 前y+1后y-1 -->
   <el-card class="charactar_list">
     <div
-      v-for="value in characterList"
+      v-for="value in store.characterList"
       :key="value.name"
       @click="clickCharacter(value)"
       class="character_box"
@@ -28,8 +28,11 @@
 
 <script lang="ts" setup>
 import CharactarDetails from './charactarDetails.vue'
-import characterList from '@/utils/allCharacter'
-import { splicingqImage } from '@/utils/utils'
+import { splicingqImage, isEmpty } from '@/utils/utils'
+import { setCharacterList } from '@/utils/allCharacter'
+import { useCharacterStore } from '@/stores/character'
+
+const store = useCharacterStore()
 
 const charactarData = ref<characterDataObj>()
 const dialogVisible = ref<boolean>(false)
@@ -41,6 +44,12 @@ const charactarDetailsClose = () => {
   dialogVisible.value = false
   charactarData.value = undefined
 }
+onMounted(async () => {
+  if (isEmpty(store.characterList)) {
+    const characterList = await setCharacterList()
+    store.setCharacterList(characterList)
+  }
+})
 </script>
 
 <style lang="less" scoped>

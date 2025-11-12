@@ -29,7 +29,9 @@
             {{ value[0] }}:<span>{{ value[1].toLocaleString() }}</span>
           </div>
           <div class="damage_box">
-            总伤害：<span>{{ damageTable.allDamageData }}</span>
+            总伤害：<span v-if="damageTable.allDamageData">{{
+              damageTable.allDamageData.toLocaleString()
+            }}</span>
           </div>
           <template v-slot:reference>
             <span style="cursor: pointer" v-html="warcraftDataMessage()"></span>
@@ -142,7 +144,7 @@ import calculateDamage from '@/utils/damage'
 const props = withDefaults(
   defineProps<{
     battleGroundList: editableCharactar[]
-    warcraftData: warcraftData
+    warcraftData: warcraftData | undefined
     attackSequence: editableCharactar[]
     turnNumber: number
     beforeBuffList: Record<string, userBuffObj>
