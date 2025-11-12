@@ -92,7 +92,7 @@ function getValueByPath(
   if (!obj || typeof obj !== 'object' || !path) {
     return undefined
   }
-  console.log(obj, '-----------------------', path)
+  // console.log(obj, '-----------------------', path)
   const pathList = path.split(separator)
   let current: undefined | number = undefined // 用于替换的值
   let potentialsCurrent: undefined | number = undefined // 觉醒属性

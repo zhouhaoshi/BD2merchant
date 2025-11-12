@@ -305,7 +305,7 @@ const setSkillEffect = (effect: effectObj, potentials: effectObj) => {
     } else {
       const number = effect[effectObjKey] as number
       const potentialsNumber = potentials[effectObjKey] as number
-      skill[value] = number + potentialsNumber
+      skill[value] = number + (potentialsNumber || 0)
     }
   }
   return skill
