@@ -10,9 +10,9 @@ const celia: characterDataObj = {
   CR: 20, // 暴击率
   CDMG: 50, // 暴击伤害
   DMG: 50, // 属性伤害
-  panel: 2550,
-  critical: 606.08,
-  attributeDamage: 90,
+  panel: 2050,
+  critical: 458.64,
+  attributeDamage: 80,
   engraving: {
     // 刻印
     HP: 243, // 生命值

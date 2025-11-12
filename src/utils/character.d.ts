@@ -177,6 +177,7 @@ interface editableTabsObj {
   buffList: Record<string, userBuffObj> // 角色buff列表
   warcraftBuffList: Record<number, warcraftBuffObj> // 魔兽buff列表
   warcraftCanUseSkill: warcraftCanUseSkillObj // 魔兽可使用的技能队列
+  canUseSp: number // 本回合可使用sp
 }
 
 interface editableCharactar extends userComonElement {
@@ -198,6 +199,7 @@ interface editableCharactarSkill extends commonSkill, skillSelectShow {
 
 interface skillEffectObj {
   buff: buffObj[]
+  special?: Record<string, number>[] // 特殊类型 比如sp回复
   aureole: aureoleObj[]
   extraMultiplying: number
   multiplying: number

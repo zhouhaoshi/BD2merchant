@@ -7,7 +7,6 @@ const calculateDamage = (data: damageObj) => {
   damage = getMultiplier(damage, data) // 倍率
   damage = getEnemyWeakness(damage, data, false) // 易伤/脆弱 + 增伤
   damage = getCritical(damage, data) // 爆伤
-  console.log(getCritical(damage, data, false), 'getCritical(damage, data)') //
   damage = getAttributeDamage(damage, data) // 属伤
   damage = getWeakPointDamageAdd(damage, data) // 最后弱点加伤
   damage = getEnemyDefence(damage, data) // 抗性

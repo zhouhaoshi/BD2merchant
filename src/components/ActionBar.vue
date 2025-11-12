@@ -76,7 +76,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { splicingqImage } from '@/utils/utils'
+import { splicingqImage, debounce } from '@/utils/utils'
 import skillScope from '@/components/skillScope.vue'
 import Sortable from 'sortablejs'
 const props = defineProps({
@@ -121,7 +121,7 @@ const initDropTable = () => {
         const dataList = props.charactarList
         const currRow = dataList?.splice(oldIndex, 1)[0] as editableCharactar
         dataList?.splice(newIndex, 0, currRow)
-        emit('change')
+        debouncedUpdate()
         // 重新绑定拖动
         nextTick(() => {
           initDropTable()
@@ -130,6 +130,10 @@ const initDropTable = () => {
     })
   })
 }
+// 创建防抖函数
+const debouncedUpdate = debounce(() => {
+  emit('change')
+}, 500)
 defineExpose({ initDropTable })
 onMounted(() => {
   initDropTable()

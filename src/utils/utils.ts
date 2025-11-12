@@ -154,7 +154,6 @@ export function conversionCommon(
   potentials: effectObj = {},
 ) {
   let result = undefined
-  console.log(potentials, 'potentials')
   if (key === 'scope') {
     result = [
       ...data[key],
@@ -178,19 +177,30 @@ export function transformationIndex(coordinates: string | number[], row: number 
 
 export function setCharacterLocation(
   characterList: editableCharactar[],
-  battleGroundList: unknown[],
+  battleGroundList: editableCharactar[],
   column: number = 4,
   row: number = 3,
 ) {
   let setNumber = 0 // 已经设置的角色数量
+  // 场地已有角色信息
+  const groundCharacterList = battleGroundList.map((item) => (item ? `${item.name}` : undefined))
   // 0 4 8 1 5 9 2 6 10 3 7 11
   // 0 1 2 3 4 5 6 7 8 9 10 11
   characterList.forEach((item) => {
+    // 队列开始位置
     let index = (setNumber % row) * column + Math.floor(setNumber / row)
-    // 如果有值则位置往后位移
-    while (!!battleGroundList[index]) {
+    // 如果场地上没有指定角色，就新增
+    if (groundCharacterList.indexOf(item.name) === -1) {
+      // 如果有值则位置往后位移
+      while (!!battleGroundList[index]) {
+        setNumber++
+        // 重新设置位置
+        index = (setNumber % row) * column + Math.floor(setNumber / row)
+      }
+    } else {
+      // 如果有指定角色就直接覆盖掉角色
       setNumber++
-      index = (setNumber % row) * column + Math.floor(setNumber / row)
+      index = groundCharacterList.indexOf(item.name)
     }
     battleGroundList[index] = item
     setNumber++
@@ -286,4 +296,21 @@ export function sumMaxNumbersByType(arr: enemyWeaknessBuffObj[]) {
   }
 
   return sum
+}
+// 防止抖动
+// utils/debounce.ts
+export function debounce<T extends (...args: unknown[]) => unknown>(
+  func: T,
+  delay: number,
+): (...args: Parameters<T>) => void {
+  let timeoutId: ReturnType<typeof setTimeout> | null = null
+
+  return function (this: ThisParameterType<T>, ...args: Parameters<T>) {
+    if (timeoutId) {
+      clearTimeout(timeoutId)
+    }
+    timeoutId = setTimeout(() => {
+      func.apply(this, args)
+    }, delay)
+  }
 }

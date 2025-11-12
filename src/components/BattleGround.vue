@@ -23,8 +23,35 @@
         style="width: calc(100% - 496px)"
         v-if="form.level"
       >
-        <span>{{ warcraftDataMessage() }}</span>
-        <span v-if="warcraftUseSkillData?.cname">使用技能 {{ warcraftUseSkillData?.cname }}</span>
+        <!-- 伤害气泡框 -->
+        <el-popover placement="top" width="300" trigger="hover">
+          <div v-for="value in damageTable.tableList" :key="value[0]" class="damage_box">
+            {{ value[0] }}:<span>{{ value[1] }}</span>
+          </div>
+          <div class="damage_box">
+            总伤害：<span>{{ damageTable.allDamageData }}</span>
+          </div>
+          <template v-slot:reference>
+            <span style="cursor: pointer" v-html="warcraftDataMessage()"></span>
+          </template>
+        </el-popover>
+        <!-- 技能气泡框 -->
+        <el-popover
+          placement="top"
+          width="400"
+          trigger="hover"
+          @show="showAttackPositionBuyWarcraft = attackPositionBuyWarcraft"
+          @hide="showAttackPositionBuyWarcraft = []"
+        >
+          {{ warcraftUseSkillData.description }}
+          <template v-slot:reference>
+            <span>
+              <span v-if="warcraftUseSkillData?.cname" style="cursor: pointer; margin-left: 20px"
+                >使用技能 <span style="color: blue">{{ warcraftUseSkillData?.cname }}</span></span
+              ></span
+            >
+          </template>
+        </el-popover>
       </el-form-item>
     </el-form>
     <!-- 作战场地 -->
@@ -35,7 +62,11 @@
           v-for="(enemy, index) in battleGroundList"
           :key="index"
           class="friendly_forces_box"
-          :class="{ select_box: selectIndex === index, buff_box: friendlyPosition.includes(index) }"
+          :class="{
+            select_box: selectIndex === index,
+            buff_box: friendlyPosition.includes(index),
+            attack_box: showAttackPositionBuyWarcraft.includes(index),
+          }"
           @click="changeLocation(index)"
         >
           <span v-if="enemy">
@@ -66,7 +97,36 @@
         </div>
       </div>
     </div>
-    <div>期望伤害：{{ alldamage().toLocaleString() }}</div>
+    <el-popover placement="top" width="300" trigger="hover">
+      <div v-for="value in trunDamageTable" :key="value[0]" class="damage_box">
+        {{ value[0] }}:<span>{{ value[1] }}</span>
+      </div>
+      <template v-slot:reference>
+        <div style="display: inline-block">
+          本轮伤害：<span style="cursor: pointer; color: blue">{{
+            alldamage().toLocaleString()
+          }}</span>
+        </div>
+      </template>
+    </el-popover>
+    <span class="sp_list">
+      <span class="sp_list_title">sp:</span>
+      <span
+        class="sp_circle"
+        :class="{
+          use_sp: value <= canUseSp,
+          all_sp: value <= canUseSp - trunUseSp,
+        }"
+        v-for="value in limitSp"
+        :key="value"
+      ></span>
+      <span
+        >剩余sp：
+        <span :style="{ color: canUseSp - trunUseSp < 0 ? 'red' : 'green' }">{{
+          canUseSp - trunUseSp
+        }}</span>
+      </span>
+    </span>
   </div>
 </template>
 <script lang="ts" setup>
@@ -120,8 +180,13 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+  canUseSp: {
+    // 所有回合的伤害
+    type: Number,
+    default: 0,
+  },
 })
-const emit = defineEmits(['changeBuff', 'changeSkill', 'setTurmDamage'])
+const emit = defineEmits(['changeBuff', 'changeSkill', 'setTurmDamage', 'nextTrunSp'])
 
 interface tempEnemyObj {
   chainCount: number // 当前连锁数量
@@ -132,11 +197,17 @@ interface tempEnemyObj {
   weakPointDamageAdd: number // 弱点增伤
 }
 
+const limitSp = ref<number>(20) // 最大sp数量
+const trunReplySp = ref<number>(0) // 本回合回复的sp
+const trunUseSp = ref<number>(0) // 本回合使用技能消耗的sp
+
 const userBuff = ref<Record<string, userBuffObj[]>>({}) // 用来记录本回合角色身上的buff 回合结束后统一更新
 const warcraftBuff = ref<Record<number, warcraftBuffObj>>({}) // 用来记录本回合魔兽身上的buff 回合结束后统一更新
 const tempEnemyList = ref<tempEnemyObj[]>([]) // 初始状态下的魔兽情况
 const afterTempEnemyList = ref<tempEnemyObj[]>([]) // 攻击后的魔兽状态
 const attackPosition = ref<number[]>([]) // 攻击到的位置的下标 展示用
+const attackPositionBuyWarcraft = ref<number[]>([]) // 魔兽打击位置 记录用
+const showAttackPositionBuyWarcraft = ref<number[]>([]) // 魔兽打击位置 展示用
 const friendlyPosition = ref<number[]>([]) // buff效果位置，展示用
 const selectIndex = ref<number>()
 // 友军场地角色位置变化
@@ -492,7 +563,13 @@ const setDamageData = (
       charactarData.multiplier = specialDamage
     } else {
       // 给魔兽上debuff
-      setAbnormalState(attackUser, charactarSkill.skillEffect, item, warcraftBoxData.chainCount)
+      setAbnormalState(
+        attackUser,
+        charactarSkill.skillEffect,
+        item,
+        warcraftBoxData.chainCount,
+        chainAddNumber,
+      )
       // 倍率计算
       if (charactarSkill.skillEffect.mainMultiplying) {
         // 主目标单独倍率
@@ -539,6 +616,7 @@ const setAbnormalState = (
   skillEffect: skillEffectObj,
   targetLocation: number,
   chainCount: number = 1,
+  chainAddNumber: number = 1,
 ) => {
   // 上debuff的情况
   if (skillEffect.deBuff) {
@@ -556,9 +634,9 @@ const setAbnormalState = (
       // 虚弱或者脆弱
       if (tempBuff.enemyWeakness) {
         initializeWarcraftBuff(warcraftBuff.value, targetLocation, 'enemyWeakness')
-        // 索菲亚的暗属性易伤
+        // 索菲亚的暗属性易伤 攻击后的连锁数量
         if (tempBuff.darkEnemyWeakness) {
-          if (tempBuff.minChainCount <= chainCount) {
+          if (tempBuff.minChainCount <= chainCount + chainAddNumber) {
             tempBuff.enemyWeakness = tempBuff.darkEnemyWeakness
             tempBuff.attributeElement = 'dark'
           }
@@ -764,10 +842,19 @@ const getBuffNumber = (attackUser: editableCharactar, key: userBuffObjKeys) => {
 
 // 当前回合血量
 const damageList = ref<Record<string, number>>({})
+const trunDamageTable = ref<[string, number][]>()
 const alldamage = () => {
   const damageNumberList = Object.values(damageList.value) || []
+  trunDamageTable.value = sortObjectByValue(damageList.value)
   return damageNumberList.length > 0 ? damageNumberList.reduce((prev, cur) => prev + cur) : 0
 }
+
+interface damageTableObj {
+  tableList?: [string, number][]
+  allDamageData?: number
+}
+
+const damageTable = ref<damageTableObj>({})
 
 // 魔兽所有伤害
 const warcraftDataMessage = () => {
@@ -790,10 +877,27 @@ const warcraftDataMessage = () => {
   const damageData =
     damageList.length > 0 ? damageList.reduce((prev, cur) => (prev || 0) + (cur || 0)) : 0
   const percentageHp = Math.round(((warcraftHp - damageData) / warcraftHp) * 10000) / 100
-  console.log(allDamageNumberObj, '---------allDamageNumberObj----------')
-  return `魔兽血量： ${warcraftHp - damageData}/${warcraftHp} (${percentageHp}%) 总伤害:${damageData.toLocaleString()}`
+  damageTable.value.tableList = sortObjectByValue(allDamageNumberObj)
+  damageTable.value.allDamageData = damageData
+  return `魔兽血量： <span style="color: blue;">${warcraftHp - damageData}</span>/${warcraftHp} (${percentageHp}%)`
 }
+/**
+ * 将 Record<string, number> 按值排序，返回 [key, value][] 数组
+ * @param obj 要排序的对象，键为 string，值为 number
+ * @param order 排序顺序，默认 'desc'（降序），可选 'asc'
+ * @returns 排序后的 [key, value][] 数组
+ */
+function sortObjectByValue(
+  obj: Record<string, number>,
+  order: 'asc' | 'desc' = 'desc',
+): [string, number][] {
+  const entries = Object.entries(obj) as [string, number][]
 
+  return entries.sort((a, b) => {
+    const diff = a[1] - b[1]
+    return order === 'asc' ? diff : -diff
+  })
+}
 interface positionObj {
   target: 'friendly' | 'enemy'
   scope: number[]
@@ -810,6 +914,7 @@ const damageCalculation = async () => {
       const selectCharactar = props.battleGroundList[index] as editableCharactar
       const selectSikll = selectCharactar.selectSikll || Object.keys(selectCharactar.skill)[0]
       const target: 'friendly' | 'enemy' = selectCharactar.skill[selectSikll].target || 'enemy'
+      spChange(selectCharactar.skill[selectSikll], selectCharactar)
       if (target === 'enemy') {
         const temp: positionObj = {
           scope: await autoGetMainAttackPosition(index),
@@ -1014,14 +1119,13 @@ const setWarcraftSkill = () => {
   // 最大连锁数
   const maxChainCount = Math.max.apply(null, chainCountList)
   // 最小连锁数量
-  const minChainCount = Math.min.apply(null, chainCountList)
-  console.log('角色回合后的魔兽信息', maxChainCount, minChainCount)
+  // const minChainCount = Math.min.apply(null, chainCountList)
   const warcraftSkillList = JSON.parse(JSON.stringify(props.warcraftCanUseSkill))
   if (props.turnNumber === 1) {
     warcraftSkillList.Skill = props.warcraftData.Skill
     warcraftSkillList.specialSkill = props.warcraftData.specialSkill
   }
-  console.log(warcraftSkillList, '---------可使用技能-----------')
+  console.log(warcraftSkillList, '---------魔兽可使用技能-----------')
   // 默认使用通用队列中的第一个 如果没有则设置空
   warcraftUseSkillData.value = warcraftSkillList.Skill ? warcraftSkillList.Skill[0] : {}
   // 如果有特殊技能，看是否触发条件技能
@@ -1063,6 +1167,7 @@ const warcraftAttack = async () => {
       attackScope =
         warcraftUseSkillData.value.scope.map((tTtem: number[]) => transformationIndex(tTtem)) || [] // 转化为下标
     }
+    attackPositionBuyWarcraft.value = JSON.parse(JSON.stringify(attackScope))
     attackScope.forEach((item) => {
       // 如果攻击范围内有目标
       if (userScopeIndexList.includes(item)) {
@@ -1215,6 +1320,69 @@ const autoGetAllWarcraftAttackPosition = (
   }
   return realSkillScope || []
 }
+//  延迟的费用回复，处理sp溢出问题
+const waitingReplySp = ref<Record<string, number>[]>()
+
+// 技能消耗统计
+const spChange = (skillData: editableCharactarSkill, useData: editableCharactar) => {
+  if (skillData.name === 'general') {
+    // 普攻回复1sp
+    waitingReplySp.value?.push({
+      spAdd: 1,
+    })
+  } else {
+    const buffList = userBuff.value[useData.name]
+    let spReduce = 0
+    buffList?.forEach((item) => {
+      if (item.spReduce) {
+        spReduce += item.spReduce
+      }
+    })
+    const skillUseSp = skillData.sp - spReduce > 0 ? skillData.sp - spReduce : 0
+    trunUseSp.value += skillUseSp
+  }
+  // 技能回复sp的情况
+  if (!!skillData.skillEffect.special) {
+    skillData.skillEffect.special.forEach((item) => {
+      if (!!item.spAdd) {
+        waitingReplySp.value?.push(item)
+      }
+    })
+  }
+}
+// 计算sp
+// 重置sp变动
+const resetSp = () => {
+  trunReplySp.value = 0
+  trunUseSp.value = 0
+  waitingReplySp.value = []
+}
+// sp回复
+const trunReplySpChang = (sp: number, limit: number = 20) => {
+  trunReplySp.value += sp
+  if (trunReplySp.value > limit) {
+    trunReplySp.value = limit
+  }
+}
+
+const calculationWaitingReplySp = (limit: number) => {
+  waitingReplySp.value?.forEach((item) => {
+    trunReplySpChang(item.spAdd, limit)
+  })
+}
+
+const getReplyMax = () => {
+  const remainingSp = props.canUseSp - trunUseSp.value
+  const replyMax = limitSp.value - (remainingSp > 0 ? remainingSp : 0) // 本回合最大可回复sp数量
+  return replyMax > 0 ? replyMax : replyMax < 20 ? replyMax : 20
+}
+
+// 简单计算，费用溢出问题未处理
+const setNextTurnSp = () => {
+  const nextSp = props.canUseSp - trunUseSp.value + trunReplySp.value
+  return nextSp > 20 ? 20 : nextSp < 0 ? 0 : nextSp
+}
+
 // 回合开始初始化
 const initialization = async (recoed?: boolean) => {
   // 清空遗留数据
@@ -1223,6 +1391,8 @@ const initialization = async (recoed?: boolean) => {
     friendlyPosition.value = []
     selectIndex.value = undefined
   }
+  // 重置本轮sp回复
+  resetSp()
   damageList.value = {}
   // 先清空buff重新计算
   userBuff.value = {}
@@ -1232,15 +1402,22 @@ const initialization = async (recoed?: boolean) => {
   await getWarcraftBuffList()
   // 开始计算伤害角色回合
   await damageCalculation()
+  // 假装是角色技能使用期间 用于处理sp回复问题
+  calculationWaitingReplySp(getReplyMax())
+  // 角色回合结束添加sp
+  trunReplySpChang(props.warcraftData.sp, getReplyMax())
   emit('setTurmDamage', damageList.value)
   // 魔兽的回合开始
   await warcraftTurn()
+  // 魔兽回合结束添加sp
+  trunReplySpChang(props.warcraftData.sp, getReplyMax())
   console.log(userBuff.value, '------userBuff-------')
   console.log(warcraftBuff.value, '------warcraftBuff-------')
   emit('changeBuff', {
     userBuff: userBuff.value,
     warcraftBuff: warcraftBuff.value,
   })
+  emit('nextTrunSp', setNextTurnSp())
 }
 
 defineExpose({ initialization })
@@ -1291,6 +1468,9 @@ defineExpose({ initialization })
     .buff_box {
       background-color: rgba(0, 128, 0, 0.1);
     }
+    .attack_box {
+      background-color: rgba(255, 0, 0, 0.3);
+    }
   }
   .enemy_troops {
     .enemy_troops_box {
@@ -1310,6 +1490,38 @@ defineExpose({ initialization })
         background-color: rgba(255, 0, 0, 0.3);
       }
     }
+  }
+}
+// 伤害展示样式
+.damage_box {
+  & > span {
+    color: red;
+  }
+}
+.damage_box + .damage_box {
+  margin-top: 10px;
+}
+// sp展示样式
+.sp_list {
+  display: inline-block;
+  margin-left: 20px;
+  span + span {
+    margin-left: 10px;
+  }
+  .sp_circle {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border: 1px solid gray;
+    border-radius: 50%; /* 关键：让矩形变成圆 */
+  }
+  .all_sp {
+    border: 1px solid green !important;
+    background-color: green !important;
+  }
+  .use_sp {
+    border: 1px solid gray;
+    background-color: gray;
   }
 }
 </style>

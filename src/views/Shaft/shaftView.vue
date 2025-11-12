@@ -55,9 +55,11 @@
             :warcraftData="warcraftList['pumpkin1106']"
             :warcraftCanUseSkill="editableTabs[index].warcraftCanUseSkill"
             :alldamageList="alldamageList"
+            :canUseSp="index === 0 ? 10 : editableTabs[index].canUseSp"
             @changeSkill="changeSkill"
             @set-turm-damage="setTurmDamage"
             @changeBuff="changeBuff"
+            @nextTrunSp="nextTrunSp"
           />
         </div>
       </el-tab-pane>
@@ -121,6 +123,8 @@
 </template>
 
 <script lang="ts" setup>
+import { ElMessageBox } from 'element-plus'
+
 import warcraftList from '@/utils/warcraft'
 import calculateDamage from '@/utils/damage'
 import ActionBar from '@/components/ActionBar.vue'
@@ -145,6 +149,7 @@ const editableTabs = ref<editableTabsObj[]>([
     buffList: {},
     warcraftBuffList: {},
     warcraftCanUseSkill: {},
+    canUseSp: 0,
   },
 ])
 const alldamageList = ref<Record<string, number>[]>([])
@@ -199,15 +204,15 @@ const setEditableTabs = (data: Record<string, selectCharacterDataObj>) => {
     buffList: {},
     warcraftBuffList: {},
     warcraftCanUseSkill: {},
+    canUseSp: 0,
   }))
 }
 // 角色数据发生变化，同步更新场地角色情况
 const changeCharactarList = () => {
-  const editableBattleGroundList = new Array(12)
   const index = (editableTabsValue.value - 1) / 2
   editableTabs.value[index].battleGroundList = setCharacterLocation(
     editableTabs.value[index].charactarList,
-    editableBattleGroundList,
+    editableTabs.value[index].battleGroundList,
   ) as editableCharactar[]
   actionBattleGroundBar.value[index].initialization()
 }
@@ -219,7 +224,6 @@ const setSkill = (skillData: selectCharacterDataObj) => {
   const commonSkill = skillData.commonSkill
   commonSkill['general'].qimage = skillDataList[0] ? skillDataList[0].qimage : commonSkill.image
   skillDataList.forEach((item) => {
-    console.log(skillData.allPotentials, '-------skillData.allPotentials--------')
     const temp: editableCharactarSkill = {
       allBreakthrough: skillData.allBreakthrough,
       allCheckList: skillData.allCheckList,
@@ -318,25 +322,31 @@ const handleTabsEdit = (targetName: number, action: string) => {
       buffList: {},
       warcraftBuffList: {},
       warcraftCanUseSkill: {},
+      canUseSp: 0,
     })
     editableTabsValue.value = newTabName
   }
   if (action === 'remove') {
-    const tabs = editableTabs.value
-    let activeName = editableTabsValue.value
-    if (activeName === targetName) {
-      tabs.forEach((tab, index) => {
-        if (tab.name === targetName) {
-          const nextTab = tabs[index + 1] || tabs[index - 1]
-          if (nextTab) {
-            activeName = nextTab.name
-          }
+    // 删除回合后会出现奇怪的问题。待处理
+    ElMessageBox.confirm(`是否删除T${targetName}回合？`)
+      .then(() => {
+        const tabs = editableTabs.value
+        let activeName = editableTabsValue.value
+        if (activeName === targetName) {
+          tabs.forEach((tab, index) => {
+            if (tab.name === targetName) {
+              const nextTab = tabs[index + 1] || tabs[index - 1]
+              if (nextTab) {
+                activeName = nextTab.name
+              }
+            }
+          })
         }
-      })
-    }
 
-    editableTabsValue.value = activeName
-    editableTabs.value = tabs.filter((tab) => tab.name !== targetName)
+        editableTabsValue.value = activeName
+        editableTabs.value = tabs.filter((tab) => tab.name !== targetName)
+      })
+      .catch(() => {})
   }
 }
 
@@ -359,6 +369,13 @@ const changeBuff = ({ userBuff, warcraftBuff }: allBuffList) => {
   }
   if (!!warcraftBuff) {
     editableTabs.value[index].warcraftBuffList = JSON.parse(JSON.stringify(warcraftBuff))
+  }
+}
+// 设置下个回合可用sp
+const nextTrunSp = (sp: number) => {
+  const index = (editableTabsValue.value - 1) / 2
+  if (index + 1 < editableTabs.value.length) {
+    editableTabs.value[index + 1].canUseSp = JSON.parse(JSON.stringify(sp))
   }
 }
 
