@@ -52,7 +52,7 @@
             :battleGroundList="item.battleGroundList"
             :beforeBuffList="index === 0 ? {} : editableTabs[index - 1].buffList"
             :beforeWarcraftBuffList="index === 0 ? {} : editableTabs[index - 1].warcraftBuffList"
-            :warcraftData="warcraftList['pumpkin1106']"
+            :warcraftData="warcraftPumpkin"
             :warcraftCanUseSkill="editableTabs[index].warcraftCanUseSkill"
             :alldamageList="alldamageList"
             :canUseSp="index === 0 ? 10 : editableTabs[index].canUseSp"
@@ -137,6 +137,10 @@ import {
   setCharacterLocation,
   specialKey,
 } from '@/utils/utils'
+
+// Provide a local variable with a relaxed type for the pumpkin warcraft entry
+// to satisfy the component prop type (use a more precise type here if available).
+const warcraftPumpkin = warcraftList['pumpkin1106'] as unknown as warcraftData
 const editableTabsValue = ref(1)
 const tabIndex = ref(1)
 const dialogVisible = ref<boolean>(false)

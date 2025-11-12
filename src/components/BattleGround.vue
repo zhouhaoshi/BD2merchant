@@ -26,7 +26,7 @@
         <!-- 伤害气泡框 -->
         <el-popover placement="top" width="300" trigger="hover">
           <div v-for="value in damageTable.tableList" :key="value[0]" class="damage_box">
-            {{ value[0] }}:<span>{{ value[1] }}</span>
+            {{ value[0] }}:<span>{{ value[1].toLocaleString() }}</span>
           </div>
           <div class="damage_box">
             总伤害：<span>{{ damageTable.allDamageData }}</span>
@@ -99,7 +99,7 @@
     </div>
     <el-popover placement="top" width="300" trigger="hover">
       <div v-for="value in trunDamageTable" :key="value[0]" class="damage_box">
-        {{ value[0] }}:<span>{{ value[1] }}</span>
+        {{ value[0] }}:<span>{{ value[1].toLocaleString() }}</span>
       </div>
       <template v-slot:reference>
         <div style="display: inline-block">
@@ -139,53 +139,30 @@ import {
 } from '@/utils/utils'
 import { specialInjuryBuffType } from '@/utils/globals'
 import calculateDamage from '@/utils/damage'
-const props = defineProps({
-  battleGroundList: {
-    // 角色场地位置
-    type: Array,
-    default: () => [],
+const props = withDefaults(
+  defineProps<{
+    battleGroundList: editableCharactar[]
+    warcraftData: warcraftData
+    attackSequence: editableCharactar[]
+    turnNumber: number
+    beforeBuffList: Record<string, userBuffObj>
+    beforeWarcraftBuffList: Record<number, warcraftBuffObj>
+    warcraftCanUseSkill: warcraftCanUseSkillObj
+    alldamageList: Record<string, number>[]
+    canUseSp: number
+  }>(),
+  {
+    battleGroundList: () => [],
+    warcraftData: () => ({}) as unknown as warcraftData,
+    attackSequence: () => [],
+    turnNumber: 0,
+    beforeBuffList: () => ({}),
+    beforeWarcraftBuffList: () => ({}),
+    warcraftCanUseSkill: () => ({}),
+    alldamageList: () => [],
+    canUseSp: 0,
   },
-  warcraftData: {
-    // 魔兽数据
-    type: Object,
-    default: () => {},
-  },
-  attackSequence: {
-    // 角色攻击顺序
-    type: Array,
-    default: () => [],
-  },
-  turnNumber: {
-    // 回合数。用来处理buff
-    type: Number,
-    default: 0,
-  },
-  beforeBuffList: {
-    // 上个回合的有效buff
-    type: Object,
-    default: () => {},
-  },
-  beforeWarcraftBuffList: {
-    // 上个回合的有效魔兽debuff
-    type: Object,
-    default: () => {},
-  },
-  warcraftCanUseSkill: {
-    // 魔兽可以使用的技能
-    type: Object,
-    default: () => {},
-  },
-  alldamageList: {
-    // 所有回合的伤害
-    type: Array,
-    default: () => [],
-  },
-  canUseSp: {
-    // 所有回合的伤害
-    type: Number,
-    default: 0,
-  },
-})
+)
 const emit = defineEmits(['changeBuff', 'changeSkill', 'setTurmDamage', 'nextTrunSp'])
 
 interface tempEnemyObj {
@@ -588,7 +565,11 @@ const setDamageData = (
       }
     }
     // 增伤
-    charactarData.increasedDamage = getIncreasedDamage(attackUser, warcraftBoxData.chainCount)
+    charactarData.increasedDamage = getIncreasedDamage(
+      attackUser,
+      warcraftBoxData.chainCount,
+      chainAddNumber,
+    )
     // 魔兽的易伤值
     warcraftData.enemyWeakness = getEnemyWeakness(attackUser, item)
     // 问魔兽的
@@ -764,7 +745,11 @@ const getMultiplier = (
   return multiply
 }
 // 计算真实增伤
-const getIncreasedDamage = (attackUser: editableCharactar, chainCount: number) => {
+const getIncreasedDamage = (
+  attackUser: editableCharactar,
+  chainCount: number,
+  chainAddNumber: number,
+) => {
   // 是否有自拐
   ourSelfBuff(attackUser)
   const attackAddBuffNumber = (userBuff.value[attackUser.name] || [])
@@ -775,7 +760,7 @@ const getIncreasedDamage = (attackUser: editableCharactar, chainCount: number) =
         if (!limitKeyList.some((key) => hasOwn.call(item, key))) {
           // 没限制条件的增伤则直接使用
           return item.increasedDamage
-        } else if (item.minChainCount && chainCount >= item.minChainCount) {
+        } else if (item.minChainCount && chainCount + chainAddNumber >= item.minChainCount) {
           return item.increasedDamage
         } else if (item.maxChainCount && chainCount <= item.maxChainCount) {
           return item.increasedDamage
@@ -1108,7 +1093,13 @@ const warcraftTurn = () => {
   warcraftAttack()
 }
 
-const warcraftUseSkillData = ref<warcraftSpecialSkillData | warcraftSkillData>({})
+const warcraftUseSkillData = ref<warcraftSpecialSkillData | warcraftSkillData>({
+  name: '',
+  cname: '',
+  chain: 0,
+  scope: [],
+  multiplying: 0,
+})
 
 // 判断本轮魔兽攻击技能
 const setWarcraftSkill = () => {
