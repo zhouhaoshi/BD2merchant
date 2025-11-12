@@ -92,6 +92,7 @@ function getValueByPath(
   if (!obj || typeof obj !== 'object' || !path) {
     return undefined
   }
+  console.log(obj, '-----------------------', path)
   const pathList = path.split(separator)
   let current: undefined | number = undefined // 用于替换的值
   let potentialsCurrent: undefined | number = undefined // 觉醒属性
@@ -110,15 +111,7 @@ function getValueByPath(
     if (item === 'effect') {
       // 只在 effect[breakthrough] 是对象且 pathList 最后一个 key 存在时取 number
       const effectObj = obj[item]?.[breakthrough]
-      if (typeof effectObj === 'object' && effectObj !== null && pathList[index + 1]) {
-        // Add index signature to effectObj for safe string indexing
-        const effectObjWithIndex = effectObj as { [key: string]: number }
-        current = effectObjWithIndex[pathList[index + 1]]
-      } else if (typeof effectObj === 'number') {
-        current = effectObj
-      } else {
-        current = 0
-      }
+      current = effectObj as unknown as number | undefined
     } else if (current && typeof current === 'object' && item in current) {
       // item in current 代替 current.hasOwnProperty(item)
       current = (current as Record<string, undefined | number>)[item]

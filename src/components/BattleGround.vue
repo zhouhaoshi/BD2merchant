@@ -565,11 +565,7 @@ const setDamageData = (
       }
     }
     // 增伤
-    charactarData.increasedDamage = getIncreasedDamage(
-      attackUser,
-      warcraftBoxData.chainCount,
-      chainAddNumber,
-    )
+    charactarData.increasedDamage = getIncreasedDamage(attackUser, warcraftBoxData.chainCount)
     // 魔兽的易伤值
     warcraftData.enemyWeakness = getEnemyWeakness(attackUser, item)
     // 问魔兽的
@@ -745,11 +741,7 @@ const getMultiplier = (
   return multiply
 }
 // 计算真实增伤
-const getIncreasedDamage = (
-  attackUser: editableCharactar,
-  chainCount: number,
-  chainAddNumber: number,
-) => {
+const getIncreasedDamage = (attackUser: editableCharactar, chainCount: number) => {
   // 是否有自拐
   ourSelfBuff(attackUser)
   const attackAddBuffNumber = (userBuff.value[attackUser.name] || [])
@@ -760,7 +752,7 @@ const getIncreasedDamage = (
         if (!limitKeyList.some((key) => hasOwn.call(item, key))) {
           // 没限制条件的增伤则直接使用
           return item.increasedDamage
-        } else if (item.minChainCount && chainCount + chainAddNumber >= item.minChainCount) {
+        } else if (item.minChainCount && chainCount >= item.minChainCount) {
           return item.increasedDamage
         } else if (item.maxChainCount && chainCount <= item.maxChainCount) {
           return item.increasedDamage

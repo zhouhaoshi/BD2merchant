@@ -55,7 +55,7 @@
             :warcraftData="warcraftPumpkin"
             :warcraftCanUseSkill="editableTabs[index].warcraftCanUseSkill"
             :alldamageList="alldamageList"
-            :canUseSp="index === 0 ? 10 : editableTabs[index].canUseSp"
+            :canUseSp="index === 0 ? 14 : editableTabs[index].canUseSp"
             @changeSkill="changeSkill"
             @set-turm-damage="setTurmDamage"
             @changeBuff="changeBuff"
@@ -125,7 +125,7 @@
 <script lang="ts" setup>
 import { ElMessageBox } from 'element-plus'
 
-import { warcraftList } from '@/utils/warcraft'
+import warcraftList from '@/utils/warcraft'
 import calculateDamage from '@/utils/damage'
 import ActionBar from '@/components/ActionBar.vue'
 import ActionBattleGroundBar from '@/components/BattleGround.vue'
