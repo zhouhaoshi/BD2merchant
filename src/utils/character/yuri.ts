@@ -183,7 +183,7 @@ const yuridata: characterDataObj = {
       image: 'Yuri_2_large',
       qimage: 'Yuri_2_idle', // q版形象
       description:
-        '&-effect/buff/0/duration-&回合内，自身暴击伤害增加&-effect/buff/0/critical-&%。4回合内，对自己应用闪避目标效果。对敌人造成相当于自身攻击力&-effect/multiplying-&%的物理伤害',
+        '&-effect/buff/0/duration-&回合内，自身暴击伤害增加&-effect/buff/0/critical-&%。&-effect/buff/1/duration-&回合内，对自己应用闪避目标效果。对敌人造成相当于自身攻击力&-effect/multiplying-&%的物理伤害',
       effect: {
         // 技能效果
         0: {
@@ -192,6 +192,11 @@ const yuridata: characterDataObj = {
             {
               duration: 4,
               critical: 150,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 4,
+              provocation: -1,
               scope: [[0, 0]],
             },
           ],
@@ -205,6 +210,11 @@ const yuridata: characterDataObj = {
               critical: 150,
               scope: [[0, 0]],
             },
+            {
+              duration: 4,
+              provocation: -1,
+              scope: [[0, 0]],
+            },
           ],
           multiplying: 495,
         },
@@ -214,6 +224,11 @@ const yuridata: characterDataObj = {
             {
               duration: 4,
               critical: 150,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 4,
+              provocation: -1,
               scope: [[0, 0]],
             },
           ],
@@ -227,6 +242,11 @@ const yuridata: characterDataObj = {
               critical: 150,
               scope: [[0, 0]],
             },
+            {
+              duration: 4,
+              provocation: -1,
+              scope: [[0, 0]],
+            },
           ],
           multiplying: 655,
         },
@@ -238,6 +258,11 @@ const yuridata: characterDataObj = {
               critical: 150,
               scope: [[0, 0]],
             },
+            {
+              duration: 4,
+              provocation: -1,
+              scope: [[0, 0]],
+            },
           ],
           multiplying: 735,
         },
@@ -247,6 +272,11 @@ const yuridata: characterDataObj = {
             {
               duration: 4,
               critical: 150,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 4,
+              provocation: -1,
               scope: [[0, 0]],
             },
           ],

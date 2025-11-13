@@ -4,5 +4,9 @@ export enum specialInjuryBuffType {
 }
 
 export enum enemyWeaknessDeBuffType {
-  fragility = 1,
+  fragility = 1, // 脆弱
+}
+
+export enum dotBuffType {
+  bleed = 1, // 流血
 }

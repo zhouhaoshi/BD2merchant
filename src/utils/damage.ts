@@ -20,9 +20,9 @@ const getChain = (damage: number, data: damageObj, integer: boolean = true) => {
   damage = damage * (1 + (data.chainCount || 0) * (0.1 + (data.chainDamageAdd || 0) / 100)) // 连锁伤害
   return integer ? Math.floor(damage) : damage
 }
-// 倍率伤害计算函数
+// 倍率伤害计算函数默认倍率为0
 const getMultiplier = (damage: number, data: damageObj, integer: boolean = true) => {
-  damage = (damage * (data.multiplier || 100)) / 100 // 倍率
+  damage = (damage * (data.multiplier || 0)) / 100 // 倍率
   return integer ? Math.floor(damage) : damage
 }
 // 易伤/脆弱 + 增伤伤害计算函数

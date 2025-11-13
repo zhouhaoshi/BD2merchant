@@ -11,8 +11,8 @@
         :key="colIndex"
         class="col_box"
         :class="{
-          center_box: `${col + sizeList.min}, ${row + sizeList.min}` === '0, 0',
-          scope_box: scopeStringList?.includes(`${col + sizeList.min}, ${row + sizeList.min}`),
+          center_box: `${col + sizeList.minX}, ${row + sizeList.minY}` === '0, 0',
+          scope_box: scopeStringList?.includes(`${col + sizeList.minX}, ${row + sizeList.minY}`),
         }"
       ></div>
     </div>
@@ -36,13 +36,15 @@ watch(props, () => {
 interface Size {
   width: number
   height: number
-  min: number
+  minX: number
+  minY: number
 }
 
 const sizeList = ref<Size>({
   width: 0,
   height: 0,
-  min: 0,
+  minX: 0,
+  minY: 0,
 })
 const scopeStringList = ref<string[]>()
 
@@ -61,8 +63,13 @@ const calculateSize = () => {
     const yMax = Math.abs(scopeListY[scopeListY.length - 1])
     const x = xMin + xMax + 1
     const y = yMin + yMax + 1
-    sizeList.value.min = Math.min(...[scopeListX[0], xMax, scopeListY[0], yMax]) - 1 // -1 添加0,0轴
+    const offsetNumber = xMax > yMax ? xMax : yMax
+    sizeList.value.minX = sizeList.value.minY =
+      Math.min(...[scopeListX[0], xMax, scopeListY[0], yMax]) - Math.ceil(offsetNumber / 2) // -1 添加0,0轴居中
     sizeList.value.height = sizeList.value.width = x > y ? x : y
+    if (yMin >= 0 && yMax >= sizeList.value.width - 1) {
+      sizeList.value.minY += Math.ceil(yMax / 2)
+    }
   } else {
     scopeStringList.value = []
     sizeList.value.height = sizeList.value.width = 3

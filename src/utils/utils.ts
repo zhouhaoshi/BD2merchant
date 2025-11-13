@@ -15,7 +15,7 @@ export function formatDate(date: Date) {
 }
 
 // 需要特殊处理的key
-export const specialKey = ['buff', 'special', 'aureole', 'deBuff', 'specialInjuryBuff']
+export const specialKey = ['buff', 'special', 'aureole', 'deBuff', 'specialInjuryBuff', 'hitBuff']
 
 /**
  * 查询并更新对象数组 B 中与 A 的 id 匹配的项
@@ -191,7 +191,6 @@ export function conversionScopeCommon(
       | undefined
   )?.[breakthrough] as unknown as Record<string, unknown> | undefined
   const effArr = toArray(effectByBreak?.[key as string])
-
   return [...baseArr, ...potArr, ...(effArr || [])]
 }
 

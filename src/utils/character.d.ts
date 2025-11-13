@@ -100,12 +100,28 @@ interface skillObj extends commonSkill {
   ability: Record<string, unknown> // 服装能力
 }
 
-interface effectObj {
+// 击退的类型的数据
+interface repellingElement {
+  repellingDirection?: number[] // 击退方向 如 [0,1]向后 [0, -1]向前 [-1, 0] 向左 [0, 1]向右
+  repellingDistance?: number // 击退距离
+  repellingMultiplying?: number // 击退后的碰撞伤害
+}
+
+interface dotBuffObj {
+  duration: number // 持续回合
+  scope?: number[][] // 范围 // 如果为空继技能本身访问
+  type?: number //  dotbuff枚举
+  dotMultiplying: number // 特殊效果倍率
+}
+
+interface effectObj extends repellingElement {
   sp?: number // 消耗
   cd?: number
+  hitBuff?: hitBuffObj[] // 受击buff
   buff?: buffObj[] // 各类加成
   deBuff?: deBuffObj[] // 各类减益Buff
-  specialInjuryBuff?: specialInjuryBuffSkillObj[] // 特殊伤害buff
+  specialInjuryBuff?: specialInjuryBuffSkillObj[] // 负伤伤害buff
+  dotBuff?: dotBuffObj[] // dot伤害buff
   aureole?: aureoleObj[] // 光环
   multiplying?: number // 倍率
   mainMultiplying?: number // 特殊倍率 - 主目标倍率
@@ -113,7 +129,19 @@ interface effectObj {
   extraMultiplying?: number // 额外倍率
   special?: Record<string, number>[] // 特殊类型 比如sp回复
 }
-
+// 受到打击触发的特殊buff 比如使徒的反击 塞尔的sp回复
+interface hitBuffObj {
+  duration?: number
+  scope?: number[][] // 独立范围，单独触发
+  triggerCount?: number // 可触发次数
+  target: 'friendly' | 'enemy' // 作用目标 友军或者敌人
+  spAdd?: number
+  increasedDamage?: number // 增强--增伤
+  HPAdd?: number // 生命回复
+  hitMultiplying?: number // 倍率
+  increasingNumber?: number // 递增数量
+  maxNumber?: number // 最大递增数量
+}
 interface buffElement {
   attackAdd?: number // 效果值
   critical?: number // 暴击伤害
@@ -127,6 +155,8 @@ interface buffElement {
   shield?: number // 护盾 以后再处理 目前的护盾有自身最大生命值的盾 法强盾 和buff人最大生命值的盾
   HPAdd?: number // 回复 以后再处理 魔法回复。自身值生命回复 buff人生命值回复
   aureole?: number // 是否有光环 1为有其他为0 光环只能套给自己
+  hit?: number // 是否有收击buff 1为有 其他为0
+  provocation?: number // 嘲讽 正常为0 -1为降低嘲讽 +为增加嘲讽
   minChainCount?: number // 最低连锁数量
   maxChainCount?: number // 最高连锁数量
   maxchainAddNumber?: number // 限制条件 最大连锁数
@@ -143,7 +173,8 @@ interface deBuffElement {
   type?: number // 那种类型的 易伤/脆弱
   minChainCount?: number // 限制条件
   enemyWeakness?: number // 易伤/脆弱
-  darkEnemyWeakness?: number //暗属性脆弱
+  darkEnemyWeakness?: number // 暗属性脆弱
+  mainEnemyWeakness?: number // 主目标脆弱
   chainDamageAdd?: number // 连锁伤害加成
 }
 
