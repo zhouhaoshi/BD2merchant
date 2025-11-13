@@ -233,6 +233,7 @@ interface editableCharactarSkill extends commonSkill, skillSelectShow {
 interface skillEffectObj {
   buff: buffObj[]
   hitBuff?: hitBuffObj[] // 受打擊buff
+  dotBuff?: dotBuffObj[] // dotbuff
   special?: Record<string, number>[] // 特殊类型 比如sp回复
   aureole: aureoleObj[]
   extraMultiplying: number
@@ -254,6 +255,12 @@ interface warcraftBuffObj {
   enemyWeakness?: enemyWeaknessBuffObj[]
   specialInjuryBuff?: specialInjuryBuffObj[] // 给魔兽上特殊伤害类型buff
   othersDebuff?: Record<string, number>[] // 给魔兽上特殊伤害类型buff
+  dotBuff?: warcraftDotBuffObj[] // 给魔兽上特殊伤害类型buff
+}
+
+interface warcraftDotBuffObj extends buffComonElement {
+  dotMultiplying: number
+  type: number
 }
 
 type chainDamageAddBuffObjKeys = keyof chainDamageAddBuffObj

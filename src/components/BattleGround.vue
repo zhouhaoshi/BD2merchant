@@ -664,6 +664,26 @@ const setAbnormalState = (
       },
     )
   }
+  // 上dot伤害
+  if (skillEffect.dotBuff) {
+    const charactarSkill =
+      attackUser.skill[attackUser.selectSikll || Object.keys(attackUser.skill)[0]] // 角色技能
+    const dotBuffList = skillEffect.dotBuff
+    dotBuffList.forEach((deBuffObj: deBuffObj, deBuffIndex: number) => {
+      const temp = JSON.parse(JSON.stringify(deBuffObj))
+      const tempBuff = {
+        addTurn: props.turnNumber, // 上buff的回合
+        key: `${attackUser.name}_${charactarSkill.name}_${deBuffIndex}`, // buffid，防止同一个buff上多次
+        ...temp,
+      }
+      delete tempBuff.scope
+      initializeWarcraftBuff(warcraftBuff.value, targetLocation, 'dotBuff')
+      warcraftBuff.value[targetLocation].dotBuff = upsertObjectByKey(
+        warcraftBuff.value[targetLocation].dotBuff,
+        tempBuff,
+      )
+    })
+  }
 }
 
 // 给魔兽debuff一个初始值
@@ -837,7 +857,7 @@ interface damageTableObj {
 
 const damageTable = ref<damageTableObj>({})
 
-// 魔兽所有伤害
+// 魔兽所有伤害 展示用
 const warcraftDataMessage = () => {
   const warcraftHp = form.value.level ? warcraftLevelList.value[form.value.level].hp : 0
   const tIndex = (props.turnNumber - 1) / 2
@@ -1076,7 +1096,7 @@ const getWarcraftBuffList = () => {
 }
 
 // 魔兽的回合
-const warcraftTurn = () => {
+const warcraftTurn = async () => {
   // 判断魔兽使用的技能
   setWarcraftSkill()
   // 魔兽回合清空连锁
@@ -1085,8 +1105,62 @@ const warcraftTurn = () => {
       item.chainCount = 0
     }
   })
+  // 触发dot伤害
+  await estimateDotDamege('user')
   // 魔兽开始攻击
   warcraftAttack()
+  // 触发dot伤害
+  await estimateDotDamege('warcraft')
+}
+
+const estimateDotDamege = (trunType: string) => {
+  const dotBuffList = []
+  // 判断并且获取所有dot伤害buff
+  for (const warcraftLocation in warcraftBuff.value) {
+    if (
+      !!warcraftBuff.value[warcraftLocation].dotBuff &&
+      warcraftBuff.value[warcraftLocation].dotBuff.length > 0
+    ) {
+      dotBuffList.push({
+        location: +warcraftLocation,
+        value: warcraftBuff.value[warcraftLocation].dotBuff,
+      })
+    }
+  }
+  // 如果有dot伤害
+  if (dotBuffList.length > 0) {
+    // 魔兽回合判断一下魔兽回合的无效buff
+    if (trunType === 'warcraft') {
+      const tempBuffList = JSON.parse(JSON.stringify(userBuff.value))
+      const effectiveBuffList: Record<string, userBuffObj[]> = {}
+      // 处理需要继承的buff
+      for (const value in tempBuffList) {
+        effectiveBuffList[value] = tempBuffList[value].filter(
+          (item: buffComonElement) => props.turnNumber + 1 - item.addTurn < item.duration, // 移除魔兽上的失效buff
+        )
+      }
+      userBuff.value = effectiveBuffList
+    }
+    dotBuffList.forEach((item) => {
+      const temp = JSON.parse(JSON.stringify(item))
+      temp.value.forEach((tItem: dotBuffObj) => {
+        const dotTemp = JSON.parse(JSON.stringify(tItem))
+        const attackUserInformation = dotTemp.key.split('_')
+        const attackUser = props.attackSequence.find(
+          (item) => item.name === attackUserInformation[0],
+        )
+        // dot伤害触发
+        const damage = setDamageData(
+          [temp.location],
+          attackUser as editableCharactar,
+          {} as editableCharactarSkill,
+          dotTemp.dotMultiplying,
+        )
+        const keys = `${attackUserInformation[0]}_${attackUserInformation[1]}`
+        damageList.value[keys] += damage
+      })
+    })
+  }
 }
 
 const warcraftUseSkillData = ref<warcraftSpecialSkillData | warcraftSkillData>({

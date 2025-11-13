@@ -137,6 +137,8 @@ import {
   conversionCommon,
   setCharacterLocation,
   specialKey,
+  ignoreKey,
+  scopeKey,
   conversionScopeCommon,
   isEmpty,
 } from '@/utils/utils'
@@ -286,7 +288,7 @@ const setSkillEffect = (effect: effectObj, potentials: effectObj) => {
   const skill: Record<string, number> = {}
   for (const value in effect) {
     const effectObjKey = value as keyof effectObj
-    if (value === 'cd' || value === 'sp') {
+    if (ignoreKey.includes(value)) {
       // break
     } else if (specialKey.includes(value)) {
       const tempBuff = JSON.parse(JSON.stringify(effect[effectObjKey]))
@@ -311,6 +313,9 @@ const setSkillEffect = (effect: effectObj, potentials: effectObj) => {
         }
       })
       skill[value] = tempBuff
+    } else if (scopeKey.includes(value)) {
+      const tempBuff = JSON.parse(JSON.stringify(effect[effectObjKey]))
+      skill[value] = tempBuff as unknown as number
     } else {
       const number = effect[effectObjKey] as number
       const potentialsNumber = potentials[effectObjKey] as number

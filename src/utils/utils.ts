@@ -15,8 +15,19 @@ export function formatDate(date: Date) {
 }
 
 // 需要特殊处理的key
-export const specialKey = ['buff', 'special', 'aureole', 'deBuff', 'specialInjuryBuff', 'hitBuff']
+export const specialKey = [
+  'buff',
+  'special',
+  'aureole',
+  'deBuff',
+  'specialInjuryBuff',
+  'hitBuff',
+  'dotBuff',
+]
 
+export const scopeKey = ['scope', 'repellingDirection']
+
+export const ignoreKey = ['cd', 'sp']
 /**
  * 查询并更新对象数组 B 中与 A 的 id 匹配的项
  * @param {Array} urlId - 源数据数组（包含要复制的值）
@@ -270,7 +281,7 @@ export function setPotentials(checkList: unknown[], skillPotentials: Record<stri
       const potRecord = potItem as Record<string, any>
       for (const value in potRecord) {
         const val = potRecord[value]
-        if (value !== 'description' && value !== 'scope' && !specialKey.includes(value)) {
+        if (value !== 'description' && !scopeKey.includes(value) && !specialKey.includes(value)) {
           tempPotentials[value] = (tempPotentials[value] || 0) + (Number(val) || 0)
         } else if (specialKey.includes(value)) {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -310,7 +321,7 @@ export function setPotentials(checkList: unknown[], skillPotentials: Record<stri
               tempPotentials[value][index] = tempData
             }
           }
-        } else if (value === 'scope') {
+        } else if (scopeKey.includes(value)) {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           tempPotentials[value] = [...(tempPotentials[value] || []), ...((val as any) || [])]
         }
