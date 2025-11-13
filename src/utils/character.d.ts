@@ -160,6 +160,8 @@ interface buffElement {
   minChainCount?: number // 最低连锁数量
   maxChainCount?: number // 最高连锁数量
   maxchainAddNumber?: number // 限制条件 最大连锁数
+  superpositionNumber?: number // 叠加数量目前就塞尔用
+  triggerCount?: number // 反击有效次数 布莱德使徒用
 }
 
 interface buffObj extends buffElement {
@@ -230,6 +232,7 @@ interface editableCharactarSkill extends commonSkill, skillSelectShow {
 
 interface skillEffectObj {
   buff: buffObj[]
+  hitBuff?: hitBuffObj[] // 受打擊buff
   special?: Record<string, number>[] // 特殊类型 比如sp回复
   aureole: aureoleObj[]
   extraMultiplying: number

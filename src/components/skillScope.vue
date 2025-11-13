@@ -63,7 +63,7 @@ const calculateSize = () => {
     const yMax = Math.abs(scopeListY[scopeListY.length - 1])
     const x = xMin + xMax + 1
     const y = yMin + yMax + 1
-    const offsetNumber = xMax > yMax ? xMax : yMax
+    const offsetNumber = (xMax > yMax ? xMax : yMax) || 1 // 最少偏移量
     sizeList.value.minX = sizeList.value.minY =
       Math.min(...[scopeListX[0], xMax, scopeListY[0], yMax]) - Math.ceil(offsetNumber / 2) // -1 添加0,0轴居中
     sizeList.value.height = sizeList.value.width = x > y ? x : y

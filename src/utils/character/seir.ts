@@ -253,7 +253,7 @@ const seir: characterDataObj = {
           hitBuff: [
             {
               target: 'friendly',
-              scope: [[0, 0]],
+              scope: [],
               spAdd: 2,
             },
           ],
@@ -276,7 +276,7 @@ const seir: characterDataObj = {
           hitBuff: [
             {
               target: 'friendly',
-              scope: [[0, 0]],
+              scope: [],
               spAdd: 2,
             },
           ],
@@ -299,7 +299,7 @@ const seir: characterDataObj = {
           hitBuff: [
             {
               target: 'friendly',
-              scope: [[0, 0]],
+              scope: [],
               spAdd: 3,
             },
           ],
@@ -322,7 +322,7 @@ const seir: characterDataObj = {
           hitBuff: [
             {
               target: 'friendly',
-              scope: [[0, 0]],
+              scope: [],
               spAdd: 3,
             },
           ],
@@ -345,7 +345,7 @@ const seir: characterDataObj = {
           hitBuff: [
             {
               target: 'friendly',
-              scope: [[0, 0]],
+              scope: [],
               spAdd: 3,
             },
           ],
@@ -368,7 +368,7 @@ const seir: characterDataObj = {
           hitBuff: [
             {
               target: 'friendly',
-              scope: [[0, 0]],
+              scope: [],
               spAdd: 3,
             },
           ],

@@ -485,7 +485,7 @@ const autoGetAllAttackPosition = (
 const setDamageData = (
   attackPosition: number[], // 攻击的范围
   attackUser: editableCharactar, // 攻击的角色
-  charactarSkill: editableCharactarSkill, // 角色使用的技能
+  charactarSkill: editableCharactarSkill, // 角色使用的技能 正常打击需要指定
   specialDamage: number = 0, // 是否有特殊伤害
 ) => {
   // console.log(attackPosition, attackUser)
@@ -506,7 +506,7 @@ const setDamageData = (
       chainCount: warcraftBoxData.chainCount, // 连锁伤害
       weakPointDamageAdd: warcraftBoxData.weakPointDamageAdd, // 弱点加伤
     }
-    // 有特殊伤害并且不是特殊伤害的判断
+    // 有特殊伤害并且不是特殊伤害触发的判断 特指噩梦伤害
     if (warcraftBuff.value[item] && warcraftBuff.value[item].specialInjuryBuff && !specialDamage) {
       const specialInjuryBuffData = warcraftBuff.value[item].specialInjuryBuff
       specialInjuryBuffData.forEach((specialItem: specialInjuryBuffObj) => {
@@ -537,7 +537,7 @@ const setDamageData = (
       })
     }
     const chainAddNumber = getchainAddNumber(attackUser)
-    // 噩梦伤害情况下的伤害逻辑
+    // 特殊伤害情况下的伤害逻辑
     if (!!specialDamage) {
       charactarData.multiplier = specialDamage
     } else {
@@ -579,7 +579,7 @@ const setDamageData = (
       ...charactarData,
       ...warcraftData,
     }
-    damageNumber = damageNumber + +calculateDamage(damageData)
+    damageNumber = damageNumber + (+calculateDamage(damageData) || 1) // 最低伤害1点
 
     // 连锁+1 有buff还要计算 如果是特殊的伤害buff则不记录连锁
     if (!specialDamage) {
@@ -749,7 +749,7 @@ const getIncreasedDamage = (attackUser: editableCharactar, chainCount: number) =
   const attackAddBuffNumber = (userBuff.value[attackUser.name] || [])
     .map((item) => {
       if (item.increasedDamage) {
-        const limitKeyList = ['minChainCount', 'maxChainCount']
+        const limitKeyList = ['minChainCount', 'maxChainCount', 'superpositionNumber']
         const hasOwn = Object.prototype.hasOwnProperty
         if (!limitKeyList.some((key) => hasOwn.call(item, key))) {
           // 没限制条件的增伤则直接使用
@@ -758,6 +758,8 @@ const getIncreasedDamage = (attackUser: editableCharactar, chainCount: number) =
           return item.increasedDamage
         } else if (item.maxChainCount && chainCount <= item.maxChainCount) {
           return item.increasedDamage
+        } else if (!!item.superpositionNumber) {
+          return item.increasedDamage * item.superpositionNumber
         } else {
           return undefined
         }
@@ -1160,11 +1162,12 @@ const warcraftAttack = async () => {
         while (number > 0) {
           // 触发魔兽打击
           setWarcraftDamageData(item)
+          number--
+        }
+        if (warcraftUseSkillData.value.chain > 0) {
           // 获取被攻击角色信息
           const attackUser = props.battleGroundList[item] as editableCharactar
           const attackUserBuff = userBuff.value[attackUser.name]
-          // 如果有反击触发反击伤害 使徒公主
-          // 如果有特殊buff触发特殊buff 塞尔
           // 魔兽上buff
           if (!!warcraftUseSkillData.value?.buff) {
             warcraftUseSkillData.value?.buff.forEach((item: buffObj, index) => {
@@ -1190,7 +1193,6 @@ const warcraftAttack = async () => {
                     tempBuff,
                   )
                 }
-                console.log(chainAddNumber, 'chainAddNumber')
               } else {
                 const temp = JSON.parse(JSON.stringify(item))
                 delete temp.scope
@@ -1206,17 +1208,111 @@ const warcraftAttack = async () => {
               }
             })
           }
-          number--
+          // 如果有反击触发反击伤害 使徒公主
+          // 如果有特殊buff触发特殊buff 塞尔
+          attackUserBuff?.forEach((attackUserItem) => {
+            if (!!attackUserItem.hit) {
+              triggerHitBuff(attackUser, warcraftUseSkillData.value.chain, attackUserItem)
+            }
+          })
         }
       }
     })
   }
 }
 
+// 魔兽打击，用于计算魔兽打击伤害
 const setWarcraftDamageData = (item: number) => {
   console.log('打击了目标，位置为：', item)
 }
 
+// 触发受击buff
+const triggerHitBuff = (
+  attackUser: editableCharactar,
+  attackNumber: number = 1,
+  triggerBuff: userBuffObj,
+) => {
+  const triggerSkill = triggerBuff.key.split('_')[0]
+  const hitBuff = attackUser.skill[triggerSkill].skillEffect.hitBuff
+  hitBuff?.forEach((hItem, index) => {
+    const temp = JSON.parse(JSON.stringify(hItem))
+    // 给友军上buff
+    if (temp.target === 'friendly') {
+      delete temp.target
+      // 范围是所有友军
+      if (temp.scope.length === 0) {
+        delete temp.scope
+        if (!!temp.spAdd) {
+          // 塞尔的受击回复sp
+          trunReplySpChang(temp.spAdd * attackNumber, getReplyMax())
+        } else if (!!temp.increasingNumber && !!temp.maxNumber) {
+          // 塞尔的受击增伤
+          let newNumber = attackNumber * temp.increasingNumber
+          delete temp.increasingNumber
+          // 给所有友军上增伤buff
+          for (const userName in userBuff.value) {
+            let oldBuff = {} as userBuffObj
+            userBuff.value[userName].forEach((buffItem) => {
+              if (buffItem.key === `${triggerSkill}_${index}`) {
+                oldBuff = buffItem
+              }
+            })
+            newNumber += oldBuff.superpositionNumber ? oldBuff.superpositionNumber : 0
+            newNumber = newNumber > temp.maxNumber ? temp.maxNumber : newNumber
+            delete temp.maxNumber
+            const tempBuff = {
+              addTurn: props.turnNumber + 1, // 上buff的回合
+              superpositionNumber: newNumber,
+              key: `${triggerSkill}_${index}`, // buffid，防止同一个buff上多次
+              ...temp,
+            }
+            userBuff.value[userName] = upsertObjectByKey(userBuff.value[userName], tempBuff)
+          }
+        }
+      } else {
+        console.log('塞尔受击回血，以后再说')
+      }
+    } else {
+      if (temp.scope.length === 0) {
+        // 攻击所有单位
+        const position = props.warcraftData.scope.map((sItem) => transformationIndex(sItem))
+        const damage = setDamageData(
+          position,
+          attackUser,
+          {} as editableCharactarSkill,
+          temp.hitMultiplying,
+        )
+        let newTriggerCount = 0
+        let effectiveTriggerCount = 0 // 有效打击次数
+        if (!triggerBuff.triggerCount) {
+          // 不存在就当第一次触发 计算剩余触发次数
+          newTriggerCount = temp.triggerCount - attackNumber
+          effectiveTriggerCount = newTriggerCount > 0 ? attackNumber : temp.triggerCount
+        } else {
+          const remainingTriggerCount = triggerBuff.triggerCount || 0
+          newTriggerCount = remainingTriggerCount - attackNumber
+          effectiveTriggerCount = newTriggerCount > 0 ? attackNumber : remainingTriggerCount
+        }
+        // 判断是否还是有效buff 是就更新不是就移除buff
+        if (newTriggerCount > 0) {
+          const tempBuff = JSON.parse(JSON.stringify(triggerBuff))
+          tempBuff.triggerCount = newTriggerCount
+          userBuff.value[attackUser.name] = upsertObjectByKey(
+            userBuff.value[attackUser.name],
+            tempBuff,
+          )
+        } else {
+          //否则移除buff
+          userBuff.value[attackUser.name] = userBuff.value[attackUser.name].filter(
+            (buItem) => buItem.key !== triggerBuff.key,
+          )
+        }
+        const keys = `${attackUser.name}_${triggerSkill}`
+        damageList.value[keys] += damage * effectiveTriggerCount
+      }
+    }
+  })
+}
 // 获取选中的皮肤攻击到的主目标位置
 const autoGetMainAttackPositionByWarcraft = async (
   userScopeIndexList: number[],
