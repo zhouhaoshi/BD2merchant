@@ -11,8 +11,8 @@ const blade: characterDataObj = {
   CR: 10, // 暴击率
   CDMG: 75, // 暴击伤害
   DMG: 50, // 属性伤害
-  panel: 2592,
-  critical: 650.56,
+  panel: 2438,
+  critical: 667.08,
   attributeDamage: 90,
   engraving: {
     // 刻印
@@ -246,6 +246,7 @@ const blade: characterDataObj = {
               scope: [],
               type: enemyWeaknessDeBuffType.fragility,
               attribute: 'atk',
+              delay: 1,
               mainEnemyWeakness: 100,
             },
           ],
@@ -260,6 +261,7 @@ const blade: characterDataObj = {
               scope: [],
               type: enemyWeaknessDeBuffType.fragility,
               attribute: 'atk',
+              delay: 1,
               mainEnemyWeakness: 100,
             },
           ],
@@ -274,6 +276,7 @@ const blade: characterDataObj = {
               scope: [],
               type: enemyWeaknessDeBuffType.fragility,
               attribute: 'atk',
+              delay: 1,
               mainEnemyWeakness: 110,
             },
           ],
@@ -288,6 +291,7 @@ const blade: characterDataObj = {
               scope: [],
               type: enemyWeaknessDeBuffType.fragility,
               attribute: 'atk',
+              delay: 1,
               mainEnemyWeakness: 120,
             },
           ],
@@ -302,6 +306,7 @@ const blade: characterDataObj = {
               scope: [],
               type: enemyWeaknessDeBuffType.fragility,
               attribute: 'atk',
+              delay: 1,
               mainEnemyWeakness: 130,
             },
           ],
@@ -316,6 +321,7 @@ const blade: characterDataObj = {
               scope: [],
               type: enemyWeaknessDeBuffType.fragility,
               attribute: 'atk',
+              delay: 1,
               mainEnemyWeakness: 140,
             },
           ],

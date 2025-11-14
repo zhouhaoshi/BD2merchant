@@ -10,8 +10,8 @@ const liberta: characterDataObj = {
   CR: 10, // 暴击率
   CDMG: 50, // 暴击伤害
   DMG: 50, // 属性伤害
-  panel: 1281,
-  critical: 276.64,
+  panel: 721,
+  critical: 240.64,
   attributeDamage: 50,
   engraving: {
     // 刻印

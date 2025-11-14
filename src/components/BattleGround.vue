@@ -138,6 +138,7 @@ import {
   transformationIndex,
   upsertObjectByKey,
   sumMaxNumbersByType,
+  isEmpty,
 } from '@/utils/utils'
 import { specialInjuryBuffType } from '@/utils/globals'
 import calculateDamage from '@/utils/damage'
@@ -537,15 +538,17 @@ const setDamageData = (
       })
     }
     const chainAddNumber = getchainAddNumber(attackUser)
+    let delaybuff = {} // 延时buff主要是脆弱这种增伤
     // 特殊伤害情况下的伤害逻辑
     if (!!specialDamage) {
       charactarData.multiplier = specialDamage
     } else {
       // 给魔兽上debuff
-      setAbnormalState(
+      delaybuff = setAbnormalState(
         attackUser,
         charactarSkill.skillEffect,
         item,
+        attackPosition,
         warcraftBoxData.chainCount,
         chainAddNumber,
       )
@@ -585,6 +588,13 @@ const setDamageData = (
     if (!specialDamage) {
       afterTempEnemyList.value[item].chainCount += chainAddNumber
     }
+    // 延时buff攻击完成之后再上
+    if (!isEmpty(delaybuff)) {
+      warcraftBuff.value[item].enemyWeakness = upsertObjectByKey(
+        warcraftBuff.value[item].enemyWeakness,
+        delaybuff,
+      )
+    }
   })
   return damageNumber
 }
@@ -594,9 +604,11 @@ const setAbnormalState = (
   attackUser: editableCharactar,
   skillEffect: skillEffectObj,
   targetLocation: number,
+  attackPosition: number[] = [],
   chainCount: number = 1,
   chainAddNumber: number = 1,
 ) => {
+  let delaybuff = {} // 延时buff主要是脆弱这种增伤
   // 上debuff的情况
   if (skillEffect.deBuff) {
     const charactarSkill =
@@ -610,9 +622,27 @@ const setAbnormalState = (
         ...temp,
       }
       delete tempBuff.scope
-      // 虚弱或者脆弱
-      if (tempBuff.enemyWeakness) {
+      // 虚弱或者脆弱 先判断优先级高的
+      if (tempBuff.mainEnemyWeakness) {
+        // 有主目标脆弱, 并且打的是主目标
+        if (targetLocation === attackPosition[0]) {
+          tempBuff.enemyWeakness = tempBuff.mainEnemyWeakness
+          delete tempBuff.mainEnemyWeakness
+          initializeWarcraftBuff(warcraftBuff.value, targetLocation, 'enemyWeakness')
+          if (!tempBuff.delay) {
+            warcraftBuff.value[targetLocation].enemyWeakness = upsertObjectByKey(
+              warcraftBuff.value[targetLocation].enemyWeakness,
+              tempBuff,
+            )
+          } else {
+            // 存储延时buff
+            delete tempBuff.delay
+            delaybuff = tempBuff
+          }
+        }
+      } else if (tempBuff.enemyWeakness) {
         initializeWarcraftBuff(warcraftBuff.value, targetLocation, 'enemyWeakness')
+        delete tempBuff.mainEnemyWeakness
         // 索菲亚的暗属性易伤 攻击后的连锁数量
         if (tempBuff.darkEnemyWeakness) {
           if (tempBuff.minChainCount <= chainCount + chainAddNumber) {
@@ -622,11 +652,19 @@ const setAbnormalState = (
           delete tempBuff.darkEnemyWeakness
           delete tempBuff.minChainCount
         }
-        warcraftBuff.value[targetLocation].enemyWeakness = upsertObjectByKey(
-          warcraftBuff.value[targetLocation].enemyWeakness,
-          tempBuff,
-        )
-      } else if (tempBuff.chainDamageAdd) {
+        if (!tempBuff.delay) {
+          warcraftBuff.value[targetLocation].enemyWeakness = upsertObjectByKey(
+            warcraftBuff.value[targetLocation].enemyWeakness,
+            tempBuff,
+          )
+        } else {
+          // 存储延时buff
+          delete tempBuff.delay
+          delaybuff = tempBuff
+        }
+      }
+      // 连锁伤害加成
+      if (tempBuff.chainDamageAdd) {
         // 连锁伤害加成
         initializeWarcraftBuff(warcraftBuff.value, targetLocation, 'chainDamageAdd')
         warcraftBuff.value[targetLocation].chainDamageAdd = upsertObjectByKey(
@@ -634,11 +672,11 @@ const setAbnormalState = (
           tempBuff,
         )
       } else {
-        initializeWarcraftBuff(warcraftBuff.value, targetLocation, 'othersDebuff')
-        warcraftBuff.value[targetLocation].othersDebuff = upsertObjectByKey(
-          warcraftBuff.value[targetLocation].othersDebuff,
-          tempBuff,
-        )
+        // initializeWarcraftBuff(warcraftBuff.value, targetLocation, 'othersDebuff')
+        // warcraftBuff.value[targetLocation].othersDebuff = upsertObjectByKey(
+        //   warcraftBuff.value[targetLocation].othersDebuff,
+        //   tempBuff,
+        // )
       }
     })
   }
@@ -684,6 +722,9 @@ const setAbnormalState = (
       )
     })
   }
+  console.log(delaybuff, 'delaybuff')
+  // 抛出记录的延时buff
+  return delaybuff
 }
 
 // 给魔兽debuff一个初始值
@@ -1099,16 +1140,16 @@ const getWarcraftBuffList = () => {
 const warcraftTurn = async () => {
   // 判断魔兽使用的技能
   setWarcraftSkill()
+  // 触发dot伤害 第一段吃连锁
+  await estimateDotDamege('user')
   // 魔兽回合清空连锁
   afterTempEnemyList.value.forEach((item) => {
     if (item && item.chainCount) {
       item.chainCount = 0
     }
   })
-  // 触发dot伤害
-  await estimateDotDamege('user')
   // 魔兽开始攻击
-  warcraftAttack()
+  await warcraftAttack()
   // 触发dot伤害
   await estimateDotDamege('warcraft')
 }

@@ -178,6 +178,7 @@ interface deBuffElement {
   darkEnemyWeakness?: number // 暗属性脆弱
   mainEnemyWeakness?: number // 主目标脆弱
   chainDamageAdd?: number // 连锁伤害加成
+  delay?: number // 延时buff 先打击后上
 }
 
 interface deBuffObj extends deBuffElement {

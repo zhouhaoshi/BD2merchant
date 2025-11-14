@@ -12,8 +12,8 @@ const teresse: characterDataObj = {
   CR: 10, // 暴击率
   CDMG: 50, // 暴击伤害
   DMG: 50, // 属性伤害
-  panel: 1281,
-  critical: 276.64,
+  panel: 1019,
+  critical: 213.04,
   attributeDamage: 50,
   engraving: {
     // 刻印
