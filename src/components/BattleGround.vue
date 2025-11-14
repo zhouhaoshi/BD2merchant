@@ -722,7 +722,7 @@ const setAbnormalState = (
       )
     })
   }
-  console.log(delaybuff, 'delaybuff')
+  // console.log(delaybuff, 'delaybuff')
   // 抛出记录的延时buff
   return delaybuff
 }
@@ -1325,8 +1325,9 @@ const warcraftAttack = async () => {
           }
           // 如果有反击触发反击伤害 使徒公主
           // 如果有特殊buff触发特殊buff 塞尔
-          attackUserBuff?.forEach((attackUserItem) => {
+          attackUserBuff?.forEach((attackUserItem, index) => {
             if (!!attackUserItem.hit) {
+              console.log(index, 'attackUserBuff')
               triggerHitBuff(attackUser, warcraftUseSkillData.value.chain, attackUserItem)
             }
           })
@@ -1362,7 +1363,7 @@ const triggerHitBuff = (
           trunReplySpChang(temp.spAdd * attackNumber, getReplyMax())
         } else if (!!temp.increasingNumber && !!temp.maxNumber) {
           // 塞尔的受击增伤
-          let newNumber = attackNumber * temp.increasingNumber
+          const newNumber = attackNumber * temp.increasingNumber
           delete temp.increasingNumber
           // 给所有友军上增伤buff
           for (const userName in userBuff.value) {
@@ -1372,12 +1373,15 @@ const triggerHitBuff = (
                 oldBuff = buffItem
               }
             })
-            newNumber += oldBuff.superpositionNumber ? oldBuff.superpositionNumber : 0
-            newNumber = newNumber > temp.maxNumber ? temp.maxNumber : newNumber
+            let superpositionNumber = JSON.parse(JSON.stringify(newNumber)) || 0
+            superpositionNumber += oldBuff.superpositionNumber ? oldBuff.superpositionNumber : 0
+            superpositionNumber =
+              superpositionNumber > temp.maxNumber ? temp.maxNumber : superpositionNumber
+            console.log(superpositionNumber, '增强', oldBuff.superpositionNumber, index)
             delete temp.maxNumber
             const tempBuff = {
               addTurn: props.turnNumber + 1, // 上buff的回合
-              superpositionNumber: newNumber,
+              superpositionNumber: superpositionNumber,
               key: `${triggerSkill}_${index}`, // buffid，防止同一个buff上多次
               ...temp,
             }
