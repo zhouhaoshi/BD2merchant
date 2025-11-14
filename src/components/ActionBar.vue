@@ -48,7 +48,7 @@
         <div v-if="selectCharactarData.skill[selectSikll]">
           {{ selectCharactarData.skill[selectSikll].description }}
         </div>
-        <div v-if="selectCharactarData.skill[selectSikll]">
+        <div v-if="selectCharactarData.skill[selectSikll]" style="overflow: hidden">
           <skillScope :scopeList="selectCharactarData.skill[selectSikll].scope" />
         </div>
       </div>

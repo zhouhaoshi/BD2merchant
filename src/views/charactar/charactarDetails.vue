@@ -81,7 +81,7 @@
         SP
       </div>
       <!-- 范围 -->
-      <div v-if="data && data.Skill">
+      <div v-if="data && data.Skill" style="overflow: hidden">
         <skillScope
           :scopeList="
             conversionScopeCommon(
