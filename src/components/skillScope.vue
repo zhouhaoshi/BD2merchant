@@ -1,5 +1,8 @@
 <template>
-  <div style="transform: rotateZ(180deg); position: relative">
+  <div
+    style="transform: rotateZ(-90deg); position: relative"
+    :style="`height: calc(52px * ${sizeList.height});`"
+  >
     <!-- 循环列表分别拿到x轴列表和y轴列表，冒泡排序分别拿到最大和最小值。最大最小值绝对值相加就是矩形图像的访问 -->
     <div
       v-for="(row, rowIndex) in sizeList.width"
@@ -11,8 +14,10 @@
         :key="colIndex"
         class="col_box"
         :class="{
-          center_box: `${col + sizeList.minX}, ${row + sizeList.minY}` === '0, 0',
-          scope_box: scopeStringList?.includes(`${col + sizeList.minX}, ${row + sizeList.minY}`),
+          center_box: `${rowIndex + sizeList.minX}, ${colIndex + sizeList.minY}` === '0, 0',
+          scope_box: scopeStringList?.includes(
+            `${rowIndex + sizeList.minX}, ${colIndex + sizeList.minY}`,
+          ),
         }"
       ></div>
     </div>
@@ -34,10 +39,10 @@ watch(props, () => {
 })
 
 interface Size {
-  width: number
-  height: number
-  minX: number
-  minY: number
+  width: number // 坐标轴的x轴
+  height: number // 坐标轴的y轴
+  minX: number // x轴的最小值
+  minY: number // y轴的最小值
 }
 
 const sizeList = ref<Size>({
@@ -63,13 +68,18 @@ const calculateSize = () => {
     const yMax = Math.abs(scopeListY[scopeListY.length - 1])
     const x = xMin + xMax + 1
     const y = yMin + yMax + 1
-    sizeList.value.minX = sizeList.value.minY =
-      Math.min(...[scopeListX[0], xMax, scopeListY[0], yMax]) - 1 // -1 添加0,0轴居中
-    sizeList.value.height = sizeList.value.width = x > y ? x : y
+    sizeList.value.height = y
+    sizeList.value.width = x
+    sizeList.value.minY = Math.min(...[scopeListY[0], scopeListY[scopeListY.length - 1]])
+    sizeList.value.minX = Math.min(...[scopeListX[0], scopeListX[scopeListX.length - 1]])
     // 处理不展示y负轴的情况
-    if (yMin >= 0 && yMax >= sizeList.value.width - 1) {
-      sizeList.value.minY += Math.ceil(yMax / 2)
-    }
+    // if (yMin >= 0 && yMax >= sizeList.value.width - 1) {
+    //   sizeList.value.minY += Math.ceil(yMax / 2) + 1
+    // }
+    // // 处理不展示x负轴的情况
+    // if (xMin >= 0 && xMin >= sizeList.value.width - 1) {
+    //   sizeList.value.minX += Math.ceil(xMin / 2) - 1
+    // }
   } else {
     scopeStringList.value = []
     sizeList.value.height = sizeList.value.width = 3
@@ -102,13 +112,13 @@ calculateSize()
 }
 .scope_box {
   background-color: #2dd4bfd9;
-  transform: rotateZ(180deg);
+  transform: rotateZ(90deg);
 }
 .All_box {
   position: absolute;
-  top: 50%;
+  top: 49%;
   left: 50%;
-  transform: translate(-50%, -50%) rotateZ(180deg);
+  transform: translate(-50%, -50%) rotateZ(90deg);
   width: 150px;
   height: 150px;
   background-color: rgba(0, 0, 0, 0.5);

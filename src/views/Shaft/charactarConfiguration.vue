@@ -9,7 +9,7 @@
     :before-close="BeforeClose"
   >
     <el-tabs class="demo-tabs" v-model="activeName">
-      <el-tab-pane label="皮肤选择" name="first">
+      <el-tab-pane label="皮肤选择" name="first" class="skill_list">
         <div
           v-for="value in data ? data.Skill : []"
           :key="value.name"
@@ -266,30 +266,35 @@ function initEditData(data: selectCharacterDataObj, charactarData: characterData
 </script>
 
 <style lang="less" scoped>
-.skill_box {
-  width: 150px;
-  display: inline-block;
-  text-align: center;
-  cursor: pointer;
-  padding: 10px;
-  box-shadow: var(--el-box-shadow-light);
-  transition: transform 0.2s;
-  border-radius: 20px;
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--el-box-shadow);
-  }
-  .img_box {
-    width: 118px;
-    height: 118px;
-    margin: auto;
-    position: relative;
-    & > img {
-      position: absolute;
-      top: 50%;
-      left: 50%;
+.skill_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding-left: 20px;
+  .skill_box {
+    width: 150px;
+    text-align: center;
+    cursor: pointer;
+    padding: 10px;
+    box-shadow: var(--el-box-shadow-light);
+    transition: transform 0.2s;
+    border-radius: 20px;
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--el-box-shadow);
+    }
+    .img_box {
       width: 118px;
-      transform: translate(-50%, -50%);
+      height: 118px;
+      margin: auto;
+      position: relative;
+      & > img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 118px;
+        transform: translate(-50%, -50%);
+      }
     }
   }
 }
@@ -313,9 +318,6 @@ function initEditData(data: selectCharacterDataObj, charactarData: characterData
     -o-transform: rotate(-45deg);
     vertical-align: baseline;
   }
-}
-.skill_box + .skill_box {
-  margin-left: 10px;
 }
 .skill_details {
   & > div {
