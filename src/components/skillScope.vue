@@ -68,18 +68,15 @@ const calculateSize = () => {
     const yMax = Math.abs(scopeListY[scopeListY.length - 1])
     const x = xMin + xMax + 1
     const y = yMin + yMax + 1
-    sizeList.value.height = y
-    sizeList.value.width = x
+    sizeList.value.width = sizeList.value.height = x > y ? x : y
     sizeList.value.minY = Math.min(...[scopeListY[0], scopeListY[scopeListY.length - 1]])
     sizeList.value.minX = Math.min(...[scopeListX[0], scopeListX[scopeListX.length - 1]])
-    // 处理不展示y负轴的情况
-    // if (yMin >= 0 && yMax >= sizeList.value.width - 1) {
-    //   sizeList.value.minY += Math.ceil(yMax / 2) + 1
-    // }
-    // // 处理不展示x负轴的情况
-    // if (xMin >= 0 && xMin >= sizeList.value.width - 1) {
-    //   sizeList.value.minX += Math.ceil(xMin / 2) - 1
-    // }
+    const difference = x - y // 为了成为正方形补了上的大小
+    if (difference > 0) {
+      sizeList.value.minY -= Math.ceil(Math.abs(difference) / 2)
+    } else if (difference < 0) {
+      sizeList.value.minX -= Math.ceil(Math.abs(difference) / 2)
+    }
   } else {
     scopeStringList.value = []
     sizeList.value.height = sizeList.value.width = 3

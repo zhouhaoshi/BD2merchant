@@ -1423,7 +1423,7 @@ const triggerHitBuff = (
           )
         }
         const keys = `${attackUser.name}_${triggerSkill}`
-        damageList.value[keys] += damage * effectiveTriggerCount
+        damageList.value[keys] = (damageList.value[keys] || 0) + damage * effectiveTriggerCount
       }
     }
   })

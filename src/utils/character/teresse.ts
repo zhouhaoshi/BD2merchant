@@ -245,7 +245,7 @@ const teresse: characterDataObj = {
       image: 'Teresse_2_large', // 图片形象
       qimage: 'Teresse_2_idle', // q版形象
       description:
-        '&-effect/buff/0/duration-&回合内，友军的攻击力或魔法力将根据各自攻击类型增加&-effect/buff/0/CRAdd-&%。&-effect/buff/1/duration-&回合内，每回合结束时，恢复友军相当于自身当前生命力&-effect/buff/1/HPAdd-&%的生命力。',
+        '&-effect/buff/0/duration-&回合内，友军的攻击力或魔法力将根据各自攻击类型增加&-effect/buff/0/attackAdd-&%。&-effect/buff/1/duration-&回合内，每回合结束时，恢复友军相当于自身当前生命力&-effect/buff/1/HPAdd-&%的生命力。',
       effect: {
         // 技能效果
         0: {
@@ -254,7 +254,7 @@ const teresse: characterDataObj = {
           buff: [
             {
               duration: 4,
-              CRAdd: 50,
+              attackAdd: 50,
               scope: [], // 攻击访问，二维坐标系存储。范围为空就是全部
             },
             {
@@ -270,7 +270,7 @@ const teresse: characterDataObj = {
           buff: [
             {
               duration: 4,
-              CRAdd: 50,
+              attackAdd: 50,
               scope: [], // 攻击访问，二维坐标系存储。范围为空就是全部
             },
             {
@@ -286,7 +286,7 @@ const teresse: characterDataObj = {
           buff: [
             {
               duration: 4,
-              CRAdd: 70,
+              attackAdd: 70,
               scope: [], // 攻击访问，二维坐标系存储。范围为空就是全部
             },
             {
@@ -302,7 +302,7 @@ const teresse: characterDataObj = {
           buff: [
             {
               duration: 4,
-              CRAdd: 70,
+              attackAdd: 70,
               scope: [], // 攻击访问，二维坐标系存储。范围为空就是全部
             },
             {
@@ -318,7 +318,7 @@ const teresse: characterDataObj = {
           buff: [
             {
               duration: 4,
-              CRAdd: 90,
+              attackAdd: 90,
               scope: [], // 攻击访问，二维坐标系存储。范围为空就是全部
             },
             {
@@ -334,7 +334,7 @@ const teresse: characterDataObj = {
           buff: [
             {
               duration: 4,
-              CRAdd: 110,
+              attackAdd: 110,
               scope: [], // 攻击访问，二维坐标系存储。范围为空就是全部
             },
             {
@@ -351,7 +351,7 @@ const teresse: characterDataObj = {
           description: '攻击力或魔法力增加10%',
           buff: {
             index: 0,
-            CRAdd: 10,
+            attackAdd: 10,
           },
         },
         potentials2: {

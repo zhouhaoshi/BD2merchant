@@ -672,8 +672,8 @@ const lathel: characterDataObj = {
       chain: 3,
       scope: [
         [0, 0],
-        [0, -1],
-        [0, 1],
+        [-1, 0],
+        [1, 0],
       ], // 攻击访问，二维坐标系存储。范围为空就是全部
       image: 'Lathel_6_large', // 图片形象
       qimage: 'Lathel_6_idle', // q版形象
@@ -796,8 +796,8 @@ const lathel: characterDataObj = {
         },
         potentials3: {
           scope: [
-            [0, -2],
-            [0, 2],
+            [-2, 0],
+            [2, 0],
           ],
           description: '范围增加',
         },
