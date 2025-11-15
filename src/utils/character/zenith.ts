@@ -72,7 +72,6 @@ const zenith: characterDataObj = {
             },
             {
               duration: 2,
-              delay: 1,
               provocation: 1,
               scope: [],
             },
@@ -92,7 +91,6 @@ const zenith: characterDataObj = {
             },
             {
               duration: 2,
-              delay: 1,
               provocation: 1,
               scope: [],
             },
@@ -112,7 +110,6 @@ const zenith: characterDataObj = {
             },
             {
               duration: 2,
-              delay: 1,
               provocation: 1,
               scope: [],
             },
@@ -132,7 +129,6 @@ const zenith: characterDataObj = {
             },
             {
               duration: 2,
-              delay: 1,
               provocation: 1,
               scope: [],
             },
@@ -152,7 +148,6 @@ const zenith: characterDataObj = {
             },
             {
               duration: 2,
-              delay: 1,
               provocation: 1,
               scope: [],
             },
@@ -172,7 +167,6 @@ const zenith: characterDataObj = {
             },
             {
               duration: 2,
-              delay: 1,
               provocation: 1,
               scope: [],
             },
@@ -240,7 +234,6 @@ const zenith: characterDataObj = {
             },
             {
               duration: 2,
-              delay: 1,
               provocation: 1,
               scope: [],
             },
@@ -259,7 +252,6 @@ const zenith: characterDataObj = {
             },
             {
               duration: 2,
-              delay: 1,
               provocation: 1,
               scope: [],
             },
@@ -278,7 +270,6 @@ const zenith: characterDataObj = {
             },
             {
               duration: 2,
-              delay: 1,
               provocation: 1,
               scope: [],
             },
@@ -297,7 +288,6 @@ const zenith: characterDataObj = {
             },
             {
               duration: 2,
-              delay: 1,
               provocation: 1,
               scope: [],
             },
@@ -316,7 +306,6 @@ const zenith: characterDataObj = {
             },
             {
               duration: 2,
-              delay: 1,
               provocation: 1,
               scope: [],
             },
@@ -335,7 +324,6 @@ const zenith: characterDataObj = {
             },
             {
               duration: 2,
-              delay: 1,
               provocation: 1,
               scope: [],
             },

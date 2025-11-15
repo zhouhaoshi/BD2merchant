@@ -128,6 +128,7 @@ interface effectObj extends repellingElement {
   ThreeMultiplying?: number // 特殊倍率 -- 三的倍数
   extraMultiplying?: number // 额外倍率
   special?: Record<string, number>[] // 特殊类型 比如sp回复
+  removeBuffList?: string[] // 需要移除的buff列表
 }
 // 受到打击触发的特殊buff 比如使徒的反击 塞尔的sp回复
 interface hitBuffObj {
@@ -180,6 +181,7 @@ interface deBuffElement {
   chainDamageAdd?: number // 连锁伤害加成
   delay?: number // 延时buff 先打击后上
   provocation?: number // 嘲讽
+  silence?: number // 沉默
 }
 
 interface deBuffObj extends deBuffElement {
@@ -256,10 +258,14 @@ interface warcraftBuffObj {
   chainDamageAdd?: chainDamageAddBuffObj[]
   enemyWeakness?: enemyWeaknessBuffObj[]
   specialInjuryBuff?: specialInjuryBuffObj[] // 给魔兽上特殊伤害类型buff
-  othersDebuff?: Record<string, number>[] // 给魔兽上特殊伤害类型buff
+  othersDebuff?: othersDebuffObj[] // 给魔兽上特殊伤害类型buff
   dotBuff?: warcraftDotBuffObj[] // 给魔兽上特殊伤害类型buff
 }
 
+interface othersDebuffObj extends buffComonElement {
+  provocation?: number
+  silence?: number
+}
 interface warcraftDotBuffObj extends buffComonElement {
   dotMultiplying: number
   type: number

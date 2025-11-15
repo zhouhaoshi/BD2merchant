@@ -14,7 +14,7 @@ export function formatDate(date: Date) {
   return `${year}-${month}-${day}`
 }
 
-// 需要特殊处理的key
+// 需要特殊处理的对象key
 export const specialKey = [
   'buff',
   'special',
@@ -25,9 +25,18 @@ export const specialKey = [
   'dotBuff',
 ]
 
-export const scopeKey = ['scope', 'repellingDirection']
+// 需要特殊处理的数组key
+export const scopeKey = ['scope', 'repellingDirection', 'removeBuffList']
 
+// 不需要处理的key
 export const ignoreKey = ['cd', 'sp']
+
+// provocation 嘲讽 silence 沉默
+export const specialBuff = ['provocation', 'silence']
+
+export function whetherIncludedSpecialBuff(obj: deBuffObj) {
+  return specialBuff.some((key) => obj.hasOwnProperty(key))
+}
 /**
  * 查询并更新对象数组 B 中与 A 的 id 匹配的项
  * @param {Array} urlId - 源数据数组（包含要复制的值）

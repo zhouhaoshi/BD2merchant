@@ -139,6 +139,7 @@ import {
   upsertObjectByKey,
   sumMaxNumbersByType,
   isEmpty,
+  whetherIncludedSpecialBuff,
 } from '@/utils/utils'
 import { specialInjuryBuffType } from '@/utils/globals'
 import calculateDamage from '@/utils/damage'
@@ -189,6 +190,7 @@ const attackPosition = ref<number[]>([]) // 攻击到的位置的下标 展示�
 const attackPositionBuyWarcraft = ref<number[]>([]) // 魔兽打击位置 记录用
 const showAttackPositionBuyWarcraft = ref<number[]>([]) // 魔兽打击位置 展示用
 const friendlyPosition = ref<number[]>([]) // buff效果位置，展示用
+const priorityAttack = ref<number[]>([]) // 回合开始时就有的嘲讽
 const selectIndex = ref<number>()
 // 友军场地角色位置变化
 const changeLocation = (index: number) => {
@@ -267,57 +269,59 @@ const selectCharactarBox = () => {
 
 // 获取选中的皮肤攻击到的主目标位置
 const getMainAttackPosition = (column: number = 4, row: number = 3) => {
+  let attackMaintarget: number[] = JSON.parse(JSON.stringify(priorityAttack.value)) // 主目标位置
   const selectPosition = selectIndex.value || 0
-  let nowColumn = Math.floor(selectPosition / column) // 当前选中角色的位置
-  const rowRange = Array.from({ length: row }, (_, index) => ({
-    // 各列额下标范围
-    max: column * (index + 1) - 1,
-    min: column * index,
-  }))
-  const warcraftScope = props.warcraftData.scope // 魔兽占用范围
-  const warcraftScopeIndexList = warcraftScope.map((item: number[]) => transformationIndex(item)) // 转化为下标方便查询
   // 皮肤攻击范围 皮肤攻击类型 魔兽范围进行匹配
   const selectCharactar = props.battleGroundList[selectPosition] as editableCharactar
-  let attackMaintarget: number[] = [] // 主目标位置
-  let firstTarget: string[] = [] // 第一次触碰到的目标
-  let secondTarget: string[] = [] // 第二次触碰到的目标 攻击类型为跳过的时候
-  let value = rowRange[nowColumn].min
-  let CycleNumber = 0 // 控制循环次数
-  while (CycleNumber < row) {
-    if (attackMaintarget.length > 0) {
-      // 找到了目标
-      break
-    }
-    while (value <= rowRange[nowColumn].max) {
-      if (warcraftScopeIndexList.includes(value)) {
-        if (firstTarget.length > 0) {
-          secondTarget = transformationCoordinates(value).split(',')
-        } else {
-          firstTarget = transformationCoordinates(value).split(',')
+  if (attackMaintarget.length === 0) {
+    let nowColumn = Math.floor(selectPosition / column) // 当前选中角色的位置
+    const rowRange = Array.from({ length: row }, (_, index) => ({
+      // 各列额下标范围
+      max: column * (index + 1) - 1,
+      min: column * index,
+    }))
+    const warcraftScope = props.warcraftData.scope // 魔兽占用范围
+    const warcraftScopeIndexList = warcraftScope.map((item: number[]) => transformationIndex(item)) // 转化为下标方便查询
+    let firstTarget: string[] = [] // 第一次触碰到的目标
+    let secondTarget: string[] = [] // 第二次触碰到的目标 攻击类型为跳过的时候
+    let value = rowRange[nowColumn].min
+    let CycleNumber = 0 // 控制循环次数
+    while (CycleNumber < row) {
+      if (attackMaintarget.length > 0) {
+        // 找到了目标
+        break
+      }
+      while (value <= rowRange[nowColumn].max) {
+        if (warcraftScopeIndexList.includes(value)) {
+          if (firstTarget.length > 0) {
+            secondTarget = transformationCoordinates(value).split(',')
+          } else {
+            firstTarget = transformationCoordinates(value).split(',')
+          }
+        }
+        if (firstTarget.length > 0 && selectCharactar.attackType === 'front') {
+          attackMaintarget = firstTarget.map((item) => +item)
+          break
+        }
+        if (secondTarget.length > 0 && selectCharactar.attackType === 'skip') {
+          attackMaintarget = secondTarget.map((item) => +item)
+          break
+        }
+        value++
+        if (value > rowRange[nowColumn].max && firstTarget.length > 0) {
+          attackMaintarget = firstTarget.map((item) => +item)
+          break
         }
       }
-      if (firstTarget.length > 0 && selectCharactar.attackType === 'front') {
-        attackMaintarget = firstTarget.map((item) => +item)
-        break
+      // 如果当前列没有匹配到目标则往下一列查询
+      nowColumn++
+      // 如果是最后一列则重头开始，因为row是值，nowCloumn是下标
+      if (nowColumn === row) {
+        nowColumn = 0
       }
-      if (secondTarget.length > 0 && selectCharactar.attackType === 'skip') {
-        attackMaintarget = secondTarget.map((item) => +item)
-        break
-      }
-      value++
-      if (value > rowRange[nowColumn].max && firstTarget.length > 0) {
-        attackMaintarget = firstTarget.map((item) => +item)
-        break
-      }
+      value = rowRange[nowColumn].min
+      CycleNumber++
     }
-    // 如果当前列没有匹配到目标则往下一列查询
-    nowColumn++
-    // 如果是最后一列则重头开始，因为row是值，nowCloumn是下标
-    if (nowColumn === row) {
-      nowColumn = 0
-    }
-    value = rowRange[nowColumn].min
-    CycleNumber++
   }
   if (attackMaintarget.length === 0) {
     console.log('没有找到可以打击的目标，确认代码或者魔兽')
@@ -376,58 +380,62 @@ const getAllAttackPosition = (
 
 // 获取选中的皮肤攻击到的主目标位置
 const autoGetMainAttackPosition = async (index: number, column: number = 4, row: number = 3) => {
+  let attackMaintarget: number[] = JSON.parse(JSON.stringify(priorityAttack.value)) // 主目标位置
   const selectPosition = index
-  let nowColumn = Math.floor(selectPosition / column) // 当前选中角色的位置
-  const rowRange = Array.from({ length: row }, (_, index) => ({
-    // 各列额下标范围
-    max: column * (index + 1) - 1,
-    min: column * index,
-  }))
-  const warcraftScope = props.warcraftData.scope // 魔兽占用范围
-  const warcraftScopeIndexList = warcraftScope.map((item: number[]) => transformationIndex(item)) // 转化为下标方便查询
   // 皮肤攻击范围 皮肤攻击类型 魔兽范围进行匹配
   const selectCharactar = props.battleGroundList[selectPosition] as editableCharactar
-  let attackMaintarget: number[] = [] // 主目标位置
-  let firstTarget: string[] = [] // 第一次触碰到的目标
-  let secondTarget: string[] = [] // 第二次触碰到的目标 攻击类型为跳过的时候
-  let value = rowRange[nowColumn].min
-  let CycleNumber = 0 // 控制循环次数
-  while (CycleNumber < row) {
-    if (attackMaintarget.length > 0) {
-      // 找到了目标
-      break
-    }
-    while (value <= rowRange[nowColumn].max) {
-      if (warcraftScopeIndexList.includes(value)) {
-        if (firstTarget.length > 0) {
-          secondTarget = transformationCoordinates(value).split(',')
-        } else {
-          firstTarget = transformationCoordinates(value).split(',')
+  // 没有继承的嘲讽位置
+  if (attackMaintarget.length === 0) {
+    let nowColumn = Math.floor(selectPosition / column) // 当前选中角色的位置
+    const rowRange = Array.from({ length: row }, (_, index) => ({
+      // 各列额下标范围
+      max: column * (index + 1) - 1,
+      min: column * index,
+    }))
+    const warcraftScope = props.warcraftData.scope // 魔兽占用范围
+    const warcraftScopeIndexList = warcraftScope.map((item: number[]) => transformationIndex(item)) // 转化为下标方便查询
+    let firstTarget: string[] = [] // 第一次触碰到的目标
+    let secondTarget: string[] = [] // 第二次触碰到的目标 攻击类型为跳过的时候
+    let value = rowRange[nowColumn].min
+    let CycleNumber = 0 // 控制循环次数
+    while (CycleNumber < row) {
+      if (attackMaintarget.length > 0) {
+        // 找到了目标
+        break
+      }
+      while (value <= rowRange[nowColumn].max) {
+        if (warcraftScopeIndexList.includes(value)) {
+          if (firstTarget.length > 0) {
+            secondTarget = transformationCoordinates(value).split(',')
+          } else {
+            firstTarget = transformationCoordinates(value).split(',')
+          }
+        }
+        if (firstTarget.length > 0 && selectCharactar.attackType === 'front') {
+          attackMaintarget = firstTarget.map((item) => +item)
+          break
+        }
+        if (secondTarget.length > 0 && selectCharactar.attackType === 'skip') {
+          attackMaintarget = secondTarget.map((item) => +item)
+          break
+        }
+        value++
+        if (value > rowRange[nowColumn].max && firstTarget.length > 0) {
+          attackMaintarget = firstTarget.map((item) => +item)
+          break
         }
       }
-      if (firstTarget.length > 0 && selectCharactar.attackType === 'front') {
-        attackMaintarget = firstTarget.map((item) => +item)
-        break
+      // 如果当前列没有匹配到目标则往下一列查询
+      nowColumn++
+      // 如果是最后一列则重头开始，因为row是值，nowCloumn是下标
+      if (nowColumn === row) {
+        nowColumn = 0
       }
-      if (secondTarget.length > 0 && selectCharactar.attackType === 'skip') {
-        attackMaintarget = secondTarget.map((item) => +item)
-        break
-      }
-      value++
-      if (value > rowRange[nowColumn].max && firstTarget.length > 0) {
-        attackMaintarget = firstTarget.map((item) => +item)
-        break
-      }
+      value = rowRange[nowColumn].min
+      CycleNumber++
     }
-    // 如果当前列没有匹配到目标则往下一列查询
-    nowColumn++
-    // 如果是最后一列则重头开始，因为row是值，nowCloumn是下标
-    if (nowColumn === row) {
-      nowColumn = 0
-    }
-    value = rowRange[nowColumn].min
-    CycleNumber++
   }
+  // 没有找到打击目标
   if (attackMaintarget.length === 0) {
     return []
   } else {
@@ -671,12 +679,14 @@ const setAbnormalState = (
           warcraftBuff.value[targetLocation].chainDamageAdd,
           tempBuff,
         )
-      } else {
-        // initializeWarcraftBuff(warcraftBuff.value, targetLocation, 'othersDebuff')
-        // warcraftBuff.value[targetLocation].othersDebuff = upsertObjectByKey(
-        //   warcraftBuff.value[targetLocation].othersDebuff,
-        //   tempBuff,
-        // )
+      }
+      // 特殊buff情况
+      if (whetherIncludedSpecialBuff(tempBuff)) {
+        initializeWarcraftBuff(warcraftBuff.value, targetLocation, 'othersDebuff')
+        warcraftBuff.value[targetLocation].othersDebuff = upsertObjectByKey(
+          warcraftBuff.value[targetLocation].othersDebuff,
+          tempBuff,
+        )
       }
     })
   }
@@ -958,6 +968,7 @@ const damageCalculation = async () => {
       const target: 'friendly' | 'enemy' = selectCharactar.skill[selectSikll].target || 'enemy'
       spChange(selectCharactar.skill[selectSikll], selectCharactar)
       if (target === 'enemy') {
+        // 获取打击目标
         const temp: positionObj = {
           scope: await autoGetMainAttackPosition(index),
           target: 'enemy',
@@ -976,7 +987,7 @@ const damageCalculation = async () => {
       }
     }
   })
-  props.attackSequence.forEach(async (item) => {
+  for (const item of props.attackSequence) {
     if (!!item) {
       const data = item as editableCharactar
       const charactarSkill = data.skill[data.selectSikll || Object.keys(data.skill)[0]]
@@ -986,16 +997,24 @@ const damageCalculation = async () => {
         await appendBuff(attackPosition[data.name].scope, charactarSkill, data)
       } else {
         let number = charactarSkill.chain || 0
+        // 获取嘲讽目标
+        const priorityAttack: number[] = await getProvocationPosition()
+        // 重新确定打击范围
+        if (priorityAttack.length > 0) {
+          attackPosition[data.name].scope = await autoGetAllAttackPosition(priorityAttack, data)
+        }
+        // 执行伤害
         while (number > 0) {
           damageNumber =
             damageNumber + setDamageData(attackPosition[data.name].scope, data, charactarSkill)
           number--
         }
+        // 获取嘲讽目标
         const keys = `${data.name}_${charactarSkill.name}`
         damageList.value[keys] = damageNumber
       }
     }
-  })
+  }
 }
 
 // 判断是否有自拐
@@ -1131,6 +1150,11 @@ const getWarcraftBuffList = () => {
       effectiveBuffList[value].specialInjuryBuff = (
         tempBuffList[value].specialInjuryBuff || []
       ).filter((item: buffComonElement) => props.turnNumber - item.addTurn < item.duration)
+
+      initializeWarcraftBuff(effectiveBuffList, +value, 'othersDebuff')
+      effectiveBuffList[value].othersDebuff = (tempBuffList[value].othersDebuff || []).filter(
+        (item: othersDebuffObj) => props.turnNumber - item.addTurn < item.duration,
+      )
     }
     warcraftBuff.value = effectiveBuffList
   })
@@ -1565,6 +1589,32 @@ const trunReplySpChang = (sp: number, limit: number = 20) => {
   }
 }
 
+const getProvocationPosition = () => {
+  const provocation = {
+    position: 0,
+    priority: 0,
+  }
+  // 获取嘲讽位置
+  for (const position in warcraftBuff.value) {
+    if (!!warcraftBuff.value[position].othersDebuff) {
+      warcraftBuff.value[position].othersDebuff.forEach((item) => {
+        if (['provocation'].some((key) => item.hasOwnProperty(key))) {
+          const provocationNumber = item.provocation || 0
+          if (provocationNumber > provocation.priority) {
+            provocation.position = +position
+            provocation.priority = provocationNumber
+          }
+        }
+      })
+    }
+  }
+  return provocation.priority > 0
+    ? transformationCoordinates(provocation.position)
+        .split(',')
+        .map((item) => +item)
+    : []
+}
+
 const calculationWaitingReplySp = (limit: number) => {
   waitingReplySp.value?.forEach((item) => {
     trunReplySpChang(item.spAdd, limit)
@@ -1600,6 +1650,8 @@ const initialization = async (recoed?: boolean) => {
   await getUserBuffList()
   // 获取魔兽身上的遗留buff
   await getWarcraftBuffList()
+  // 获取嘲讽位置，确实打击位置
+  priorityAttack.value = await getProvocationPosition()
   // 开始计算伤害角色回合
   await damageCalculation()
   // 假装是角色技能使用期间 用于处理sp回复问题

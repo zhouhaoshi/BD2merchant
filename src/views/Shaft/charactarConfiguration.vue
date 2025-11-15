@@ -10,18 +10,20 @@
   >
     <el-tabs class="demo-tabs" v-model="activeName">
       <el-tab-pane label="皮肤选择" name="first" class="skill_list">
-        <div
-          v-for="value in data ? data.Skill : []"
-          :key="value.name"
-          class="skill_box"
-          :class="{ skill_box_select: skillBoxList.includes(value.name) }"
-          @click="clickSelectSkill(value.name)"
-        >
-          <div class="img_box">
-            <img :src="splicingqImage(value.qimage, 'qimage')" alt="" />
-          </div>
-          <div>
-            {{ value.cName }}
+        <div class="skill_box_list">
+          <div
+            v-for="value in data ? data.Skill : []"
+            :key="value.name"
+            class="skill_box"
+            :class="{ skill_box_select: skillBoxList.includes(value.name) }"
+            @click="clickSelectSkill(value.name)"
+          >
+            <div class="img_box">
+              <img :src="splicingqImage(value.qimage, 'qimage')" alt="" />
+            </div>
+            <div>
+              {{ value.cName }}
+            </div>
           </div>
         </div>
         <div class="skill_details">
@@ -267,33 +269,35 @@ function initEditData(data: selectCharacterDataObj, charactarData: characterData
 
 <style lang="less" scoped>
 .skill_list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
   padding-left: 20px;
-  .skill_box {
-    width: 150px;
-    text-align: center;
-    cursor: pointer;
-    padding: 10px;
-    box-shadow: var(--el-box-shadow-light);
-    transition: transform 0.2s;
-    border-radius: 20px;
-    &:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--el-box-shadow);
-    }
-    .img_box {
-      width: 118px;
-      height: 118px;
-      margin: auto;
-      position: relative;
-      & > img {
-        position: absolute;
-        top: 50%;
-        left: 50%;
+  .skill_box_list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    .skill_box {
+      width: 150px;
+      text-align: center;
+      cursor: pointer;
+      padding: 10px;
+      box-shadow: var(--el-box-shadow-light);
+      transition: transform 0.2s;
+      border-radius: 20px;
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--el-box-shadow);
+      }
+      .img_box {
         width: 118px;
-        transform: translate(-50%, -50%);
+        height: 118px;
+        margin: auto;
+        position: relative;
+        & > img {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 118px;
+          transform: translate(-50%, -50%);
+        }
       }
     }
   }
