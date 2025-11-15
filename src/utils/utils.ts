@@ -26,7 +26,7 @@ export const specialKey = [
 ]
 
 // 需要特殊处理的数组key
-export const scopeKey = ['scope', 'repellingDirection', 'removeBuffList']
+export const scopeKey = ['scope', 'repellingDirection', 'removeBuffList', 'condition']
 
 // 不需要处理的key
 export const ignoreKey = ['cd', 'sp']

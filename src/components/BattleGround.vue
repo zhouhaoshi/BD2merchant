@@ -141,7 +141,7 @@ import {
   isEmpty,
   whetherIncludedSpecialBuff,
 } from '@/utils/utils'
-import { specialInjuryBuffType } from '@/utils/globals'
+import { specialInjuryBuffType, damageType } from '@/utils/globals'
 import calculateDamage from '@/utils/damage'
 const props = withDefaults(
   defineProps<{
@@ -577,10 +577,43 @@ const setDamageData = (
         charactarData.multiplier = getMultiplier(charactarSkill, attackPosition.length)
       }
     }
+    // 主要是班塔纳
+    if (!!charactarSkill.skillEffect.condition) {
+      // 判断特殊buff中是否包含指定条件的buff
+      if (!!warcraftBuff.value[item] && !!warcraftBuff.value[item].othersDebuff) {
+        warcraftBuff.value[item].othersDebuff.forEach((item) => {
+          const tempP = JSON.parse(JSON.stringify(charactarSkill.skillEffect.condition)) as (
+            | number
+            | string
+          )[]
+          if (tempP.some((key) => item.hasOwnProperty(key))) {
+            // 特殊条件后触发修改攻击类型
+            if (charactarSkill.skillEffect.conditionType) {
+              charactarSkill.skillEffect.type = charactarSkill.skillEffect.conditionType
+            }
+            // 特殊条件触发后的倍率
+            if (charactarSkill.skillEffect.conditionMultiplying) {
+              charactarData.multiplier = charactarSkill.skillEffect.conditionMultiplying
+            }
+          }
+        })
+      }
+    }
     // 增伤
     charactarData.increasedDamage = getIncreasedDamage(attackUser, warcraftBoxData.chainCount)
     // 魔兽的易伤值
     warcraftData.enemyWeakness = getEnemyWeakness(attackUser, item)
+    // 固定伤害无法暴击 无视防御护盾和减伤
+    if (charactarSkill.skillEffect.type === damageType.fixed) {
+      charactarData.critical = 0
+      warcraftData.enemyDefence = 0
+      warcraftData.damageReduction = 0
+    }
+    // 纯粹伤害无视防御护盾和减伤 并且可以暴击
+    if (charactarSkill.skillEffect.type === damageType.pure) {
+      warcraftData.enemyDefence = 0
+      warcraftData.damageReduction = 0
+    }
     // 问魔兽的
     // enemyDefence?: number // 防御/魔抗
     // damageReduction?: number // 减伤
@@ -660,15 +693,38 @@ const setAbnormalState = (
           delete tempBuff.darkEnemyWeakness
           delete tempBuff.minChainCount
         }
-        if (!tempBuff.delay) {
-          warcraftBuff.value[targetLocation].enemyWeakness = upsertObjectByKey(
-            warcraftBuff.value[targetLocation].enemyWeakness,
-            tempBuff,
-          )
+        // 如果有条件
+        if (!!tempBuff.condition) {
+          // 判断特殊buff中是否包含指定条件的buff
+          if (!!warcraftBuff.value[targetLocation].othersDebuff) {
+            warcraftBuff.value[targetLocation].othersDebuff.forEach((item) => {
+              const tempP = JSON.parse(JSON.stringify(tempBuff.condition)) as (number | string)[]
+              if (tempP.some((key) => item.hasOwnProperty(key))) {
+                delete tempBuff.condition
+                if (!tempBuff.delay) {
+                  warcraftBuff.value[targetLocation].enemyWeakness = upsertObjectByKey(
+                    warcraftBuff.value[targetLocation].enemyWeakness,
+                    tempBuff,
+                  )
+                } else {
+                  // 存储延时buff
+                  delete tempBuff.delay
+                  delaybuff = tempBuff
+                }
+              }
+            })
+          }
         } else {
-          // 存储延时buff
-          delete tempBuff.delay
-          delaybuff = tempBuff
+          if (!tempBuff.delay) {
+            warcraftBuff.value[targetLocation].enemyWeakness = upsertObjectByKey(
+              warcraftBuff.value[targetLocation].enemyWeakness,
+              tempBuff,
+            )
+          } else {
+            // 存储延时buff
+            delete tempBuff.delay
+            delaybuff = tempBuff
+          }
         }
       }
       // 连锁伤害加成

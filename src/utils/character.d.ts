@@ -5,6 +5,12 @@ interface buffComonElement {
   duration: number // 持续回合
 }
 
+interface conditionObj {
+  condition?: (number | string)[] //伤害条件
+  conditionType?: number //攻击类型
+  conditionMultiplying?: number // 条件倍率
+}
+
 // 角色通用属性
 interface userComonElement {
   element: 'light' | 'dark' | 'fire' | 'wind' | 'water' // 元素属性
@@ -114,7 +120,7 @@ interface dotBuffObj {
   dotMultiplying: number // 特殊效果倍率
 }
 
-interface effectObj extends repellingElement {
+interface effectObj extends repellingElement, conditionObj {
   sp?: number // 消耗
   cd?: number
   hitBuff?: hitBuffObj[] // 受击buff
@@ -124,6 +130,7 @@ interface effectObj extends repellingElement {
   dotBuff?: dotBuffObj[] // dot伤害buff
   aureole?: aureoleObj[] // 光环
   multiplying?: number // 倍率
+  type?: number // 攻击类型
   mainMultiplying?: number // 特殊倍率 - 主目标倍率
   ThreeMultiplying?: number // 特殊倍率 -- 三的倍数
   extraMultiplying?: number // 额外倍率
@@ -173,6 +180,8 @@ interface buffObj extends buffElement {
 
 interface deBuffElement {
   attribute?: 'atk' | 'matk' // 效果类型
+  attributeElement?: 'light' | 'dark' | 'fire' | 'wind' | 'water'
+  condition?: (string | number)[] // 限制条件
   type?: number // 那种类型的 易伤/脆弱
   minChainCount?: number // 限制条件
   enemyWeakness?: number // 易伤/脆弱
@@ -234,7 +243,8 @@ interface editableCharactarSkill extends commonSkill, skillSelectShow {
   skillEffect: skillEffectObj // 行动条展示倍率
 }
 
-interface skillEffectObj {
+interface skillEffectObj extends conditionObj {
+  type?: number // 攻击类型
   buff: buffObj[]
   hitBuff?: hitBuffObj[] // 受打擊buff
   dotBuff?: dotBuffObj[] // dotbuff
