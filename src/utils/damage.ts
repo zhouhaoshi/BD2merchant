@@ -36,7 +36,7 @@ const getAttributeDamage = (damage: number, data: damageObj, integer: boolean = 
   damage = Math.floor(damage * (1 + (data.attributeDamage || 0) / 100)) // 属伤
   return integer ? Math.floor(damage) : damage
 }
-// 属伤伤害计算函数
+// 爆伤伤害计算函数
 const getCritical = (damage: number, data: damageObj, integer: boolean = true) => {
   damage = damage * (1 + (data.critical || 0) / 100) // 爆伤
   return integer ? Math.floor(damage) : damage

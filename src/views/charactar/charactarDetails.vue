@@ -373,6 +373,7 @@ const calculateData = ref({
   atk: 0,
   patk: 0,
   critical: 0,
+  attributeDamage: 0,
 })
 const getBasicPanel = () => {
   let string = `攻击：0 爆伤：0`
@@ -439,43 +440,46 @@ const getBasicPanel = () => {
     dynamicValue.value.clothingDynamic = clothingDynamic
     const critical = basicCdmg + clothingFixed.critical + clothingDynamic.critical
 
-    setCalculateData(basicPanel, basicCdmg)
+    setCalculateData(basicPanel, basicCdmg, attributeDamage)
     // 固定值角色自身提供的爆伤
-    const panel =
-      Math.floor(
-        basicPanel + dynamicValue.value.engravingValue + clothingFixed.atk + clothingDynamic.atk,
-      ) *
-      (1 +
-        (clothingFixed.patk +
-          clothingDynamic.patk +
-          dynamicValue.value.awakeningValue +
-          dynamicValue.value.collectionBonus) /
-          100) // 百分比
+    const panel = Math.floor(
+      (basicPanel + dynamicValue.value.engravingValue + clothingFixed.atk + clothingDynamic.atk) *
+        (1 +
+          (clothingFixed.patk +
+            clothingDynamic.patk +
+            dynamicValue.value.awakeningValue +
+            dynamicValue.value.collectionBonus) /
+            100),
+    ) // 百分比
 
     string = `面板：${Math.floor(panel)} (基础面板：${basicPanel}) 爆伤：${critical} 属性伤害:${attributeDamage}`
   }
   return string
 }
 
-const setCalculateData = (basicPanel: number, basicCdmg: number) => {
+const setCalculateData = (basicPanel: number, basicCdmg: number, attributeDamage: number) => {
   // 固定值角色自身提供的固定值
-  calculateData.value.atk = Math.floor(
+  calculateData.value.atk =
     basicPanel +
-      dynamicValue.value.engravingValue +
-      dynamicValue.value.clothingFixed.atk +
-      dynamicValue.value.clothingDynamic.atk,
-  )
+    dynamicValue.value.engravingValue +
+    dynamicValue.value.clothingFixed.atk +
+    dynamicValue.value.clothingDynamic.atk
+
   // 固定值角色自身提供的百分比值
   calculateData.value.patk =
     dynamicValue.value.clothingFixed.patk +
     dynamicValue.value.clothingDynamic.patk +
     dynamicValue.value.awakeningValue +
     dynamicValue.value.collectionBonus
-
+  console.log(calculateData.value, 'calculateData')
+  // 角色爆伤
   calculateData.value.critical =
     basicCdmg +
     dynamicValue.value.clothingFixed.critical +
     dynamicValue.value.clothingDynamic.critical
+
+  // 角色属性伤害
+  calculateData.value.attributeDamage = attributeDamage
 }
 // 强化值计算
 const changeEnhancement = (index: number) => {
@@ -499,7 +503,8 @@ const getCharacterPanel = () => {
   if (radio1.value === '3') {
     critical += 90
   }
-  return calculateMaxValueWithAllocation(atk, patk, critical)
+  console.log(atk, patk, 'atk')
+  return calculateMaxValueWithAllocation(atk, patk, critical, calculateData.value.attributeDamage)
 }
 </script>
 

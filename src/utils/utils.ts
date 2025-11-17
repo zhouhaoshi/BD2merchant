@@ -385,7 +385,12 @@ export function debounce<T extends (...args: unknown[]) => unknown>(
  * @param y  - 基础爆伤
  * @returns 格式化结果字符串
  */
-export function calculateMaxValueWithAllocation(x1: number, x2: number, y: number): string {
+export function calculateMaxValueWithAllocation(
+  x1: number = 0,
+  x2: number = 0,
+  y: number = 0,
+  d: number = 0,
+): string {
   if (!Number.isFinite(x1) || !Number.isFinite(x2) || !Number.isFinite(y)) {
     throw new Error('All inputs must be finite numbers.')
   }
@@ -405,7 +410,7 @@ export function calculateMaxValueWithAllocation(x1: number, x2: number, y: numbe
 
     const part1 = Math.floor(x1 * (1 + (x2 + k * n) / 100))
     const part2 = y + j * m
-    const damage = part1 * part2
+    const damage = part1 * (1 + part2 / 100) * (1 + d / 100)
 
     if (damage > maxDamage) {
       maxDamage = damage
@@ -419,8 +424,9 @@ export function calculateMaxValueWithAllocation(x1: number, x2: number, y: numbe
   // 可选：对显示值进行四舍五入（例如保留2位小数）
   const attackStr = Math.floor(bestPart1)
   const critDmgStr = bestPart2.toFixed(2)
+  const damage = Math.floor(Math.floor(attackStr * (1 + bestPart2 / 100)) * (1 + d / 100))
 
-  return `攻击：${attackStr}, 爆伤：${critDmgStr}, 伤害为(${(attackStr * bestPart2).toLocaleString()})其中攻击词条${bestN}个, 爆伤词条${bestM}个`
+  return `攻击：${attackStr}, 爆伤：${critDmgStr}, 伤害为(${damage.toLocaleString()})其中攻击词条${bestN}个, 爆伤词条${bestM}个`
 }
 // 点击文本复制
 export async function copyTextToClipboard(text: number) {
