@@ -374,3 +374,69 @@ export function debounce<T extends (...args: unknown[]) => unknown>(
     }, delay)
   }
 }
+/**
+ * 根据新公式计算最大伤害组合，并返回格式化字符串。
+ *
+ * 公式：(x1 * (1 + (x2 + 9 * n) / 100)) * (y + 18 * m)
+ * 约束：n + m = 15，n, m 为非负整数
+ *
+ * @param x1 - 基础攻击力
+ * @param x2 - 基础攻击百分比（如 50 表示 50%）
+ * @param y  - 基础爆伤
+ * @returns 格式化结果字符串
+ */
+export function calculateMaxValueWithAllocation(x1: number, x2: number, y: number): string {
+  if (!Number.isFinite(x1) || !Number.isFinite(x2) || !Number.isFinite(y)) {
+    throw new Error('All inputs must be finite numbers.')
+  }
+
+  const k = 9 // 每个攻击词条加成
+  const j = 18 // 每个爆伤词条加成
+  const total = 15
+
+  let maxDamage = -Infinity
+  let bestPart1 = 0
+  let bestPart2 = 0
+  let bestN = 0
+  let bestM = total
+
+  for (let n = 0; n <= total; n++) {
+    const m = total - n
+
+    const part1 = Math.floor(x1 * (1 + (x2 + k * n) / 100))
+    const part2 = y + j * m
+    const damage = part1 * part2
+
+    if (damage > maxDamage) {
+      maxDamage = damage
+      bestPart1 = part1
+      bestPart2 = part2
+      bestN = n
+      bestM = m
+    }
+  }
+
+  // 可选：对显示值进行四舍五入（例如保留2位小数）
+  const attackStr = Math.floor(bestPart1)
+  const critDmgStr = bestPart2.toFixed(2)
+
+  return `攻击：${attackStr}, 爆伤：${critDmgStr}, 伤害为(${(attackStr * bestPart2).toLocaleString()})其中攻击词条${bestN}个, 爆伤词条${bestM}个`
+}
+// 点击文本复制
+export async function copyTextToClipboard(text: number) {
+  try {
+    await navigator.clipboard.writeText(text.toString())
+    console.log('Text copied to clipboard')
+  } catch (err) {
+    console.error('Could not copy text: ', err)
+  }
+}
+
+export function setEnhancementValue(value: number = 6) {
+  const calculate = value + 6
+  return {
+    atk: Math.floor(calculate * 2.5),
+    patk: calculate * 2 - Math.floor(calculate / 3),
+    critical: calculate * 3.36,
+  }
+}
