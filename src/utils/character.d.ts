@@ -118,6 +118,8 @@ interface dotBuffObj {
   scope?: number[][] // 范围 // 如果为空继技能本身访问
   type?: number //  dotbuff枚举
   dotMultiplying: number // 特殊效果倍率
+  dotbuffNumber?: number // 作用层数
+  maxNumber?: number // 最大层数
 }
 
 interface effectObj extends repellingElement, conditionObj {
@@ -131,11 +133,16 @@ interface effectObj extends repellingElement, conditionObj {
   aureole?: aureoleObj[] // 光环
   multiplying?: number // 倍率
   type?: number // 攻击类型
+  lifemanship?: number // 先发制人
+  spNumber?: number // utm的sp数量
+  spExtraMultiplying?: number // utm的sp倍率
+  buffNumber?: number // 黑皮的buff数量
+  buffExtraMultiplying?: number // 黑皮的buff倍率
   mainMultiplying?: number // 特殊倍率 - 主目标倍率
   ThreeMultiplying?: number // 特殊倍率 -- 三的倍数
   extraMultiplying?: number // 额外倍率
   special?: Record<string, number>[] // 特殊类型 比如sp回复
-  removeBuffList?: string[] // 需要移除的buff列表
+  removeBuffList?: (string | number)[] // 需要移除的buff列表
 }
 // 受到打击触发的特殊buff 比如使徒的反击 塞尔的sp回复
 interface hitBuffObj {
@@ -170,6 +177,8 @@ interface buffElement {
   maxchainAddNumber?: number // 限制条件 最大连锁数
   superpositionNumber?: number // 叠加数量目前就塞尔用
   triggerCount?: number // 反击有效次数 布莱德使徒用
+  judgingCondition?: string[] // 判断条件为空是基础状态，有值则是条件成立。类似if else
+  sidestep?: number // 闪避数量
 }
 
 interface buffObj extends buffElement {

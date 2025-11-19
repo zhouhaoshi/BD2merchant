@@ -442,7 +442,7 @@ export function setEnhancementValue(value: number = 6) {
   const calculate = value + 6
   return {
     atk: Math.floor(calculate * 2.5),
-    patk: calculate * 2 - Math.floor(calculate / 3),
+    patk: calculate * 1.68,
     critical: calculate * 3.36,
   }
 }

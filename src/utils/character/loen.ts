@@ -248,7 +248,7 @@ const loen: characterDataObj = {
         },
         Bonding: {
           // 绑定属性
-          CDMG: 104, // 百分比生命值
+          CR: 17, // 百分比生命值
           PMATK: 14.2, // 百分比攻击力
           DMG: 30, // 百分比攻击力
         },

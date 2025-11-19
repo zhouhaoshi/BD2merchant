@@ -98,6 +98,8 @@
         </div>
       </el-tab-pane>
       <el-tab-pane label="面板展示" name="panel">
+        <h1>服装提供</h1>
+        {{ props.data.Skill[selectSkill || Object.keys(data.Skill)[select]].ability.Bonding }}
         <h1>基础面板值</h1>
         {{ getBasicPanel() }}
         <h1>装备提供值</h1>
@@ -175,9 +177,9 @@
               </el-dropdown-menu>
             </template>
           </el-dropdown>
-          百分比手提供攻击
+          固定手固定攻击
           <span @click="copyTextToClipboard(exampleData.atk)">{{ exampleData.atk }}</span
-          >, 固定手固定攻击
+          >, 百分比手提供攻击
           <span @click="copyTextToClipboard(exampleData.patk)">{{ exampleData.patk }}</span
           >, 暴击伤害为
           <span @click="copyTextToClipboard(exampleData.critical)">{{ exampleData.critical }}</span>
@@ -471,7 +473,7 @@ const setCalculateData = (basicPanel: number, basicCdmg: number, attributeDamage
     dynamicValue.value.clothingDynamic.patk +
     dynamicValue.value.awakeningValue +
     dynamicValue.value.collectionBonus
-  console.log(calculateData.value, 'calculateData')
+
   // 角色爆伤
   calculateData.value.critical =
     basicCdmg +
@@ -503,7 +505,7 @@ const getCharacterPanel = () => {
   if (radio1.value === '3') {
     critical += 90
   }
-  console.log(atk, patk, 'atk')
+  console.log(atk, patk, '计算值')
   return calculateMaxValueWithAllocation(atk, patk, critical, calculateData.value.attributeDamage)
 }
 </script>

@@ -1,4 +1,4 @@
-const yuridata: characterDataObj = {
+const yuri: characterDataObj = {
   name: 'yuri',
   cName: '尤里',
   element: 'light',
@@ -315,4 +315,4 @@ const yuridata: characterDataObj = {
   },
 }
 
-export default yuridata
+export default yuri
