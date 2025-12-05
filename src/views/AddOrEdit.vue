@@ -2,7 +2,7 @@
   <el-dialog
     :close-on-click-modal="false"
     :model-value="dialogVisible"
-    :title="shopData ? `编辑商品${shopData.name}` : '新增商品'"  
+    :title="shopData ? `编辑商品${shopData.name}` : '新增商品'"
     :before-close="handleClose"
   >
     <el-form :model="form" label-width="auto" :rules="rules">
@@ -15,7 +15,7 @@
             :value="item.id"
             class="material_select"
           >
-            <img :src="item.url">
+            <img :src="item.url" />
             <span>{{ item.name }}</span>
           </el-option>
         </el-select>
@@ -39,22 +39,20 @@
 </template>
 
 <script lang="ts" setup>
-import Api from "@/api/api"
-const props = defineProps(['dialogVisible',"shopData"])
+import Api from '@/api/api'
+const props = defineProps(['dialogVisible', 'shopData'])
 const emit = defineEmits(['close', 'save'])
-defineExpose({ initEditData });
+defineExpose({ initEditData })
 interface shopObj {
   id?: number
-  url?: string,
-  name?: string,
-  price?: string | number,
+  url?: string
+  name?: string
+  price?: string | number
   type?: string | undefined
 }
 
 const rules = reactive({
-  id: [
-    { required: true, message: '请选择商品', trigger: 'change' }
-  ],
+  id: [{ required: true, message: '请选择商品', trigger: 'change' }],
   price: [
     {
       required: true,
@@ -68,7 +66,7 @@ const rules = reactive({
       message: '请选择类型',
       trigger: 'change',
     },
-  ]
+  ],
 })
 
 const form = reactive<shopObj>({
@@ -76,11 +74,11 @@ const form = reactive<shopObj>({
   id: undefined,
   url: undefined,
   price: undefined,
-  type: 'normal'
+  type: 'normal',
 })
 const editIndex = ref()
 // 初始化
-function initEditData (index?: number){
+function initEditData(index?: number) {
   editIndex.value = index
   if (typeof index === 'number') {
     form.name = props?.shopData.name
@@ -99,15 +97,15 @@ function initEditData (index?: number){
 // 获取素材列表
 const materialList = ref<Array<shopObj>>()
 const getMaterialList = async () => {
- const { data } = await Api.materialList()
- materialList.value = data as Array<shopObj>
+  const { data } = await Api.materialList()
+  materialList.value = data as Array<shopObj>
 }
 getMaterialList()
 
 // 选中商品
-const changeMaterial = (data:string | number) =>{
-  materialList.value?.forEach(item => {
-    if(item.id === data){
+const changeMaterial = (data: string | number) => {
+  materialList.value?.forEach((item) => {
+    if (item.id === data) {
       form.name = item.name
       form.url = item.url
     }
@@ -123,13 +121,13 @@ const saveMaterial = () => {
 </script>
 
 <style lang="less" scoped>
-  .material_select{
+.material_select {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  & > img {
     height: 40px;
-    display: flex;
-    align-items: center;
-    &>img{
-      height: 40px;
-      width: 40px;
-    }
+    width: 40px;
   }
+}
 </style>

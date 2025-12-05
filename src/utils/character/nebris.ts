@@ -333,7 +333,8 @@ const nebris: characterDataObj = {
             {
               duration: 2,
               attributeDamage: 50,
-              judgingCondition: ['attackAdd', 'critical'],
+              // 攻击魔法提升 爆伤提升 暴击提升 属性伤害提升 防御 魔抗 属性抵抗 （面板数值）
+              judgingCondition: ['attackAdd', 'critical', 'attributeDamage', 'CRAdd'],
               scope: [[0, 0]],
             },
           ],

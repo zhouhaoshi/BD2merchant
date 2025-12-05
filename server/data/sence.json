@@ -1,1 +1,913 @@
-[{"name":"达雷普镇","url":"s02_1","support":["dot"],"shopId":"2"},{"name":"封闭的矿山","url":"s02_2","support":["dot","monster"],"shopId":"2"},{"name":"禁止的矿山","url":"s02_3","support":["dot","monster"],"shopId":"2"},{"name":"古代遗迹前哨基地","url":"s17_01","support":["dot"],"shopId":"17"},{"name":"试炼之路","url":"s17_02","support":["dot","monster"],"shopId":"17"},{"name":"封印祭坛","url":"s17_03","support":["dot","monster"],"shopId":"17"},{"name":"迪尔索特港口城市","url":"s16_01","support":["dot"],"shopId":"16"},{"name":"迪尔索特黑市","url":"s16_02","support":["dot","monster"],"shopId":"16"},{"name":"黑市深处","url":"s16_03","support":["dot","monster"],"shopId":"16"},{"name":"迪尔索特旅馆","url":"s16_04","support":["dot"],"shopId":"16"},{"name":"迪尔索特酒馆","url":"s16_05","support":["dot"],"shopId":"16"},{"name":"迪尔索特商店","url":"s16_06","support":["dot"],"shopId":"16"},{"name":"科库托斯研究设施","url":"s15_01","support":["dot"],"shopId":"15"},{"name":"血刻印房间","url":"s15_02","support":["dot"],"shopId":"15"},{"name":"血刻印量产设施","url":"s15_03","support":["dot","monster"],"shopId":"15"},{"name":"重要保管区域","url":"s15_04","support":["dot","monster"],"shopId":"15"},{"name":"阿尔卡迪亚居住区域","url":"s14_01","support":["dot"],"shopId":"14"},{"name":"阿尔卡迪亚救护站","url":"s14_02","support":["dot"],"shopId":"14"},{"name":"阿尔卡迪亚救援休息处","url":"s14_03","support":["dot"],"shopId":"14"},{"name":"朝圣者商店","url":"s14_04","support":["dot"],"shopId":"14"},{"name":"剑之神殿中央回廊","url":"s14_05","support":["dot","monster"],"shopId":"14"},{"name":"剑之神殿左侧回廊","url":"s14_06","support":["dot","monster"],"shopId":"14"},{"name":"剑之神殿右侧回廊","url":"s14_07","support":["dot","monster"],"shopId":"14"},{"name":"封印指定室","url":"s14_08","support":["dot"],"shopId":"14"},{"name":"华特波尔镇","url":"s13_01","support":["dot"],"shopId":"13"},{"name":"华特波尔雪山","url":"s13_02","support":["dot","monster"],"shopId":"13"},{"name":"记忆裂缝","url":"s13_03","support":["dot","monster"],"shopId":"13"},{"name":"华特波尔旅馆","url":"s13_04","support":["dot"],"shopId":"13"},{"name":"华特波尔商店","url":"s13_05","support":["dot"],"shopId":"13"},{"name":"埃克夏城","url":"s12_01","support":["dot"],"shopId":"12"},{"name":"埃克夏森林","url":"s12_02","support":["dot","monster"],"shopId":"12"},{"name":"埃克夏森林深处","url":"s12_03","support":["dot","monster"],"shopId":"12"},{"name":"埃克夏旅馆","url":"s12_04","support":["dot"],"shopId":"12"},{"name":"埃克夏酒馆","url":"s12_05","support":["dot"],"shopId":"12"},{"name":"佐顿商团","url":"s12_06","support":["dot"],"shopId":"12"},{"name":"商团仓库","url":"s12_07","support":["dot"],"shopId":"12"},{"name":"罗坦王城","url":"s11_01","support":["dot"],"shopId":"11"},{"name":"罗坦城门","url":"s11_02","support":["monster","dot"],"shopId":"11"},{"name":"城下小镇","url":"s11_03","support":["dot","monster"],"shopId":"11"},{"name":"城内旅馆","url":"s11_04","support":["dot"],"shopId":"11"},{"name":"城内铁匠铺","url":"s11_05","support":["dot"],"shopId":"11"},{"name":"城内酒馆","url":"s11_06","support":["dot"],"shopId":"11"},{"name":"觐见室","url":"s11_07","support":["dot"],"shopId":"11"},{"name":"埃兰城市","url":"s10_01","support":["dot"],"shopId":"10"},{"name":"官邸地下","url":"s10_02","support":["dot","monster"],"shopId":"10"},{"name":"官邸大殿","url":"s10_03","support":["dot","monster"],"shopId":"10"},{"name":"埃兰旅馆","url":"s10_04","support":["dot"],"shopId":"10"},{"name":"埃兰酒馆","url":"s10_05","support":["dot"],"shopId":"10"},{"name":"埃兰商店","url":"s10_06","support":["dot"],"shopId":"10"},{"name":"雷瓦汀基地","url":"s09_01","support":["dot"],"shopId":"9"},{"name":"加尔顿山前段","url":"s09_02","support":["dot","monster"],"shopId":"9"},{"name":"加尔顿山后段","url":"s09_03","support":["dot","monster"],"shopId":"9"},{"name":"雷瓦汀基地救护站","url":"s09_04","support":["dot"],"shopId":"9"},{"name":"雷瓦汀基地补给库","url":"s09_05","support":["dot"],"shopId":"9"},{"name":"雷瓦汀基地酒馆","url":"s09_06","support":["dot"],"shopId":"9"},{"name":"司令官室","url":"s09_07","support":["dot"],"shopId":"9"},{"name":"崩塌的矿山","url":"s09_08","support":["dot"],"shopId":"9"},{"name":"罗戴夫镇","url":"s08_01","support":["dot"],"shopId":"8"},{"name":"贫民区","url":"s08_02","support":["dot","monster"],"shopId":"8"},{"name":"盗贼据点","url":"s08_03","support":["dot","monster"],"shopId":"8"},{"name":"罗戴夫旅馆","url":"s08_04","support":["dot"],"shopId":"8"},{"name":"罗戴夫商店","url":"s08_05","support":["dot"],"shopId":"8"},{"name":"罗戴夫酒馆","url":"s08_06","support":["dot"],"shopId":"8"},{"name":"拉勒凯镇","url":"s07_01","support":["dot"],"shopId":"7"},{"name":"洞穴神殿","url":"s07_02","support":["dot","monster"],"shopId":"7"},{"name":"隐藏的神殿","url":"s07_03","support":["dot","monster"],"shopId":"7"},{"name":"拉勒凯旅馆","url":"s07_04","support":["dot"],"shopId":"7"},{"name":"亚拉里克城市","url":"s05_1","support":["dot"],"shopId":"5"},{"name":"亚拉里克遗迹","url":"s05_2","support":["dot","monster"],"shopId":"5"},{"name":"亚拉里克遗迹深层","url":"s05_3","support":["dot","monster"],"shopId":"5"},{"name":"亚拉里克旅馆","url":"s05_4","support":["dot"],"shopId":"5"},{"name":"亚拉里克酒馆","url":"s05_5","support":["dot"],"shopId":"5"},{"name":"阿尔德巴伦总部","url":"s05_6","support":["dot"],"shopId":"5"},{"name":"亚拉里克佣兵公会","url":"s05_7","support":["dot"],"shopId":"5"},{"name":"凯洛镇","url":"s04_1","support":["dot"],"shopId":"4"},{"name":"凯洛山","url":"s04_2","support":["dot","monster"],"shopId":"4"},{"name":"凯洛山中心地区","url":"s04_3","support":["dot","monster"],"shopId":"4"},{"name":"布伦城市","url":"s03_1","support":["dot"],"shopId":"3"},{"name":"布伦下水道","url":"s03_2","support":["dot","monster"],"shopId":"3"},{"name":"布伦下水道深层","url":"s03_3","support":["dot","monster"],"shopId":"3"},{"name":"学校1楼","url":"ch01_01","support":["dot"],"shopId":"1001"},{"name":"学校2楼","url":"ch01_02","support":["dot"],"shopId":"1001"},{"name":"学校3楼","url":"ch01_03","support":["dot"],"shopId":"1001"},{"name":"学校地下","url":"ch01_04","support":["monster","dot"],"shopId":"1001"},{"name":"纠察队室","url":"ch01_05","support":["dot"],"shopId":"1001"},{"name":"避难所166","url":"ch02_01","support":["dot"],"shopId":"1002"},{"name":"废墟地道（前段）","url":"ch02_02","support":["dot","monster"],"shopId":"1002"},{"name":"废墟地道（后段）","url":"ch02_03","support":["dot","monster"],"shopId":"1002"},{"name":"上流社会的派对场地","url":"ch03_01","support":["dot"],"shopId":"1003"},{"name":"地下秘密拍卖场","url":"ch03_02","support":["dot","monster"],"shopId":"1003"},{"name":"禁闭室","url":"ch03_03","support":["dot","monster"],"shopId":"1003"},{"name":"拍卖仓库","url":"ch03_04","support":["dot","monster"],"shopId":"1003"},{"name":"商场4楼","url":"ch04_01","support":["dot"],"shopId":"1004"},{"name":"商场3楼","url":"ch04_02","support":["dot","monster"],"shopId":"1004"},{"name":"商场2楼","url":"ch04_03","support":["dot","monster"],"shopId":"1004"},{"name":"商场1楼","shopId":"1004","url":"ch04_04","support":["dot","monster"]},{"name":"童话小镇","url":"ch05_01","support":["dot"],"shopId":"1005"},{"name":"魔女住的森林","url":"ch05_02","support":["dot","monster"],"shopId":"1005"},{"name":"西风小镇","url":"ch06_01","support":["dot"],"shopId":"1006"},{"name":"西风竹林","url":"ch06_02","support":["dot","monster"],"shopId":"1006"},{"name":"妖怪森林","url":"ch06_03","support":["dot","monster"],"shopId":"1006"},{"name":"妖怪小镇","url":"ch06_04","support":["dot","monster"],"shopId":"1006"},{"name":"凯那尔工业1楼","url":"ch07_01","support":["dot"],"shopId":"1007"},{"name":"凯那尔工业2楼","url":"ch07_02","support":["dot"],"shopId":"1007"},{"name":"卡尔塔市","url":"ch07_03","support":["dot","monster"],"shopId":"1007"},{"name":"卢戈镇","url":"s01_1","support":["dot"],"shopId":"1"},{"name":"卢戈森林","url":"s01_2","support":["dot","monster"],"shopId":"1"},{"name":"卢戈森林","url":"s01_3","support":["dot","monster"],"shopId":"1"}]
+[
+  {
+    "name": "达雷普镇",
+    "url": "s02_1",
+    "support": [
+      "dot"
+    ],
+    "shopId": "2"
+  },
+  {
+    "name": "封闭的矿山",
+    "url": "s02_2",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "2"
+  },
+  {
+    "name": "禁止的矿山",
+    "url": "s02_3",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "2"
+  },
+  {
+    "name": "古代遗迹前哨基地",
+    "url": "s17_01",
+    "support": [
+      "dot"
+    ],
+    "shopId": "17"
+  },
+  {
+    "name": "试炼之路",
+    "url": "s17_02",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "17"
+  },
+  {
+    "name": "封印祭坛",
+    "url": "s17_03",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "17"
+  },
+  {
+    "name": "迪尔索特港口城市",
+    "url": "s16_01",
+    "support": [
+      "dot"
+    ],
+    "shopId": "16"
+  },
+  {
+    "name": "迪尔索特黑市",
+    "url": "s16_02",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "16"
+  },
+  {
+    "name": "黑市深处",
+    "url": "s16_03",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "16"
+  },
+  {
+    "name": "迪尔索特旅馆",
+    "url": "s16_04",
+    "support": [
+      "dot"
+    ],
+    "shopId": "16"
+  },
+  {
+    "name": "迪尔索特酒馆",
+    "url": "s16_05",
+    "support": [
+      "dot"
+    ],
+    "shopId": "16"
+  },
+  {
+    "name": "迪尔索特商店",
+    "url": "s16_06",
+    "support": [
+      "dot"
+    ],
+    "shopId": "16"
+  },
+  {
+    "name": "科库托斯研究设施",
+    "url": "s15_01",
+    "support": [
+      "dot"
+    ],
+    "shopId": "15"
+  },
+  {
+    "name": "血刻印房间",
+    "url": "s15_02",
+    "support": [
+      "dot"
+    ],
+    "shopId": "15"
+  },
+  {
+    "name": "血刻印量产设施",
+    "url": "s15_03",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "15"
+  },
+  {
+    "name": "重要保管区域",
+    "url": "s15_04",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "15"
+  },
+  {
+    "name": "阿尔卡迪亚居住区域",
+    "url": "s14_01",
+    "support": [
+      "dot"
+    ],
+    "shopId": "14"
+  },
+  {
+    "name": "阿尔卡迪亚救护站",
+    "url": "s14_02",
+    "support": [
+      "dot"
+    ],
+    "shopId": "14"
+  },
+  {
+    "name": "阿尔卡迪亚救援休息处",
+    "url": "s14_03",
+    "support": [
+      "dot"
+    ],
+    "shopId": "14"
+  },
+  {
+    "name": "朝圣者商店",
+    "url": "s14_04",
+    "support": [
+      "dot"
+    ],
+    "shopId": "14"
+  },
+  {
+    "name": "剑之神殿中央回廊",
+    "url": "s14_05",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "14"
+  },
+  {
+    "name": "剑之神殿左侧回廊",
+    "url": "s14_06",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "14"
+  },
+  {
+    "name": "剑之神殿右侧回廊",
+    "url": "s14_07",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "14"
+  },
+  {
+    "name": "封印指定室",
+    "url": "s14_08",
+    "support": [
+      "dot"
+    ],
+    "shopId": "14"
+  },
+  {
+    "name": "华特波尔镇",
+    "url": "s13_01",
+    "support": [
+      "dot"
+    ],
+    "shopId": "13"
+  },
+  {
+    "name": "华特波尔雪山",
+    "url": "s13_02",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "13"
+  },
+  {
+    "name": "记忆裂缝",
+    "url": "s13_03",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "13"
+  },
+  {
+    "name": "华特波尔旅馆",
+    "url": "s13_04",
+    "support": [
+      "dot"
+    ],
+    "shopId": "13"
+  },
+  {
+    "name": "华特波尔商店",
+    "url": "s13_05",
+    "support": [
+      "dot"
+    ],
+    "shopId": "13"
+  },
+  {
+    "name": "埃克夏城",
+    "url": "s12_01",
+    "support": [
+      "dot"
+    ],
+    "shopId": "12"
+  },
+  {
+    "name": "埃克夏森林",
+    "url": "s12_02",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "12"
+  },
+  {
+    "name": "埃克夏森林深处",
+    "url": "s12_03",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "12"
+  },
+  {
+    "name": "埃克夏旅馆",
+    "url": "s12_04",
+    "support": [
+      "dot"
+    ],
+    "shopId": "12"
+  },
+  {
+    "name": "埃克夏酒馆",
+    "url": "s12_05",
+    "support": [
+      "dot"
+    ],
+    "shopId": "12"
+  },
+  {
+    "name": "佐顿商团",
+    "url": "s12_06",
+    "support": [
+      "dot"
+    ],
+    "shopId": "12"
+  },
+  {
+    "name": "商团仓库",
+    "url": "s12_07",
+    "support": [
+      "dot"
+    ],
+    "shopId": "12"
+  },
+  {
+    "name": "罗坦王城",
+    "url": "s11_01",
+    "support": [
+      "dot"
+    ],
+    "shopId": "11"
+  },
+  {
+    "name": "罗坦城门",
+    "url": "s11_02",
+    "support": [
+      "monster",
+      "dot"
+    ],
+    "shopId": "11"
+  },
+  {
+    "name": "城下小镇",
+    "url": "s11_03",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "11"
+  },
+  {
+    "name": "城内旅馆",
+    "url": "s11_04",
+    "support": [
+      "dot"
+    ],
+    "shopId": "11"
+  },
+  {
+    "name": "城内铁匠铺",
+    "url": "s11_05",
+    "support": [
+      "dot"
+    ],
+    "shopId": "11"
+  },
+  {
+    "name": "城内酒馆",
+    "url": "s11_06",
+    "support": [
+      "dot"
+    ],
+    "shopId": "11"
+  },
+  {
+    "name": "觐见室",
+    "url": "s11_07",
+    "support": [
+      "dot"
+    ],
+    "shopId": "11"
+  },
+  {
+    "name": "埃兰城市",
+    "url": "s10_01",
+    "support": [
+      "dot"
+    ],
+    "shopId": "10"
+  },
+  {
+    "name": "官邸地下",
+    "url": "s10_02",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "10"
+  },
+  {
+    "name": "官邸大殿",
+    "url": "s10_03",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "10"
+  },
+  {
+    "name": "埃兰旅馆",
+    "url": "s10_04",
+    "support": [
+      "dot"
+    ],
+    "shopId": "10"
+  },
+  {
+    "name": "埃兰酒馆",
+    "url": "s10_05",
+    "support": [
+      "dot"
+    ],
+    "shopId": "10"
+  },
+  {
+    "name": "埃兰商店",
+    "url": "s10_06",
+    "support": [
+      "dot"
+    ],
+    "shopId": "10"
+  },
+  {
+    "name": "雷瓦汀基地",
+    "url": "s09_01",
+    "support": [
+      "dot"
+    ],
+    "shopId": "9"
+  },
+  {
+    "name": "加尔顿山前段",
+    "url": "s09_02",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "9"
+  },
+  {
+    "name": "加尔顿山后段",
+    "url": "s09_03",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "9"
+  },
+  {
+    "name": "雷瓦汀基地救护站",
+    "url": "s09_04",
+    "support": [
+      "dot"
+    ],
+    "shopId": "9"
+  },
+  {
+    "name": "雷瓦汀基地补给库",
+    "url": "s09_05",
+    "support": [
+      "dot"
+    ],
+    "shopId": "9"
+  },
+  {
+    "name": "雷瓦汀基地酒馆",
+    "url": "s09_06",
+    "support": [
+      "dot"
+    ],
+    "shopId": "9"
+  },
+  {
+    "name": "司令官室",
+    "url": "s09_07",
+    "support": [
+      "dot"
+    ],
+    "shopId": "9"
+  },
+  {
+    "name": "崩塌的矿山",
+    "url": "s09_08",
+    "support": [
+      "dot"
+    ],
+    "shopId": "9"
+  },
+  {
+    "name": "罗戴夫镇",
+    "url": "s08_01",
+    "support": [
+      "dot"
+    ],
+    "shopId": "8"
+  },
+  {
+    "name": "贫民区",
+    "url": "s08_02",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "8"
+  },
+  {
+    "name": "盗贼据点",
+    "url": "s08_03",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "8"
+  },
+  {
+    "name": "罗戴夫旅馆",
+    "url": "s08_04",
+    "support": [
+      "dot"
+    ],
+    "shopId": "8"
+  },
+  {
+    "name": "罗戴夫商店",
+    "url": "s08_05",
+    "support": [
+      "dot"
+    ],
+    "shopId": "8"
+  },
+  {
+    "name": "罗戴夫酒馆",
+    "url": "s08_06",
+    "support": [
+      "dot"
+    ],
+    "shopId": "8"
+  },
+  {
+    "name": "拉勒凯镇",
+    "url": "s07_01",
+    "support": [
+      "dot"
+    ],
+    "shopId": "7"
+  },
+  {
+    "name": "洞穴神殿",
+    "url": "s07_02",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "7"
+  },
+  {
+    "name": "隐藏的神殿",
+    "url": "s07_03",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "7"
+  },
+  {
+    "name": "拉勒凯旅馆",
+    "url": "s07_04",
+    "support": [
+      "dot"
+    ],
+    "shopId": "7"
+  },
+  {
+    "name": "亚拉里克城市",
+    "url": "s05_1",
+    "support": [
+      "dot"
+    ],
+    "shopId": "5"
+  },
+  {
+    "name": "亚拉里克遗迹",
+    "url": "s05_2",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "5"
+  },
+  {
+    "name": "亚拉里克遗迹深层",
+    "url": "s05_3",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "5"
+  },
+  {
+    "name": "亚拉里克旅馆",
+    "url": "s05_4",
+    "support": [
+      "dot"
+    ],
+    "shopId": "5"
+  },
+  {
+    "name": "亚拉里克酒馆",
+    "url": "s05_5",
+    "support": [
+      "dot"
+    ],
+    "shopId": "5"
+  },
+  {
+    "name": "阿尔德巴伦总部",
+    "url": "s05_6",
+    "support": [
+      "dot"
+    ],
+    "shopId": "5"
+  },
+  {
+    "name": "亚拉里克佣兵公会",
+    "url": "s05_7",
+    "support": [
+      "dot"
+    ],
+    "shopId": "5"
+  },
+  {
+    "name": "凯洛镇",
+    "url": "s04_1",
+    "support": [
+      "dot"
+    ],
+    "shopId": "4"
+  },
+  {
+    "name": "凯洛山",
+    "url": "s04_2",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "4"
+  },
+  {
+    "name": "凯洛山中心地区",
+    "url": "s04_3",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "4"
+  },
+  {
+    "name": "布伦城市",
+    "url": "s03_1",
+    "support": [
+      "dot"
+    ],
+    "shopId": "3"
+  },
+  {
+    "name": "布伦下水道",
+    "url": "s03_2",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "3"
+  },
+  {
+    "name": "布伦下水道深层",
+    "url": "s03_3",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "3"
+  },
+  {
+    "name": "学校1楼",
+    "url": "ch01_01",
+    "support": [
+      "dot"
+    ],
+    "shopId": "1001"
+  },
+  {
+    "name": "学校2楼",
+    "url": "ch01_02",
+    "support": [
+      "dot"
+    ],
+    "shopId": "1001"
+  },
+  {
+    "name": "学校3楼",
+    "url": "ch01_03",
+    "support": [
+      "dot"
+    ],
+    "shopId": "1001"
+  },
+  {
+    "name": "学校地下",
+    "url": "ch01_04",
+    "support": [
+      "monster",
+      "dot"
+    ],
+    "shopId": "1001"
+  },
+  {
+    "name": "纠察队室",
+    "url": "ch01_05",
+    "support": [
+      "dot"
+    ],
+    "shopId": "1001"
+  },
+  {
+    "name": "避难所166",
+    "url": "ch02_01",
+    "support": [
+      "dot"
+    ],
+    "shopId": "1002"
+  },
+  {
+    "name": "废墟地道（前段）",
+    "url": "ch02_02",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "1002"
+  },
+  {
+    "name": "废墟地道（后段）",
+    "url": "ch02_03",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "1002"
+  },
+  {
+    "name": "上流社会的派对场地",
+    "url": "ch03_01",
+    "support": [
+      "dot"
+    ],
+    "shopId": "1003"
+  },
+  {
+    "name": "地下秘密拍卖场",
+    "url": "ch03_02",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "1003"
+  },
+  {
+    "name": "禁闭室",
+    "url": "ch03_03",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "1003"
+  },
+  {
+    "name": "拍卖仓库",
+    "url": "ch03_04",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "1003"
+  },
+  {
+    "name": "商场4楼",
+    "url": "ch04_01",
+    "support": [
+      "dot"
+    ],
+    "shopId": "1004"
+  },
+  {
+    "name": "商场3楼",
+    "url": "ch04_02",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "1004"
+  },
+  {
+    "name": "商场2楼",
+    "url": "ch04_03",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "1004"
+  },
+  {
+    "name": "商场1楼",
+    "shopId": "1004",
+    "url": "ch04_04",
+    "support": [
+      "dot",
+      "monster"
+    ]
+  },
+  {
+    "name": "童话小镇",
+    "url": "ch05_01",
+    "support": [
+      "dot"
+    ],
+    "shopId": "1005"
+  },
+  {
+    "name": "魔女住的森林",
+    "url": "ch05_02",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "1005"
+  },
+  {
+    "name": "西风小镇",
+    "url": "ch06_01",
+    "support": [
+      "dot"
+    ],
+    "shopId": "1006"
+  },
+  {
+    "name": "西风竹林",
+    "url": "ch06_02",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "1006"
+  },
+  {
+    "name": "妖怪森林",
+    "url": "ch06_03",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "1006"
+  },
+  {
+    "name": "妖怪小镇",
+    "url": "ch06_04",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "1006"
+  },
+  {
+    "name": "凯那尔工业1楼",
+    "url": "ch07_01",
+    "support": [
+      "dot"
+    ],
+    "shopId": "1007"
+  },
+  {
+    "name": "凯那尔工业2楼",
+    "url": "ch07_02",
+    "support": [
+      "dot"
+    ],
+    "shopId": "1007"
+  },
+  {
+    "name": "卡尔塔市",
+    "url": "ch07_03",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "1007"
+  },
+  {
+    "name": "卢戈镇",
+    "url": "s01_1",
+    "support": [
+      "dot"
+    ],
+    "shopId": "1"
+  },
+  {
+    "name": "卢戈森林",
+    "url": "s01_2",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "1"
+  },
+  {
+    "name": "卢戈森林",
+    "url": "s01_3",
+    "support": [
+      "dot",
+      "monster"
+    ],
+    "shopId": "1"
+  }
+]

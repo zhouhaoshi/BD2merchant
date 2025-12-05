@@ -265,6 +265,10 @@ interface skillEffectObj extends conditionObj {
   ThreeMultiplying?: number // 卢班希亚3x倍率
   deBuff?: deBuffObj[] // 负面buff
   specialInjuryBuff?: specialInjuryBuffObj[] // 特殊伤害buff
+  spNumber?: number // utm的sp数量
+  spExtraMultiplying?: number // utm的sp倍率
+  buffNumber?: number // 黑皮的buff数量
+  buffExtraMultiplying?: number // 黑皮的buff倍率
 }
 type userBuffObjKeys = keyof userBuffObj
 // 角色身上的buff

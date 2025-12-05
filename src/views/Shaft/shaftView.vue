@@ -429,9 +429,9 @@ onMounted(async () => {
   if (isEmpty(store.warcraftList)) {
     const warcraftList = await setWarcraftList()
     store.setWarcraftList(warcraftList)
-    warcraftPumpkin.value = store.warcraftList['pumpkin1106'] as unknown as warcraftData
+    warcraftPumpkin.value = store.warcraftList['pumpkin'] as unknown as warcraftData
   } else {
-    warcraftPumpkin.value = store.warcraftList['pumpkin1106'] as unknown as warcraftData
+    warcraftPumpkin.value = store.warcraftList['pumpkin'] as unknown as warcraftData
   }
 })
 </script>

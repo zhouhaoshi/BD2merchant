@@ -578,7 +578,7 @@ const setDamageData = (
       }
     }
     // 主要是班塔纳
-    if (!!charactarSkill.skillEffect.condition) {
+    if (!!charactarSkill.skillEffect && !!charactarSkill.skillEffect.condition) {
       // 判断特殊buff中是否包含指定条件的buff
       if (!!warcraftBuff.value[item] && !!warcraftBuff.value[item].othersDebuff) {
         warcraftBuff.value[item].othersDebuff.forEach((item) => {
@@ -604,13 +604,13 @@ const setDamageData = (
     // 魔兽的易伤值
     warcraftData.enemyWeakness = getEnemyWeakness(attackUser, item)
     // 固定伤害无法暴击 无视防御护盾和减伤
-    if (charactarSkill.skillEffect.type === damageType.fixed) {
+    if (!!charactarSkill.skillEffect && charactarSkill.skillEffect.type === damageType.fixed) {
       charactarData.critical = 0
       warcraftData.enemyDefence = 0
       warcraftData.damageReduction = 0
     }
     // 纯粹伤害无视防御护盾和减伤 并且可以暴击
-    if (charactarSkill.skillEffect.type === damageType.pure) {
+    if (!!charactarSkill.skillEffect && charactarSkill.skillEffect.type === damageType.pure) {
       warcraftData.enemyDefence = 0
       warcraftData.damageReduction = 0
     }
@@ -867,6 +867,12 @@ const getMultiplier = (
   if (charactarSkill.skillEffect.extraMultiplying) {
     multiply = multiply + charactarSkill.skillEffect.extraMultiplying * attackNumber
   }
+  if (charactarSkill.skillEffect.spExtraMultiplying) {
+    const residueSp = props.canUseSp - trunUseSp.value
+    const spNumber = charactarSkill.skillEffect.spNumber || 1
+    multiply =
+      multiply + charactarSkill.skillEffect.spExtraMultiplying * Math.floor(residueSp / spNumber)
+  }
   return multiply
 }
 // 计算真实增伤
@@ -1043,6 +1049,8 @@ const damageCalculation = async () => {
       }
     }
   })
+  // setSkillExtraSp
+  // 开始打击
   for (const item of props.attackSequence) {
     if (!!item) {
       const data = item as editableCharactar
@@ -1211,6 +1219,11 @@ const getWarcraftBuffList = () => {
       effectiveBuffList[value].othersDebuff = (tempBuffList[value].othersDebuff || []).filter(
         (item: othersDebuffObj) => props.turnNumber - item.addTurn < item.duration,
       )
+
+      initializeWarcraftBuff(effectiveBuffList, +value, 'dotBuff')
+      effectiveBuffList[value].dotBuff = (tempBuffList[value].dotBuff || []).filter(
+        (item: warcraftDotBuffObj) => props.turnNumber - item.addTurn < item.duration,
+      )
     }
     warcraftBuff.value = effectiveBuffList
   })
@@ -1233,7 +1246,7 @@ const warcraftTurn = async () => {
   // 触发dot伤害
   await estimateDotDamege('warcraft')
 }
-
+// 触发dot伤害
 const estimateDotDamege = (trunType: string) => {
   const dotBuffList = []
   // 判断并且获取所有dot伤害buff
@@ -1270,12 +1283,14 @@ const estimateDotDamege = (trunType: string) => {
         const attackUser = props.attackSequence.find(
           (item) => item.name === attackUserInformation[0],
         )
+        // 层数 主要是兔弓
+        const dotbuffNumber = dotTemp.dotbuffNumber || 1
         // dot伤害触发
         const damage = setDamageData(
           [temp.location],
           attackUser as editableCharactar,
           {} as editableCharactarSkill,
-          dotTemp.dotMultiplying,
+          dotTemp.dotMultiplying * dotbuffNumber,
         )
         const keys = `${attackUserInformation[0]}_${attackUserInformation[1]}`
         damageList.value[keys] += damage
@@ -1602,6 +1617,16 @@ const autoGetAllWarcraftAttackPosition = (
 }
 //  延迟的费用回复，处理sp溢出问题
 const waitingReplySp = ref<Record<string, number>[]>()
+//  技能费用额外消耗
+// const skillExtraSp = ref<Record<string, number>[]>()
+
+// const setSkillExtraSp = (skillData: editableCharactarSkill) => {
+//   if (!!skillData.skillEffect && !!skillData.skillEffect.spExtraMultiplying) {
+//     skillExtraSp.value?.push({
+//       useAdd: props.canUseSp - trunUseSp.value,
+//     })
+//   }
+// }
 
 // 技能消耗统计
 const spChange = (skillData: editableCharactarSkill, useData: editableCharactar) => {

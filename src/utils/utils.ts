@@ -269,8 +269,24 @@ export function upsertObjectByKey(
     (item) => (item as Record<string, unknown>)[k] === (newObj as Record<string, unknown>)[k],
   )
   if (index !== -1) {
-    // 找到了，覆盖
-    arrList[index] = newObj // 可选：合并旧值和新值；如果要完全替换，直接 arr[index] = newObj;
+    // 如果有层数
+    if (!!newObj.dotbuffNumber) {
+      const tempDotbuffNumber = arrList[index].dotbuffNumber || 0
+      // 找到了，覆盖
+      arrList[index] = newObj // 可选：合并旧值和新值；如果要完全替换，直接 arr[index] = newObj;
+      arrList[index].dotbuffNumber += tempDotbuffNumber
+      console.log(tempDotbuffNumber, arrList[index].dotbuffNumber, arrList)
+      // 最大值
+      if (!!newObj.maxNumber) {
+        arrList[index].dotbuffNumber =
+          arrList[index].dotbuffNumber > newObj.maxNumber
+            ? newObj.maxNumber
+            : arrList[index].dotbuffNumber
+      }
+    } else {
+      // 找到了，覆盖
+      arrList[index] = newObj // 可选：合并旧值和新值；如果要完全替换，直接 arr[index] = newObj;
+    }
   } else {
     // 没找到，新增
     arrList.push(newObj)

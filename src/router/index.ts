@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import CommodityView from '../views/commodity/CommodityView.vue'
 import SenceView from '../views/SenceView.vue'
 import charactarView from '../views/charactar/charactarView.vue'
 import shaftView from '../views/Shaft/shaftView.vue'
@@ -19,6 +20,11 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/ShopView.vue'),
+    },
+    {
+      path: '/commodity',
+      name: '商品管理',
+      component: CommodityView,
     },
     {
       path: '/sence',

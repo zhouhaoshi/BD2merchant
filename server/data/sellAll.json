@@ -1,764 +1,1197 @@
-[
-    {
-        "mapId": "S1",
-        "mapLabel": "血骑士",
-        "price": "5",
-        "id": "1"
-    },
-    {
-        "mapId": "C5",
-        "mapLabel": "鲁的迷宫",
-        "price": "32",
-        "id": "2"
-    },
-    {
-        "mapId": "S2",
-        "mapLabel": "苍蓝魔女",
-        "price": "12",
-        "id": "3"
-    },
-    {
-        "mapId": "S5",
-        "mapLabel": "沙漠之花",
-        "price": "11",
-        "id": "4"
-    },
-    {
-        "mapId": "S1",
-        "mapLabel": "血骑士",
-        "price": "23",
-        "id": "5"
-    },
-    {
-        "mapId": "S15",
-        "mapLabel": "复仇誓约",
-        "price": "29",
-        "id": "6"
-    },
-    {
-        "mapId": "S11",
-        "mapLabel": "虚假游戏",
-        "price": "29",
-        "id": "16"
-    },
-    {
-        "mapId": "S1",
-        "mapLabel": "血骑士",
-        "price": "5",
-        "id": "17"
-    },
-    {
-        "mapId": "S3",
-        "mapLabel": "迷雾神射手",
-        "price": "59",
-        "id": "18"
-    },
-    {
-        "mapId": "S3",
-        "mapLabel": "迷雾神射手",
-        "price": "35",
-        "id": "11"
-    },
-    {
-        "mapId": "S1",
-        "mapLabel": "血骑士",
-        "price": "25",
-        "id": "12"
-    },
-    {
-        "mapId": "S1",
-        "mapLabel": "血骑士",
-        "price": "6",
-        "id": "13"
-    },
-    {
-        "mapId": "S4",
-        "mapLabel": "眼镜与猫",
-        "price": "17",
-        "id": "14"
-    },
-    {
-        "mapId": "C5",
-        "mapLabel": "鲁的迷宫",
-        "price": "29",
-        "id": "15"
-    },
-    {
-        "mapId": "S4",
-        "mapLabel": "眼镜与猫",
-        "price": "11",
-        "id": "25"
-    },
-    {
-        "mapId": "S3",
-        "mapLabel": "迷雾神射手",
-        "price": "17",
-        "id": "26"
-    },
-    {
-        "mapId": "S6",
-        "mapLabel": "异教塔",
-        "price": "35",
-        "id": "27"
-    },
-    {
-        "mapId": "S2",
-        "mapLabel": "苍蓝魔女",
-        "price": "5",
-        "id": "28"
-    },
-    {
-        "mapId": "S2",
-        "mapLabel": "苍蓝魔女",
-        "price": "38",
-        "id": "20"
-    },
-    {
-        "mapId": "C3",
-        "mapLabel": "不可能的美丽",
-        "price": "19",
-        "id": "21"
-    },
-    {
-        "mapId": "S2",
-        "mapLabel": "苍蓝魔女",
-        "price": "23",
-        "id": "22"
-    },
-    {
-        "mapId": "S3",
-        "mapLabel": "迷雾神射手",
-        "price": "5",
-        "id": "23"
-    },
-    {
-        "mapId": "C4",
-        "mapLabel": "大逃脱",
-        "price": "29",
-        "id": "24"
-    },
-    {
-        "mapId": "S6",
-        "mapLabel": "异教塔",
-        "price": "17",
-        "id": "35"
-    },
-    {
-        "mapId": "S2",
-        "mapLabel": "苍蓝魔女",
-        "price": "5",
-        "id": "36"
-    },
-    {
-        "mapId": "S5",
-        "mapLabel": "沙漠之花",
-        "price": "59",
-        "id": "37"
-    },
-    {
-        "mapId": "S1",
-        "mapLabel": "血骑士",
-        "price": "23",
-        "id": "38"
-    },
-    {
-        "mapId": "S1",
-        "mapLabel": "血骑士",
-        "price": "6",
-        "id": "30"
-    },
-    {
-        "mapId": "S3",
-        "mapLabel": "迷雾神射手",
-        "price": "12",
-        "id": "31"
-    },
-    {
-        "mapId": "S1",
-        "mapLabel": "血骑士",
-        "price": "23",
-        "id": "32"
-    },
-    {
-        "mapId": "S2",
-        "mapLabel": "苍蓝魔女",
-        "price": "23",
-        "id": "33"
-    },
-    {
-        "mapId": "S17",
-        "mapLabel": "试炼之路",
-        "price": "29",
-        "id": "34"
-    },
-    {
-        "mapId": "S2",
-        "mapLabel": "苍蓝魔女",
-        "price": "11",
-        "id": "7"
-    },
-    {
-        "mapId": "S1",
-        "mapLabel": "血骑士",
-        "price": "5",
-        "id": "8"
-    },
-    {
-        "mapId": "S4",
-        "mapLabel": "眼镜与猫",
-        "price": "65",
-        "id": "9"
-    },
-    {
-        "mapId": "S3",
-        "mapLabel": "迷雾神射手",
-        "price": "23",
-        "id": "10"
-    },
-    {
-        "mapId": "S7",
-        "mapLabel": "愤怒的天使",
-        "price": "41",
-        "id": "19"
-    },
-    {
-        "mapId": "S6",
-        "mapLabel": "异教塔",
-        "price": "77",
-        "id": "29"
-    },
-    {
-        "mapId": "S5",
-        "mapLabel": "沙漠之花",
-        "price": "107",
-        "id": "39"
-    },
-    {
-        "mapId": "S4",
-        "mapLabel": "眼镜与猫",
-        "price": "71",
-        "id": "40"
-    },
-    {
-        "mapId": "S3",
-        "mapLabel": "迷雾神射手",
-        "price": "65",
-        "id": "50"
-    },
-    {
-        "mapId": "S2",
-        "mapLabel": "苍蓝魔女",
-        "price": "83",
-        "id": "60"
-    },
-    {
-        "mapId": "S1",
-        "mapLabel": "血骑士",
-        "price": "95",
-        "id": "70"
-    },
-    {
-        "mapId": "S6",
-        "mapLabel": "异教塔",
-        "price": "101",
-        "id": "41"
-    },
-    {
-        "mapId": "S5",
-        "mapLabel": "沙漠之花",
-        "price": "107",
-        "id": "51"
-    },
-    {
-        "mapId": "S4",
-        "mapLabel": "眼镜与猫",
-        "price": "119",
-        "id": "61"
-    },
-    {
-        "mapId": "S3",
-        "mapLabel": "迷雾神射手",
-        "price": "77",
-        "id": "71"
-    },
-    {
-        "mapId": "S1",
-        "mapLabel": "血骑士",
-        "price": "92",
-        "id": "42"
-    },
-    {
-        "mapId": "S6",
-        "mapLabel": "异教塔",
-        "price": "89",
-        "id": "52"
-    },
-    {
-        "mapId": "S5",
-        "mapLabel": "沙漠之花",
-        "price": "89",
-        "id": "62"
-    },
-    {
-        "mapId": "S4",
-        "mapLabel": "眼镜与猫",
-        "price": "2231",
-        "id": "72"
-    },
-    {
-        "mapId": "S3",
-        "mapLabel": "迷雾神射手",
-        "price": "2231",
-        "id": "43"
-    },
-    {
-        "mapId": "S2",
-        "mapLabel": "苍蓝魔女",
-        "price": "2231",
-        "id": "53"
-    },
-    {
-        "mapId": "S1",
-        "mapLabel": "血骑士",
-        "price": "2231",
-        "id": "63"
-    },
-    {
-        "mapId": "S10",
-        "mapLabel": "霍尔蒙克斯",
-        "price": "2231",
-        "id": "73"
-    },
-    {
-        "mapId": "S9",
-        "mapLabel": "铁假面",
-        "price": "2231",
-        "id": "44"
-    },
-    {
-        "mapId": "S8",
-        "mapLabel": "血之狂想曲",
-        "price": "2231",
-        "id": "54"
-    },
-    {
-        "mapId": "S7",
-        "mapLabel": "愤怒的天使",
-        "price": "2231",
-        "id": "64"
-    },
-    {
-        "mapId": "S6",
-        "mapLabel": "异教塔",
-        "price": "2231",
-        "id": "74"
-    },
-    {
-        "mapId": "S5",
-        "mapLabel": "沙漠之花",
-        "price": "2231",
-        "id": "45"
-    },
-    {
-        "mapId": "S4",
-        "mapLabel": "眼镜与猫",
-        "price": "2231",
-        "id": "55"
-    },
-    {
-        "mapId": "S3",
-        "mapLabel": "迷雾神射手",
-        "price": "2231",
-        "id": "65"
-    },
-    {
-        "mapId": "S2",
-        "mapLabel": "苍蓝魔女",
-        "price": "2231",
-        "id": "75"
-    },
-    {
-        "mapId": "S1",
-        "mapLabel": "血骑士",
-        "price": "2231",
-        "id": "46"
-    },
-    {
-        "mapId": "S17",
-        "mapLabel": "试炼之路",
-        "price": "51",
-        "id": "57"
-    },
-    {
-        "mapId": "S16",
-        "mapLabel": "三国同盟",
-        "price": "97",
-        "id": "67"
-    },
-    {
-        "mapId": "S15",
-        "mapLabel": "复仇誓约",
-        "price": "109",
-        "id": "77"
-    },
-    {
-        "mapId": "S14",
-        "mapLabel": "神圣审判",
-        "price": "255",
-        "id": "48"
-    },
-    {
-        "mapId": "S13",
-        "mapLabel": "雪之歌",
-        "price": "163",
-        "id": "58"
-    },
-    {
-        "mapId": "S12",
-        "mapLabel": "黑羽毛",
-        "price": "257",
-        "id": "68"
-    },
-    {
-        "mapId": "S11",
-        "mapLabel": "虚假游戏",
-        "price": "216",
-        "id": "78"
-    },
-    {
-        "mapId": "S10",
-        "mapLabel": "霍尔蒙克斯",
-        "price": "239",
-        "id": "49"
-    },
-    {
-        "mapId": "S9",
-        "mapLabel": "铁假面",
-        "price": "437",
-        "id": "59"
-    },
-    {
-        "mapId": "S8",
-        "mapLabel": "血之狂想曲",
-        "price": "170",
-        "id": "69"
-    },
-    {
-        "mapId": "S7",
-        "mapLabel": "愤怒的天使",
-        "price": "373",
-        "id": "79"
-    },
-    {
-        "mapId": "S6",
-        "mapLabel": "异教塔",
-        "price": "199",
-        "id": "80"
-    },
-    {
-        "mapId": "S5",
-        "mapLabel": "沙漠之花",
-        "price": "214",
-        "id": "90"
-    },
-    {
-        "mapId": "S4",
-        "mapLabel": "眼镜与猫",
-        "price": "226",
-        "id": "100"
-    },
-    {
-        "mapId": "S3",
-        "mapLabel": "迷雾神射手",
-        "price": "650",
-        "id": "110"
-    },
-    {
-        "mapId": "S2",
-        "mapLabel": "苍蓝魔女",
-        "price": "299",
-        "id": "81"
-    },
-    {
-        "mapId": "S1",
-        "mapLabel": "血骑士",
-        "price": "176",
-        "id": "91"
-    },
-    {
-        "mapId": "S2",
-        "mapLabel": "苍蓝魔女",
-        "price": "328",
-        "id": "101"
-    },
-    {
-        "mapId": "S1",
-        "mapLabel": "血骑士",
-        "price": "147",
-        "id": "111"
-    },
-    {
-        "mapId": "S1",
-        "mapLabel": "血骑士",
-        "price": "5",
-        "id": "97"
-    },
-    {
-        "mapId": "S9",
-        "mapLabel": "铁假面",
-        "price": "17",
-        "id": "107"
-    },
-    {
-        "mapId": "C7",
-        "mapLabel": "合约之战",
-        "price": "220",
-        "id": "117"
-    },
-    {
-        "mapId": "S4",
-        "mapLabel": "眼镜与猫",
-        "price": "5",
-        "id": "88"
-    },
-    {
-        "mapId": "S13",
-        "mapLabel": "雪之歌",
-        "price": "107",
-        "id": "98"
-    },
-    {
-        "mapId": "S12",
-        "mapLabel": "黑羽毛",
-        "price": "196",
-        "id": "108"
-    },
-    {
-        "mapId": "S11",
-        "mapLabel": "虚假游戏",
-        "price": "1404",
-        "id": "118"
-    },
-    {
-        "mapId": "S10",
-        "mapLabel": "霍尔蒙克斯",
-        "price": "107",
-        "id": "89"
-    },
-    {
-        "mapId": "S3",
-        "mapLabel": "迷雾神射手",
-        "price": "1404",
-        "id": "99"
-    },
-    {
-        "mapId": "S2",
-        "mapLabel": "苍蓝魔女",
-        "price": "2475",
-        "id": "109"
-    },
-    {
-        "mapId": "S1",
-        "mapLabel": "血骑士",
-        "price": "16933",
-        "id": "119"
-    },
-    {
-        "mapId": "S10",
-        "mapLabel": "霍尔蒙克斯",
-        "price": "1404",
-        "id": "120"
-    },
-    {
-        "mapId": "S1",
-        "mapLabel": "血骑士",
-        "price": "5",
-        "id": "121"
-    },
-    {
-        "mapId": "S5",
-        "mapLabel": "沙漠之花",
-        "price": "107",
-        "id": "122"
-    },
-    {
-        "mapId": "C3",
-        "mapLabel": "不可能的美丽",
-        "price": "1404",
-        "id": "123"
-    },
-    {
-        "mapId": "S1",
-        "mapLabel": "血骑士",
-        "price": "5",
-        "id": "124"
-    },
-    {
-        "mapId": "S7",
-        "mapLabel": "愤怒的天使",
-        "price": "107",
-        "id": "125"
-    },
-    {
-        "mapId": "S5",
-        "mapLabel": "沙漠之花",
-        "price": "1404",
-        "id": "126"
-    },
-    {
-        "mapId": "S1",
-        "mapLabel": "血骑士",
-        "price": "5",
-        "id": "127"
-    },
-    {
-        "mapId": "S11",
-        "mapLabel": "虚假游戏",
-        "price": "1404",
-        "id": "129"
-    },
-    {
-        "mapId": "C5",
-        "mapLabel": "鲁的迷宫",
-        "price": "190",
-        "id": "86"
-    },
-    {
-        "mapId": "C4",
-        "mapLabel": "大逃脱",
-        "price": "190",
-        "id": "96"
-    },
-    {
-        "mapId": "C3",
-        "mapLabel": "不可能的美丽",
-        "price": "190",
-        "id": "106"
-    },
-    {
-        "mapId": "C2",
-        "mapLabel": "火片",
-        "price": "190",
-        "id": "116"
-    },
-    {
-        "mapId": "C1",
-        "mapLabel": "杰登之门",
-        "price": "190",
-        "id": "87"
-    },
-    {
-        "mapId": "S1",
-        "mapLabel": "血骑士",
-        "price": "33",
-        "id": "56"
-    },
-    {
-        "mapId": "S17",
-        "mapLabel": "试炼之路",
-        "price": "49",
-        "id": "66"
-    },
-    {
-        "mapId": "S16",
-        "mapLabel": "三国同盟",
-        "price": "54",
-        "id": "76"
-    },
-    {
-        "mapId": "S15",
-        "mapLabel": "复仇誓约",
-        "price": "123",
-        "id": "47"
-    },
-    {
-        "mapId": "S14",
-        "mapLabel": "神圣审判",
-        "price": "904",
-        "id": "92"
-    },
-    {
-        "mapId": "S13",
-        "mapLabel": "雪之歌",
-        "price": "304",
-        "id": "102"
-    },
-    {
-        "mapId": "S12",
-        "mapLabel": "黑羽毛",
-        "price": "70",
-        "id": "112"
-    },
-    {
-        "mapId": "S11",
-        "mapLabel": "虚假游戏",
-        "price": "176",
-        "id": "83"
-    },
-    {
-        "mapId": "S10",
-        "mapLabel": "霍尔蒙克斯",
-        "price": "149",
-        "id": "93"
-    },
-    {
-        "mapId": "S9",
-        "mapLabel": "铁假面",
-        "price": "723",
-        "id": "103"
-    },
-    {
-        "mapId": "S7",
-        "mapLabel": "愤怒的天使",
-        "price": "490",
-        "id": "84"
-    },
-    {
-        "mapId": "S6",
-        "mapLabel": "异教塔",
-        "price": "575",
-        "id": "94"
-    },
-    {
-        "mapId": "S5",
-        "mapLabel": "沙漠之花",
-        "price": "423",
-        "id": "104"
-    },
-    {
-        "mapId": "S1",
-        "mapLabel": "血骑士",
-        "price": "7470",
-        "id": "114"
-    },
-    {
-        "mapId": "S14",
-        "mapLabel": "神圣审判",
-        "price": "7394",
-        "id": "85"
-    },
-    {
-        "mapId": "S15",
-        "mapLabel": "复仇誓约",
-        "price": "779",
-        "id": "82"
-    },
-    {
-        "mapId": "S13",
-        "mapLabel": "雪之歌",
-        "price": "7688",
-        "id": "95"
-    },
-    {
-        "mapId": "S12",
-        "mapLabel": "黑羽毛",
-        "price": "7660",
-        "id": "105"
-    },
-    {
-        "mapId": "S2",
-        "mapLabel": "苍蓝魔女",
-        "price": "7802",
-        "id": "115"
+{
+    "111": {
+        "url": "/img/icon_resource111_15.webp",
+        "name": "火的聖石",
+        "base": 160,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "112": {
+        "url": "/img/icon_resource112_16.webp",
+        "name": "水的聖石",
+        "base": 160,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "113": {
+        "url": "/img/icon_resource113_17.webp",
+        "name": "風的聖石",
+        "base": 160,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "114": {
+        "url": "/img/icon_resource114_18.webp",
+        "name": "光的聖石",
+        "base": 160,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "115": {
+        "url": "/img/icon_resource115_19.webp",
+        "name": "暗的聖石",
+        "base": 160,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "201": {
+        "url": "/img/icon_resource201_27.webp",
+        "name": "鐵礦石",
+        "base": 5,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [
+            "3",
+            "9"
+        ],
+        "date": 2
+    },
+    "202": {
+        "url": "/img/icon_resource202_28.webp",
+        "name": "銅礦石",
+        "base": 15,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "203": {
+        "url": "/img/icon_resource203_29.webp",
+        "name": "金礦石",
+        "base": 185,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "204": {
+        "url": "/img/icon_resource204_30.webp",
+        "name": "泥炭",
+        "base": 5,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [
+            "1",
+            "5"
+        ],
+        "date": 5
+    },
+    "211": {
+        "url": "/img/icon_resource211_32.webp",
+        "name": "鐵塊",
+        "base": 90,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "212": {
+        "url": "/img/icon_resource212_33.webp",
+        "name": "銅塊",
+        "base": 165,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "213": {
+        "url": "/img/icon_resource213_34.webp",
+        "name": "金塊",
+        "base": 1180,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "214": {
+        "url": "/img/icon_resource214_35.webp",
+        "name": "煤",
+        "base": 90,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "221": {
+        "url": "/img/icon_resource221_36.webp",
+        "name": "鋼鐵塊",
+        "base": 1180,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "222": {
+        "url": "/img/icon_resource222_37.webp",
+        "name": "黃銅塊",
+        "base": 2080,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "223": {
+        "url": "/img/icon_resource223_38.webp",
+        "name": "白金塊",
+        "base": 14230,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "224": {
+        "url": "/img/icon_resource224_62.webp",
+        "name": "無煙煤",
+        "base": 1180,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "301": {
+        "url": "/img/icon_resource301_39.webp",
+        "name": "一般皮革",
+        "base": 5,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [
+            "2",
+            "6"
+        ],
+        "date": 6
+    },
+    "311": {
+        "url": "/img/icon_resource311_40.webp",
+        "name": "高級皮革",
+        "base": 90,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "321": {
+        "url": "/img/icon_resource321_41.webp",
+        "name": "頂級皮革",
+        "base": 1180,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "401": {
+        "url": "/img/icon_resource401_42.webp",
+        "name": "一般布料",
+        "base": 5,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [
+            "1",
+            "14"
+        ],
+        "date": 12
+    },
+    "411": {
+        "url": "/img/icon_resource411_43.webp",
+        "name": "高級布料",
+        "base": 90,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "421": {
+        "url": "/img/icon_resource421_44.webp",
+        "name": "頂級布料",
+        "base": 1180,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "501": {
+        "url": "/img/icon_resource501_45.webp",
+        "name": "原木",
+        "base": 5,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [
+            "1",
+            "7"
+        ],
+        "date": 8
+    },
+    "511": {
+        "url": "/img/icon_resource511_46.webp",
+        "name": "夾板",
+        "base": 90,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "521": {
+        "url": "/img/icon_resource521_63.webp",
+        "name": "強化夾板",
+        "base": 1180,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1001": {
+        "url": "/img/icon_food1001_1.webp",
+        "name": "獸肉",
+        "base": 5,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [
+            "3"
+        ],
+        "date": 8
+    },
+    "1002": {
+        "url": "/img/icon_food1002_2.webp",
+        "name": "鮭魚",
+        "base": 30,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1003": {
+        "url": "/img/icon_food1003_3.webp",
+        "name": "淡水蝦",
+        "base": 30,
+        "maxRate": 130,
+        "minRate": 70,
+        "shopId": [],
+        "date": 0
+    },
+    "1004": {
+        "url": "/img/icon_food1004_4.webp",
+        "name": "小麥",
+        "base": 5,
+        "maxRate": 130,
+        "minRate": 70,
+        "shopId": [],
+        "date": 0
+    },
+    "1005": {
+        "url": "/img/icon_food1005_5.webp",
+        "name": "草藥",
+        "base": 25,
+        "maxRate": 130,
+        "minRate": 70,
+        "shopId": [],
+        "date": 0
+    },
+    "1006": {
+        "url": "/img/icon_food1006_6.webp",
+        "name": "玉米",
+        "base": 20,
+        "maxRate": 130,
+        "minRate": 70,
+        "shopId": [],
+        "date": 0
+    },
+    "1007": {
+        "url": "/img/icon_food1007_7.webp",
+        "name": "豆子",
+        "base": 15,
+        "maxRate": 130,
+        "minRate": 70,
+        "shopId": [],
+        "date": 0
+    },
+    "1008": {
+        "url": "/img/icon_food1008_8.webp",
+        "name": "大麥",
+        "base": 10,
+        "maxRate": 130,
+        "minRate": 70,
+        "shopId": [],
+        "date": 0
+    },
+    "1009": {
+        "url": "/img/icon_food1009_9.webp",
+        "name": "啤酒花",
+        "base": 10,
+        "maxRate": 130,
+        "minRate": 70,
+        "shopId": [],
+        "date": 0
+    },
+    "1010": {
+        "url": "/img/icon_food1010_10.webp",
+        "name": "米",
+        "base": 6,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [
+            "3",
+            "5"
+        ],
+        "date": 17
+    },
+    "1011": {
+        "url": "/img/icon_food1011_11.webp",
+        "name": "蘋果",
+        "base": 20,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1012": {
+        "url": "/img/icon_food1012_12.webp",
+        "name": "葡萄",
+        "base": 20,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1013": {
+        "url": "/img/icon_food1013_13.webp",
+        "name": "蘑菇",
+        "base": 10,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1014": {
+        "url": "/img/icon_food1014_14.webp",
+        "name": "紅蘿蔔",
+        "base": 15,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1015": {
+        "url": "/img/icon_food1015_15.webp",
+        "name": "馬鈴薯",
+        "base": 5,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [
+            "3",
+            "16"
+        ],
+        "date": 17
+    },
+    "1016": {
+        "url": "/img/icon_food1016_16.webp",
+        "name": "洋蔥",
+        "base": 20,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1017": {
+        "url": "/img/icon_food1017_17.webp",
+        "name": "甜椒",
+        "base": 20,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1018": {
+        "url": "/img/icon_food1018_18.webp",
+        "name": "蘿蔔嬰",
+        "base": 25,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1019": {
+        "url": "/img/icon_food1019_19.webp",
+        "name": "花椰菜",
+        "base": 25,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1020": {
+        "url": "/img/icon_food1020_20.webp",
+        "name": "番茄",
+        "base": 25,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1022": {
+        "url": "/img/icon_food1022_22.webp",
+        "name": "咖啡豆",
+        "base": 25,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1023": {
+        "url": "/img/icon_food1023_23.webp",
+        "name": "糖",
+        "base": 10,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1024": {
+        "url": "/img/icon_food1024_24.webp",
+        "name": "起司",
+        "base": 15,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1025": {
+        "url": "/img/icon_food1025_25.webp",
+        "name": "雞蛋",
+        "base": 10,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1026": {
+        "url": "/img/icon_food1026_26.webp",
+        "name": "奶油",
+        "base": 25,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1027": {
+        "url": "/img/icon_food1027_27.webp",
+        "name": "牛奶",
+        "base": 15,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1028": {
+        "url": "/img/icon_food1028_28.webp",
+        "name": "鮪魚罐頭",
+        "base": 5,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [
+            "1",
+            "12"
+        ],
+        "date": 26
+    },
+    "1029": {
+        "url": "/img/icon_food1029_29.webp",
+        "name": "雞胸肉袋",
+        "base": 5,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [
+            "3",
+            "4"
+        ],
+        "date": 24
+    },
+    "1030": {
+        "url": "/img/icon_food1030_30.webp",
+        "name": "巧克力",
+        "base": 5,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [
+            "2",
+            "4"
+        ],
+        "date": 12
+    },
+    "1031": {
+        "url": "/img/icon_food1031_31.webp",
+        "name": "吐司",
+        "base": 30,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1032": {
+        "url": "/img/icon_food1032_32.webp",
+        "name": "橄欖油",
+        "base": 50,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1033": {
+        "url": "/img/icon_food1033_33.webp",
+        "name": "辣醬",
+        "base": 55,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1034": {
+        "url": "/img/icon_food1034_34.webp",
+        "name": "蜂蜜",
+        "base": 50,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1035": {
+        "url": "/img/icon_food1035_35.webp",
+        "name": "鹽",
+        "base": 5,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [
+            "17"
+        ],
+        "date": 5
+    },
+    "1036": {
+        "url": "/img/icon_food1036_36.webp",
+        "name": "哈密瓜",
+        "base": 20,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1037": {
+        "url": "/img/icon_food1037_37.webp",
+        "name": "辣椒",
+        "base": 20,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1038": {
+        "url": "/img/icon_food1038_38.webp",
+        "name": "番紅花",
+        "base": 35,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1039": {
+        "url": "/img/icon_food1039_39.webp",
+        "name": "杏仁",
+        "base": 65,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1040": {
+        "url": "/img/icon_food1040_40.webp",
+        "name": "水果罐頭",
+        "base": 90,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1041": {
+        "url": "/img/icon_food1041_41.webp",
+        "name": "魚子醬罐頭",
+        "base": 60,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1042": {
+        "url": "/img/icon_food1042_42.webp",
+        "name": "包裝好的海苔",
+        "base": 55,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1043": {
+        "url": "/img/icon_food1043_43.webp",
+        "name": "凱洛藥材",
+        "base": 70,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1044": {
+        "url": "/img/icon_food1044_44.webp",
+        "name": "薑黃",
+        "base": 80,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1045": {
+        "url": "/img/icon_food1045_45.webp",
+        "name": "永恆龍舌蘭酒",
+        "base": 85,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1046": {
+        "url": "/img/icon_food1046_46.webp",
+        "name": "芥末",
+        "base": 90,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1047": {
+        "url": "/img/icon_food1047_47.webp",
+        "name": "料酒",
+        "base": 100,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1048": {
+        "url": "/img/icon_food1048_48.webp",
+        "name": "雷瓦汀火腿",
+        "base": 65,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1050": {
+        "url": "/img/icon_food1050_50.webp",
+        "name": "辣椒素",
+        "base": 78,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1051": {
+        "url": "/img/icon_food1051_51.webp",
+        "name": "松露油",
+        "base": 75,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1052": {
+        "url": "/img/icon_food1052_52.webp",
+        "name": "美乃滋",
+        "base": 75,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1053": {
+        "url": "/img/icon_food1053_53.webp",
+        "name": "盧戈山蔘",
+        "base": 1875,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1054": {
+        "url": "/img/icon_food1054_54.webp",
+        "name": "生命的木炭",
+        "base": 1875,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1055": {
+        "url": "/img/icon_food1055_55.webp",
+        "name": "閃爍的粉末",
+        "base": 1875,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1056": {
+        "url": "/img/icon_food1056_56.webp",
+        "name": "透明的蘑菇",
+        "base": 1875,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1057": {
+        "url": "/img/icon_food1057_57.webp",
+        "name": "穿山甲的鱗片",
+        "base": 1875,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1058": {
+        "url": "/img/icon_food1058_58.webp",
+        "name": "能量蘑菇",
+        "base": 1875,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1059": {
+        "url": "/img/icon_food1059_59.webp",
+        "name": "禿鷲的羽毛",
+        "base": 1875,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1060": {
+        "url": "/img/icon_food1060_60.webp",
+        "name": "魅惑粉末",
+        "base": 1875,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1061": {
+        "url": "/img/icon_food1061_61.webp",
+        "name": "黃金羅勒",
+        "base": 1875,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1062": {
+        "url": "/img/icon_food1062_62.webp",
+        "name": "能量藥水",
+        "base": 1875,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1063": {
+        "url": "/img/icon_food1063_63.webp",
+        "name": "靈魂鮮奶油",
+        "base": 1875,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1064": {
+        "url": "/img/icon_food1064_64.webp",
+        "name": "維生素B濃縮溶液",
+        "base": 1875,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1065": {
+        "url": "/img/icon_food1065_65.webp",
+        "name": "能量粉末",
+        "base": 1875,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "1066": {
+        "url": "/img/icon_food1066_66.webp",
+        "name": "地獄火醬汁",
+        "base": 1875,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "2002": {
+        "url": "/img/icon_food2002_2.webp",
+        "name": "蘑菇湯",
+        "base": 28,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "2003": {
+        "url": "/img/icon_food2003_3.webp",
+        "name": "炒蘑菇",
+        "base": 42,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "2004": {
+        "url": "/img/icon_food2004_4.webp",
+        "name": "烤菇串",
+        "base": 46,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "2005": {
+        "url": "/img/icon_food2005_5.webp",
+        "name": "蘑菇烤牛肉火鍋",
+        "base": 104,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "2006": {
+        "url": "/img/icon_food2006_6.webp",
+        "name": "馬鈴薯湯",
+        "base": 43,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "2007": {
+        "url": "/img/icon_food2007_7.webp",
+        "name": "達雷普黑啤酒",
+        "base": 82,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "2008": {
+        "url": "/img/icon_food2008_8.webp",
+        "name": "黑啤酒燉鍋",
+        "base": 92,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "2009": {
+        "url": "/img/icon_food2009_9.webp",
+        "name": "烤蜂蜜蘋果",
+        "base": 215,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "2010": {
+        "url": "/img/icon_food2010_10.webp",
+        "name": "桑格利亞酒",
+        "base": 137,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "2011": {
+        "url": "/img/icon_food2011_11.webp",
+        "name": "流浪美食家的烤肉",
+        "base": 216,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "2012": {
+        "url": "/img/icon_food2012_12.webp",
+        "name": "喵拿鐵",
+        "base": 182,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "2013": {
+        "url": "/img/icon_food2013_13.webp",
+        "name": "炸鮭魚便當",
+        "base": 201,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "2014": {
+        "url": "/img/icon_food2014_14.webp",
+        "name": "草藥三明治",
+        "base": 368,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "2015": {
+        "url": "/img/icon_food2015_15.webp",
+        "name": "哈密瓜雪酪",
+        "base": 143,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "2016": {
+        "url": "/img/icon_food2016_16.webp",
+        "name": "番紅花甜茶",
+        "base": 314,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "2017": {
+        "url": "/img/icon_food2017_17.webp",
+        "name": "甜椒義式烘蛋",
+        "base": 168,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "2018": {
+        "url": "/img/icon_food2018_18.webp",
+        "name": "鮮血布丁",
+        "base": 180,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "2019": {
+        "url": "/img/icon_food2019_19.webp",
+        "name": "蔬菜三明治",
+        "base": 190,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "2020": {
+        "url": "/img/icon_food2020_20.webp",
+        "name": "鮭魚芥末壽司",
+        "base": 547,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "2021": {
+        "url": "/img/icon_food2021_21.webp",
+        "name": "玉米起司",
+        "base": 252,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "2022": {
+        "url": "/img/icon_food2022_22.webp",
+        "name": "豆奶醬義大利麵",
+        "base": 148,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "2023": {
+        "url": "/img/icon_food2023_23.webp",
+        "name": "炒馬鈴薯",
+        "base": 276,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "2024": {
+        "url": "/img/icon_food2024_24.webp",
+        "name": "醬炒牛排",
+        "base": 124,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "2025": {
+        "url": "/img/icon_food2025_25.webp",
+        "name": "甜辣鮮蝦",
+        "base": 655,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "2026": {
+        "url": "/img/icon_food2026_26.webp",
+        "name": "蜂蜜奶油杏仁",
+        "base": 760,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "2027": {
+        "url": "/img/icon_food2027_27.webp",
+        "name": "凱洛養身湯",
+        "base": 256,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "2028": {
+        "url": "/img/icon_food2028_28.webp",
+        "name": "巧克力麵包",
+        "base": 59,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "2029": {
+        "url": "/img/icon_food2029_29.webp",
+        "name": "鮪魚雞胸肉三明治",
+        "base": 148,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "2030": {
+        "url": "/img/icon_food2030_30.webp",
+        "name": "水果冰沙",
+        "base": 126,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "2031": {
+        "url": "/img/icon_food2031_31.webp",
+        "name": "火烤魚板棒",
+        "base": 608,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "2032": {
+        "url": "/img/icon_food2032_32.webp",
+        "name": "巧克力雞尾酒",
+        "base": 275,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "2033": {
+        "url": "/img/icon_food2033_33.webp",
+        "name": "魚子醬蛋包飯",
+        "base": 412,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "2034": {
+        "url": "/img/icon_food2034_34.webp",
+        "name": "三角美乃滋飯糰",
+        "base": 484,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "2035": {
+        "url": "/img/icon_food2035_35.webp",
+        "name": "雞肉捲",
+        "base": 356,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "3001": {
+        "url": "/img/icon_food3001_1.webp",
+        "name": "盧戈烤山蔘串",
+        "base": 6278,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "3002": {
+        "url": "/img/icon_food3002_2.webp",
+        "name": "煤炭餅乾",
+        "base": 6214,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "3003": {
+        "url": "/img/icon_food3003_3.webp",
+        "name": "閃耀西班牙蒜味蝦",
+        "base": 6461,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "3004": {
+        "url": "/img/icon_food3004_4.webp",
+        "name": "透明化沙拉",
+        "base": 6437,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
+    },
+    "3014": {
+        "url": "/img/icon_food3014_14.webp",
+        "name": "地獄火海苔飯捲",
+        "base": 6557,
+        "maxRate": 120,
+        "minRate": 80,
+        "shopId": [],
+        "date": 0
     }
-]
+}
