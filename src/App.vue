@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import NavigationBar from "@/components/NavigationBar.vue"
+import NavigationBar from '@/components/NavigationBar.vue'
 </script>
 
 <template>
@@ -9,5 +9,4 @@
   </section>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
