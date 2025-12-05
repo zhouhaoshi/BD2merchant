@@ -22,6 +22,7 @@
           <div>
             <div>{{ element.name }}</div>
             <div><img src="/src/assets/img/icon_resource60005_88.webp" />{{ element.base }}</div>
+            <div class="normal_tps">优惠日期：{{ element.date }}号</div>
           </div>
           <div class="overlay">
             <Edit @click="addCommodity(element, index)" />
@@ -50,7 +51,7 @@ const formInline = reactive({
 })
 // 地图信息
 interface shopObj {
-  id?: number | string
+  id?: number
   url?: string
   name?: string
   maxRate: string | number
@@ -80,7 +81,16 @@ const onSubmit = async () => {
         })
       }
     }
-    shopList.value = tempList.sort((a, b) => a.base - b.base)
+    shopList.value = tempList.sort((a, b) => {
+      // 首先比较 base 字段
+      if (a.base !== b.base) {
+        return a.base - b.base // 升序
+      }
+      // 如果 base 相同，再比较 id 字段（处理可能为 undefined 的情况）
+      const aId = a.id ?? 0
+      const bId = b.id ?? 0
+      return aId - bId // 升序
+    })
   } else console.log(message)
 }
 // 是否弹窗
@@ -197,6 +207,10 @@ onMounted(() => {
         opacity: 1;
       }
     }
+  }
+  .normal_tps {
+    font-size: 12px;
+    color: #616161;
   }
   & > div {
     padding: 20px;
