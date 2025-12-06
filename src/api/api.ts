@@ -1,10 +1,10 @@
 import { get, post } from './config'
-import { getLocalSenceList, isUse } from '@/utils/localService'
+import { getLocalMapList, isUse, getLocalShopList } from '@/utils/localService'
 
 export default {
   mapList: (params = {}) => {
     if (isUse()) {
-      return getLocalSenceList().then((res) => {
+      return getLocalMapList().then((res) => {
         return { code: 200, data: res, message: '成功' }
       })
     } else {
@@ -23,7 +23,13 @@ export default {
   }, // 更新场景列表
 
   shopList: (params = {}) => {
-    return get('/shop/list', params)
+    if (isUse()) {
+      return getLocalShopList(params).then((res) => {
+        return { code: 200, data: res, message: '成功' }
+      })
+    } else {
+      return get('/shop/list', params)
+    }
   }, // 获取商品列表
   shopBuyUpdata: (data = {}) => {
     return post('/shop/updata', data)
