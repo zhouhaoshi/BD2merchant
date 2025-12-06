@@ -124,7 +124,6 @@
 import Api from '@/api/api'
 import SenceImage from '@/components/SenceImage.vue'
 import { getHoursAgo, getSenceList as setSence, setLocalImageAddress } from '@/utils/utils'
-console.log(window.location.href, 'window.location.href')
 const formInline = reactive({
   shopId: '1',
   type: 'buy',

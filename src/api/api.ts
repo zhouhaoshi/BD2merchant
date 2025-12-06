@@ -1,8 +1,15 @@
 import { get, post } from './config'
+import { getLocalSenceList, isUse } from '@/utils/localService'
 
 export default {
   mapList: (params = {}) => {
-    return get('/map/list', params)
+    if (isUse()) {
+      return getLocalSenceList().then((res) => {
+        return { code: 200, data: res, message: '成功' }
+      })
+    } else {
+      return get('/map/list', params)
+    }
   }, // 地图列表
   mapUpdata: (data = {}) => {
     return post('/map/update', data)
