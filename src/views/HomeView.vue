@@ -147,14 +147,14 @@ const mapList = ref()
 const getMapList = async () => {
   const { code, data, message } = await Api.mapList()
   if (code === 200) {
-    const AllShop: mapObj = {
-      shopId: '-1',
-      label: '全部',
-      value: 0,
-      completedData: '',
-      mapList: [],
-    }
-    mapList.value = [AllShop, ...(Array.isArray(data) ? data : [])]
+    // const AllShop: mapObj = {
+    //   shopId: '-1',
+    //   label: '全部',
+    //   value: 0,
+    //   completedData: '',
+    //   mapList: [],
+    // }
+    mapList.value = data
   } else console.log(message)
   getSenceList()
 }
