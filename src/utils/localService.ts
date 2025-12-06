@@ -8,16 +8,18 @@ export function getLocalMapList() {
   return fetch(baseUrl + 'map.json').then((response) => response.json())
 }
 
-export function getLocalShopList(param: Record<string, unknown>) {
+export function getLocalShopList(param: Record<string, number | string>) {
   return new Promise((resolve) => {
     fetch(baseUrl + 'buyAll.json')
       .then((response) => response.json())
       .then((data) => {
-        let result = data.filter((item: Record<string, unknown>) => item.shopId === param.shopId)
+        let result = data.filter(
+          (item: Record<string, number | string>) => +item.shopId === +param.shopId,
+        )
         fetch(baseUrl + 'sellAll.json')
           .then((response) => response.json())
           .then((sdata) => {
-            result = result.map((shopItem: Record<string, string>) => {
+            result = result.map((shopItem: Record<string, number | string>) => {
               return {
                 id: shopItem.id,
                 url: sdata[shopItem.id].url,
@@ -27,6 +29,7 @@ export function getLocalShopList(param: Record<string, unknown>) {
                 type: shopItem.type,
               }
             })
+            console.log('getLocalShopList', result, param)
             resolve(result)
           })
       })
