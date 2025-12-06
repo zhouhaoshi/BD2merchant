@@ -286,4 +286,22 @@ onMounted(() => {
     }
   }
 }
+@media (max-width: 576px) {
+  .shop_box {
+    grid-template-columns: repeat(1, 1fr); /* 定义三列，每列占据等分的空间 */
+  }
+}
+/* 小屏（手机 ≥576px） */
+@media (max-width: 768px) and (min-width: 577px) {
+  .shop_box {
+    grid-template-columns: repeat(2, 1fr); /* 定义三列，每列占据等分的空间 */
+  }
+}
+
+/* 中屏（平板 ≥768px） */
+@media (max-width: 992px) and (min-width: 769px) {
+  .shop_box {
+    grid-template-columns: repeat(3, 1fr); /* 定义三列，每列占据等分的空间 */
+  }
+}
 </style>
