@@ -14,6 +14,10 @@ export function formatDate(date: Date) {
   return `${year}-${month}-${day}`
 }
 
+export function setLocalImageAddress(url: string, baseUrl: string = 'BD2merchant') {
+  return `/${baseUrl}/${url}`
+}
+
 // 需要特殊处理的对象key
 export const specialKey = [
   'buff',

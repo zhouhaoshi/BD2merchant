@@ -15,7 +15,7 @@
             :value="item.id"
             class="material_select"
           >
-            <img :src="item.url" />
+            <img :src="setLocalImageAddress(item.url || '')" />
             <span>{{ item.name }}</span>
           </el-option>
         </el-select>
@@ -40,6 +40,7 @@
 
 <script lang="ts" setup>
 import Api from '@/api/api'
+import { setLocalImageAddress } from '@/utils/utils'
 const props = defineProps(['dialogVisible', 'shopData'])
 const emit = defineEmits(['close', 'save'])
 defineExpose({ initEditData })

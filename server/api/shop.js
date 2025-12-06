@@ -161,5 +161,6 @@ export const buyUpdata = async (req, res) => {
     (item) => +item.shopId !== +saveShop[0].shopId && !!item.shopId,
   )
   const data = await writeFile(`./data/buyAll.json`, JSON.stringify([...saveData, ...saveShop]))
+  await writeFile(`../public/json/buyAll.json`, JSON.stringify([...saveData, ...saveShop]))
   res.send(data || { code: 2022, message: 'error', data: '修改失败！' })
 }

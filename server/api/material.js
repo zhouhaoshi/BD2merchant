@@ -30,5 +30,6 @@ export const sellList = async (req, res) => {
 // 修改素材价格与商店售卖列表
 export const sellUpdate = async (req, res) => {
   const data = await writeFile(`./data/sellAll.json`, JSON.stringify(req.body))
+  await writeFile(`../public/json/sellAll.json`, JSON.stringify(req.body))
   res.send(data || { code: 2022, message: 'error', data: '修改失败！' })
 }

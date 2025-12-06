@@ -72,7 +72,7 @@
                 : 'abnormal'
           "
         >
-          <img :src="item.url" />
+          <img :src="setLocalImageAddress(item.url)" />
           <div>
             <div>
               {{ item.name }} {{ item.maxPrice - getPrice(+item.price, formInline.discount) }}
@@ -123,8 +123,8 @@
 <script lang="ts" setup>
 import Api from '@/api/api'
 import SenceImage from '@/components/SenceImage.vue'
-import { getHoursAgo, getSenceList as setSence } from '@/utils/utils'
-
+import { getHoursAgo, getSenceList as setSence, setLocalImageAddress } from '@/utils/utils'
+console.log(window.location.href, 'window.location.href')
 const formInline = reactive({
   shopId: '1',
   type: 'buy',

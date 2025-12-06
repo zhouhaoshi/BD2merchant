@@ -18,7 +18,7 @@
     >
       <template #item="{ element, index }">
         <div class="normal">
-          <img :src="element.url" />
+          <img :src="setLocalImageAddress(element.url)" />
           <div>
             <div>{{ element.name }}</div>
             <div><img src="/src/assets/img/icon_resource60005_88.webp" />{{ element.base }}</div>
@@ -46,6 +46,7 @@ import Api from '@/api/api'
 import AddOrEdit from './AddOrEdit.vue'
 import draggable from 'vuedraggable'
 import { ElMessage, ElMessageBox } from 'element-plus'
+import { setLocalImageAddress } from '@/utils/utils'
 const formInline = reactive({
   shopId: '1',
 })
