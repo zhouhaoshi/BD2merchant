@@ -58,16 +58,26 @@ export function K(m, t, time) {
   }
 }
 
-const deduplicate = (arr, key = 'id') => {
-  const map = new Map()
-  arr.forEach((item) => {
-    if (!map.has(item[key])) {
-      map.set(item[key], item)
-    }
-  })
-  return Array.from(map.values())
+// const deduplicate = (arr, key = 'id') => {
+//   const map = new Map()
+//   arr.forEach((item) => {
+//     if (!map.has(item[key])) {
+//       map.set(item[key], item)
+//     }
+//   })
+//   return Array.from(map.values())
+// }
+/**
+ * 根据 shopId 数组，从 data 中查找对应项，并返回 label_value 格式的字符串数组
+ * @param {string[]} shopIdList - 要查询的 shopId 字符串数组（注意：原始数据中 shopId 是字符串）
+ * @returns {string[]} - 形如 ["S1_血骑士", "C3_不可能的美丽", ...] 的数组
+ */
+function getLabelValueByShopIds(shopIdList, shopList) {
+  const shopIdSet = new Set(shopIdList) // 提升查找效率
+  return shopList
+    .filter((item) => shopIdSet.has(item.shopId))
+    .map((item) => `${item.label}_${item.value}`)
 }
-
 // 获取商品购买列表
 export const buyList = async (req, res) => {
   const { shopId, type, time } = req.query
@@ -100,44 +110,26 @@ export const buyList = async (req, res) => {
       }
     } else {
       const dataList = []
-      let shopList
-      // 查询所有商店售卖情况
-      if (shopId === '-1') {
-        shopList = await readFile(`./data/map.json`)
-      }
+      const shopList = await readFile(`./data/map.json`)
       // 查询对应的物资表
       const mData = await readFile(`./data/sellAll.json`)
-      if (shopId === '-1') {
-        shopList.data.forEach((shopItem) => {
-          for (let key in mData.data) {
-            const l = K(mData.data[key], shopItem.shopId, time)
-            // 添加最高价格商品
-            if (l.finalPrice >= mData.data[key].maxPrice) {
-              dataList.push({
-                ...mData.data[key],
-                price: mData.data[key].maxPrice,
-              })
-            }
-          }
-        })
-      } else {
-        for (let key in mData.data) {
-          const l = K(mData.data[key], shopId, time)
-          // 添加最高价格商品
-          if (l.finalPrice >= mData.data[key].maxPrice) {
-            dataList.push({
-              ...mData.data[key],
-              price: mData.data[key].maxPrice,
-            })
-          }
+      const now = time ? new Date(time) : new Date()
+      const day = +now.getDate()
+      for (let key in mData.data) {
+        // 添加最高价格商品
+        if (mData.data[key].date === day) {
+          dataList.push({
+            url: mData.data[key].url,
+            name: mData.data[key].name,
+            shopName: getLabelValueByShopIds(mData.data[key].shopId, shopList.data),
+            price: Math.floor((mData.data[key].base * mData.data[key].maxRate) / 100),
+          })
         }
       }
       // 对 dataList 去重
-      const uniqueDataList = deduplicate(dataList, 'bdx_id')
-      if (shopId === '-1') {
-        uniqueDataList.sort((a, b) => +b.price - +a.price)
-      }
-      res.send({ code: 200, message: 'success', data: uniqueDataList })
+      // const uniqueDataList = deduplicate(dataList, 'bdx_id')
+      dataList.sort((a, b) => +b.price - +a.price)
+      res.send({ code: 200, message: 'success', data: dataList })
     }
   } else {
     res.send({

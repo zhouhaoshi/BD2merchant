@@ -1,7 +1,7 @@
 <template>
   <el-card>
     <el-form :inline="true" :model="formInline" class="demo-form-inline">
-      <el-form-item label="章节">
+      <el-form-item label="章节" v-if="formInline.type === 'buy'">
         <el-select
           v-model="formInline.shopId"
           placeholder="所属章节"
@@ -86,11 +86,19 @@
         </div>
       </template>
       <template v-else>
-        <div v-for="item in shopList" :key="item.id" class="normal">
-          <img :src="item.url" />
+        <div v-for="item in shopList" :key="item.name" class="normal">
+          <img :src="setLocalImageAddress(item.url)" />
           <div>
             <div>{{ item.name }}</div>
             <div><img src="/src/assets/img/icon_resource60005_88.webp" />{{ item.price }}</div>
+            <el-popover placement="top" width="300" trigger="hover">
+              <div v-for="value in item.shopName" :key="value" class="buy_shop">{{ value }}</div>
+              <template v-slot:reference>
+                <span style="cursor: pointer; color: gray; font-size: 12px"
+                  >出售商店：{{ item.shopName && item.shopName[0] }}</span
+                >
+              </template>
+            </el-popover>
           </div>
         </div>
       </template>
@@ -285,6 +293,12 @@ onMounted(() => {
       }
     }
   }
+}
+.buy_shop {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: black;
+  font-size: 18px;
 }
 @media (max-width: 576px) {
   .shop_box {
