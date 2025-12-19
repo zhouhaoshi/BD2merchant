@@ -102,6 +102,21 @@
         {{ props.data.Skill[selectSkill || Object.keys(data.Skill)[select]].ability.Bonding }}
         <h1>基础面板值</h1>
         {{ getBasicPanel() }}
+        <h1>额外数值提供</h1>
+        <el-form :model="additionalAttributes" label-width="auto" :inline="true">
+          <el-form-item label="攻击：" prop="atk">
+            <el-input-number placeholder="请输入百分比攻击" v-model="additionalAttributes.patk" />
+          </el-form-item>
+          <el-form-item label="爆伤：" prop="critical">
+            <el-input-number placeholder="请输入爆伤" v-model="additionalAttributes.critical" />
+          </el-form-item>
+          <el-form-item label="属伤：" prop="attributeDamage">
+            <el-input-number
+              placeholder="请输入属伤"
+              v-model="additionalAttributes.attributeDamage"
+            />
+          </el-form-item>
+        </el-form>
         <h1>装备提供值</h1>
         <span class="tps">
           武器选择
@@ -236,6 +251,13 @@ const exampleData = ref({
   critical: 0,
   patk: 0,
 })
+
+const additionalAttributes = ref({
+  attributeDamage: 0,
+  patk: 0,
+  critical: 0,
+})
+
 // 词条数量
 const entriesNumber = ref({
   atk: 2,
@@ -478,10 +500,11 @@ const setCalculateData = (basicPanel: number, basicCdmg: number, attributeDamage
   calculateData.value.critical =
     basicCdmg +
     dynamicValue.value.clothingFixed.critical +
-    dynamicValue.value.clothingDynamic.critical
+    dynamicValue.value.clothingDynamic.critical +
+    additionalAttributes.value.critical
 
   // 角色属性伤害
-  calculateData.value.attributeDamage = attributeDamage
+  calculateData.value.attributeDamage = attributeDamage + additionalAttributes.value.attributeDamage
 }
 // 强化值计算
 const changeEnhancement = (index: number) => {
@@ -506,7 +529,13 @@ const getCharacterPanel = () => {
     critical += 90
   }
   console.log(atk, patk, '计算值')
-  return calculateMaxValueWithAllocation(atk, patk, critical, calculateData.value.attributeDamage)
+  return calculateMaxValueWithAllocation(
+    atk,
+    patk,
+    critical,
+    calculateData.value.attributeDamage,
+    additionalAttributes.value.patk,
+  )
 }
 </script>
 

@@ -17,7 +17,7 @@
 import { isUse } from '@/utils/localService'
 const routerList = ref(useRouter().options.routes)
 console.log(routerList.value, 'routerList')
-const Whitelist = ['跑商', '排轴']
+const Whitelist = ['跑商', '排轴', '角色管理']
 if (isUse()) {
   routerList.value = routerList.value.filter(
     (item) => typeof item.name === 'string' && Whitelist.includes(item.name),

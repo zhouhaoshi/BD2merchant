@@ -401,8 +401,10 @@ export function debounce<T extends (...args: unknown[]) => unknown>(
  * 约束：n + m = 15，n, m 为非负整数
  *
  * @param x1 - 基础攻击力
- * @param x2 - 基础攻击百分比（如 50 表示 50%）
- * @param y  - 基础爆伤
+ * @param x2 - 基础攻击百分比（如 50 表示
+ * @param y  - 基础爆伤 50%
+ * @param d  - 属性伤害
+ * @param x3  - 额外的百分比攻击
  * @returns 格式化结果字符串
  */
 export function calculateMaxValueWithAllocation(
@@ -410,6 +412,7 @@ export function calculateMaxValueWithAllocation(
   x2: number = 0,
   y: number = 0,
   d: number = 0,
+  x3: number = 0,
 ): string {
   if (!Number.isFinite(x1) || !Number.isFinite(x2) || !Number.isFinite(y)) {
     throw new Error('All inputs must be finite numbers.')
@@ -428,7 +431,7 @@ export function calculateMaxValueWithAllocation(
   for (let n = 0; n <= total; n++) {
     const m = total - n
 
-    const part1 = Math.floor(x1 * (1 + (x2 + k * n) / 100))
+    const part1 = Math.floor(Math.floor(x1 * (1 + (x2 + k * n) / 100)) * (1 + x3 / 100))
     const part2 = y + j * m
     const damage = part1 * (1 + part2 / 100) * (1 + d / 100)
 
