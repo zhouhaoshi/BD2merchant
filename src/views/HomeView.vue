@@ -132,6 +132,7 @@
 import Api from '@/api/api'
 import SenceImage from '@/components/SenceImage.vue'
 import { getHoursAgo, getSenceList as setSence, setLocalImageAddress } from '@/utils/utils'
+import axios from 'axios'
 const formInline = reactive({
   shopId: '1',
   type: 'buy',
@@ -139,7 +140,29 @@ const formInline = reactive({
   sellType: 'all',
   time: new Date(),
 })
-
+axios
+  .post(
+    'https://www.gamekee.com/v1/guild/info',
+    {
+      id: 51,
+    },
+    {
+      headers: {
+        'game-alias': 'zsca2',
+      },
+    },
+  )
+  .then((response) => {
+    interface Member {
+      name: string
+      // Add other properties if needed
+    }
+    const members: Member[] = response.data.data.member
+    console.log(
+      '数据提交成功:',
+      members.map((item) => item.name),
+    )
+  })
 const discountList = ref([
   { lable: '直购', value: 0 },
   { lable: '直购绿脸', value: 0.1 },

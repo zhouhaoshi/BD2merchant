@@ -365,9 +365,10 @@ export function sumMaxNumbersByType(arr: enemyWeaknessBuffObj[]) {
   // 遍历数组，记录每个 type 对应的最大 number
   for (const item of arr) {
     const { type, enemyWeakness } = item
-    if (!maxMap.has(type) || enemyWeakness > maxMap.get(type)) {
-      maxMap.set(type, enemyWeakness)
-    }
+    // 现在是虚弱都是叠加乘区
+    // if (!maxMap.has(type) || enemyWeakness > maxMap.get(type)) {
+    maxMap.set(type, enemyWeakness)
+    // }
   }
   // 对所有最大值求和
   let sum = 0
