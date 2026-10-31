@@ -3,6 +3,7 @@ import { dotBuffType } from '@/utils/globals'
 const liatris: characterDataObj = {
   name: 'liatris',
   cName: '莉亚特里斯',
+  star: 5, // 星级
   element: 'fire',
   attackAttribute: 'atk', // 攻击属性 matk 魔法 atk为物理
   ATK: 352, // 攻击力

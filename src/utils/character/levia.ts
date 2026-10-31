@@ -2,6 +2,7 @@ import { enemyWeaknessDeBuffType } from '@/utils/globals'
 const levia: characterDataObj = {
   name: 'levia',
   cName: '莱维亚',
+  star: 5, // 星级
   element: 'fire',
   attackAttribute: 'matk', // 攻击属性 matk 魔法 atk为物理
   MATK: 396, // 攻击力

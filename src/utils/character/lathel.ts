@@ -1,6 +1,7 @@
 const lathel: characterDataObj = {
   name: 'lathel',
   cName: '拉德尔',
+  star: 5, // 星级
   element: 'fire',
   attackAttribute: 'atk', // 攻击属性 matk 魔法 atk为物理
   ATK: 275, // 攻击力

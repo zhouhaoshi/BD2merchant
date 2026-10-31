@@ -3,6 +3,7 @@ import { damageType, enemyWeaknessDeBuffType } from '@/utils/globals'
 const ventana: characterDataObj = {
   name: 'ventana',
   cName: '班塔纳',
+  star: 5, // 星级
   element: 'light',
   attackAttribute: 'atk', // 攻击属性 matk 魔法 atk为物理
   ATK: 385, // 攻击力

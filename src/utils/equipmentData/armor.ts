@@ -1,0 +1,526 @@
+// 本文件由「装备管理」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
+// 部位：盔甲　共 21 件
+export default [
+  {
+    "content_id": 597659,
+    "name": "不屈甲胄",
+    "icon": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_656/h_984/50118/43758/2025/6/3/162170.png",
+    "icon1": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_84/h_91/50118/497891/2026/3/21/945090.webp",
+    "part": "盔甲",
+    "type": "制作",
+    "roleName": "",
+    "roleAvatar": "",
+    "mainAttr": {
+      "zynl": "",
+      "jbnl1": "防御力 9%",
+      "jbnl2": "防御力 9%"
+    },
+    "otherAttr": {
+      "ur1": {
+        "zynl": "",
+        "jbnl1": "防御力 4.5%",
+        "jbnl2": "防御力 4.5%"
+      },
+      "ur2": {
+        "zynl": "",
+        "jbnl1": "防御力 5.4%",
+        "jbnl2": "防御力 5.4%"
+      },
+      "ur3": {
+        "zynl": "",
+        "jbnl1": "防御力 7.2%",
+        "jbnl2": "防御力 7.2%"
+      }
+    }
+  },
+  {
+    "content_id": 597660,
+    "name": "海神鳞",
+    "icon": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_704/h_1055/50118/43758/2025/6/3/789179.png",
+    "icon1": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_74/h_90/50118/497891/2026/3/21/353671.webp",
+    "part": "盔甲",
+    "type": "制作",
+    "roleName": "",
+    "roleAvatar": "",
+    "mainAttr": {
+      "zynl": "",
+      "jbnl1": "防御力 9%",
+      "jbnl2": "生命力 270"
+    },
+    "otherAttr": {
+      "ur1": {
+        "zynl": "",
+        "jbnl1": "防御力 4.5%",
+        "jbnl2": "生命力 135"
+      },
+      "ur2": {
+        "zynl": "",
+        "jbnl1": "防御力 5.4%",
+        "jbnl2": "生命力 162"
+      },
+      "ur3": {
+        "zynl": "",
+        "jbnl1": "防御力 7.2%",
+        "jbnl2": "生命力 216"
+      }
+    }
+  },
+  {
+    "content_id": 597662,
+    "name": "不死黄金甲",
+    "icon": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_648/h_973/50118/43758/2025/6/3/910286.png",
+    "icon1": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_72/h_98/50118/497891/2026/3/21/647707.webp",
+    "part": "盔甲",
+    "type": "制作",
+    "roleName": "",
+    "roleAvatar": "",
+    "mainAttr": {
+      "zynl": "",
+      "jbnl1": "防御力 9%",
+      "jbnl2": "生命力 30%"
+    },
+    "otherAttr": {
+      "ur1": {
+        "zynl": "",
+        "jbnl1": "防御力 4.5%",
+        "jbnl2": "生命力 15%"
+      },
+      "ur2": {
+        "zynl": "",
+        "jbnl1": "防御力 5.4%",
+        "jbnl2": "生命力 18%"
+      },
+      "ur3": {
+        "zynl": "",
+        "jbnl1": "防御力 7.2%",
+        "jbnl2": "生命力 24%"
+      }
+    }
+  },
+  {
+    "content_id": 597667,
+    "name": "魔兽庇佑",
+    "icon": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_590/h_885/50118/43758/2025/6/3/243654.png",
+    "icon1": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_76/h_95/50118/497891/2026/3/21/10665.webp",
+    "part": "盔甲",
+    "type": "制作",
+    "roleName": "",
+    "roleAvatar": "",
+    "mainAttr": {
+      "zynl": "",
+      "jbnl1": "魔法抵抗 9%",
+      "jbnl2": "魔法抵抗 9%"
+    },
+    "otherAttr": {
+      "ur1": {
+        "zynl": "",
+        "jbnl1": "魔法抵抗 4.50%",
+        "jbnl2": "魔法抵抗 4.50%"
+      },
+      "ur2": {
+        "zynl": "",
+        "jbnl1": "魔法抵抗 5.4%",
+        "jbnl2": "魔法抵抗 5.4%"
+      },
+      "ur3": {
+        "zynl": "",
+        "jbnl1": "魔法抵抗 7.2%",
+        "jbnl2": "魔法抵抗 7.2%"
+      }
+    }
+  },
+  {
+    "content_id": 597746,
+    "name": "死神寿衣",
+    "icon": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_598/h_897/50118/43758/2025/6/3/505124.png",
+    "icon1": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_81/h_94/50118/497891/2026/3/21/851104.webp",
+    "part": "盔甲",
+    "type": "制作",
+    "roleName": "",
+    "roleAvatar": "",
+    "mainAttr": {
+      "zynl": "",
+      "jbnl1": "魔法抵抗 9%",
+      "jbnl2": "生命力 270"
+    },
+    "otherAttr": {
+      "ur1": {
+        "zynl": "",
+        "jbnl1": "魔法抵抗 4.50%",
+        "jbnl2": "生命力 135"
+      },
+      "ur2": {
+        "zynl": "",
+        "jbnl1": "魔法抵抗 5.4%",
+        "jbnl2": "生命力 162"
+      },
+      "ur3": {
+        "zynl": "",
+        "jbnl1": "魔法抵抗 7.2%",
+        "jbnl2": "生命力 216"
+      }
+    }
+  },
+  {
+    "content_id": 597747,
+    "name": "业火长袍",
+    "icon": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_580/h_871/50118/43758/2025/6/3/180175.png",
+    "icon1": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_93/h_93/50118/497891/2026/3/21/140009.webp",
+    "part": "盔甲",
+    "type": "制作",
+    "roleName": "",
+    "roleAvatar": "",
+    "mainAttr": {
+      "zynl": "",
+      "jbnl1": "魔法抵抗 9%",
+      "jbnl2": "生命力 30%"
+    },
+    "otherAttr": {
+      "ur1": {
+        "zynl": "",
+        "jbnl1": "魔法抵抗 4.50%",
+        "jbnl2": "生命力 15%"
+      },
+      "ur2": {
+        "zynl": "",
+        "jbnl1": "魔法抵抗 5.4%",
+        "jbnl2": "生命力 18%"
+      },
+      "ur3": {
+        "zynl": "",
+        "jbnl1": "魔法抵抗 7.2%",
+        "jbnl2": "生命力 24%"
+      }
+    }
+  },
+  {
+    "content_id": 668827,
+    "name": "阿尔塔卢戈",
+    "icon": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_556/h_833/50118/497891/2025/6/3/203160.png",
+    "icon1": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_80/h_92/50118/497891/2026/3/21/306989.webp",
+    "part": "盔甲",
+    "type": "专用",
+    "roleName": "拉德尔",
+    "roleAvatar": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_256/h_256/50118/103682/2026/0/4/45362.png",
+    "mainAttr": {
+      "zynl": "攻击力 45%",
+      "jbnl1": "防御力 9% / 魔法抵抗 9%",
+      "jbnl2": "生命力 270 / 生命力 30% / 防御力 9% / 魔法抵抗 9%"
+    },
+    "otherAttr": {
+      "sr": {
+        "zynl": "攻击力 31.5%",
+        "jbnl1": "防御力 5.25%",
+        "jbnl2": "生命力 157 / 生命力 17.5% / 防御力 5.25%"
+      }
+    }
+  },
+  {
+    "content_id": 668862,
+    "name": "玫瑰精选",
+    "icon": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_507/h_760/50118/86082/2025/6/3/85590.png",
+    "icon1": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_99/h_92/50118/497891/2026/3/21/346447.webp",
+    "part": "盔甲",
+    "type": "专用",
+    "roleName": "爱丽洁",
+    "roleAvatar": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_256/h_256/50118/103682/2026/0/4/849252.png",
+    "mainAttr": {
+      "zynl": "攻击力 67",
+      "jbnl1": "防御力 9% / 魔法抵抗 9%",
+      "jbnl2": "生命力 270 / 生命力 30% / 防御力 9% / 魔法抵抗 9%"
+    },
+    "otherAttr": {
+      "sr": {
+        "zynl": "攻击力 47",
+        "jbnl1": "防御力 5.25%",
+        "jbnl2": "生命力 157 / 生命力 17.5% / 防御力 5.25%"
+      }
+    }
+  },
+  {
+    "content_id": 668879,
+    "name": "小仙子",
+    "icon": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_572/h_857/50118/86082/2025/6/9/889319.webp",
+    "icon1": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_177/h_181/50118/497891/2026/3/21/573496.webp",
+    "part": "盔甲",
+    "type": "专用",
+    "roleName": "芮彼泰雅",
+    "roleAvatar": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_256/h_256/50118/103682/2026/0/4/555586.png",
+    "mainAttr": {
+      "zynl": "魔法抵抗 16.2%",
+      "jbnl1": "魔法抵抗 9% / 防御力 9%",
+      "jbnl2": "生命力 270 / 生命力 30% / 魔法抵抗 9% / 防御力 9%"
+    },
+    "otherAttr": {
+      "sr": {
+        "zynl": "魔法抵抗 9.45%",
+        "jbnl1": "魔法抵抗 9%",
+        "jbnl2": "生命力 270 / 生命力 30% / 魔法抵抗 9%"
+      }
+    }
+  },
+  {
+    "content_id": 668891,
+    "name": "春日祝福",
+    "icon": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_512/h_768/50118/72324/2025/6/3/985998.png",
+    "icon1": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_93/h_98/50118/497891/2026/3/24/895565.webp",
+    "part": "盔甲",
+    "type": "魔兽",
+    "roleName": "",
+    "roleAvatar": "",
+    "mainAttr": {
+      "zynl": "",
+      "jbnl1": "魔法抵抗 7.2%",
+      "jbnl2": "魔法抵抗 7.2%"
+    },
+    "otherAttr": {
+      "sr": {
+        "zynl": "",
+        "jbnl1": "魔法抵抗 4.2%",
+        "jbnl2": "魔法抵抗 4.2%"
+      }
+    }
+  },
+  {
+    "content_id": 668899,
+    "name": "塔罗斯索玛",
+    "icon": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_695/h_1042/50118/72324/2025/6/3/883025.png",
+    "icon1": "",
+    "part": "盔甲",
+    "type": "魔兽",
+    "roleName": "",
+    "roleAvatar": "",
+    "mainAttr": {
+      "zynl": "",
+      "jbnl1": "防御力 7.2%",
+      "jbnl2": "防御力 7.2%"
+    },
+    "otherAttr": {
+      "sr": {
+        "zynl": "",
+        "jbnl1": "防御力 4.2%",
+        "jbnl2": "防御力 4.2%"
+      }
+    }
+  },
+  {
+    "content_id": 668903,
+    "name": "肥猫套装",
+    "icon": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_542/h_812/50118/72324/2025/6/3/591006.png",
+    "icon1": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_83/h_92/50118/497891/2026/3/24/246144.webp",
+    "part": "盔甲",
+    "type": "魔兽",
+    "roleName": "",
+    "roleAvatar": "",
+    "mainAttr": {
+      "zynl": "",
+      "jbnl1": "防御力 7.2%",
+      "jbnl2": "生命力 216"
+    },
+    "otherAttr": {
+      "sr": {
+        "zynl": "",
+        "jbnl1": "防御力 4.2%",
+        "jbnl2": "生命力 126"
+      }
+    }
+  },
+  {
+    "content_id": 668911,
+    "name": "人肉战车",
+    "icon": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_620/h_930/50118/72324/2025/6/3/320934.png",
+    "icon1": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_94/h_95/50118/497891/2026/3/24/244560.webp",
+    "part": "盔甲",
+    "type": "魔兽",
+    "roleName": "",
+    "roleAvatar": "",
+    "mainAttr": {
+      "zynl": "",
+      "jbnl1": "防御力 7.2%",
+      "jbnl2": "生命力 24%"
+    },
+    "otherAttr": {
+      "sr": {
+        "zynl": "",
+        "jbnl1": "防御力 4.2%",
+        "jbnl2": "生命力 14%"
+      }
+    }
+  },
+  {
+    "content_id": 668917,
+    "name": "寒霜盔甲",
+    "icon": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_512/h_1024/50118/72324/2025/6/3/685102.png",
+    "icon1": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_73/h_84/50118/497891/2026/3/24/11511.webp",
+    "part": "盔甲",
+    "type": "魔兽",
+    "roleName": "",
+    "roleAvatar": "",
+    "mainAttr": {
+      "zynl": "",
+      "jbnl1": "防御力 7.2%",
+      "jbnl2": "防御力 7.2%"
+    },
+    "otherAttr": {
+      "sr": {
+        "zynl": "",
+        "jbnl1": "防御力 4.2%",
+        "jbnl2": "防御力 4.2%"
+      }
+    }
+  },
+  {
+    "content_id": 668921,
+    "name": "虔诚笃信的证明",
+    "icon": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_512/h_1024/50118/72324/2025/6/3/717130.png",
+    "icon1": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_93/h_85/50118/497891/2026/3/24/80163.webp",
+    "part": "盔甲",
+    "type": "魔兽",
+    "roleName": "",
+    "roleAvatar": "",
+    "mainAttr": {
+      "zynl": "",
+      "jbnl1": "魔法抵抗 7.2%",
+      "jbnl2": "生命力 216"
+    },
+    "otherAttr": {
+      "sr": {
+        "zynl": "",
+        "jbnl1": "魔法抵抗 4.2%",
+        "jbnl2": "生命力 126"
+      }
+    }
+  },
+  {
+    "content_id": 668927,
+    "name": "夏日派对",
+    "icon": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_512/h_1024/50118/72324/2025/6/3/579996.png",
+    "icon1": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_97/h_98/50118/497891/2026/3/24/682426.webp",
+    "part": "盔甲",
+    "type": "魔兽",
+    "roleName": "",
+    "roleAvatar": "",
+    "mainAttr": {
+      "zynl": "",
+      "jbnl1": "魔法抵抗 7.2%",
+      "jbnl2": "魔法抵抗 7.2%"
+    },
+    "otherAttr": {
+      "sr": {
+        "zynl": "",
+        "jbnl1": "魔法抵抗 4.2%",
+        "jbnl2": "魔法抵抗 4.2%"
+      }
+    }
+  },
+  {
+    "content_id": 689728,
+    "name": "仙子女王",
+    "icon": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_512/h_580/50118/497891/2026/0/14/118815.png",
+    "icon1": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_87/h_102/50118/497891/2026/3/21/651317.webp",
+    "part": "盔甲",
+    "type": "专用",
+    "roleName": "葛拉娜德",
+    "roleAvatar": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_361/h_358/50118/497891/2026/0/14/656604.png",
+    "mainAttr": {
+      "zynl": "生命力 54%",
+      "jbnl1": "魔法抵抗 9%/ 魔法抵抗 9%",
+      "jbnl2": "生命力 270 / 生命力 30% / 魔法抵抗 9%/ 魔法抵抗 9%"
+    },
+    "otherAttr": {
+      "sr": {
+        "zynl": "生命力 31.5%",
+        "jbnl1": "魔法抵抗 9%",
+        "jbnl2": "生命力 270 / 生命力 30% / 魔法抵抗 9%"
+      }
+    }
+  },
+  {
+    "content_id": 696599,
+    "name": "苍蓝独裁者",
+    "icon": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_512/h_1024/50118/497891/2026/2/6/379979.webp",
+    "icon1": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_82/h_89/50118/497891/2026/3/24/525086.webp",
+    "part": "盔甲",
+    "type": "魔兽",
+    "roleName": "角色名称",
+    "roleAvatar": "",
+    "mainAttr": {
+      "zynl": "",
+      "jbnl1": "防御力 7.2%",
+      "jbnl2": "生命力 24%"
+    },
+    "otherAttr": {
+      "sr": {
+        "zynl": "",
+        "jbnl1": "",
+        "jbnl2": ""
+      }
+    }
+  },
+  {
+    "content_id": 696620,
+    "name": "凶兽的气魄",
+    "icon": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_512/h_1024/50118/497891/2026/2/6/618455.webp",
+    "icon1": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_93/h_98/50118/497891/2026/3/24/859070.webp",
+    "part": "盔甲",
+    "type": "魔兽",
+    "roleName": "角色名称",
+    "roleAvatar": "",
+    "mainAttr": {
+      "zynl": "",
+      "jbnl1": "防御力 7.2%",
+      "jbnl2": "生命力 24%"
+    },
+    "otherAttr": {
+      "sr": {
+        "zynl": "",
+        "jbnl1": "",
+        "jbnl2": ""
+      }
+    }
+  },
+  {
+    "content_id": 696623,
+    "name": "毒蛇胸甲",
+    "icon": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_512/h_1024/50118/497891/2026/2/6/712542.webp",
+    "icon1": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_90/h_94/50118/497891/2026/3/24/492546.webp",
+    "part": "盔甲",
+    "type": "魔兽",
+    "roleName": "角色名称",
+    "roleAvatar": "",
+    "mainAttr": {
+      "zynl": "",
+      "jbnl1": "防御力 7.2%",
+      "jbnl2": "防御力 7.2%"
+    },
+    "otherAttr": {
+      "sr": {
+        "zynl": "",
+        "jbnl1": "",
+        "jbnl2": ""
+      }
+    }
+  },
+  {
+    "content_id": 696630,
+    "name": "廢料裝甲",
+    "icon": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_512/h_1024/50118/497891/2026/2/6/593984.webp",
+    "icon1": "//cdnimg-v2.gamekee.com/wiki2.0/images/w_85/h_85/50118/497891/2026/3/24/541736.webp",
+    "part": "盔甲",
+    "type": "魔兽",
+    "roleName": "角色名称",
+    "roleAvatar": "",
+    "mainAttr": {
+      "zynl": "",
+      "jbnl1": "防御力 7.2%",
+      "jbnl2": "生命力 24%"
+    },
+    "otherAttr": {
+      "sr": {
+        "zynl": "",
+        "jbnl1": "",
+        "jbnl2": ""
+      }
+    }
+  }
+] as equipmentDataObj[]

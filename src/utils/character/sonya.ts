@@ -2,6 +2,7 @@ import { enemyWeaknessDeBuffType, specialInjuryBuffType } from '@/utils/globals'
 const sonya: characterDataObj = {
   name: 'sonya',
   cName: '索尼娅',
+  star: 5, // 星级
   element: 'dark',
   attackAttribute: 'matk', // 攻击属性 matk 魔法 atk为物理
   MATK: 407, // 攻击力

@@ -1,4 +1,10 @@
 <template>
+  <div class="page_header">
+    <div>
+      <div class="page_title">跑商</div>
+      <div class="page_subtitle">每日商店买卖 · 价格走势与折扣参考</div>
+    </div>
+  </div>
   <el-card>
     <el-form :inline="true" :model="formInline" class="demo-form-inline">
       <el-form-item label="章节" v-if="formInline.type === 'buy'">
@@ -104,7 +110,7 @@
       </template>
     </div>
   </el-card>
-  <el-card style="margin-top: 20px" v-if="senceList.length">
+  <el-card class="sence_card" v-if="senceList.length">
     <el-radio-group v-model="sence" size="large" @change="changeSence">
       <el-radio-button v-for="(item, index) in senceList" :value="index" :key="item.url">
         {{ item.name }}</el-radio-button
@@ -268,32 +274,40 @@ onMounted(() => {
   background-color: rgb(239.8, 248.9, 235.3);
   color: var(--el-color-success);
 }
+.sence_card {
+  margin-top: 24px;
+}
 .shop_box {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 定义三列，每列占据等分的空间 */
   grid-template-rows: auto; /* 行高自动 */
-  gap: 10px; /* 设置行和列之间的间距 */
+  gap: 12px; /* 设置行和列之间的间距 */
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE 10+ */
   user-select: none; /* 标准语法 */
   cursor: pointer;
   .normal {
-    background-color: rgba(45, 212, 191, 0.2);
-    border: 1px solid rgba(45, 212, 191, 0.6);
+    background-color: rgba(45, 212, 191, 0.1);
+    border: 1px solid rgba(45, 212, 191, 0.35);
   }
   .cuisine_food {
-    background-color: rgba(102, 157, 255, 0.6);
-    border: 1px solid rgb(0, 94, 255);
+    background-color: rgba(102, 157, 255, 0.16);
+    border: 1px solid rgba(102, 157, 255, 0.45);
   }
   .abnormal {
-    background-color: rgba(255, 0, 0, 0.2);
-    border: 1px solid rgba(255, 0, 0, 0.6);
+    background-color: rgba(255, 77, 79, 0.08);
+    border: 1px solid rgba(255, 77, 79, 0.3);
   }
   & > div {
-    padding: 20px;
-    border-radius: 20px;
+    padding: 16px;
+    border-radius: var(--app-radius);
     display: flex;
+    transition: var(--app-transition);
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--app-shadow-hover);
+    }
     & > img {
       width: 60px;
       height: 60px;
@@ -302,6 +316,7 @@ onMounted(() => {
     & > div {
       & > div:first-child {
         margin-left: 5px;
+        font-weight: 600;
       }
       & > div + div {
         margin-top: 5px;

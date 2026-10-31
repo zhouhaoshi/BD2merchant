@@ -1,4 +1,10 @@
 <template>
+  <div class="page_header">
+    <div>
+      <div class="page_title">场景管理</div>
+      <div class="page_subtitle">维护商店场景背景图 · 支持拖拽排序</div>
+    </div>
+  </div>
   <el-card>
     <el-form :inline="true" :model="formInline" class="demo-form-inline">
       <el-form-item label="章节">

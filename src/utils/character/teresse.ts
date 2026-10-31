@@ -3,6 +3,7 @@ import { dotBuffType } from '@/utils/globals'
 const teresse: characterDataObj = {
   name: 'teresse',
   cName: '泰瑞丝',
+  star: 5, // 星级
   element: 'water',
   attackAttribute: 'atk', // 攻击属性 matk 魔法 atk为物理
   ATK: 132, // 攻击力

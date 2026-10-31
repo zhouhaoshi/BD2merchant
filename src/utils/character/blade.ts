@@ -2,6 +2,7 @@ import { enemyWeaknessDeBuffType } from '@/utils/globals'
 const blade: characterDataObj = {
   name: 'blade',
   cName: '布莱德',
+  star: 5, // 星级
   element: 'dark',
   attackAttribute: 'atk', // 攻击属性 matk 魔法 atk为物理
   ATK: 429, // 攻击力

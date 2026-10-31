@@ -1,12 +1,45 @@
 <template>
+  <div class="page_header">
+    <div>
+      <div class="page_title">排轴</div>
+      <div class="page_subtitle">配置出战队伍 · 按回合规划技能释放与伤害预估</div>
+    </div>
+  </div>
   <el-card>
-    <!-- 选择其他轴 --- 新增轴  --- 保存只每个轴单独保存，id为当前时间戳-->
+    <!-- 排轴模式 + boss选择 + 开始模拟 -->
+    <div class="mode_bar">
+      <el-radio-group v-model="mode" @change="onModeChange">
+        <el-radio-button value="warcraft">魔兽战</el-radio-button>
+        <el-radio-button value="guild">公会战</el-radio-button>
+      </el-radio-group>
+      <el-select
+        v-model="warcraftKey"
+        placeholder="选择boss"
+        class="boss_select"
+        @change="onBossChange"
+      >
+        <el-option
+          v-for="(item, key) in store.warcraftList"
+          :key="key"
+          :label="item.cName || key"
+          :value="key"
+        />
+      </el-select>
+      <el-select v-model="bossLevel" placeholder="boss等级" class="boss_select">
+        <el-option v-for="item in bossLevelList" :key="item" :label="`Lv.${item}`" :value="item" />
+      </el-select>
+      <el-button type="primary" @click="startSimulation">开始模拟</el-button>
+    </div>
     <!-- 队伍角色配置 从角色管理中获取角色 -- 展示队伍中角色头像-->
-    <div class="team_box">
+    <div v-for="teamIndex in shaftConfig.teamNumber" :key="teamIndex" class="team_box">
       <div class="team_box_title">
-        <div class="team_list">配队</div>
+        <div class="team_list">队伍{{ teamIndex }}</div>
         <div class="team_list">
-          <div v-for="value in selectCharactarList" :key="value.name" class="team_character_box">
+          <div
+            v-for="value in teamCharactarList(teamIndex - 1)"
+            :key="value.name"
+            class="team_character_box"
+          >
             <img
               :src="splicingqImage(value.Skill[Object.keys(value.Skill)[0]].qimage, 'qimage')"
               alt=""
@@ -14,121 +47,88 @@
           </div>
         </div>
       </div>
-      <div class="select_btn" @click="dialogVisible = true">选择角色</div>
     </div>
-    <!-- 鼠标经过角色格展示角色buff -->
-    <div></div>
-    <!-- 列表话展示轴，行线展示回合，列为角色技能-->
-    <div></div>
+    <div class="select_btn" @click="dialogVisible = true">选择角色</div>
   </el-card>
-  <el-card style="margin-top: 20px">
-    <el-tabs
-      v-model="editableTabsValue"
-      type="card"
-      editable
-      @tab-change="handleTabChange"
-      @edit="handleTabsEdit"
-    >
+  <el-card class="tab_card">
+    <el-tabs v-model="currentTeamTab" type="border-card">
       <el-tab-pane
-        :key="item.name"
-        v-for="(item, index) in editableTabs"
-        :label="`T${index * 2 + 1}`"
-        :name="item.name"
+        v-for="teamIndex in shaftConfig.teamNumber"
+        :key="teamIndex"
+        :label="`队伍${teamIndex}`"
+        :name="teamIndex - 1"
       >
-        <div class="shaft_box" v-if="!isEmpty(warcraftPumpkin)">
-          <ActionBar
-            ref="actionBar"
-            :key="`ActionBar_${index}`"
-            :charactarList="item.charactarList"
-            :turnNumber="editableTabsValue"
-            v-if="item.charactarList.length"
-            @change="changeCharactarList"
-          />
-          <ActionBattleGroundBar
-            ref="actionBattleGroundBar"
-            :key="`actionBattleGroundBar_${index}`"
-            :turnNumber="editableTabsValue"
-            :attackSequence="item.charactarList"
-            :battleGroundList="item.battleGroundList"
-            :beforeBuffList="index === 0 ? {} : editableTabs[index - 1].buffList"
-            :beforeWarcraftBuffList="index === 0 ? {} : editableTabs[index - 1].warcraftBuffList"
-            :warcraftCanUseSkill="editableTabs[index].warcraftCanUseSkill"
-            :alldamageList="alldamageList"
-            :warcraftData="warcraftPumpkin"
-            :canUseSp="index === 0 ? 14 : editableTabs[index].canUseSp"
-            @changeSkill="changeSkill"
-            @set-turm-damage="setTurmDamage"
-            @changeBuff="changeBuff"
-            @nextTrunSp="nextTrunSp"
-          />
-        </div>
+        <el-tabs
+          v-model="editableTabsValue[teamIndex - 1]"
+          type="card"
+          editable
+          @tab-change="handleTabChange"
+          @edit="handleTabsEdit"
+        >
+          <el-tab-pane
+            :key="item.name"
+            v-for="(item, index) in teamTabs(teamIndex - 1)"
+            :label="`T${index * 2 + 1}`"
+            :name="item.name"
+          >
+            <div class="shaft_box" v-if="!isEmpty(warcraftData)">
+              <ActionBar
+                :key="`ActionBar_${teamIndex}_${index}`"
+                :charactarList="item.charactarList"
+                :turnNumber="editableTabsValue[teamIndex - 1]"
+                v-if="item.charactarList.length"
+                @change="changeCharactarList"
+              />
+              <ActionBattleGroundBar
+                :ref="(el) => setGroundRef(el, teamIndex - 1, item.name)"
+                :key="`actionBattleGroundBar_${teamIndex}_${index}`"
+                :turnNumber="editableTabsValue[teamIndex - 1]"
+                :attackSequence="item.charactarList"
+                :battleGroundList="item.battleGroundList"
+                :beforeBuffList="index === 0 ? {} : teamTabs(teamIndex - 1)[index - 1].buffList"
+                :beforeWarcraftBuffList="
+                  index === 0 ? {} : teamTabs(teamIndex - 1)[index - 1].warcraftBuffList
+                "
+                :warcraftCanUseSkill="item.warcraftCanUseSkill"
+                :alldamageList="alldamageList"
+                :warcraftData="warcraftData"
+                :canUseSp="index === 0 ? startSp : item.canUseSp"
+                :spLimit="shaftConfig.maxSp"
+                :groundColumn="shaftConfig.column"
+                :groundRow="shaftConfig.row"
+                @changeSkill="changeSkill"
+                @set-turm-damage="setTurmDamage"
+                @changeBuff="changeBuff"
+                @nextTrunSp="nextTrunSp"
+              />
+            </div>
+          </el-tab-pane>
+        </el-tabs>
       </el-tab-pane>
     </el-tabs>
   </el-card>
-  <el-card style="margin-top: 20px">
-    <!-- 选择其他轴 --- 新增轴  --- 保存只每个轴单独保存，id为当前时间戳-->
-    <!-- 队伍角色配置 从角色管理中获取角色 -- 展示队伍中角色头像-->
-    <div></div>
-    <!-- 具体排轴 tab页选择回合数 --- 可以新增tab --- tab内容为3x4的格子可以拖到和选择角色 左侧为出手列表 --可拖到，默认队伍排序 --- 鼠标经过角色格展示角色buff -->
-    <div></div>
-    <!-- 列表话展示轴，行线展示回合，列为角色技能-->
-    <div></div>
-    <el-form :model="userdata" label-width="auto">
-      <el-form-item label="面板" prop="panel">
-        <el-input placeholder="请输入面板" v-model="userdata.panel" />
-      </el-form-item>
-      <el-form-item label="攻击力/魔法力加成" prop="attackAdd">
-        <el-input placeholder="请输入攻击力/魔法力加成" v-model="userdata.attackAdd" />
-      </el-form-item>
-      <el-form-item label="爆伤" prop="critical">
-        <el-input placeholder="请输入爆伤" v-model="userdata.critical" />
-      </el-form-item>
-      <el-form-item label="倍率" prop="multiplier">
-        <el-input placeholder="请输入倍率" v-model="userdata.multiplier" />
-      </el-form-item>
-      <el-form-item label="易伤/脆弱" prop="enemyWeakness">
-        <el-input placeholder="请输入易伤/脆弱" v-model="userdata.enemyWeakness" />
-      </el-form-item>
-      <el-form-item label="增伤" prop="increasedDamage">
-        <el-input placeholder="请输入增伤" v-model="userdata.increasedDamage" />
-      </el-form-item>
-      <el-form-item label="属性伤害" prop="attributeDamage">
-        <el-input placeholder="请输入属性伤害" v-model="userdata.attributeDamage" />
-      </el-form-item>
-      <el-form-item label="当前连锁数" prop="chainCount">
-        <el-input placeholder="请输入当前连锁数" v-model="userdata.chainCount" />
-      </el-form-item>
-      <el-form-item label="连锁伤害加成" prop="chainDamageAdd">
-        <el-input placeholder="请输入连锁伤害加成" v-model="userdata.chainDamageAdd" />
-      </el-form-item>
-      <el-form-item label="弱点加伤" prop="weakPointDamageAdd">
-        <el-input placeholder="请输入弱点加伤" v-model="userdata.weakPointDamageAdd" />
-      </el-form-item>
-      <el-form-item label="防御/魔抗" prop="enemyDefence">
-        <el-input placeholder="请输入防御/魔抗" v-model="userdata.enemyDefence" />
-      </el-form-item>
-      <el-form-item label="减伤" prop="damageReduction">
-        <el-input placeholder="请输入减伤" v-model="userdata.damageReduction" />
-      </el-form-item>
-      <el-form-item label="属性抵抗" prop="attributeResistance">
-        <el-input placeholder="请输入属性抵抗" v-model="userdata.attributeResistance" />
-      </el-form-item>
-    </el-form>
-    <div class="damge">
-      <!-- .toLocaleString() 三三展示 -->
-      期望伤害：<span>{{ calculateDamage(userdata).toLocaleString() }}</span>
-    </div>
-  </el-card>
-  <charactarSelect :dialog-visible="dialogVisible" @close="charactarSelectClose" />
+  <charactarSelect
+    :dialog-visible="dialogVisible"
+    :mode="mode"
+    :team-number="shaftConfig.teamNumber"
+    :team-limit="shaftConfig.teamLimit"
+    :select-charactar-list="selectCharactarList"
+    @close="charactarSelectClose"
+  />
+  <SimulationResult
+    :dialog-visible="simulationVisible"
+    :result="simulationResult"
+    @close="simulationVisible = false"
+  />
 </template>
 
 <script lang="ts" setup>
 import { ElMessageBox } from 'element-plus'
 
-import calculateDamage from '@/utils/damage'
 import ActionBar from '@/components/ActionBar.vue'
 import ActionBattleGroundBar from '@/components/BattleGround.vue'
 import charactarSelect from './charactarSelect.vue'
+import SimulationResult from '@/components/SimulationResult.vue'
 import { setCharacterList } from '@/utils/allCharacter'
 import { setWarcraftList } from '@/utils/warcraft'
 import {
@@ -142,96 +142,158 @@ import {
   conversionScopeCommon,
   isEmpty,
 } from '@/utils/utils'
-
+import { computeCharacterFinalStats } from '@/utils/equipmentEnhance'
+import { runBattleSimulation } from '@/utils/battleSimulator'
 import { useWarcraftListStore } from '@/stores/warcraft'
+import { useCharacterStore } from '@/stores/character'
+import { useEquipmentStore } from '@/stores/equipment'
 
 const store = useWarcraftListStore()
-
-import { useCharacterStore } from '@/stores/character'
-
 const characterStore = useCharacterStore()
+const equipmentStore = useEquipmentStore()
 
-// Provide a local variable with a relaxed type for the pumpkin warcraft entry
-// to satisfy the component prop type (use a more precise type here if available).
-const editableTabsValue = ref(1)
-const tabIndex = ref(1)
-const dialogVisible = ref<boolean>(false)
-const selectCharactarList = ref<Record<string, selectCharacterDataObj>>({})
-const editableTabs = ref<editableTabsObj[]>([
-  {
-    name: 1,
-    charactarList: [],
-    battleGroundList: [],
-    buffList: {},
-    warcraftBuffList: {},
-    warcraftCanUseSkill: {},
-    canUseSp: 0,
+// 排轴模式
+const mode = ref<shaftMode>('warcraft')
+const shaftConfigMap: Record<shaftMode, shaftConfigObj> = {
+  guild: { column: 5, row: 5, teamNumber: 1, teamLimit: 7, maxSp: 30 },
+  warcraft: { column: 4, row: 3, teamNumber: 3, teamLimit: 5, maxSp: 20 },
+}
+const shaftConfig = computed(() => shaftConfigMap[mode.value])
+// 起始SP
+const startSp = 14
+
+// boss选择
+const warcraftKey = ref<string>('pumpkin')
+const bossLevel = ref<number>()
+const warcraftData = computed<warcraftData | undefined>(() => {
+  const data = store.warcraftList[warcraftKey.value]
+  return (data as unknown as warcraftData) || undefined
+})
+const bossLevelList = computed(() => {
+  const data = warcraftData.value
+  return data ? Object.keys(data.levelData).map((item) => +item) : []
+})
+watch(
+  bossLevelList,
+  (list) => {
+    if (list.length && (!bossLevel.value || !list.includes(bossLevel.value))) {
+      bossLevel.value = list[0]
+    }
   },
-])
+  { immediate: true },
+)
+const onBossChange = () => {
+  bossLevel.value = undefined
+}
+// 模式切换：重置队伍并预选对应模式的boss
+const onModeChange = () => {
+  const presetKey = mode.value === 'guild' ? 'guildDemo' : 'pumpkin'
+  if (store.warcraftList[presetKey]) {
+    warcraftKey.value = presetKey
+  }
+  selectCharactarList.value = {}
+  setEditableTabs()
+}
+
+// 角色选择弹窗
+const dialogVisible = ref<boolean>(false)
+const selectCharactarList = ref<Record<number, Record<string, selectCharacterDataObj>>>({})
+const teamCharactarList = (teamIndex: number) =>
+  Object.values(selectCharactarList.value[teamIndex] || {}) as selectCharacterDataObj[]
+
+// 队伍tab
+const currentTeamTab = ref(0)
+// 每队的回合tab
+const editableTabsValue = ref<number[]>([])
+const tabIndex = ref<number[]>([])
+const editableTabs = ref<Record<number, editableTabsObj[]>>({})
+const teamTabs = (teamIndex: number) => editableTabs.value[teamIndex] || []
+
 const alldamageList = ref<Record<string, number>[]>([])
-const editableCharactarList = ref<editableCharactar[]>([])
-const editableBattleGroundList = ref()
-const userdata = ref<damageObj>({
-  panel: 0,
-  attackAdd: 0,
-  critical: 0,
-  multiplier: 0,
-  enemyWeakness: 0,
-  increasedDamage: 0,
-  enemyDefence: 0,
-  attributeDamage: 0,
-  damageReduction: 0,
-  chainCount: 0,
-  chainDamageAdd: 0,
-  attributeResistance: 0,
-  weakPointDamageAdd: 0,
+
+// 场地组件实例
+const groundRefs = ref<Record<string, { initialization: () => void }>>({})
+const setGroundRef = (el: unknown, teamIndex: number, tabName: number) => {
+  const key = `${teamIndex}_${tabName}`
+  if (el) {
+    groundRefs.value[key] = el as { initialization: () => void }
+  } else {
+    delete groundRefs.value[key]
+  }
+}
+const activeGround = () => {
+  const teamIndex = currentTeamTab.value
+  const tabName = editableTabsValue.value[teamIndex]
+  return groundRefs.value[`${teamIndex}_${tabName}`]
+}
+
+const createTurnTab = (
+  name: number,
+  charactarList: editableCharactar[],
+  battleGroundList: editableCharactar[],
+): editableTabsObj => ({
+  name,
+  charactarList: JSON.parse(JSON.stringify(charactarList)),
+  battleGroundList: JSON.parse(JSON.stringify(battleGroundList)),
+  buffList: {},
+  warcraftBuffList: {},
+  warcraftCanUseSkill: {},
+  canUseSp: 0,
 })
 
-const actionBar = ref()
-const actionBattleGroundBar = ref()
+// 构建排轴角色（面板沿用裸面板，装备加成在模拟时计算）
+const buildEditableCharactar = (item: selectCharacterDataObj): editableCharactar => ({
+  panel: item.panel,
+  critical: item.critical,
+  name: item.name,
+  cName: item.cName,
+  attributeDamage: item.attributeDamage,
+  element: item.element,
+  attackAttribute: item.attackAttribute,
+  attackType: item.attackType, // attackType: 'skip', // 攻击类型 front为最前 skip为跳过
+  skill: setSkill(item),
+})
 
-// 设置轴的初始值
-const setEditableTabs = (data: Record<string, selectCharacterDataObj>) => {
-  editableCharactarList.value = []
-  const dataList = Object.values(data)
-  dataList.forEach((item) => {
-    const editableCharactar: editableCharactar = {
-      panel: item.panel,
-      critical: item.critical,
-      name: item.name,
-      cName: item.cName,
-      attributeDamage: item.attributeDamage,
-      element: item.element,
-      attackAttribute: item.attackAttribute,
-      attackType: item.attackType, // attackType: 'skip', // 攻击类型 front为最前 skip为跳过
-      skill: setSkill(item),
-    }
-    editableCharactarList.value?.push(editableCharactar)
-  })
-  editableBattleGroundList.value = new Array(12)
-  editableBattleGroundList.value = setCharacterLocation(
-    editableCharactarList.value,
-    editableBattleGroundList.value,
-  )
-  editableTabs.value = editableTabs.value.map((item) => ({
-    name: item.name,
-    charactarList: JSON.parse(JSON.stringify(editableCharactarList.value)),
-    battleGroundList: JSON.parse(JSON.stringify(editableBattleGroundList.value)),
-    buffList: {},
-    warcraftBuffList: {},
-    warcraftCanUseSkill: {},
-    canUseSp: 0,
-  }))
+// 设置轴的初始值（按队伍）
+const setEditableTabs = () => {
+  const nextTabs: Record<number, editableTabsObj[]> = {}
+  const nextTabValues: number[] = []
+  const nextTabIndex: number[] = []
+  for (let teamIndex = 0; teamIndex < shaftConfig.value.teamNumber; teamIndex++) {
+    const dataList = teamCharactarList(teamIndex)
+    const teamCharacters = dataList.map(buildEditableCharactar)
+    const teamBattleGroundList = setCharacterLocation(
+      teamCharacters,
+      new Array(shaftConfig.value.column * shaftConfig.value.row),
+      shaftConfig.value.column,
+      shaftConfig.value.row,
+    ) as editableCharactar[]
+    nextTabs[teamIndex] = [createTurnTab(1, teamCharacters, teamBattleGroundList)]
+    nextTabValues[teamIndex] = 1
+    nextTabIndex[teamIndex] = 1
+  }
+  editableTabs.value = nextTabs
+  editableTabsValue.value = nextTabValues
+  tabIndex.value = nextTabIndex
+  currentTeamTab.value = 0
+  alldamageList.value = []
 }
+
 // 角色数据发生变化，同步更新场地角色情况
 const changeCharactarList = () => {
-  const index = (editableTabsValue.value - 1) / 2
-  editableTabs.value[index].battleGroundList = setCharacterLocation(
-    editableTabs.value[index].charactarList,
-    editableTabs.value[index].battleGroundList,
+  const teamIndex = currentTeamTab.value
+  const tabName = editableTabsValue.value[teamIndex]
+  const tab = (editableTabs.value[teamIndex] || []).find((item) => item.name === tabName)
+  if (!tab) return
+  tab.battleGroundList = setCharacterLocation(
+    tab.charactarList,
+    tab.battleGroundList,
+    shaftConfig.value.column,
+    shaftConfig.value.row,
   ) as editableCharactar[]
-  actionBattleGroundBar.value[index].initialization()
+  activeGround()?.initialization()
 }
+
 const setSkill = (skillData: selectCharacterDataObj) => {
   const skill: Record<string, editableCharactarSkill> = {}
   const skillDataList = Object.values(skillData.Skill).filter((item) =>
@@ -325,45 +387,37 @@ const setSkillEffect = (effect: effectObj, potentials: effectObj) => {
   return skill
 }
 
-const charactarSelectClose = (dataList: Record<string, selectCharacterDataObj>) => {
+const charactarSelectClose = (dataList: Record<number, Record<string, selectCharacterDataObj>>) => {
   dialogVisible.value = false
   selectCharactarList.value = dataList
-  setEditableTabs(dataList)
+  setEditableTabs()
 }
 
 const handleTabsEdit = (targetName: number, action: string) => {
+  const teamIndex = currentTeamTab.value
+  const tabs = editableTabs.value[teamIndex] || []
   if (action === 'add') {
-    const newTabName = (tabIndex.value = tabIndex.value + 2)
-    editableTabs.value.push({
-      name: newTabName,
-      charactarList: JSON.parse(JSON.stringify(editableCharactarList.value || [])),
-      battleGroundList: JSON.parse(JSON.stringify(editableBattleGroundList.value || [])),
-      buffList: {},
-      warcraftBuffList: {},
-      warcraftCanUseSkill: {},
-      canUseSp: 0,
-    })
-    editableTabsValue.value = newTabName
+    const newTabName = (tabIndex.value[teamIndex] = (tabIndex.value[teamIndex] || 1) + 2)
+    const lastTab = tabs[tabs.length - 1]
+    tabs.push(
+      createTurnTab(newTabName, lastTab?.charactarList || [], lastTab?.battleGroundList || []),
+    )
+    editableTabsValue.value[teamIndex] = newTabName
   }
   if (action === 'remove') {
     // 删除回合后会出现奇怪的问题。待处理
     ElMessageBox.confirm(`是否删除T${targetName}回合？`)
       .then(() => {
-        const tabs = editableTabs.value
-        let activeName = editableTabsValue.value
+        let activeName = editableTabsValue.value[teamIndex]
         if (activeName === targetName) {
-          tabs.forEach((tab, index) => {
-            if (tab.name === targetName) {
-              const nextTab = tabs[index + 1] || tabs[index - 1]
-              if (nextTab) {
-                activeName = nextTab.name
-              }
-            }
-          })
+          const index = tabs.findIndex((tab) => tab.name === targetName)
+          const nextTab = tabs[index + 1] || tabs[index - 1]
+          if (nextTab) {
+            activeName = nextTab.name
+          }
         }
-
-        editableTabsValue.value = activeName
-        editableTabs.value = tabs.filter((tab) => tab.name !== targetName)
+        editableTabsValue.value[teamIndex] = activeName
+        editableTabs.value[teamIndex] = tabs.filter((tab) => tab.name !== targetName)
       })
       .catch(() => {})
   }
@@ -371,8 +425,7 @@ const handleTabsEdit = (targetName: number, action: string) => {
 
 // 每次更新都初始化，防止buff遗留问题
 const handleTabChange = () => {
-  const index = (editableTabsValue.value - 1) / 2
-  actionBattleGroundBar.value[index].initialization()
+  nextTick(() => activeGround()?.initialization())
 }
 
 interface allBuffList {
@@ -380,46 +433,118 @@ interface allBuffList {
   warcraftBuff: Record<number, warcraftBuffObj>
 }
 
+// 当前队伍/回合的tab
+const activeTab = () => {
+  const teamIndex = currentTeamTab.value
+  const tabName = editableTabsValue.value[teamIndex]
+  return (editableTabs.value[teamIndex] || []).find((item) => item.name === tabName)
+}
+// 当前tab在队伍中的下标
+const activeTabIndex = () => {
+  const teamIndex = currentTeamTab.value
+  const tabName = editableTabsValue.value[teamIndex]
+  return (editableTabs.value[teamIndex] || []).findIndex((item) => item.name === tabName)
+}
+
 const changeBuff = ({ userBuff, warcraftBuff }: allBuffList) => {
-  // 回合结束时传递buff向后续回合。先循环buff对象。拿到角色的buff duration - addTurn >= editableTabsValue（回合数） 则代表可以进入该回合否则移除buff
-  const index = (editableTabsValue.value - 1) / 2
+  // 回合结束时传递buff向后续回合
+  const tab = activeTab()
+  if (!tab) return
   if (!!userBuff) {
-    editableTabs.value[index].buffList = JSON.parse(JSON.stringify(userBuff))
+    tab.buffList = JSON.parse(JSON.stringify(userBuff))
   }
   if (!!warcraftBuff) {
-    editableTabs.value[index].warcraftBuffList = JSON.parse(JSON.stringify(warcraftBuff))
+    tab.warcraftBuffList = JSON.parse(JSON.stringify(warcraftBuff))
   }
 }
 // 设置下个回合可用sp
 const nextTrunSp = (sp: number) => {
-  const index = (editableTabsValue.value - 1) / 2
-  if (index + 1 < editableTabs.value.length) {
-    editableTabs.value[index + 1].canUseSp = JSON.parse(JSON.stringify(sp))
+  const teamIndex = currentTeamTab.value
+  const tabs = editableTabs.value[teamIndex] || []
+  const index = activeTabIndex()
+  if (index + 1 < tabs.length) {
+    tabs[index + 1].canUseSp = JSON.parse(JSON.stringify(sp))
   }
 }
-
 // 魔兽可使用技能队列
 const changeSkill = (warcraftCanUseSkill: warcraftCanUseSkillObj) => {
-  const index = (editableTabsValue.value - 1) / 2
+  const teamIndex = currentTeamTab.value
+  const tabs = editableTabs.value[teamIndex] || []
+  const index = activeTabIndex()
   // 最后一根回合不需要往下传递
-  if (index + 1 < editableTabs.value.length) {
+  if (index + 1 < tabs.length) {
     // 下个回合魔兽可以使用的技能
-    editableTabs.value[index + 1].warcraftCanUseSkill = JSON.parse(
-      JSON.stringify(warcraftCanUseSkill),
-    )
+    tabs[index + 1].warcraftCanUseSkill = JSON.parse(JSON.stringify(warcraftCanUseSkill))
   }
 }
-
 // 设置指定回合的伤害
 const setTurmDamage = (damage: Record<string, number>) => {
-  const index = (editableTabsValue.value - 1) / 2
+  const index = activeTabIndex()
   if (alldamageList.value.length - 1 < index) {
     alldamageList.value.length = index
   }
   alldamageList.value[index] = damage
 }
 
-const warcraftPumpkin = ref<warcraftData>()
+// 战斗模拟
+const simulationVisible = ref<boolean>(false)
+const simulationResult = ref<battleSimulationResult>()
+const startSimulation = () => {
+  if (!warcraftData.value) {
+    ElMessageBox.alert('请先选择boss', '提示')
+    return
+  }
+  if (bossLevel.value === undefined) {
+    ElMessageBox.alert('请先选择boss等级', '提示')
+    return
+  }
+  const equipmentMap = new Map(equipmentStore.equipmentList.map((item) => [item.content_id, item]))
+  const teams: battleSimulationTeam[] = []
+  for (let teamIndex = 0; teamIndex < shaftConfig.value.teamNumber; teamIndex++) {
+    const teamChars = teamCharactarList(teamIndex)
+    if (!teamChars.length) {
+      ElMessageBox.alert(`请先为队伍${teamIndex + 1}选择出战角色`, '提示')
+      return
+    }
+    const characters: battleSimulationCharacter[] = teamChars.map((charactar) => {
+      const stats = computeCharacterFinalStats(charactar, charactar.equipments || [], equipmentMap)
+      const bareStats = computeCharacterFinalStats(charactar, [], new Map())
+      const editableCharactar = buildEditableCharactar(charactar)
+      const maxHp = Math.round(
+        charactar.HP * (1 + (stats.php + (charactar.Awakening?.PHP || 0)) / 100) + stats.hp,
+      )
+      return {
+        charactar: editableCharactar,
+        stats,
+        bareStats,
+        skills: Object.values(editableCharactar.skill),
+        def: Math.round((charactar.DEF + stats.def) * (1 + stats.pdef / 100)),
+        mres: Math.round((charactar.MRES + stats.mdef) * (1 + stats.pmdef / 100)),
+        hp: maxHp,
+        maxHp,
+      }
+    })
+    const turns: battleSimulationAction[][] = (editableTabs.value[teamIndex] || []).map((tab) =>
+      (tab.charactarList || []).map((charactar) => ({
+        charactarName: charactar.name,
+        skillName: charactar.selectSikll || Object.keys(charactar.skill)[0],
+      })),
+    )
+    teams.push({ index: teamIndex, characters, turns })
+  }
+  simulationResult.value = runBattleSimulation({
+    mode: mode.value,
+    groundColumn: shaftConfig.value.column,
+    groundRow: shaftConfig.value.row,
+    boss: warcraftData.value,
+    bossLevel: bossLevel.value,
+    teams,
+    maxSp: shaftConfig.value.maxSp,
+    startSp,
+    maxTurn: 300,
+  })
+  simulationVisible.value = true
+}
 
 onMounted(async () => {
   if (isEmpty(characterStore.characterList)) {
@@ -429,18 +554,35 @@ onMounted(async () => {
   if (isEmpty(store.warcraftList)) {
     const warcraftList = await setWarcraftList()
     store.setWarcraftList(warcraftList)
-    warcraftPumpkin.value = store.warcraftList['pumpkin'] as unknown as warcraftData
-  } else {
-    warcraftPumpkin.value = store.warcraftList['pumpkin'] as unknown as warcraftData
   }
+  if (!equipmentStore.equipmentList.length && !equipmentStore.loading) {
+    await equipmentStore.loadEquipment()
+  }
+  if (!store.warcraftList[warcraftKey.value]) {
+    warcraftKey.value = 'pumpkin'
+  }
+  setEditableTabs()
 })
 </script>
 
 <style lang="less" scoped>
+.tab_card {
+  margin-top: 24px;
+}
+.mode_bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  .boss_select {
+    width: 200px;
+    margin: 0 12px;
+  }
+}
 .team_box {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 12px;
   .team_box_title {
     display: flex;
     align-items: center;
@@ -453,10 +595,14 @@ onMounted(async () => {
         text-align: center;
         cursor: pointer;
         padding: 5px;
-        box-shadow: var(--el-box-shadow-light);
-        transition: transform 0.2s;
-        border-radius: 5px;
+        border: 1px solid var(--app-border);
+        border-radius: var(--app-radius-sm);
+        transition: var(--app-transition);
         position: relative;
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: var(--app-shadow-hover);
+        }
         & > img {
           position: absolute;
           width: 100%;
@@ -470,13 +616,20 @@ onMounted(async () => {
       }
     }
   }
-  .select_btn {
-    background-color: #409eff;
-    color: #fff;
-    font-size: 14px;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
+}
+.select_btn {
+  margin-top: 16px;
+  display: inline-block;
+  background-color: var(--app-primary);
+  color: #fff;
+  font-size: 14px;
+  padding: 10px 20px;
+  border-radius: var(--app-radius-sm);
+  cursor: pointer;
+  transition: var(--app-transition);
+  &:hover {
+    background-color: var(--app-primary-hover);
+    box-shadow: 0 6px 16px rgba(61, 90, 254, 0.35);
   }
 }
 .shaft_box {
@@ -488,15 +641,5 @@ onMounted(async () => {
   & > div:last-child {
     width: calc(100% - 100px);
   }
-}
-.damge {
-  span {
-    color: red;
-  }
-}
-.damge + .damge {
-  margin-top: 10px;
-  border-top: 1px solid #eee;
-  padding-top: 10px;
 }
 </style>

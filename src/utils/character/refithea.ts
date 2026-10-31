@@ -1,6 +1,7 @@
 const refithea: characterDataObj = {
   name: 'refithea',
   cName: '芮彼泰雅',
+  star: 5, // 星级
   element: 'light',
   attackAttribute: 'matk', // 攻击属性 matk 魔法 atk为物理
   MATK: 187, // 攻击力

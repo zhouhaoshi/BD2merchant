@@ -58,6 +58,12 @@ export function splicingImage(id?: string, type?: string) {
 }
 
 export function splicingqImage(url?: string, value: string = 'qimage') {
+  // 已经是完整地址（比如从 gamekee 抓来的 wiki 图）：gamekee 的 CDN 校验 Referer，
+  // 浏览器直接请求会返回 567，所以 wiki 图统一走 dev server 的 /gk-cdn 代理
+  if (url && /^https?:\/\//.test(url)) {
+    const cdn = url.match(/^https?:\/\/[^/]+(\/wiki2\.0\/.*)$/)
+    return cdn ? `/gk-cdn${cdn[1]}` : url
+  }
   return value === 'qimage'
     ? `https://www.souseihaku.com/characters/${url}.webp`
     : `https://www.souseihaku.com/characters-large/${url}.webp`
@@ -464,9 +470,15 @@ export async function copyTextToClipboard(text: number) {
 
 export function setEnhancementValue(value: number = 6) {
   const calculate = value + 6
+  const round2 = (n: number) => Math.round(n * 100) / 100
   return {
-    atk: Math.floor(calculate * 2.5),
-    patk: calculate * 1.68,
-    critical: calculate * 3.36,
+    atk: Math.floor(calculate * 2.5), // 固定攻击
+    patk: round2(calculate * 1.68), // 百分比攻击
+    critical: round2(calculate * 3.36), // 爆伤
+    def: round2(calculate * 0.6), // 物抗
+    mdef: round2(calculate * 0.6), // 魔抗
+    hp: calculate * 18, // 固定生命
+    php: round2(calculate * 2), // 百分比生命
+    criticalRate: round2(calculate * 0.56), // 暴击率
   }
 }

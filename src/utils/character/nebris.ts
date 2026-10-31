@@ -1,6 +1,7 @@
 const nebris: characterDataObj = {
   name: 'nebris',
   cName: '内布利斯',
+  star: 5, // 星级
   element: 'wind',
   attackAttribute: 'atk', // 攻击属性 matk 魔法 atk为物理
   ATK: 396, // 攻击力

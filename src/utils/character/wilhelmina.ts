@@ -1,6 +1,7 @@
 const wilhelmina: characterDataObj = {
   name: 'wilhelmina',
   cName: '威廉明娜',
+  star: 5, // 星级
   element: 'water',
   attackAttribute: 'atk', // 攻击属性 matk 魔法 atk为物理
   ATK: 319, // 攻击力

@@ -50,6 +50,15 @@
               />
             </el-checkbox-group>
           </div>
+          <!-- 爆发技能 -->
+          <div v-if="Object.keys(burstList).length">
+            <div class="title">爆发技能</div>
+            <div v-for="(value, key) in burstList" :key="key" class="burst_box">
+              <div class="burst_name">{{ key }}：消耗 {{ value.sp }} SP</div>
+              <div v-if="value.description">{{ value.description }}</div>
+              <skillScope v-if="value.scope" :scopeList="value.scope as number[][]" />
+            </div>
+          </div>
           <!-- 技能描述 -->
           <div v-if="data && data.Skill">
             {{
@@ -354,6 +363,12 @@ const radio1 = ref('0')
 const activeName = ref('skill')
 const checkList = ref([])
 const potentials = ref()
+// 当前选中服装的爆发技能升级（爆发1/爆发2/爆发3）
+const burstList = computed(() => {
+  if (!props.data?.Skill) return {}
+  const skill = props.data.Skill[selectSkill.value || Object.keys(props.data.Skill)[select.value]]
+  return (skill?.burst as Record<string, burstObj> | undefined) || {}
+})
 const changeSkillPotentials = () => {
   const skillPotentials =
     props.data.Skill[selectSkill.value || Object.keys(props.data.Skill)[select.value]]
@@ -546,12 +561,13 @@ const getCharacterPanel = () => {
   text-align: center;
   cursor: pointer;
   padding: 10px;
-  box-shadow: var(--el-box-shadow-light);
-  transition: transform 0.2s;
-  border-radius: 20px;
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius);
+  transition: var(--app-transition);
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--el-box-shadow);
+    transform: translateY(-4px);
+    box-shadow: var(--app-shadow-hover);
+    border-color: var(--el-color-primary-light-7);
   }
   .img_box {
     width: 118px;
@@ -572,11 +588,11 @@ const getCharacterPanel = () => {
 }
 .tps {
   display: inline-block;
-  color: gray;
+  color: var(--app-text-secondary);
   margin: 20px 0;
   font-size: 12px;
   & > span {
-    color: rgb(56, 56, 255);
+    color: var(--app-primary);
     cursor: pointer;
   }
 }
@@ -584,24 +600,45 @@ const getCharacterPanel = () => {
   display: flex;
   align-items: center;
   cursor: pointer;
-  color: #3838ff;
+  color: var(--app-primary);
 }
 .skill_details {
   & > div {
     margin-top: 20px;
   }
   .title {
-    font-size: 24px;
-    font-weight: 600;
+    font-size: 18px;
+    font-weight: 700;
     margin-bottom: 10px;
+    padding-left: 10px;
+    border-left: 4px solid var(--app-primary);
+    color: var(--app-text);
   }
   .breakthrough_level {
     margin-right: 10px;
     cursor: pointer;
-    font-size: 24px;
+    font-size: 22px;
+    color: var(--app-text-secondary);
+    transition: var(--app-transition);
+    &:hover {
+      color: var(--app-primary);
+    }
   }
   .active {
-    color: red;
+    color: var(--app-primary);
+    font-weight: 700;
+  }
+}
+.burst_box {
+  margin-bottom: 15px;
+  padding: 12px 16px;
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-sm);
+  background: var(--el-color-primary-light-9);
+  .burst_name {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--app-navy);
   }
 }
 </style>

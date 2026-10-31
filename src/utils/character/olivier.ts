@@ -1,6 +1,7 @@
 const olivier: characterDataObj = {
   name: 'olivier',
   cName: '奥利维耶',
+  star: 5, // 星级
   element: 'light',
   attackAttribute: 'matk', // 攻击属性 matk 魔法 atk为物理
   MATK: 341, // 攻击力

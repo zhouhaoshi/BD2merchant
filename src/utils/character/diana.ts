@@ -1,6 +1,7 @@
 const diana: characterDataObj = {
   name: 'diana',
   cName: '黛安娜',
+  star: 5, // 星级
   element: 'wind',
   attackAttribute: 'matk', // 攻击属性 matk 魔法 atk为物理
   attackType: 'skip', // 攻击类型 front为最前 skip为跳过

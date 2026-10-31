@@ -63,6 +63,7 @@ interface warcraftBuff {
 interface characterDataObj extends userComonElement {
   name: string // 英文名称 / key
   cName: string // 中文名称
+  star?: number // 星级（5/4/3），wiki 图鉴抓取生成的角色才有，部分手写文件没有
   ATK?: number // 攻击力
   MATK?: number // 魔力值
   HP: number // 生命值
@@ -95,14 +96,24 @@ interface characterDataObj extends userComonElement {
   Skill: Record<string, skillObj> // 技能列表
 }
 
-interface selectCharacterDataObj extends characterDataObj, damageObj, skillSelectShow {}
+interface selectCharacterDataObj extends characterDataObj, damageObj, skillSelectShow {
+  equipments?: equipmentWearObj[] // 佩戴的装备
+}
 
 type skillObjKeys = keyof skillObj
+// 爆发技能升级（爆发1/爆发2/爆发3）
+interface burstObj {
+  sp: number // 消耗SP
+  description: string // 爆发效果
+  scope?: number[][] // 爆发后的攻击范围，二维坐标系。没有范围改变的角色无此字段
+}
+
 // 角色技能数据结构定义
 interface skillObj extends commonSkill {
   description: string // 技能描述
   effect: Record<number, effectObj> // 技能效果
   skillPotentials: Record<string, unknown> // 技能觉醒效果
+  burst?: Record<string, burstObj> // 爆发技能升级（爆发1/爆发2/爆发3），老角色没有
   ability: Record<string, unknown> // 服装能力
 }
 
@@ -235,6 +246,15 @@ interface editableTabsObj {
   canUseSp: number // 本回合可使用sp
 }
 
+// 排轴配置（按排轴类型）
+interface shaftConfigObj {
+  column: number // 场地列数
+  row: number // 场地行数
+  teamNumber: number // 队伍数量
+  teamLimit: number // 每队人数上限
+  maxSp: number // SP 上限
+}
+
 interface editableCharactar extends userComonElement {
   name: string // 名称
   cName?: string // 中文名称
@@ -326,6 +346,7 @@ interface warcraftData extends userComonElement {
   // 魔兽特殊技能
   specialSkill: warcraftSpecialSkillData[]
   levelData: Record<string, warcraftLevelData>
+  killTurn?: number // 必杀技释放回合（为空则按技能队列顺序遇到 kill 技能时释放）
 }
 // 魔兽弱点
 interface warcraftScopeWeaknessesData {
@@ -343,6 +364,7 @@ interface warcraftSkillData {
   description?: string
   buff?: buffObj[]
   fixed?: number // 打击位置是否固定 1为固定
+  kill?: boolean // 必杀技标记：释放后解除敌人有益效果并使敌人立即死亡
 }
 
 // 魔兽弱点

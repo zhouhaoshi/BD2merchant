@@ -41,6 +41,16 @@ const router = createRouter({
       name: '排轴',
       component: shaftView,
     },
+    {
+      path: '/equipment',
+      name: '装备管理',
+      component: () => import('../views/equipment/EquipmentView.vue'),
+    },
+    {
+      path: '/character-crawler',
+      name: '角色抓取',
+      component: () => import('../views/CharacterCrawler/CharacterCrawlerView.vue'),
+    },
   ],
 })
 

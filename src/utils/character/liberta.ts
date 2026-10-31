@@ -1,6 +1,7 @@
 const liberta: characterDataObj = {
   name: 'liberta',
   cName: '黎维塔',
+  star: 5, // 星级
   element: 'fire',
   attackAttribute: 'atk', // 攻击属性 matk 魔法 atk为物理
   ATK: 187, // 攻击力

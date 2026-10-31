@@ -1,6 +1,7 @@
 const eleaneer: characterDataObj = {
   name: 'eleaneer',
   cName: '艾尼尔',
+  star: 5, // 星级
   element: 'dark',
   attackAttribute: 'atk', // 攻击属性 matk 魔法 atk为物理
   ATK: 352, // 攻击力

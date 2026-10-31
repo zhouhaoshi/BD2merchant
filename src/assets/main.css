@@ -1,13 +1,68 @@
-body{
+/* =========================================================
+   BD2merchant 设计系统
+   配色思路：藏青（结构）+ 靛蓝（主交互）+ 暖金（强调）
+   间距遵循 4/8/16/24/32 节奏，圆角 8/14 两级
+   ========================================================= */
+:root {
+  /* 品牌色 */
+  --app-primary: #3d5afe;
+  --app-primary-hover: #2f48d8;
+  --app-navy: #1e2a5a;
+  --app-navy-light: #2a3a78;
+  --app-gold: #c9a45c;
+  --app-gold-soft: rgba(201, 164, 92, 0.16);
+
+  /* 中性色 */
+  --app-bg: #f2f4fa;
+  --app-card: #ffffff;
+  --app-text: #1f2430;
+  --app-text-secondary: #66708a;
+  --app-text-weak: #9aa3bc;
+  --app-border: #e6e9f2;
+
+  /* 形状与阴影 */
+  --app-radius: 14px;
+  --app-radius-sm: 8px;
+  --app-shadow: 0 2px 8px rgba(30, 42, 90, 0.05);
+  --app-shadow-hover: 0 12px 28px rgba(30, 42, 90, 0.14);
+  --app-transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* 元素属性色（火/水/风/光/暗） */
+  --element-light: #d4a017;
+  --element-dark: #7c3aed;
+  --element-fire: #e11d48;
+  --element-wind: #16a34a;
+  --element-water: #2563eb;
+
+  /* Element Plus 主题对齐 */
+  --el-color-primary: #3d5afe;
+  --el-color-primary-light-3: #7c8efc;
+  --el-color-primary-light-5: #9eabfd;
+  --el-color-primary-light-7: #c0c8fe;
+  --el-color-primary-light-8: #d1d7fe;
+  --el-color-primary-light-9: #e8ebff;
+  --el-color-primary-dark-2: #2f48d8;
+  --el-border-radius-base: 8px;
+  --el-font-size-base: 14px;
+}
+
+body {
   margin: 0;
   padding: 0;
+  background: var(--app-bg);
+  color: var(--app-text);
+  font-family:
+    'PingFang SC', 'HarmonyOS Sans SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
+
 section {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 24px 32px;
   font-weight: normal;
 }
+
 /* 去除a标签下划线 */
 a {
   color: black;
@@ -42,4 +97,74 @@ a:active {
 a:focus {
   color: black;
   text-decoration: none;
+}
+
+/* ===== 全局组件观感：卡片统一圆角与柔和阴影 ===== */
+.el-card {
+  --el-card-border-color: var(--app-border);
+  --el-card-border-radius: var(--app-radius);
+  --el-card-shadow: var(--app-shadow);
+  --el-card-shadow-light: var(--app-shadow);
+}
+
+/* ===== 页面通用骨架：标题区 + 筛选工具栏 ===== */
+.page_header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 0 4px;
+
+  .page_title {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--app-text);
+  }
+
+  .page_subtitle {
+    font-size: 13px;
+    color: var(--app-text-weak);
+  }
+}
+
+/* 筛选工具栏卡片 */
+.filter_card {
+  margin-bottom: 20px;
+  background: var(--app-card);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius);
+  box-shadow: var(--app-shadow);
+
+  .filter_body {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px 24px;
+    padding: 16px 20px;
+  }
+
+  .filter_group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .filter_label {
+    font-size: 13px;
+    color: var(--app-text-secondary);
+    white-space: nowrap;
+  }
+}
+
+/* 筛选结果计数 */
+.filter_count {
+  margin-left: auto;
+  font-size: 13px;
+  color: var(--app-text-weak);
+
+  b {
+    color: var(--app-primary);
+    font-weight: 600;
+  }
 }

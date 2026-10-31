@@ -1,6 +1,7 @@
 const luvencia: characterDataObj = {
   name: 'luvencia',
   cName: '卢班希亚',
+  star: 5, // 星级
   element: 'dark',
   attackAttribute: 'atk', // 攻击属性 matk 魔法 atk为物理
   ATK: 319, // 攻击力

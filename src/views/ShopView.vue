@@ -1,4 +1,10 @@
 <template>
+  <div class="page_header">
+    <div>
+      <div class="page_title">商店管理</div>
+      <div class="page_subtitle">维护各章节商店的在售商品 · 支持拖拽排序</div>
+    </div>
+  </div>
   <el-card>
     <el-form :inline="true" :model="formInline" class="demo-form-inline">
       <el-form-item label="章节">
@@ -150,25 +156,30 @@ onMounted(() => {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 定义三列，每列占据等分的空间 */
   grid-template-rows: auto; /* 行高自动 */
-  gap: 10px; /* 设置行和列之间的间距 */
+  gap: 12px; /* 设置行和列之间的间距 */
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE 10+ */
   user-select: none; /* 标准语法 */
   cursor: pointer;
   .normal {
-    background-color: rgba(45, 212, 191, 0.2);
-    border: 1px solid rgba(45, 212, 191, 0.6);
+    background-color: rgba(61, 90, 254, 0.06);
+    border: 1px solid var(--app-border);
     position: relative;
+    transition: var(--app-transition);
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--app-shadow-hover);
+      border-color: var(--el-color-primary-light-7);
+    }
     .overlay {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(0, 0, 0, 0.8);
-      border-radius: 20px;
+      background-color: rgba(30, 42, 90, 0.55);
+      border-radius: var(--app-radius);
       opacity: 0;
       transition: opacity 0.2s;
       display: flex;
@@ -177,7 +188,7 @@ onMounted(() => {
       & > svg {
         height: 40px;
         width: 40px;
-        color: #000;
+        color: #fff;
       }
     }
     &:hover {
@@ -187,8 +198,8 @@ onMounted(() => {
     }
   }
   & > div {
-    padding: 20px;
-    border-radius: 20px;
+    padding: 16px;
+    border-radius: var(--app-radius);
     display: flex;
     & > img {
       width: 60px;
@@ -198,6 +209,7 @@ onMounted(() => {
     & > div {
       & > div:first-child {
         margin-left: 5px;
+        font-weight: 600;
       }
       & > div + div {
         margin-top: 5px;

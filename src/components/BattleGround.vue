@@ -2,7 +2,7 @@
   <div ref="BattleGround" class="battle_ground_box">
     <el-form :inline="true" :model="form" label-width="auto">
       <el-form-item label="场地范围" prop="type" style="width: 200px">
-        <el-select v-model="form.size" placeholder="选择场地范围">
+        <el-select v-model="form.size" placeholder="选择场地范围" @change="setTempEnemyList">
           <el-option label="3x4" :value="12" />
           <el-option label="5x5" :value="25" />
         </el-select>
@@ -49,7 +49,10 @@
           <template v-slot:reference>
             <span>
               <span v-if="warcraftUseSkillData?.cname" style="cursor: pointer; margin-left: 20px"
-                >使用技能 <span style="color: blue">{{ warcraftUseSkillData?.cname }}</span></span
+                >使用技能 <span style="color: blue">{{ warcraftUseSkillData?.cname }}</span>
+                <span v-if="(warcraftUseSkillData as warcraftSkillData)?.kill" class="kill_tag"
+                  >必杀</span
+                ></span
               ></span
             >
           </template>
@@ -69,6 +72,7 @@
             buff_box: friendlyPosition.includes(index),
             attack_box: showAttackPositionBuyWarcraft.includes(index),
           }"
+          :style="{ width: 100 / groundColumn + '%' }"
           @click="changeLocation(index)"
         >
           <span v-if="enemy">
@@ -88,7 +92,12 @@
       </div>
       <!-- 敌军场地 -->
       <div class="enemy_troops">
-        <div v-for="(enemy, index) in tempEnemyList" :key="index" class="enemy_troops_box">
+        <div
+          v-for="(enemy, index) in tempEnemyList"
+          :key="index"
+          class="enemy_troops_box"
+          :style="{ width: 100 / groundColumn + '%' }"
+        >
           <span
             v-if="enemy"
             class="enemy_box"
@@ -154,6 +163,9 @@ const props = withDefaults(
     warcraftCanUseSkill: warcraftCanUseSkillObj
     alldamageList: Record<string, number>[]
     canUseSp: number
+    spLimit?: number
+    groundColumn?: number
+    groundRow?: number
   }>(),
   {
     battleGroundList: () => [],
@@ -165,6 +177,9 @@ const props = withDefaults(
     warcraftCanUseSkill: () => ({}),
     alldamageList: () => [],
     canUseSp: 0,
+    spLimit: 20,
+    groundColumn: 4,
+    groundRow: 3,
   },
 )
 const emit = defineEmits(['changeBuff', 'changeSkill', 'setTurmDamage', 'nextTrunSp'])
@@ -178,9 +193,14 @@ interface tempEnemyObj {
   weakPointDamageAdd: number // 弱点增伤
 }
 
-const limitSp = ref<number>(20) // 最大sp数量
+const limitSp = ref<number>(props.spLimit) // 最大sp数量
 const trunReplySp = ref<number>(0) // 本回合回复的sp
 const trunUseSp = ref<number>(0) // 本回合使用技能消耗的sp
+
+// 场地坐标转换包装（5x5 场地时列数不同）
+const tIndex = (coordinates: string | number[]) =>
+  transformationIndex(coordinates, props.groundColumn)
+const tCoordinates = (number: number) => transformationCoordinates(number, props.groundColumn)
 
 const userBuff = ref<Record<string, userBuffObj[]>>({}) // 用来记录本回合角色身上的buff 回合结束后统一更新
 const warcraftBuff = ref<Record<number, warcraftBuffObj>>({}) // 用来记录本回合魔兽身上的buff 回合结束后统一更新
@@ -215,7 +235,7 @@ const changeLocation = (index: number) => {
   }
 }
 const form = ref<Record<string, number | undefined>>({
-  size: 12,
+  size: props.groundColumn * props.groundRow,
   level: undefined,
 })
 
@@ -233,7 +253,7 @@ const setTempEnemyList = () => {
   warcraftLevelList.value = props.warcraftData.levelData
   form.value.level = Object.keys(warcraftLevelList.value).map((item) => +item)[0] // 默认使用第一个面板
   scopeList.forEach((item: number[]) => {
-    tempEnemyList.value[transformationIndex(item)] = {
+    tempEnemyList.value[tIndex(item)] = {
       chainCount: 0, // 当前连锁数量
       chainDamageAdd: [],
       enemyWeakness: [],
@@ -245,7 +265,7 @@ const setTempEnemyList = () => {
   const scopeWeaknessesList = props.warcraftData.scopeWeaknesses
   scopeWeaknessesList.forEach((item: scopeWeaknessesObj) => {
     item.scope.forEach((sItem: number[]) => {
-      tempEnemyList.value[transformationIndex(sItem)].weakPointDamageAdd = item.weaknesses
+      tempEnemyList.value[tIndex(sItem)].weakPointDamageAdd = item.weaknesses
     })
   })
 }
@@ -258,7 +278,7 @@ const selectCharactarBox = () => {
   const selectSikll = selectCharactar.selectSikll || Object.keys(selectCharactar.skill)[0]
   const charactarSkillTarget = selectCharactar.skill[selectSikll].target
   if (charactarSkillTarget === 'friendly') {
-    const mainTarget = transformationCoordinates(selectPosition)
+    const mainTarget = tCoordinates(selectPosition)
       .split(',')
       .map((item) => +item)
     getAllAttackPosition(mainTarget, selectCharactar)
@@ -268,7 +288,10 @@ const selectCharactarBox = () => {
 }
 
 // 获取选中的皮肤攻击到的主目标位置
-const getMainAttackPosition = (column: number = 4, row: number = 3) => {
+const getMainAttackPosition = (
+  column: number = props.groundColumn,
+  row: number = props.groundRow,
+) => {
   let attackMaintarget: number[] = JSON.parse(JSON.stringify(priorityAttack.value)) // 主目标位置
   const selectPosition = selectIndex.value || 0
   // 皮肤攻击范围 皮肤攻击类型 魔兽范围进行匹配
@@ -281,7 +304,7 @@ const getMainAttackPosition = (column: number = 4, row: number = 3) => {
       min: column * index,
     }))
     const warcraftScope = props.warcraftData.scope // 魔兽占用范围
-    const warcraftScopeIndexList = warcraftScope.map((item: number[]) => transformationIndex(item)) // 转化为下标方便查询
+    const warcraftScopeIndexList = warcraftScope.map((item: number[]) => tIndex(item)) // 转化为下标方便查询
     let firstTarget: string[] = [] // 第一次触碰到的目标
     let secondTarget: string[] = [] // 第二次触碰到的目标 攻击类型为跳过的时候
     let value = rowRange[nowColumn].min
@@ -294,9 +317,9 @@ const getMainAttackPosition = (column: number = 4, row: number = 3) => {
       while (value <= rowRange[nowColumn].max) {
         if (warcraftScopeIndexList.includes(value)) {
           if (firstTarget.length > 0) {
-            secondTarget = transformationCoordinates(value).split(',')
+            secondTarget = tCoordinates(value).split(',')
           } else {
-            firstTarget = transformationCoordinates(value).split(',')
+            firstTarget = tCoordinates(value).split(',')
           }
         }
         if (firstTarget.length > 0 && selectCharactar.attackType === 'front') {
@@ -327,7 +350,7 @@ const getMainAttackPosition = (column: number = 4, row: number = 3) => {
     console.log('没有找到可以打击的目标，确认代码或者魔兽')
     return
   } else {
-    attackPosition.value = [transformationIndex(attackMaintarget)]
+    attackPosition.value = [tIndex(attackMaintarget)]
     getAllAttackPosition(attackMaintarget, selectCharactar)
   }
 }
@@ -335,17 +358,15 @@ const getMainAttackPosition = (column: number = 4, row: number = 3) => {
 const getAllAttackPosition = (
   attackMaintarget: number[], // 主目标位置 坐标
   selectCharactar: editableCharactar, // 角色信息
-  column: number = 4, // 场地大小
-  row: number = 3,
+  column: number = props.groundColumn, // 场地大小
+  row: number = props.groundRow,
 ) => {
   const selectSikll = selectCharactar.selectSikll || Object.keys(selectCharactar.skill)[0]
   const charactarSkillScope = selectCharactar.skill[selectSikll].scope
   const target: 'friendly' | 'enemy' = selectCharactar.skill[selectSikll].target || 'enemy'
   if (target === 'enemy') {
     const warcraftDataScope: number[][] = props.warcraftData.scope // 魔兽范围
-    const warcraftScopeIndexList = warcraftDataScope.map((item: number[]) =>
-      transformationIndex(item),
-    ) // 转化为下标方便查询
+    const warcraftScopeIndexList = warcraftDataScope.map((item: number[]) => tIndex(item)) // 转化为下标方便查询
     const realSkillScope = charactarSkillScope
       ?.map(
         (
@@ -353,7 +374,7 @@ const getAllAttackPosition = (
         ) => item.map((val: number, i: number) => val + (attackMaintarget[i] || 0)),
       )
       .filter((item) => 0 <= item[0] && item[0] <= row - 1 && 0 <= item[1] && item[1] <= column - 1) // 过滤超出地图的点位
-      .map((tTtem: number[]) => transformationIndex(tTtem)) // 转化为下标
+      .map((tTtem: number[]) => tIndex(tTtem)) // 转化为下标
       .filter((item) => warcraftScopeIndexList.includes(item)) // 过来不是魔兽位置的点位
     attackPosition.value = realSkillScope || []
   } else {
@@ -372,14 +393,18 @@ const getAllAttackPosition = (
           .filter(
             (item) => 0 <= item[0] && item[0] <= row - 1 && 0 <= item[1] && item[1] <= column - 1,
           ) // 过滤超出地图的点位
-          .map((tTtem: number[]) => transformationIndex(tTtem)) || [] // 转化为下标
+          .map((tTtem: number[]) => tIndex(tTtem)) || [] // 转化为下标
     }
     friendlyPosition.value = realSkillScope
   }
 }
 
 // 获取选中的皮肤攻击到的主目标位置
-const autoGetMainAttackPosition = async (index: number, column: number = 4, row: number = 3) => {
+const autoGetMainAttackPosition = async (
+  index: number,
+  column: number = props.groundColumn,
+  row: number = props.groundRow,
+) => {
   let attackMaintarget: number[] = JSON.parse(JSON.stringify(priorityAttack.value)) // 主目标位置
   const selectPosition = index
   // 皮肤攻击范围 皮肤攻击类型 魔兽范围进行匹配
@@ -393,7 +418,7 @@ const autoGetMainAttackPosition = async (index: number, column: number = 4, row:
       min: column * index,
     }))
     const warcraftScope = props.warcraftData.scope // 魔兽占用范围
-    const warcraftScopeIndexList = warcraftScope.map((item: number[]) => transformationIndex(item)) // 转化为下标方便查询
+    const warcraftScopeIndexList = warcraftScope.map((item: number[]) => tIndex(item)) // 转化为下标方便查询
     let firstTarget: string[] = [] // 第一次触碰到的目标
     let secondTarget: string[] = [] // 第二次触碰到的目标 攻击类型为跳过的时候
     let value = rowRange[nowColumn].min
@@ -406,9 +431,9 @@ const autoGetMainAttackPosition = async (index: number, column: number = 4, row:
       while (value <= rowRange[nowColumn].max) {
         if (warcraftScopeIndexList.includes(value)) {
           if (firstTarget.length > 0) {
-            secondTarget = transformationCoordinates(value).split(',')
+            secondTarget = tCoordinates(value).split(',')
           } else {
-            firstTarget = transformationCoordinates(value).split(',')
+            firstTarget = tCoordinates(value).split(',')
           }
         }
         if (firstTarget.length > 0 && selectCharactar.attackType === 'front') {
@@ -446,8 +471,8 @@ const autoGetMainAttackPosition = async (index: number, column: number = 4, row:
 const autoGetAllAttackPosition = (
   attackMaintarget: number[], // 主目标位置
   selectCharactar: editableCharactar, // 角色信息
-  column: number = 4, // 场地大小
-  row: number = 3,
+  column: number = props.groundColumn, // 场地大小
+  row: number = props.groundRow,
 ) => {
   const selectSikll = selectCharactar.selectSikll || Object.keys(selectCharactar.skill)[0]
   const charactarSkillScope = selectCharactar.skill[selectSikll].scope
@@ -455,9 +480,7 @@ const autoGetAllAttackPosition = (
   let realSkillScope: number[] = []
   if (target === 'enemy') {
     const warcraftDataScope: number[][] = props.warcraftData.scope // 魔兽范围
-    const warcraftScopeIndexList = warcraftDataScope.map((item: number[]) =>
-      transformationIndex(item),
-    ) // 转化为下标方便查询
+    const warcraftScopeIndexList = warcraftDataScope.map((item: number[]) => tIndex(item)) // 转化为下标方便查询
     realSkillScope =
       charactarSkillScope
         ?.map(
@@ -468,7 +491,7 @@ const autoGetAllAttackPosition = (
         .filter(
           (item) => 0 <= item[0] && item[0] <= row - 1 && 0 <= item[1] && item[1] <= column - 1,
         ) // 过滤超出地图的点位
-        .map((tTtem: number[]) => transformationIndex(tTtem)) // 转化为下标
+        .map((tTtem: number[]) => tIndex(tTtem)) // 转化为下标
         .filter((item) => warcraftScopeIndexList.includes(item)) || [] // 过来不是魔兽位置的点位
   } else {
     if (charactarSkillScope?.length === 0) {
@@ -485,7 +508,7 @@ const autoGetAllAttackPosition = (
           .filter(
             (item) => 0 <= item[0] && item[0] <= row - 1 && 0 <= item[1] && item[1] <= column - 1,
           ) // 过滤超出地图的点位
-          .map((tTtem: number[]) => transformationIndex(tTtem)) || [] // 转化为下标
+          .map((tTtem: number[]) => tIndex(tTtem)) || [] // 转化为下标
     }
   }
   return realSkillScope || []
@@ -1038,7 +1061,7 @@ const damageCalculation = async () => {
         attackPosition[data.name] = temp
       } else {
         // 获取坐标位置
-        const mainTarget = transformationCoordinates(index)
+        const mainTarget = tCoordinates(index)
           .split(',')
           .map((item) => +item)
         const temp: positionObj = {
@@ -1136,7 +1159,7 @@ const appendBuff = (
       })
     } else {
       // 作用给自己的buff
-      if (item.scope.length === 1 && transformationIndex(item.scope[0]) === 0) {
+      if (item.scope.length === 1 && tIndex(item.scope[0]) === 0) {
         const temp = JSON.parse(JSON.stringify(item))
         delete temp.scope
         delete temp.attribute
@@ -1178,7 +1201,7 @@ const getUserBuffList = () => {
           userList.forEach(async (Bitem: editableCharactar, Bindex: number) => {
             if (Bitem && Bitem.name === value) {
               const selectSkill = item.key.split('_')[0]
-              const mainTarget = transformationCoordinates(Bindex)
+              const mainTarget = tCoordinates(Bindex)
                 .split(',')
                 .map((item) => +item)
               const selectCharactar = JSON.parse(JSON.stringify(Bitem))
@@ -1361,8 +1384,7 @@ const warcraftAttack = async () => {
     if (!warcraftUseSkillData.value.fixed) {
       attackScope = await autoGetMainAttackPositionByWarcraft(userScopeIndexList)
     } else {
-      attackScope =
-        warcraftUseSkillData.value.scope.map((tTtem: number[]) => transformationIndex(tTtem)) || [] // 转化为下标
+      attackScope = warcraftUseSkillData.value.scope.map((tTtem: number[]) => tIndex(tTtem)) || [] // 转化为下标
     }
     attackPositionBuyWarcraft.value = JSON.parse(JSON.stringify(attackScope))
     attackScope.forEach((item) => {
@@ -1489,7 +1511,7 @@ const triggerHitBuff = (
     } else {
       if (temp.scope.length === 0) {
         // 攻击所有单位
-        const position = props.warcraftData.scope.map((sItem) => transformationIndex(sItem))
+        const position = props.warcraftData.scope.map((sItem) => tIndex(sItem))
         const damage = setDamageData(
           position,
           attackUser,
@@ -1530,8 +1552,8 @@ const triggerHitBuff = (
 // 获取选中的皮肤攻击到的主目标位置
 const autoGetMainAttackPositionByWarcraft = async (
   userScopeIndexList: number[],
-  column: number = 4,
-  row: number = 3,
+  column: number = props.groundColumn,
+  row: number = props.groundRow,
 ) => {
   let nowColumn = Math.floor(row / 2) // 魔兽攻击默认从中间一列开始
   const rowRange = Array.from({ length: row }, (_, index) => ({
@@ -1554,9 +1576,9 @@ const autoGetMainAttackPositionByWarcraft = async (
     while (value <= rowRange[nowColumn].max) {
       if (userScopeIndexList.includes(value)) {
         if (firstTarget.length > 0) {
-          secondTarget = transformationCoordinates(value).split(',')
+          secondTarget = tCoordinates(value).split(',')
         } else {
-          firstTarget = transformationCoordinates(value).split(',')
+          firstTarget = tCoordinates(value).split(',')
         }
       }
       if (firstTarget.length > 0 && attackType === 'front') {
@@ -1592,8 +1614,8 @@ const autoGetMainAttackPositionByWarcraft = async (
 // 获取所有打击位置， 应对嘲讽的情况。嘲讽的时候主目标固定为嘲讽单位
 const autoGetAllWarcraftAttackPosition = (
   attackMaintarget: number[], // 主目标位置
-  column: number = 4, // 场地大小
-  row: number = 3,
+  column: number = props.groundColumn, // 场地大小
+  row: number = props.groundRow,
 ) => {
   const charactarSkillScope = warcraftUseSkillData.value.scope || []
   let realSkillScope: number[] = []
@@ -1611,7 +1633,7 @@ const autoGetAllWarcraftAttackPosition = (
         .filter(
           (item) => 0 <= item[0] && item[0] <= row - 1 && 0 <= item[1] && item[1] <= column - 1,
         ) // 过滤超出地图的点位
-        .map((tTtem: number[]) => transformationIndex(tTtem)) || [] // 转化为下标
+        .map((tTtem: number[]) => tIndex(tTtem)) || [] // 转化为下标
   }
   return realSkillScope || []
 }
@@ -1663,7 +1685,7 @@ const resetSp = () => {
   waitingReplySp.value = []
 }
 // sp回复
-const trunReplySpChang = (sp: number, limit: number = 20) => {
+const trunReplySpChang = (sp: number, limit: number = props.spLimit) => {
   trunReplySp.value += sp
   if (trunReplySp.value > limit) {
     trunReplySp.value = limit
@@ -1690,7 +1712,7 @@ const getProvocationPosition = () => {
     }
   }
   return provocation.priority > 0
-    ? transformationCoordinates(provocation.position)
+    ? tCoordinates(provocation.position)
         .split(',')
         .map((item) => +item)
     : []
@@ -1705,13 +1727,13 @@ const calculationWaitingReplySp = (limit: number) => {
 const getReplyMax = () => {
   const remainingSp = props.canUseSp - trunUseSp.value
   const replyMax = limitSp.value - (remainingSp > 0 ? remainingSp : 0) // 本回合最大可回复sp数量
-  return replyMax > 0 ? replyMax : replyMax < 20 ? replyMax : 20
+  return replyMax > 0 ? replyMax : replyMax < props.spLimit ? replyMax : props.spLimit
 }
 
 // 简单计算，费用溢出问题未处理
 const setNextTurnSp = () => {
   const nextSp = props.canUseSp - trunUseSp.value + trunReplySp.value
-  return nextSp > 20 ? 20 : nextSp < 0 ? 0 : nextSp
+  return nextSp > props.spLimit ? props.spLimit : nextSp < 0 ? 0 : nextSp
 }
 
 // 回合开始初始化
@@ -1856,5 +1878,15 @@ defineExpose({ initialization })
     border: 1px solid gray;
     background-color: gray;
   }
+}
+// 必杀技标签
+.kill_tag {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 0 6px;
+  border: 1px solid red;
+  border-radius: 4px;
+  color: red;
+  font-size: 12px;
 }
 </style>

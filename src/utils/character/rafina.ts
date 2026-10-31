@@ -3,6 +3,7 @@ import { enemyWeaknessDeBuffType } from '@/utils/globals'
 const rafina: characterDataObj = {
   name: 'rafina',
   cName: '拉菲娜',
+  star: 5, // 星级
   element: 'water',
   attackAttribute: 'atk', // 攻击属性 matk 魔法 atk为物理
   ATK: 220, // 攻击力

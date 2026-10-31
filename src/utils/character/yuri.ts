@@ -1,6 +1,7 @@
 const yuri: characterDataObj = {
   name: 'yuri',
   cName: '尤里',
+  star: 5, // 星级
   element: 'light',
   attackAttribute: 'atk', // 攻击属性 matk 魔法 atk为物理
   ATK: 363, // 攻击力

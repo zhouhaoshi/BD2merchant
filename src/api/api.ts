@@ -44,4 +44,18 @@ export default {
   sellUpdate: (data = {}) => {
     return post('/sell/update', data)
   }, // 修改商品信息
+
+  characterList: () => {
+    return get('/character/list', {})
+  }, // 已存在的角色文件
+  characterSave: (data: { fileName: string; content: string }) => {
+    return post('/character/save', data)
+  }, // 保存抓取到的角色文件
+
+  equipmentList: () => {
+    return get('/equipment/list', {})
+  }, // 已存在的装备数据文件
+  equipmentSave: (data: { fileName: string; content: string }) => {
+    return post('/equipment/save', data)
+  }, // 保存装备数据文件
 }

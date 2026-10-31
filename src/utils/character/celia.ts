@@ -1,6 +1,7 @@
 const celia: characterDataObj = {
   name: 'celia',
   cName: '西利亚',
+  star: 5, // 星级
   element: 'dark',
   attackAttribute: 'matk', // 攻击属性 matk 魔法 atk为物理
   MATK: 275, // 攻击力

@@ -1,6 +1,7 @@
 const sacredJustia: characterDataObj = {
   name: 'sacredJustia',
   cName: '神圣悠丝缇亚',
+  star: 5, // 星级
   element: 'light',
   attackAttribute: 'atk', // 攻击属性 matk 魔法 atk为物理
   ATK: 352, // 攻击力

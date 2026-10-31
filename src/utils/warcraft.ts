@@ -1,7 +1,9 @@
 // utils/loadPlugins.js
 async function getAllWarcraft() {
   // 使用 Vite 的 import.meta.glob 动态匹配所有 .js 文件
-  const modules = import.meta.glob('@/utils/warcraft/*.ts') as Record<
+  // 用相对路径而非 @ 别名：Windows 下别名解析路径与模块图路径盘符大小写不一致，
+  // 会导致 vite build 生成损坏的相对导入路径
+  const modules = import.meta.glob('./warcraft/*.ts') as Record<
     string,
     () => Promise<{ default: unknown }>
   >
