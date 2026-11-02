@@ -196,7 +196,7 @@ const mamonir: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/pro/50118/images/w_360/h_381/50118/497891/2026/4/28/1779950625882_1779950607284_33vi7gj21r_e8up99ydqo.png',
       description:
-        '自身遭受攻击时，对敌人应用&-effect/deBuff/0/enemyWeakness-&%虚弱效果。此效果在遭受8次攻击后将消失。2回合内，虚弱效果将持续，每被攻击1次时，叠加至1，最多可赋予叠加至8。&-effect/buff/0/duration-&回合内，对自己应用&-effect/buff/0/damageReduction-&%的防护罩效果。',
+        '自身遭受攻击时，对敌人应用&-effect/deBuff/0/enemyWeakness-&%虚弱效果。此效果在遭受8次攻击后将消失。&-effect/deBuff/0/duration-&回合内，虚弱效果将持续，每被攻击1次时，叠加至&-effect/deBuff/0/superpositionNumber-&，最多可赋予叠加至&-effect/deBuff/0/maxNumber-&。&-effect/buff/0/duration-&回合内，对自己应用&-effect/buff/0/damageReduction-&%的防护罩效果。',
       effect: {
         0: {
           sp: 0,
@@ -211,9 +211,11 @@ const mamonir: characterDataObj = {
           ],
           deBuff: [
             {
-              duration: 99,
+              duration: 2,
               type: enemyWeaknessDeBuffType.weakness,
               enemyWeakness: 30,
+              superpositionNumber: 1,
+              maxNumber: 8,
               scope: [],
             },
           ],
@@ -231,9 +233,11 @@ const mamonir: characterDataObj = {
           ],
           deBuff: [
             {
-              duration: 99,
+              duration: 2,
               type: enemyWeaknessDeBuffType.weakness,
               enemyWeakness: 30,
+              superpositionNumber: 1,
+              maxNumber: 8,
               scope: [],
             },
           ],
@@ -251,9 +255,11 @@ const mamonir: characterDataObj = {
           ],
           deBuff: [
             {
-              duration: 99,
+              duration: 2,
               type: enemyWeaknessDeBuffType.weakness,
               enemyWeakness: 35,
+              superpositionNumber: 1,
+              maxNumber: 8,
               scope: [],
             },
           ],
@@ -271,9 +277,11 @@ const mamonir: characterDataObj = {
           ],
           deBuff: [
             {
-              duration: 99,
+              duration: 2,
               type: enemyWeaknessDeBuffType.weakness,
               enemyWeakness: 40,
+              superpositionNumber: 1,
+              maxNumber: 8,
               scope: [],
             },
           ],
@@ -291,9 +299,11 @@ const mamonir: characterDataObj = {
           ],
           deBuff: [
             {
-              duration: 99,
+              duration: 2,
               type: enemyWeaknessDeBuffType.weakness,
               enemyWeakness: 45,
+              superpositionNumber: 1,
+              maxNumber: 8,
               scope: [],
             },
           ],
@@ -311,20 +321,24 @@ const mamonir: characterDataObj = {
           ],
           deBuff: [
             {
-              duration: 99,
+              duration: 2,
               type: enemyWeaknessDeBuffType.weakness,
               enemyWeakness: 50,
+              superpositionNumber: 1,
+              maxNumber: 8,
               scope: [],
             },
           ],
         },
-        // TODO 描述里未能识别的效果：自身遭受攻击时， | ，虚弱效果将持续，每被 | 时，叠加至1，
       },
       // 技能觉醒效果
       skillPotentials: {
         potentials1: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
           description: '虚弱+2回合',
+          deBuff: {
+            index: 0,
+            duration: 2,
+          },
         },
         potentials2: {
           damageReduction: 10,
@@ -340,14 +354,26 @@ const mamonir: characterDataObj = {
         burst1: {
           sp: 1, // 消耗SP
           description: '虚弱+15%',
+          deBuff: {
+            index: 0,
+            enemyWeakness: 15,
+          },
         },
         burst2: {
           sp: 1, // 消耗SP
           description: '虚弱+15%',
+          deBuff: {
+            index: 0,
+            enemyWeakness: 15,
+          },
         },
         burst3: {
           sp: 1, // 消耗SP
           description: '虚弱+2回合',
+          deBuff: {
+            index: 0,
+            duration: 2,
+          },
         },
       },
       // 服装能力

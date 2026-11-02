@@ -2,6 +2,8 @@
 // contentId: 660218 / entryId: 185516
 // 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
 
+import { enemyWeaknessDeBuffType } from '@/utils/globals'
+
 const priestess: characterDataObj = {
   name: 'priestess',
   cName: '女神官',
@@ -71,23 +73,101 @@ const priestess: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/580558.png',
       description:
-        '2回合内，对敌人应用50%的魔法脆弱效果。对敌人造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。',
+        '&-effect/deBuff/0/duration-&回合内，对敌人应用&-effect/deBuff/0/enemyWeakness-&%的魔法脆弱效果。对敌人造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 250 }, // +0
-        1: { sp: 1, cd: 0, multiplying: 250 }, // +1
-        2: { sp: 1, cd: 0, multiplying: 250 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 300 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 300 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 350 }, // +5
-        // TODO 描述里未能识别的效果：，对敌人应用50%的魔法脆弱效果
-        // 　　　　　　　　　　　，对敌人应用60%的魔法脆弱效果 | ，对敌人应用70%的魔法脆弱效果
-        // TODO 待人工复核：没有解析到连锁次数
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 250,
+          deBuff: [
+            {
+              duration: 2,
+              scope: [],
+              type: enemyWeaknessDeBuffType.fragility,
+              attribute: 'matk',
+              enemyWeakness: 50,
+            },
+          ],
+        }, // +0
+        1: {
+          sp: 1,
+          cd: 0,
+          multiplying: 250,
+          deBuff: [
+            {
+              duration: 2,
+              scope: [],
+              type: enemyWeaknessDeBuffType.fragility,
+              attribute: 'matk',
+              enemyWeakness: 50,
+            },
+          ],
+        }, // +1
+        2: {
+          sp: 1,
+          cd: 0,
+          multiplying: 250,
+          deBuff: [
+            {
+              duration: 2,
+              scope: [],
+              type: enemyWeaknessDeBuffType.fragility,
+              attribute: 'matk',
+              enemyWeakness: 60,
+            },
+          ],
+        }, // +2
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 300,
+          deBuff: [
+            {
+              duration: 2,
+              scope: [],
+              type: enemyWeaknessDeBuffType.fragility,
+              attribute: 'matk',
+              enemyWeakness: 60,
+            },
+          ],
+        }, // +3
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 300,
+          deBuff: [
+            {
+              duration: 2,
+              scope: [],
+              type: enemyWeaknessDeBuffType.fragility,
+              attribute: 'matk',
+              enemyWeakness: 70,
+            },
+          ],
+        }, // +4
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 350,
+          deBuff: [
+            {
+              duration: 2,
+              scope: [],
+              type: enemyWeaknessDeBuffType.fragility,
+              attribute: 'matk',
+              enemyWeakness: 70,
+            },
+          ],
+        }, // +5
       },
       // 技能觉醒效果
       skillPotentials: {
         potentials1: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
           description: '魔法脆弱效果倍率+5%',
+          deBuff: {
+            index: 0,
+            enemyWeakness: 5,
+          },
         },
         potentials2: {
           multiplying: 25,

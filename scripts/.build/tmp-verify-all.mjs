@@ -746,7 +746,7 @@ function setPotentials(checkList, skillPotentials) {
                 if (!tempPotentials[value][index]) {
                   tempPotentials[value][index] = {};
                 }
-                tempPotentials[value][index][buffValue] = (tempPotentials[value][index][buffValue] || 0) + // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                tempPotentials[value][index][buffValue] = (tempPotentials[value][index][buffValue] || 0) +  
                 val[buffValue];
                 if (tempPotentials[value].length === 0) {
                   delete tempPotentials[value];

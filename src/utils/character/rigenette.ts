@@ -61,15 +61,80 @@ const rigenette: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/318660.png',
       description:
-        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。4回合内，对敌人应用集中射击效果。',
+        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。&-effect/deBuff/0/duration-&回合内，对敌人应用集中射击效果。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 35 }, // +0
-        1: { sp: 0, cd: -4, multiplying: 35 }, // +1
-        2: { sp: 0, cd: -4, multiplying: 60 }, // +2
-        3: { sp: 1, cd: -4, multiplying: 60 }, // +3
-        4: { sp: 1, cd: -4, multiplying: 110 }, // +4
-        5: { sp: 1, cd: -4, multiplying: 110 }, // +5
-        // TODO 描述里未能识别的效果：，对敌人应用集中射击效果
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 35,
+          deBuff: [
+            {
+              duration: 4,
+              provocation: 1,
+              scope: [],
+            },
+          ],
+        }, // +0
+        1: {
+          sp: 0,
+          cd: -4,
+          multiplying: 35,
+          deBuff: [
+            {
+              duration: 4,
+              provocation: 1,
+              scope: [],
+            },
+          ],
+        }, // +1
+        2: {
+          sp: 0,
+          cd: -4,
+          multiplying: 60,
+          deBuff: [
+            {
+              duration: 4,
+              provocation: 1,
+              scope: [],
+            },
+          ],
+        }, // +2
+        3: {
+          sp: 1,
+          cd: -4,
+          multiplying: 60,
+          deBuff: [
+            {
+              duration: 4,
+              provocation: 1,
+              scope: [],
+            },
+          ],
+        }, // +3
+        4: {
+          sp: 1,
+          cd: -4,
+          multiplying: 110,
+          deBuff: [
+            {
+              duration: 4,
+              provocation: 1,
+              scope: [],
+            },
+          ],
+        }, // +4
+        5: {
+          sp: 1,
+          cd: -4,
+          multiplying: 110,
+          deBuff: [
+            {
+              duration: 6,
+              provocation: 1,
+              scope: [],
+            },
+          ],
+        }, // +5
       },
       // 技能觉醒效果
       skillPotentials: {

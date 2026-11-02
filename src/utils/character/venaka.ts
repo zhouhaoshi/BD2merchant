@@ -2,6 +2,8 @@
 // contentId: 625113 / entryId: 152215
 // 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
 // 手工维护：DJ 潜力3 在 wiki 上是范围扩大图片（无文本），自动生成无法识别
+// 手工维护：风之舞姬的风属性虚弱（75%/125%）与潜力3（+25%）手工结构化进 deBuff
+import { enemyWeaknessDeBuffType } from '@/utils/globals'
 
 const venaka: characterDataObj = {
   name: 'venaka',
@@ -204,7 +206,17 @@ const venaka: characterDataObj = {
       sp: -4,
       cd: 3,
       chain: 1,
-      scope: [[0, 0]], // 攻击访问，二维坐标系存储。范围为空就是全部
+      scope: [
+        [0, 0],
+        [-1, 1],
+        [-1, 0],
+        [-1, 2],
+        [0, 1],
+        [0, 2],
+        [1, 0],
+        [1, 1],
+        [1, 2],
+      ], // 攻击访问，二维坐标系存储。范围为空就是全部
       // 服装立绘（wiki 原图）
       image:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_421/h_1024/50118/497891/2026/1/4/100501.png',
@@ -212,17 +224,92 @@ const venaka: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/411646.png',
       description:
-        '4回合内，对敌人应用75%的风属性虚弱效果。对敌人造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。',
+        '&-effect/deBuff/0/duration-&回合内，对敌人应用&-effect/deBuff/0/enemyWeakness-&%的风属性虚弱效果。对敌人造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 200 }, // +0
-        1: { sp: 1, cd: 0, multiplying: 200 }, // +1
-        2: { sp: 1, cd: 0, multiplying: 250 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 250 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 300 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 350 }, // +5
-        // TODO 描述里未能识别的效果：，对敌人应用75%的风属性虚弱效果
-        // 　　　　　　　　　　　，对敌人应用125%的风属性虚弱效果
-        // TODO 待人工复核：没有解析到连锁次数
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 200,
+          deBuff: [
+            {
+              duration: 4,
+              scope: [],
+              type: enemyWeaknessDeBuffType.weakness,
+              enemyWeakness: 75,
+              attributeElement: 'wind',
+            },
+          ],
+        }, // +0
+        1: {
+          sp: 1,
+          cd: 0,
+          multiplying: 200,
+          deBuff: [
+            {
+              duration: 4,
+              scope: [],
+              type: enemyWeaknessDeBuffType.weakness,
+              enemyWeakness: 75,
+              attributeElement: 'wind',
+            },
+          ],
+        }, // +1
+        2: {
+          sp: 1,
+          cd: 0,
+          multiplying: 250,
+          deBuff: [
+            {
+              duration: 4,
+              scope: [],
+              type: enemyWeaknessDeBuffType.weakness,
+              enemyWeakness: 75,
+              attributeElement: 'wind',
+            },
+          ],
+        }, // +2
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 250,
+          deBuff: [
+            {
+              duration: 4,
+              scope: [],
+              type: enemyWeaknessDeBuffType.weakness,
+              enemyWeakness: 125,
+              attributeElement: 'wind',
+            },
+          ],
+        }, // +3
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 300,
+          deBuff: [
+            {
+              duration: 4,
+              scope: [],
+              type: enemyWeaknessDeBuffType.weakness,
+              enemyWeakness: 125,
+              attributeElement: 'wind',
+            },
+          ],
+        }, // +4
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 350,
+          deBuff: [
+            {
+              duration: 4,
+              scope: [],
+              type: enemyWeaknessDeBuffType.weakness,
+              enemyWeakness: 125,
+              attributeElement: 'wind',
+            },
+          ],
+        }, // +5
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -235,8 +322,11 @@ const venaka: characterDataObj = {
           description: '伤害量+25%',
         },
         potentials3: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
           description: '风属性虚弱效果+25%',
+          deBuff: {
+            index: 0,
+            enemyWeakness: 25,
+          },
         },
       },
       // 服装能力

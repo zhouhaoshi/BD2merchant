@@ -319,8 +319,11 @@ const eclipse: characterDataObj = {
       // 技能觉醒效果
       skillPotentials: {
         potentials1: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
           description: '魔法抵抗减少+5%',
+          deBuff: {
+            index: 0,
+            MRESReduce: 5,
+          },
         },
         potentials2: {
           multiplying: 10,
@@ -538,12 +541,18 @@ const eclipse: characterDataObj = {
       // 技能觉醒效果
       skillPotentials: {
         potentials1: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
           description: '魔法力增加+25%',
+          buff: {
+            index: 0,
+            attackAdd: 25,
+          },
         },
         potentials2: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
           description: '魔法力增加+25%',
+          buff: {
+            index: 0,
+            attackAdd: 25,
+          },
         },
         potentials3: {
           multiplying: 50,

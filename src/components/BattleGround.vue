@@ -626,6 +626,20 @@ const setDamageData = (
           }
         })
       }
+      // 持续伤害状态条件（达丽安冻伤）
+      if (
+        charactarSkill.skillEffect.condition.includes('dotBuff') &&
+        !!warcraftBuff.value[item] &&
+        !!warcraftBuff.value[item].dotBuff &&
+        warcraftBuff.value[item].dotBuff.length > 0
+      ) {
+        if (charactarSkill.skillEffect.conditionType) {
+          charactarSkill.skillEffect.type = charactarSkill.skillEffect.conditionType
+        }
+        if (charactarSkill.skillEffect.conditionMultiplying) {
+          charactarData.multiplier = charactarSkill.skillEffect.conditionMultiplying
+        }
+      }
     }
     // 增伤
     charactarData.increasedDamage = getIncreasedDamage(attackUser, warcraftBoxData.chainCount)

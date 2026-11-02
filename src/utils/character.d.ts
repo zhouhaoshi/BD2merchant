@@ -109,8 +109,16 @@ interface burstObj {
   multiplying?: number // 伤害倍率增加（百分比点，选中爆发后加算）
   extraMultiplying?: number // 额外倍率增加
   attackAdd?: number // 攻击力/魔法力增加
+  conditionMultiplying?: number // 条件倍率增加
   shield?: number // 能量护盾（自身攻击力百分比）
   duration?: number // 持续回合
+  deBuff?: { index: number; [key: string]: number | string | undefined } // 减益效果加成（按index合并）
+}
+
+// 爆发合并后的数值加成（数值字段直接加算；deBuff等特殊buff按index合并）
+type burstMergedBuffObj = Record<number, Record<string, number | string>>
+interface burstMergedObj {
+  [key: string]: number | burstMergedBuffObj | undefined
 }
 
 // 角色技能数据结构定义
@@ -218,6 +226,10 @@ interface deBuffElement {
   delay?: number // 延时buff 先打击后上
   provocation?: number // 嘲讽
   silence?: number // 沉默
+  summonWeakness?: number // 召唤兽虚弱（墨菲亚）
+  dotWeakness?: number // 持续伤害虚弱（露比雅）
+  superpositionNumber?: number // 每次叠加层数（马莫尼勒虚弱叠加）
+  maxNumber?: number // 最大叠加层数
 }
 
 interface deBuffObj extends deBuffElement {

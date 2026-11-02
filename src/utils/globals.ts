@@ -13,6 +13,7 @@ export enum dotBuffType {
   burn = 2, //灼烧
   poison = 3, // 中毒
   rot = 4, // 腐败
+  freeze = 5, // 冻伤
 }
 
 export enum damageType {

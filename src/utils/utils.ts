@@ -84,7 +84,7 @@ function replacePathPlaceholders(
   data: skillObj,
   breakthrough: number,
   potentials: effectObj = {},
-  bursts: Record<string, number> = {},
+  bursts: burstMergedObj = {},
   prefix = '&-',
   suffix = '-&',
 ) {
@@ -118,7 +118,7 @@ function getValueByPath(
   breakthrough: number = 0, // 突破等级
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   potentials: effectObj & { [key: string]: any } = {}, // 觉醒加成
-  bursts: Record<string, number> = {}, // 已选爆发合并的数值加成
+  bursts: burstMergedObj = {}, // 已选爆发合并的数值加成
   separator = '/',
 ) {
   if (!obj || typeof obj !== 'object' || !path) {
@@ -141,8 +141,16 @@ function getValueByPath(
       }
     }
     if (item in bursts) {
-      // 爆发加成与觉醒一样直接加算
-      potentialsCurrent = (potentialsCurrent || 0) + (bursts[item] || 0)
+      const burstValue = bursts[item]
+      if (specialKey.includes(item) && burstValue && typeof burstValue === 'object') {
+        // 特殊buff爆发加成：按index取对应buff的最终key加算
+        const buffIndex = Number(pathList[index + 1])
+        const buff = (burstValue as burstMergedBuffObj)[buffIndex]
+        potentialsCurrent = (potentialsCurrent || 0) + (Number(buff?.[pathList[pathList.length - 1]]) || 0)
+      } else {
+        // 爆发加成与觉醒一样直接加算
+        potentialsCurrent = (potentialsCurrent || 0) + (Number(burstValue) || 0)
+      }
     }
     if (item === 'effect') {
       // 只在 effect[breakthrough] 是对象且 pathList 最后一个 key 存在时取 number
@@ -166,7 +174,7 @@ export function conversionDescription(
   skillData: skillObj, // 技能对象
   breakthrough: number = 0, // 突破等级
   potentials: effectObj = {}, // 觉醒加成
-  bursts: Record<string, number> = {}, // 已选爆发合并的数值加成
+  bursts: burstMergedObj = {}, // 已选爆发合并的数值加成
 ) {
   let description = skillData.description
   const potentialsObj = JSON.parse(JSON.stringify(potentials))
@@ -175,6 +183,17 @@ export function conversionDescription(
     if (Array.isArray(potentialsObj[extra])) {
       potentialsObj[extra].forEach((item) => {
         if (!!item && item.extra === 1) {
+          description = description + item.extraDescription
+        }
+      })
+    }
+  }
+  // 爆发额外能力处理（如紫罗兰爆发1的减益效果）
+  for (const extra in bursts) {
+    const burstValue = bursts[extra]
+    if (burstValue && typeof burstValue === 'object') {
+      Object.values(burstValue as burstMergedBuffObj).forEach((item) => {
+        if (item && item.extra === 1 && item.extraDescription) {
           description = description + item.extraDescription
         }
       })
@@ -375,15 +394,41 @@ export function setPotentials(checkList: unknown[], skillPotentials: Record<stri
 
 // 处理选中的爆发：数值字段合并成扁平对象（description/scope 仅展示用，sp/shield/duration
 // 是爆发自身效果不参与加算，只加算 multiplying/extraMultiplying/attackAdd 这类数值提升）
-const BURST_MERGE_KEYS = ['multiplying', 'extraMultiplying', 'attackAdd']
+const BURST_MERGE_KEYS = ['multiplying', 'extraMultiplying', 'attackAdd', 'conditionMultiplying']
+// 需要按index合并的特殊buff
+const BURST_MERGE_SPECIAL_KEYS = ['deBuff']
 export function setBursts(checkList: unknown[], burstList: Record<string, burstObj>) {
-  const tempBursts: Record<string, number> = {}
+  const tempBursts: burstMergedObj = {}
   checkList.forEach((item) => {
     const burst = burstList[String(item)]
     if (burst && typeof burst === 'object') {
       for (const key of BURST_MERGE_KEYS) {
         if (burst[key as keyof burstObj] !== undefined) {
-          tempBursts[key] = (tempBursts[key] || 0) + (Number(burst[key as keyof burstObj]) || 0)
+          tempBursts[key] = (Number(tempBursts[key]) || 0) + (Number(burst[key as keyof burstObj]) || 0)
+        }
+      }
+      for (const key of BURST_MERGE_SPECIAL_KEYS) {
+        const burstSpecial = burst[key as keyof burstObj]
+        if (burstSpecial && typeof burstSpecial === 'object' && !Array.isArray(burstSpecial)) {
+          const { index, ...fields } = burstSpecial as {
+            index: number
+            [key: string]: number | string | undefined
+          }
+          if (!tempBursts[key] || typeof tempBursts[key] !== 'object') {
+            tempBursts[key] = {}
+          }
+          const target = tempBursts[key] as burstMergedBuffObj
+          if (!target[index]) {
+            target[index] = {}
+          }
+          for (const field in fields) {
+            const val = fields[field]
+            if (typeof val === 'number') {
+              target[index][field] = (Number(target[index][field]) || 0) + val
+            } else if (val !== undefined) {
+              target[index][field] = val
+            }
+          }
         }
       }
     }

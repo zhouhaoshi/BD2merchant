@@ -157,12 +157,18 @@ const rubia: characterDataObj = {
           description: '伤害倍率+35%',
         },
         potentials2: {
-          dotMultiplying: 50,
           description: '灼伤效果倍率+50%',
+          dotBuff: {
+            index: 0,
+            dotMultiplying: 50,
+          },
         },
         potentials3: {
-          dotMultiplying: 50,
           description: '灼伤效果倍率+50%',
+          dotBuff: {
+            index: 0,
+            dotMultiplying: 50,
+          },
         },
       },
       // 爆发技能
@@ -301,16 +307,22 @@ const rubia: characterDataObj = {
       // 技能觉醒效果
       skillPotentials: {
         potentials1: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
           description: '防御力减少倍率+10%',
+          deBuff: {
+            index: 0,
+            DEFReduce: 10,
+          },
         },
         potentials2: {
           multiplying: 8,
           description: '伤害倍率+8%',
         },
         potentials3: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
           description: '防御力减少倍率+10%',
+          deBuff: {
+            index: 0,
+            DEFReduce: 10,
+          },
         },
       },
       // 服装能力
@@ -467,12 +479,18 @@ const rubia: characterDataObj = {
           description: '伤害倍率+20%',
         },
         potentials2: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
           description: '+2回合',
+          buff: {
+            index: 1,
+            duration: 2,
+          },
         },
         potentials3: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
           description: '闪避次数+1次',
+          buff: {
+            index: 0,
+            sidestep: 1,
+          },
         },
       },
       // 服装能力
@@ -509,12 +527,19 @@ const rubia: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/798884.png',
       description:
-        '对敌人造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。&-effect/dotBuff/0/duration-&回合内，对敌人应用造成相当于自身攻击力&-effect/dotBuff/0/dotMultiplying-&的物理伤害的灼伤效果。4回合内，对敌人应用150%的施加持续伤害虚弱效果。',
+        '对敌人造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。&-effect/dotBuff/0/duration-&回合内，对敌人应用造成相当于自身攻击力&-effect/dotBuff/0/dotMultiplying-&的物理伤害的灼伤效果。&-effect/deBuff/0/duration-&回合内，对敌人应用&-effect/deBuff/0/dotWeakness-&%的施加持续伤害虚弱效果。',
       effect: {
         0: {
           sp: 0,
           cd: 0,
           multiplying: 150,
+          deBuff: [
+            {
+              duration: 4,
+              scope: [],
+              dotWeakness: 150,
+            },
+          ],
           dotBuff: [
             {
               type: dotBuffType.burn,
@@ -528,6 +553,13 @@ const rubia: characterDataObj = {
           sp: 1,
           cd: 0,
           multiplying: 150,
+          deBuff: [
+            {
+              duration: 4,
+              scope: [],
+              dotWeakness: 150,
+            },
+          ],
           dotBuff: [
             {
               type: dotBuffType.burn,
@@ -541,6 +573,13 @@ const rubia: characterDataObj = {
           sp: 1,
           cd: 0,
           multiplying: 150,
+          deBuff: [
+            {
+              duration: 4,
+              scope: [],
+              dotWeakness: 150,
+            },
+          ],
           dotBuff: [
             {
               type: dotBuffType.burn,
@@ -554,6 +593,13 @@ const rubia: characterDataObj = {
           sp: 1,
           cd: 0,
           multiplying: 150,
+          deBuff: [
+            {
+              duration: 4,
+              scope: [],
+              dotWeakness: 200,
+            },
+          ],
           dotBuff: [
             {
               type: dotBuffType.burn,
@@ -567,6 +613,13 @@ const rubia: characterDataObj = {
           sp: 1,
           cd: 0,
           multiplying: 150,
+          deBuff: [
+            {
+              duration: 4,
+              scope: [],
+              dotWeakness: 200,
+            },
+          ],
           dotBuff: [
             {
               type: dotBuffType.burn,
@@ -580,6 +633,13 @@ const rubia: characterDataObj = {
           sp: 1,
           cd: 0,
           multiplying: 150,
+          deBuff: [
+            {
+              duration: 4,
+              scope: [],
+              dotWeakness: 250,
+            },
+          ],
           dotBuff: [
             {
               type: dotBuffType.burn,
@@ -589,24 +649,29 @@ const rubia: characterDataObj = {
             },
           ],
         },
-        // TODO 描述里未能识别的效果：，对敌人应用150%的施加持续伤害虚弱效果
-        // 　　　　　　　　　　　，对敌人应用200%的施加持续伤害虚弱效果
-        // 　　　　　　　　　　　，对敌人应用250%的施加持续伤害虚弱效果
-        // TODO 待人工复核：没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {
         potentials1: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
           description: '持续伤害虚弱效果倍率+25%',
+          deBuff: {
+            index: 0,
+            dotWeakness: 25,
+          },
         },
         potentials2: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
           description: '持续伤害虚弱效果倍率+25%',
+          deBuff: {
+            index: 0,
+            dotWeakness: 25,
+          },
         },
         potentials3: {
-          dotMultiplying: 50,
           description: '灼伤效果倍率+50%',
+          dotBuff: {
+            index: 0,
+            dotMultiplying: 50,
+          },
         },
       },
       // 服装能力

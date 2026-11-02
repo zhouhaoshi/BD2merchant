@@ -2,6 +2,8 @@
 // contentId: 678559 / entryId: 195333
 // 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
 
+import { dotBuffType } from '@/utils/globals'
+
 const darian: characterDataObj = {
   name: 'darian',
   cName: '达丽安',
@@ -161,38 +163,127 @@ const darian: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/354975.png',
       description:
-        '每命中一个目标，该技能的冷却时间减少2。对敌人造成相当于自身200%的物理伤害。若敌人处于持续伤害状态，则改为造成相当于自身攻击力400%的物理伤害。5回合内，对敌人应用每层叠加造成相当于自身攻击110%的物理伤害的冻伤效果。最多可应用叠加至7。',
+        '每命中一个目标，该技能的冷却时间减少2。对敌人造成相当于自身&-effect/multiplying-&%的物理伤害。若敌人处于持续伤害状态，则改为造成相当于自身攻击力&-effect/conditionMultiplying-&%的物理伤害。&-effect/dotBuff/0/duration-&回合内，对敌人应用每层叠加造成相当于自身攻击&-effect/dotBuff/0/dotMultiplying-&%的物理伤害的冻伤效果。最多可应用叠加至&-effect/dotBuff/0/maxNumber-&。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 0 }, // +0
-        1: { sp: 1, cd: 0, multiplying: 0 }, // +1
-        2: { sp: 1, cd: -2, multiplying: 0 }, // +2
-        3: { sp: 1, cd: -2, multiplying: 0 }, // +3
-        4: { sp: 1, cd: -2, multiplying: 0 }, // +4
-        5: { sp: 1, cd: -2, multiplying: 0 }, // +5
-        // TODO 描述里未能识别的效果：
-        // 　　　　　　　　　　　条件效果未结构化：若敌人处于持续伤害状态，则改为造成相当于自身攻击力400%的物理伤害
-        // 　　　　　　　　　　　每命中一个目标，该技能的冷却时间减少2
-        // 　　　　　　　　　　　，对敌人应用每层叠加造成相当于自身攻击110%的物理伤害的冻伤效果
-        // 　　　　　　　　　　　最多可应用叠加至7
-        // 　　　　　　　　　　　条件效果未结构化：若敌人处于持续伤害状态，则改为造成相当于自身攻击力475%的物理伤害
-        // 　　　　　　　　　　　，对敌人应用每层叠加造成相当于自身攻击150%的物理伤害的冻伤效果
-        // 　　　　　　　　　　　条件效果未结构化：若敌人处于持续伤害状态，则改为造成相当于自身攻击力550%的物理伤害
-        // TODO 待人工复核：没有解析到技能倍率 | 没有解析到连锁次数
-        // 　　　　　　描述里有增益/减益关键词，但没解析成 buff
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 200,
+          conditionMultiplying: 400,
+          condition: ['dotBuff'],
+          dotBuff: [
+            {
+              type: dotBuffType.freeze,
+              scope: [],
+              duration: 5,
+              dotMultiplying: 110,
+              dotbuffNumber: 1,
+              maxNumber: 7,
+            },
+          ],
+        }, // +0
+        1: {
+          sp: 1,
+          cd: 0,
+          multiplying: 200,
+          conditionMultiplying: 400,
+          condition: ['dotBuff'],
+          dotBuff: [
+            {
+              type: dotBuffType.freeze,
+              scope: [],
+              duration: 5,
+              dotMultiplying: 110,
+              dotbuffNumber: 1,
+              maxNumber: 7,
+            },
+          ],
+        }, // +1
+        2: {
+          sp: 1,
+          cd: -2,
+          multiplying: 200,
+          conditionMultiplying: 400,
+          condition: ['dotBuff'],
+          dotBuff: [
+            {
+              type: dotBuffType.freeze,
+              scope: [],
+              duration: 5,
+              dotMultiplying: 110,
+              dotbuffNumber: 1,
+              maxNumber: 7,
+            },
+          ],
+        }, // +2
+        3: {
+          sp: 1,
+          cd: -2,
+          multiplying: 275,
+          conditionMultiplying: 475,
+          condition: ['dotBuff'],
+          dotBuff: [
+            {
+              type: dotBuffType.freeze,
+              scope: [],
+              duration: 5,
+              dotMultiplying: 110,
+              dotbuffNumber: 1,
+              maxNumber: 7,
+            },
+          ],
+        }, // +3
+        4: {
+          sp: 1,
+          cd: -2,
+          multiplying: 275,
+          conditionMultiplying: 475,
+          condition: ['dotBuff'],
+          dotBuff: [
+            {
+              type: dotBuffType.freeze,
+              scope: [],
+              duration: 5,
+              dotMultiplying: 150,
+              dotbuffNumber: 1,
+              maxNumber: 7,
+            },
+          ],
+        }, // +4
+        5: {
+          sp: 1,
+          cd: -2,
+          multiplying: 350,
+          conditionMultiplying: 550,
+          condition: ['dotBuff'],
+          dotBuff: [
+            {
+              type: dotBuffType.freeze,
+              scope: [],
+              duration: 5,
+              dotMultiplying: 150,
+              dotbuffNumber: 1,
+              maxNumber: 7,
+            },
+          ],
+        }, // +5
       },
       // 技能觉醒效果
       skillPotentials: {
         potentials1: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
           description: '冻伤效果倍率+30%',
+          dotBuff: {
+            index: 0,
+            dotMultiplying: 30,
+          },
         },
         potentials2: {
           multiplying: 50,
           description: '伤害倍率+50%',
         },
         potentials3: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
           description: '若敌人处于持续伤害状态，伤害倍率+50%',
+          conditionMultiplying: 50,
         },
       },
       // 服装能力

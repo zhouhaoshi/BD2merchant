@@ -128,14 +128,14 @@ const palette: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/pro/50118/images/w_360/h_381/50118/497891/2026/4/13/1778639372068_1778638379000_tobmy23doi_wxvpvksncc.png',
       description:
-        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。此时，敌方的减益效果达到7个及以上时，则改为造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。',
+        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。此时，敌方的减益效果达到7个及以上时，则改为造成相当于自身魔法力&-effect/conditionMultiplying-&%的魔法伤害。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 110 }, // +0
-        1: { sp: 1, cd: 0, multiplying: 110 }, // +1
-        2: { sp: 1, cd: 0, multiplying: 125 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 140 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 155 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 170 }, // +5
+        0: { sp: 0, cd: 0, multiplying: 35, conditionMultiplying: 110 }, // +0
+        1: { sp: 1, cd: 0, multiplying: 35, conditionMultiplying: 110 }, // +1
+        2: { sp: 1, cd: 0, multiplying: 40, conditionMultiplying: 125 }, // +2
+        3: { sp: 1, cd: 0, multiplying: 45, conditionMultiplying: 140 }, // +3
+        4: { sp: 1, cd: 0, multiplying: 50, conditionMultiplying: 155 }, // +4
+        5: { sp: 1, cd: 0, multiplying: 55, conditionMultiplying: 170 }, // +5
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -144,12 +144,12 @@ const palette: characterDataObj = {
           description: '伤害倍率+10%',
         },
         potentials2: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
           description: '条件伤害倍率+15%',
+          conditionMultiplying: 15,
         },
         potentials3: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
           description: '条件伤害倍率+15%',
+          conditionMultiplying: 15,
         },
       },
       // 爆发技能
@@ -157,16 +157,23 @@ const palette: characterDataObj = {
         burst1: {
           sp: 2, // 消耗SP
           description: '【额外能力】【前置效果】4回合内，敌人魔法抵抗减少50%，攻击次数+1.',
+          deBuff: {
+            index: 0,
+            duration: 4,
+            extra: 1, // 是否为额外值
+            extraDescription: '【额外能力】4回合内，敌人魔法抵抗减少50%，攻击次数+1。',
+            MRESReduce: 50,
+          },
         },
         burst2: {
           sp: 1, // 消耗SP
           description: '条件伤害量+25%',
-          multiplying: 25,
+          conditionMultiplying: 25,
         },
         burst3: {
           sp: 1, // 消耗SP
           description: '条件伤害量+25%',
-          multiplying: 25,
+          conditionMultiplying: 25,
         },
       },
       // 服装能力

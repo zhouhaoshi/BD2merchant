@@ -148,8 +148,15 @@ const emma: characterDataObj = {
       // 技能觉醒效果
       skillPotentials: {
         potentials1: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
           description: '【额外能力】6回合内，自身致命率增加30%。',
+          buff: {
+            index: 0,
+            duration: 6,
+            scope: [],
+            extra: 1, // 是否为额外值
+            extraDescription: '【额外能力】6回合内，自身致命率增加30%。',
+            CRAdd: 30,
+          },
         },
       },
       // 服装能力

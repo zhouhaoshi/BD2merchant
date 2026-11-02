@@ -164,8 +164,15 @@ const scheherazade: characterDataObj = {
       // 技能觉醒效果
       skillPotentials: {
         potentials1: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
           description: '[额外能力]2回合内，敌人魔法抵抗减少15%',
+          deBuff: {
+            index: 0,
+            duration: 2,
+            scope: [],
+            extra: 1, // 是否为额外值
+            extraDescription: '【额外能力】2回合内，敌人魔法抵抗减少15%。',
+            MRESReduce: 15,
+          },
         },
         potentials2: {
           multiplying: 15,
@@ -211,7 +218,7 @@ const scheherazade: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/193841.png',
       description:
-        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。解除应用于敌人的增益效果。2回合内，对敌人应用沉默效果。',
+        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。解除应用于敌人的增益效果。&-effect/deBuff/0/duration-&回合内，对敌人应用沉默效果。',
       effect: {
         0: {
           sp: 0,
@@ -298,8 +305,11 @@ const scheherazade: characterDataObj = {
           description: '伤害量+30%',
         },
         potentials3: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
           description: '+2回合',
+          deBuff: {
+            index: 0,
+            duration: 2,
+          },
         },
       },
       // 服装能力
@@ -338,32 +348,26 @@ const scheherazade: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/144855.png',
       description:
-        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。若此攻击对敌人叠加的连携数量为15或以上，则改为造成相当于自身魔法力140%的魔法伤害。解除应用于敌人的增益效果。',
+        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。若此攻击对敌人叠加的连携数量为15或以上，则改为造成相当于自身魔法力&-effect/conditionMultiplying-&%的魔法伤害。解除应用于敌人的增益效果。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 30 }, // +0
-        1: { sp: 0, cd: 0, multiplying: 38 }, // +1
-        2: { sp: 0, cd: 0, multiplying: 46 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 46 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 53 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 60 }, // +5
-        // TODO 描述里未能识别的效果：
-        // 　　　　　　　　　　　条件效果未结构化：若此攻击对敌人叠加的连携数量为15或以上，则改为造成相当于自身魔法力140%的魔法伤害
-        // 　　　　　　　　　　　解除应用于敌人的增益效果
-        // 　　　　　　　　　　　条件效果未结构化：若此攻击对敌人叠加的连携数量为15或以上，则改为造成相当于自身魔法力160%的魔法伤害
-        // 　　　　　　　　　　　条件效果未结构化：若此攻击对敌人叠加的连携数量为15或以上，则改为造成相当于自身魔法力180%的魔法伤害
-        // 　　　　　　　　　　　条件效果未结构化：若此攻击对敌人叠加的连携数量为15或以上，则改为造成相当于自身魔法力200%的魔法伤害
-        // 　　　　　　　　　　　条件效果未结构化：若此攻击对敌人叠加的连携数量为15或以上，则改为造成相当于自身魔法力220%的魔法伤害
-        // TODO 待人工复核：描述里有增益/减益关键词，但没解析成 buff
+        0: { sp: 0, cd: 0, multiplying: 30, conditionMultiplying: 140 }, // +0
+        1: { sp: 0, cd: 0, multiplying: 38, conditionMultiplying: 160 }, // +1
+        2: { sp: 0, cd: 0, multiplying: 46, conditionMultiplying: 180 }, // +2
+        3: { sp: 1, cd: 0, multiplying: 46, conditionMultiplying: 180 }, // +3
+        4: { sp: 1, cd: 0, multiplying: 53, conditionMultiplying: 200 }, // +4
+        5: { sp: 1, cd: 0, multiplying: 60, conditionMultiplying: 220 }, // +5
       },
       // 技能觉醒效果
       skillPotentials: {
         potentials1: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
           description: '伤害量+10%；若此攻击对敌人叠加的连携数量为15或以上，伤害量+20%',
+          multiplying: 10,
+          conditionMultiplying: 20,
         },
         potentials2: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
           description: '伤害量+10%；若此攻击对敌人叠加的连携数量为15或以上，伤害量+20%',
+          multiplying: 10,
+          conditionMultiplying: 20,
         },
         potentials3: {
           cd: -2,
@@ -375,12 +379,12 @@ const scheherazade: characterDataObj = {
         burst1: {
           sp: 2, // 消耗SP
           description: '敌人连携数达到15及以上时，伤害量+160%',
-          multiplying: 160,
+          conditionMultiplying: 160,
         },
         burst2: {
           sp: 1, // 消耗SP
           description: '敌人连携数达到15及以上时，伤害量+80%',
-          multiplying: 80,
+          conditionMultiplying: 80,
         },
         burst3: {
           sp: 1, // 消耗SP

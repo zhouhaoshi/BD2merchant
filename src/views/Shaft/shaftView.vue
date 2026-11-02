@@ -370,7 +370,9 @@ const setSkillEffect = (effect: effectObj, potentials: effectObj) => {
             tempBuff[tempBuff.length] = temp
           } else {
             keyList.forEach((keyItem) => {
-              ;(tempBuff[index][keyItem] as number) += temp[keyItem] as number
+              if (keyItem !== 'index') {
+                ;(tempBuff[index][keyItem] as number) += temp[keyItem] as number
+              }
             })
           }
         }

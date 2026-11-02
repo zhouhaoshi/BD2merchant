@@ -60,18 +60,87 @@ const carlson: characterDataObj = {
       // Q版形象（wiki 原图）
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/254281.png',
-      description: '2回合内，对自己应用35%的物理防护罩效果。',
+      description:
+        '&-effect/buff/0/duration-&回合内，对自己应用&-effect/buff/0/damageReduction-&%的物理防护罩效果。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 0 }, // +0
-        1: { sp: 0, cd: -4, multiplying: 0 }, // +1
-        2: { sp: 0, cd: -4, multiplying: 0 }, // +2
-        3: { sp: 1, cd: -4, multiplying: 0 }, // +3
-        4: { sp: 1, cd: -4, multiplying: 0 }, // +4
-        5: { sp: 1, cd: -4, multiplying: 0 }, // +5
-        // TODO 描述里未能识别的效果：，对自己应用35%的物理防护罩效果
-        // 　　　　　　　　　　　，对自己应用45%的物理防护罩效果
-        // 　　　　　　　　　　　，对自己应用65%的物理防护罩效果
-        // TODO 待人工复核：没有解析到连锁次数
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 2,
+              attribute: 'atk',
+              damageReduction: 35,
+              scope: [[0, 0]],
+            },
+          ],
+        }, // +0
+        1: {
+          sp: 0,
+          cd: -4,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 2,
+              attribute: 'atk',
+              damageReduction: 35,
+              scope: [[0, 0]],
+            },
+          ],
+        }, // +1
+        2: {
+          sp: 0,
+          cd: -4,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 2,
+              attribute: 'atk',
+              damageReduction: 45,
+              scope: [[0, 0]],
+            },
+          ],
+        }, // +2
+        3: {
+          sp: 1,
+          cd: -4,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 2,
+              attribute: 'atk',
+              damageReduction: 45,
+              scope: [[0, 0]],
+            },
+          ],
+        }, // +3
+        4: {
+          sp: 1,
+          cd: -4,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 2,
+              attribute: 'atk',
+              damageReduction: 65,
+              scope: [[0, 0]],
+            },
+          ],
+        }, // +4
+        5: {
+          sp: 1,
+          cd: -4,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 4,
+              attribute: 'atk',
+              damageReduction: 65,
+              scope: [[0, 0]],
+            },
+          ],
+        }, // +5
       },
       // 技能觉醒效果
       skillPotentials: {

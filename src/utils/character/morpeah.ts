@@ -85,8 +85,15 @@ const morpeah: characterDataObj = {
           description: 'SP消耗-1',
         },
         potentials3: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
           description: '【额外能力】4回合内，对自己应用30%的防护罩效果',
+          buff: {
+            index: 0,
+            duration: 4,
+            scope: [],
+            extra: 1, // 是否为额外值
+            extraDescription: '【额外能力】4回合内，对自己应用30%的防护罩效果。',
+            damageReduction: 30,
+          },
         },
       },
       // 服装能力
@@ -187,31 +194,126 @@ const morpeah: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/795633.png',
       description:
-        '对敌人造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。2回合内，对主要目标敌人应用集中射击效果。2回合内，对敌人应用100%的召唤兽虚弱效果。',
+        '对敌人造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。&-effect/deBuff/1/duration-&回合内，对主要目标敌人应用集中射击效果。&-effect/deBuff/0/duration-&回合内，对敌人应用&-effect/deBuff/0/summonWeakness-&%的召唤兽虚弱效果。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 100 }, // +0
-        1: { sp: 1, cd: 0, multiplying: 100 }, // +1
-        2: { sp: 1, cd: 0, multiplying: 125 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 150 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 175 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 200 }, // +5
-        // TODO 描述里未能识别的效果：，对主要目标敌人应用集中射击效果
-        // 　　　　　　　　　　　，对敌人应用100%的召唤兽虚弱效果
-        // 　　　　　　　　　　　，对敌人应用115%的召唤兽虚弱效果
-        // 　　　　　　　　　　　，对敌人应用130%的召唤兽虚弱效果
-        // 　　　　　　　　　　　，对敌人应用145%的召唤兽虚弱效果
-        // 　　　　　　　　　　　，对敌人应用160%的召唤兽虚弱效果
-        // TODO 待人工复核：没有解析到连锁次数
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 100,
+          deBuff: [
+            {
+              duration: 2,
+              scope: [],
+              summonWeakness: 100,
+            },
+            {
+              duration: 2,
+              scope: [],
+              provocation: 1,
+            },
+          ],
+        }, // +0
+        1: {
+          sp: 1,
+          cd: 0,
+          multiplying: 100,
+          deBuff: [
+            {
+              duration: 2,
+              scope: [],
+              summonWeakness: 100,
+            },
+            {
+              duration: 2,
+              scope: [],
+              provocation: 1,
+            },
+          ],
+        }, // +1
+        2: {
+          sp: 1,
+          cd: 0,
+          multiplying: 125,
+          deBuff: [
+            {
+              duration: 2,
+              scope: [],
+              summonWeakness: 115,
+            },
+            {
+              duration: 2,
+              scope: [],
+              provocation: 1,
+            },
+          ],
+        }, // +2
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 150,
+          deBuff: [
+            {
+              duration: 2,
+              scope: [],
+              summonWeakness: 130,
+            },
+            {
+              duration: 2,
+              scope: [],
+              provocation: 1,
+            },
+          ],
+        }, // +3
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 175,
+          deBuff: [
+            {
+              duration: 2,
+              scope: [],
+              summonWeakness: 145,
+            },
+            {
+              duration: 2,
+              scope: [],
+              provocation: 1,
+            },
+          ],
+        }, // +4
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 200,
+          deBuff: [
+            {
+              duration: 2,
+              scope: [],
+              summonWeakness: 160,
+            },
+            {
+              duration: 2,
+              scope: [],
+              provocation: 1,
+            },
+          ],
+        }, // +5
       },
       // 技能觉醒效果
       skillPotentials: {
         potentials1: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
           description: '召唤物虚弱效果倍率+10%',
+          deBuff: {
+            index: 0,
+            summonWeakness: 10,
+          },
         },
         potentials2: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
           description: '召唤物虚弱效果倍率+10%',
+          deBuff: {
+            index: 0,
+            summonWeakness: 10,
+          },
         },
         potentials3: {
           sp: 1,
@@ -223,6 +325,10 @@ const morpeah: characterDataObj = {
         burst1: {
           sp: 1, // 消耗SP
           description: '召唤物虚弱+70%',
+          deBuff: {
+            index: 0,
+            summonWeakness: 70,
+          },
         },
         burst2: {
           sp: 1, // 消耗SP

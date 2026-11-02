@@ -2,6 +2,8 @@
 // contentId: 593593 / entryId: 122328
 // 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
 
+import { dotBuffType } from '@/utils/globals'
+
 const cynthia: characterDataObj = {
   name: 'cynthia',
   cName: '辛西亚',
@@ -67,15 +69,86 @@ const cynthia: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/981020.png',
       description:
-        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。对敌人应用造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害的冻伤效果。此效果在遭受8次攻击后将消失。（包括此攻击）',
+        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。对敌人应用造成相当于自身魔法力&-effect/dotBuff/0/dotMultiplying-&%的魔法伤害的冻伤效果。此效果在遭受8次攻击后将消失。（包括此攻击）',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 75 }, // +0
-        1: { sp: 0, cd: -4, multiplying: 75 }, // +1
-        2: { sp: 0, cd: -4, multiplying: 100 }, // +2
-        3: { sp: 1, cd: -4, multiplying: 100 }, // +3
-        4: { sp: 1, cd: -4, multiplying: 150 }, // +4
-        5: { sp: 1, cd: -4, multiplying: 225 }, // +5
-        // TODO 描述里未能识别的效果：对敌人应用 | 的魔法伤害的冻伤效果
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 25,
+          dotBuff: [
+            {
+              type: dotBuffType.freeze,
+              scope: [],
+              duration: 8,
+              dotMultiplying: 75,
+            },
+          ],
+        }, // +0
+        1: {
+          sp: 0,
+          cd: -4,
+          multiplying: 25,
+          dotBuff: [
+            {
+              type: dotBuffType.freeze,
+              scope: [],
+              duration: 8,
+              dotMultiplying: 75,
+            },
+          ],
+        }, // +1
+        2: {
+          sp: 0,
+          cd: -4,
+          multiplying: 25,
+          dotBuff: [
+            {
+              type: dotBuffType.freeze,
+              scope: [],
+              duration: 8,
+              dotMultiplying: 100,
+            },
+          ],
+        }, // +2
+        3: {
+          sp: 1,
+          cd: -4,
+          multiplying: 25,
+          dotBuff: [
+            {
+              type: dotBuffType.freeze,
+              scope: [],
+              duration: 8,
+              dotMultiplying: 100,
+            },
+          ],
+        }, // +3
+        4: {
+          sp: 1,
+          cd: -4,
+          multiplying: 25,
+          dotBuff: [
+            {
+              type: dotBuffType.freeze,
+              scope: [],
+              duration: 8,
+              dotMultiplying: 150,
+            },
+          ],
+        }, // +4
+        5: {
+          sp: 1,
+          cd: -4,
+          multiplying: 25,
+          dotBuff: [
+            {
+              type: dotBuffType.freeze,
+              scope: [],
+              duration: 8,
+              dotMultiplying: 225,
+            },
+          ],
+        }, // +5
       },
       // 技能觉醒效果
       skillPotentials: {
