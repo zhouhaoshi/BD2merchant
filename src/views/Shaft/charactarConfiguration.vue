@@ -105,10 +105,18 @@
           <div v-for="(wear, slotIndex) in wears" :key="slotIndex" class="equipment_slot">
             <div class="slot_header">
               <span class="slot_title">{{ EQUIPMENT_SLOT_PARTS[slotIndex] }}</span>
+              <span
+                v-if="factionLabel(slotIndex)"
+                class="faction_tag"
+                :class="factionClass(factionLabel(slotIndex))"
+              >
+                {{ factionLabel(slotIndex) }}
+              </span>
               <el-select
                 v-model="wear.contentId"
                 placeholder="选择装备"
                 clearable
+                filterable
                 class="slot_select"
                 @change="onEquipmentChange(slotIndex)"
               >
@@ -117,7 +125,14 @@
                   :key="item.content_id"
                   :label="item.name"
                   :value="item.content_id"
-                />
+                  class="equipment_select"
+                >
+                  <img :src="equipmentImageUrl(item.icon1)" />
+                  <span>{{ item.name }}</span>
+                  <span class="faction_tag" :class="factionClass(getEquipmentFaction(item))">
+                    {{ getEquipmentFaction(item) }}
+                  </span>
+                </el-option>
               </el-select>
             </div>
             <div v-if="currentEquipment(slotIndex)" class="slot_config">
@@ -133,62 +148,63 @@
                   size="small"
                 />
               </div>
-              <!-- 专武词条选择 -->
-              <template
-                v-for="(choiceKey, choiceIndex) in ['jbnl1Choice', 'jbnl2Choice']"
-                :key="choiceKey"
-              >
-                <div v-if="currentEquipment(slotIndex)?.type === '专用'" class="config_row">
-                  <span class="row_label">基本能力{{ choiceIndex + 1 }}：</span>
-                  <el-select
-                    v-model="wear[choiceKey as 'jbnl1Choice']"
-                    placeholder="选择词条"
-                    size="small"
-                    class="choice_select"
+              <!-- 专武词条选择：基本能力1/2 两列左右布局 -->
+              <div v-if="currentEquipment(slotIndex)?.type === '专用'" class="config_row">
+                <span class="row_label">基本能力：</span>
+                <div class="config_grid cols_2">
+                  <div
+                    v-for="(choiceKey, choiceIndex) in ['jbnl1Choice', 'jbnl2Choice']"
+                    :key="choiceKey"
+                    class="grid_item"
                   >
-                    <el-option
-                      v-for="(entry, entryIndex) in jbnlEntryList(slotIndex, choiceIndex)"
-                      :key="entryIndex"
-                      :label="entry.text"
-                      :value="entryIndex"
-                    />
-                  </el-select>
+                    <span class="item_label">基本能力{{ choiceIndex + 1 }}</span>
+                    <el-select
+                      v-model="wear[choiceKey as 'jbnl1Choice']"
+                      placeholder="选择词条"
+                      size="small"
+                      class="choice_select"
+                    >
+                      <el-option
+                        v-for="(entry, entryIndex) in jbnlEntryList(slotIndex, choiceIndex)"
+                        :key="entryIndex"
+                        :label="entry.text"
+                        :value="entryIndex"
+                      />
+                    </el-select>
+                  </div>
                 </div>
-              </template>
-              <!-- 3条副属性 -->
+              </div>
+              <!-- 3条副属性：三列布局，词条按装备系别过滤 -->
               <div class="config_row">
                 <span class="row_label">副属性：</span>
-                <el-select
-                  v-for="(_, subIndex) in wear.subAttrs"
-                  :key="subIndex"
-                  v-model="wear.subAttrs[subIndex]"
-                  placeholder="副属性"
-                  size="small"
-                  class="sub_select"
-                >
-                  <el-option
-                    v-for="opt in EQUIPMENT_SUB_ATTR_OPTIONS"
-                    :key="opt.key"
-                    :label="opt.name"
-                    :value="opt.key"
-                  />
-                </el-select>
+                <div class="config_grid cols_3">
+                  <div v-for="(_, subIndex) in wear.subAttrs" :key="subIndex" class="grid_item">
+                    <span class="item_label">副属性{{ subIndex + 1 }}</span>
+                    <el-select
+                      v-model="wear.subAttrs[subIndex]"
+                      placeholder="副属性"
+                      size="small"
+                      class="sub_select"
+                    >
+                      <el-option
+                        v-for="opt in getSubAttrOptions(currentEquipment(slotIndex))"
+                        :key="opt.key"
+                        :label="opt.name"
+                        :value="opt.key"
+                      />
+                    </el-select>
+                  </div>
+                </div>
               </div>
-              <!-- 属性拆解展示 -->
+              <!-- 属性拆解展示：基础属性与评分加成合并展示（基础+评分） -->
               <div class="stat_parts">
                 <div class="stat_part">
                   <div class="part_title">基础属性</div>
-                  <div v-for="value in formatPanel(slotStatParts(slotIndex)?.base)" :key="value[0]">
-                    {{ value[0] }}：<span>{{ value[1] }}</span>
-                  </div>
-                </div>
-                <div class="stat_part">
-                  <div class="part_title">评分加成</div>
                   <div
-                    v-for="value in formatPanel(slotStatParts(slotIndex)?.scoreBonus)"
-                    :key="value[0]"
+                    v-for="(entry, entryIndex) in baseEntryList(slotIndex)"
+                    :key="`${entry.name}_${entryIndex}`"
                   >
-                    {{ value[0] }}：<span>{{ value[1] }}</span>
+                    {{ entry.name }}：<span>{{ formatBaseEntry(entry) }}</span>
                   </div>
                 </div>
                 <div class="stat_part">
@@ -227,13 +243,16 @@ import {
   setPotentials,
 } from '@/utils/utils'
 import skillScope from '@/components/skillScope.vue'
+import { equipmentImageUrl } from '@/utils/equipment'
 import { useEquipmentStore } from '@/stores/equipment'
 import {
-  EQUIPMENT_SUB_ATTR_OPTIONS,
   parseEquipmentAttrEntry,
   computeEquipmentStatParts,
+  computeEquipmentBaseEntries,
   computeCharacterFinalStats,
   getWearableEquipmentList,
+  getEquipmentFaction,
+  getSubAttrOptions,
 } from '@/utils/equipmentEnhance'
 const props = defineProps(['dialogVisible', 'data'])
 const emit = defineEmits(['close', 'primary'])
@@ -246,15 +265,19 @@ const EQUIPMENT_SLOT_PARTS = ['武器', '盔甲', '头盔', '饰品', '手套']
 const createEmptyWear = (slot: number): equipmentWearObj => ({
   contentId: 0,
   slot,
-  score: 6,
-  subAttrs: ['atk', 'atk', 'atk'],
+  score: 19,
+  subAttrs: ['critical', 'critical', 'critical'],
 })
-const wears = ref<equipmentWearObj[]>(EQUIPMENT_SLOT_PARTS.map((_, index) => createEmptyWear(index)))
+const wears = ref<equipmentWearObj[]>(
+  EQUIPMENT_SLOT_PARTS.map((_, index) => createEmptyWear(index)),
+)
 
-// 可穿戴装备列表（UR专武 + UR4制作），按部位过滤
+// 可穿戴装备列表（自身专武 + UR4制作），按部位过滤
 const wearableListByPart = (slotIndex: number) => {
   const part = EQUIPMENT_SLOT_PARTS[slotIndex]
-  return getWearableEquipmentList(equipmentStore.equipmentList).filter((item) => item.part === part)
+  return getWearableEquipmentList(equipmentStore.equipmentList, props.data).filter(
+    (item) => item.part === part,
+  )
 }
 // 当前槽位装备
 const currentEquipment = (slotIndex: number) => {
@@ -262,12 +285,36 @@ const currentEquipment = (slotIndex: number) => {
   if (!wear || !wear.contentId) return undefined
   return equipmentStore.equipmentList.find((item) => item.content_id === wear.contentId)
 }
-// 切换装备时重置专武词条选择
+// 当前槽位装备系别（用于头部/下拉框展示）
+const factionLabel = (slotIndex: number) => {
+  const equipment = currentEquipment(slotIndex)
+  return equipment ? getEquipmentFaction(equipment) : ''
+}
+const factionClass = (faction: string) =>
+  (
+    {
+      魔法系: 'faction_magic',
+      物理系: 'faction_physical',
+      通用系: 'faction_universal',
+    } as Record<string, string>
+  )[faction] || 'faction_universal'
+// 校验副属性词条是否符合当前装备系别，非法词条替换为爆伤（各系别均可用）
+const normalizeSubAttrs = (slotIndex: number) => {
+  const wear = wears.value[slotIndex]
+  if (!wear) return
+  const options = getSubAttrOptions(currentEquipment(slotIndex))
+  const validKeys = new Set(options.map((opt) => opt.key))
+  wear.subAttrs = wear.subAttrs.map((key) => (validKeys.has(key) ? key : 'critical')) as
+    equipmentWearObj['subAttrs']
+}
+// 切换装备：评分重置为默认19、基本能力选中第一项、校验副属性
 const onEquipmentChange = (slotIndex: number) => {
   const wear = wears.value[slotIndex]
   if (!wear) return
-  wear.jbnl1Choice = undefined
-  wear.jbnl2Choice = undefined
+  wear.score = 19
+  wear.jbnl1Choice = jbnlEntryList(slotIndex, 0).length ? 0 : undefined
+  wear.jbnl2Choice = jbnlEntryList(slotIndex, 1).length ? 0 : undefined
+  normalizeSubAttrs(slotIndex)
 }
 // 专武基本能力词条选项
 const jbnlEntryList = (slotIndex: number, choiceIndex: number) => {
@@ -284,6 +331,18 @@ const slotStatParts = (slotIndex: number) => {
   const wear = wears.value[slotIndex]
   if (!equipment || !wear) return null
   return computeEquipmentStatParts(equipment, wear)
+}
+// 基础词条展示（基础值+评分加成值，每个词条单独一行）
+const baseEntryList = (slotIndex: number) => {
+  const equipment = currentEquipment(slotIndex)
+  const wear = wears.value[slotIndex]
+  if (!equipment || !wear) return []
+  return computeEquipmentBaseEntries(equipment, wear)
+}
+// 基础词条格式：30+62（百分比带 %，主词条无评分加成只显示基础值）
+const formatBaseEntry = (entry: equipmentBaseEntryItem) => {
+  const pct = entry.isPercent ? '%' : ''
+  return entry.score ? `${entry.base}${pct}+${entry.score}${pct}` : `${entry.base}${pct}`
 }
 // 属性键展示名
 const PANEL_NAME_MAP: Record<equipmentAttrKey, string> = {
@@ -309,9 +368,7 @@ const formatPanel = (panel?: equipmentStatPanel) => {
 // 合并后最终面板
 const formatFinalStats = () => {
   if (!props.data) return []
-  const equipmentMap = new Map(
-    equipmentStore.equipmentList.map((item) => [item.content_id, item]),
-  )
+  const equipmentMap = new Map(equipmentStore.equipmentList.map((item) => [item.content_id, item]))
   const stats = computeCharacterFinalStats(
     props.data as selectCharacterDataObj,
     wears.value,
@@ -470,10 +527,98 @@ function initEditData(data: selectCharacterDataObj, charactarData: characterData
     const exist = (data?.equipments || []).find((item) => item.slot === index)
     return exist ? JSON.parse(JSON.stringify(exist)) : createEmptyWear(index)
   })
+  // 历史数据副属性可能不符合当前装备系别，统一校验；基本能力未选时默认第一项
+  EQUIPMENT_SLOT_PARTS.forEach((_, index) => {
+    const wear = wears.value[index]
+    if (!wear) return
+    if (wear.jbnl1Choice === undefined && jbnlEntryList(index, 0).length) wear.jbnl1Choice = 0
+    if (wear.jbnl2Choice === undefined && jbnlEntryList(index, 1).length) wear.jbnl2Choice = 0
+    normalizeSubAttrs(index)
+  })
 }
 </script>
 
 <style lang="less" scoped>
+.equipment_select {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  & > img {
+    height: 40px;
+    width: 40px;
+    object-fit: contain;
+  }
+}
+/* 装备系别标签（下拉框选项与槽位头部共用） */
+.faction_tag {
+  flex-shrink: 0;
+  margin-left: 8px;
+  padding: 1px 8px;
+  font-size: 11px;
+  line-height: 16px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.faction_magic {
+  color: #7c3aed;
+  background: rgba(124, 58, 237, 0.12);
+}
+.faction_physical {
+  color: #b45309;
+  background: rgba(180, 83, 9, 0.12);
+}
+.faction_universal {
+  color: #0e7490;
+  background: rgba(14, 116, 144, 0.12);
+}
+.slot_config {
+  margin-top: 10px;
+  .config_row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    .row_label {
+      flex-shrink: 0;
+      font-size: 13px;
+      color: var(--app-text-secondary);
+    }
+    .el-slider {
+      flex: 1;
+    }
+  }
+  /* 基本能力（两列）/ 副属性（三列）通用盒模型布局 */
+  .config_grid {
+    flex: 1;
+    display: grid;
+    gap: 10px;
+    &.cols_2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    &.cols_3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  .grid_item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border: 1px solid var(--app-border);
+    border-radius: var(--app-radius-sm);
+    background: var(--app-card);
+    .item_label {
+      flex-shrink: 0;
+      font-size: 12px;
+      color: var(--app-text-weak);
+      white-space: nowrap;
+    }
+    .el-select {
+      flex: 1;
+      min-width: 0;
+    }
+  }
+}
 .skill_list {
   padding-left: 20px;
   .skill_box_list {

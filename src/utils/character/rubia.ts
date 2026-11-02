@@ -1,6 +1,9 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 593601 / entryId: 122350
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
+
+
+import { dotBuffType } from '@/utils/globals'
 
 const rubia: characterDataObj = {
   name: 'rubia',
@@ -66,14 +69,86 @@ const rubia: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/231437.png',
       description:
-        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。7回合内，对敌人应用造成相当于自身攻击力150%的物理伤害的灼伤效果。',
+        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。&-effect/dotBuff/0/duration-&回合内，对敌人应用造成相当于自身攻击力&-effect/dotBuff/0/dotMultiplying-&的物理伤害的灼伤效果。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 40 }, // +0
-        1: { sp: 0, cd: 0, multiplying: 60 }, // +1
-        2: { sp: 0, cd: 0, multiplying: 75 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 75 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 75 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 75 }, // +5
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 40,
+          dotBuff: [
+            {
+              type: dotBuffType.burn,
+              scope: [],
+              duration: 7,
+              dotMultiplying: 150,
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: 0,
+          multiplying: 60,
+          dotBuff: [
+            {
+              type: dotBuffType.burn,
+              scope: [],
+              duration: 7,
+              dotMultiplying: 150,
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: 0,
+          multiplying: 75,
+          dotBuff: [
+            {
+              type: dotBuffType.burn,
+              scope: [],
+              duration: 7,
+              dotMultiplying: 150,
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 75,
+          dotBuff: [
+            {
+              type: dotBuffType.burn,
+              scope: [],
+              duration: 7,
+              dotMultiplying: 150,
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 75,
+          dotBuff: [
+            {
+              type: dotBuffType.burn,
+              scope: [],
+              duration: 7,
+              dotMultiplying: 195,
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 75,
+          dotBuff: [
+            {
+              type: dotBuffType.burn,
+              scope: [],
+              duration: 7,
+              dotMultiplying: 240,
+            },
+          ],
+        },
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -82,11 +157,11 @@ const rubia: characterDataObj = {
           description: '伤害倍率+35%',
         },
         potentials2: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
+          dotMultiplying: 50,
           description: '灼伤效果倍率+50%',
         },
         potentials3: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
+          dotMultiplying: 50,
           description: '灼伤效果倍率+50%',
         },
       },
@@ -95,21 +170,13 @@ const rubia: characterDataObj = {
         burst1: {
           sp: 2, // 消耗SP
           description: '灼伤伤害量+100%，增加技能范围。',
-          scope: [
-            [0, 0],
-            [-1, 1],
-            [-2, 2],
-            [-1, 2],
-            [0, 1],
-            [0, 2],
-            [1, 2],
-            [1, 1],
-            [2, 2],
-          ], // 爆发后的攻击范围，二维坐标系存储。直接命中目标为[0,0]
+          multiplying: 100,
+          scope: [[0, 0]], // TODO: 范围图没解析出来，请人工确认命中范围
         },
         burst2: {
           sp: 1, // 消耗SP
           description: '灼伤伤害量+100%',
+          multiplying: 100,
         },
         burst3: {
           sp: 1, // 消耗SP
@@ -156,15 +223,80 @@ const rubia: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/822312.png',
       description:
-        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。4回合内，敌人防御力减少25%。',
+        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。&-effect/deBuff/0/duration-&回合内，敌人防御力减少&-effect/deBuff/0/DEFReduce-&%。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 40 }, // +0
-        1: { sp: 0, cd: 0, multiplying: 48 }, // +1
-        2: { sp: 0, cd: 0, multiplying: 56 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 56 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 64 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 72 }, // +5
-        // TODO 描述里识别到的效果：减防25%（4回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 40,
+          deBuff: [
+            {
+              duration: 4,
+              DEFReduce: 25,
+              scope: [],
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: 0,
+          multiplying: 48,
+          deBuff: [
+            {
+              duration: 4,
+              DEFReduce: 25,
+              scope: [],
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: 0,
+          multiplying: 56,
+          deBuff: [
+            {
+              duration: 4,
+              DEFReduce: 25,
+              scope: [],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 56,
+          deBuff: [
+            {
+              duration: 4,
+              DEFReduce: 25,
+              scope: [],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 64,
+          deBuff: [
+            {
+              duration: 4,
+              DEFReduce: 25,
+              scope: [],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 72,
+          deBuff: [
+            {
+              duration: 4,
+              DEFReduce: 25,
+              scope: [],
+            },
+          ],
+        },
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -216,15 +348,117 @@ const rubia: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/431417.png',
       description:
-        '自身成功闪避敌人2次前，以100%的概率闪避敌人的攻击。4回合内，自身攻击力增加50%。攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。',
+        '自身成功闪避敌人&-effect/buff/0/sidestep-&次前，以100%的概率闪避敌人的攻击。&-effect/buff/1/duration-&回合内，自身攻击力增加&-effect/buff/1/attackAdd-&%。攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 120 }, // +0
-        1: { sp: 1, cd: 0, multiplying: 120 }, // +1
-        2: { sp: 1, cd: 0, multiplying: 140 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 160 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 180 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 200 }, // +5
-        // TODO 描述里识别到的效果：闪避（1回合） | 自身攻击力50%（4回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 120,
+          buff: [
+            {
+              duration: 99,
+              sidestep: 2,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 4,
+              attribute: 'atk',
+              attackAdd: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        1: {
+          sp: 1,
+          cd: 0,
+          multiplying: 120,
+          buff: [
+            {
+              duration: 99,
+              sidestep: 2,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 4,
+              attribute: 'atk',
+              attackAdd: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        2: {
+          sp: 1,
+          cd: 0,
+          multiplying: 140,
+          buff: [
+            {
+              duration: 99,
+              sidestep: 2,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 4,
+              attribute: 'atk',
+              attackAdd: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 160,
+          buff: [
+            {
+              duration: 99,
+              sidestep: 2,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 4,
+              attribute: 'atk',
+              attackAdd: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 180,
+          buff: [
+            {
+              duration: 99,
+              sidestep: 2,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 4,
+              attribute: 'atk',
+              attackAdd: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 200,
+          buff: [
+            {
+              duration: 99,
+              sidestep: 2,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 4,
+              attribute: 'atk',
+              attackAdd: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        // TODO 描述里未能识别的效果：，以100%的概率闪避敌人的攻击
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -275,15 +509,90 @@ const rubia: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/798884.png',
       description:
-        '对敌人造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。2回合内，对敌人应用造成相当于自身攻击力250%的物理伤害的灼伤效果。4回合内，对敌人应用150%的施加持续伤害虚弱效果。',
+        '对敌人造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。&-effect/dotBuff/0/duration-&回合内，对敌人应用造成相当于自身攻击力&-effect/dotBuff/0/dotMultiplying-&的物理伤害的灼伤效果。4回合内，对敌人应用150%的施加持续伤害虚弱效果。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 150 }, // +0
-        1: { sp: 1, cd: 0, multiplying: 150 }, // +1
-        2: { sp: 1, cd: 0, multiplying: 150 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 150 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 150 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 150 }, // +5
-        // TODO 描述里识别到的效果：持续伤害（4回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 150,
+          dotBuff: [
+            {
+              type: dotBuffType.burn,
+              scope: [],
+              duration: 2,
+              dotMultiplying: 250,
+            },
+          ],
+        },
+        1: {
+          sp: 1,
+          cd: 0,
+          multiplying: 150,
+          dotBuff: [
+            {
+              type: dotBuffType.burn,
+              scope: [],
+              duration: 2,
+              dotMultiplying: 250,
+            },
+          ],
+        },
+        2: {
+          sp: 1,
+          cd: 0,
+          multiplying: 150,
+          dotBuff: [
+            {
+              type: dotBuffType.burn,
+              scope: [],
+              duration: 2,
+              dotMultiplying: 350,
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 150,
+          dotBuff: [
+            {
+              type: dotBuffType.burn,
+              scope: [],
+              duration: 2,
+              dotMultiplying: 350,
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 150,
+          dotBuff: [
+            {
+              type: dotBuffType.burn,
+              scope: [],
+              duration: 2,
+              dotMultiplying: 450,
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 150,
+          dotBuff: [
+            {
+              type: dotBuffType.burn,
+              scope: [],
+              duration: 2,
+              dotMultiplying: 450,
+            },
+          ],
+        },
+        // TODO 描述里未能识别的效果：，对敌人应用150%的施加持续伤害虚弱效果
+        // 　　　　　　　　　　　，对敌人应用200%的施加持续伤害虚弱效果
+        // 　　　　　　　　　　　，对敌人应用250%的施加持续伤害虚弱效果
+        // TODO 待人工复核：没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -296,7 +605,7 @@ const rubia: characterDataObj = {
           description: '持续伤害虚弱效果倍率+25%',
         },
         potentials3: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
+          dotMultiplying: 50,
           description: '灼伤效果倍率+50%',
         },
       },

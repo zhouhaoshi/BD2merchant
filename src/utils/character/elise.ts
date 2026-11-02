@@ -1,6 +1,6 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 593626 / entryId: 122360
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
 
 const elise: characterDataObj = {
   name: 'elise',
@@ -73,15 +73,110 @@ const elise: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/548564.png',
       description:
-        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。4回合内，敌人防御力减少50%。4回合内，敌人魔法抵抗减少50%。',
+        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。&-effect/deBuff/0/duration-&回合内，敌人防御力减少&-effect/deBuff/0/DEFReduce-&%。&-effect/deBuff/1/duration-&回合内，敌人魔法抵抗减少&-effect/deBuff/1/MRESReduce-&%。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 90 }, // +0
-        1: { sp: 0, cd: 0, multiplying: 115 }, // +1
-        2: { sp: 0, cd: 0, multiplying: 140 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 140 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 165 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 185 }, // +5
-        // TODO 描述里识别到的效果：减防50%（4回合） | 减魔抗50%（4回合） | 减防50%（6回合） | 减魔抗50%（6回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 90,
+          deBuff: [
+            {
+              duration: 4,
+              DEFReduce: 50,
+              scope: [],
+            },
+            {
+              duration: 4,
+              MRESReduce: 50,
+              scope: [],
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: 0,
+          multiplying: 115,
+          deBuff: [
+            {
+              duration: 4,
+              DEFReduce: 50,
+              scope: [],
+            },
+            {
+              duration: 4,
+              MRESReduce: 50,
+              scope: [],
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: 0,
+          multiplying: 140,
+          deBuff: [
+            {
+              duration: 4,
+              DEFReduce: 50,
+              scope: [],
+            },
+            {
+              duration: 4,
+              MRESReduce: 50,
+              scope: [],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 140,
+          deBuff: [
+            {
+              duration: 4,
+              DEFReduce: 50,
+              scope: [],
+            },
+            {
+              duration: 4,
+              MRESReduce: 50,
+              scope: [],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 165,
+          deBuff: [
+            {
+              duration: 4,
+              DEFReduce: 50,
+              scope: [],
+            },
+            {
+              duration: 4,
+              MRESReduce: 50,
+              scope: [],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 185,
+          deBuff: [
+            {
+              duration: 6,
+              DEFReduce: 50,
+              scope: [],
+            },
+            {
+              duration: 6,
+              MRESReduce: 50,
+              scope: [],
+            },
+          ],
+        },
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -116,7 +211,7 @@ const elise: characterDataObj = {
     skill2: {
       name: 'skill2', // TODO: wiki 只有中文名，英文 key 需要人工命名
       cName: '代号O',
-      target: 'friendly',
+      target: 'enemy',
       sp: -3,
       cd: 5,
       chain: 1,
@@ -127,15 +222,88 @@ const elise: characterDataObj = {
       // Q版形象（wiki 原图）
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/960288.png',
-      description: '友军的SP恢复3点。对敌人造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。',
+      description:
+        '友军的SP恢复&-effect/special/0/spAdd-&点。对敌人造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 500, special: [{ spAdd: 3 }] }, // +0
-        1: { sp: 0, cd: 0, multiplying: 600, special: [{ spAdd: 3 }] }, // +1
-        2: { sp: 0, cd: 0, multiplying: 700, special: [{ spAdd: 3 }] }, // +2
-        3: { sp: 1, cd: 0, multiplying: 700, special: [{ spAdd: 3 }] }, // +3
-        4: { sp: 1, cd: 0, multiplying: 800, special: [{ spAdd: 3 }] }, // +4
-        5: { sp: 1, cd: 0, multiplying: 900, special: [{ spAdd: 3 }] }, // +5
-        // TODO 描述里识别到的效果：SP变化（1回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 500,
+          special: [
+            {
+              spAdd: 3,
+            },
+            {
+              spAdd: 3,
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: 0,
+          multiplying: 600,
+          special: [
+            {
+              spAdd: 3,
+            },
+            {
+              spAdd: 3,
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: 0,
+          multiplying: 700,
+          special: [
+            {
+              spAdd: 3,
+            },
+            {
+              spAdd: 3,
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 700,
+          special: [
+            {
+              spAdd: 3,
+            },
+            {
+              spAdd: 3,
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 800,
+          special: [
+            {
+              spAdd: 3,
+            },
+            {
+              spAdd: 3,
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 900,
+          special: [
+            {
+              spAdd: 3,
+            },
+            {
+              spAdd: 3,
+            },
+          ],
+        },
+        // TODO 待人工复核：没有解析到连锁次数 | 描述里有增益/减益关键词，但没解析成 buff
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -157,14 +325,17 @@ const elise: characterDataObj = {
         burst1: {
           sp: 2, // 消耗SP
           description: '[额外能力]【前置效果】每次攻击命中敌人时，SP恢复1，伤害量+150%',
+          multiplying: 150,
         },
         burst2: {
           sp: 2, // 消耗SP
           description: '伤害量+300%',
+          multiplying: 300,
         },
         burst3: {
           sp: 2, // 消耗SP
           description: '伤害量+300%',
+          multiplying: 300,
         },
       },
       // 服装能力
@@ -203,14 +374,83 @@ const elise: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/pro/50118/images/w_360/h_381/497891/2026/6/2/83648230mr350j6l.png',
       description:
-        '对自己在6回合内，应用施加伤害增加70%的增强效果。【共鸣】战场上处于能力值弱化状态的目标，6回合内，对自己应用4%的增强效果，每有1个目标，可叠加1。最多可叠加至30。攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。',
+        '对自己在&-effect/buff/0/duration-&回合内，应用施加伤害增加&-effect/buff/0/increasedDamage-&%的增强效果。【共鸣】战场上处于能力值弱化状态的目标，6回合内，对自己应用4%的增强效果，每有1个目标，可叠加1。最多可叠加至30。攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 100 }, // +0
-        1: { sp: 1, cd: 0, multiplying: 100 }, // +1
-        2: { sp: 1, cd: 0, multiplying: 100 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 120 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 120 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 140 }, // +5
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 100,
+          buff: [
+            {
+              duration: 6,
+              increasedDamage: 70,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        1: {
+          sp: 1,
+          cd: 0,
+          multiplying: 100,
+          buff: [
+            {
+              duration: 6,
+              increasedDamage: 70,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        2: {
+          sp: 1,
+          cd: 0,
+          multiplying: 100,
+          buff: [
+            {
+              duration: 6,
+              increasedDamage: 85,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 120,
+          buff: [
+            {
+              duration: 6,
+              increasedDamage: 85,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 120,
+          buff: [
+            {
+              duration: 6,
+              increasedDamage: 100,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 140,
+          buff: [
+            {
+              duration: 6,
+              increasedDamage: 100,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        // TODO 描述里未能识别的效果：，对自己应用4%的增强效果，每有1个目标，可叠加1
+        // 　　　　　　　　　　　，对自己应用6%的增强效果，每有1个目标，可叠加1
+        // 　　　　　　　　　　　，对自己应用8%的增强效果，每有1个目标，可叠加1
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -232,6 +472,7 @@ const elise: characterDataObj = {
         burst2: {
           sp: 1, // 消耗SP
           description: '伤害量+50%',
+          multiplying: 50,
         },
         burst3: {
           sp: 1, // 消耗SP

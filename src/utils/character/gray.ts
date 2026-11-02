@@ -1,6 +1,9 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 593582 / entryId: 122346
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
+
+
+import { dotBuffType } from '@/utils/globals'
 
 const gray: characterDataObj = {
   name: 'gray',
@@ -65,14 +68,86 @@ const gray: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/156503.png',
       description:
-        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。4回合内，对敌人应用造成相当于敌人攻击力125%的物理伤害的中毒效果。',
+        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。&-effect/dotBuff/0/duration-&回合内，对敌人应用造成相当于敌人攻击力&-effect/dotBuff/0/dotMultiplying-&的物理伤害的中毒效果。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 65 }, // +0
-        1: { sp: 0, cd: 0, multiplying: 65 }, // +1
-        2: { sp: 0, cd: 0, multiplying: 65 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 65 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 65 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 0 }, // +5
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 65,
+          dotBuff: [
+            {
+              type: dotBuffType.poison,
+              scope: [],
+              duration: 4,
+              dotMultiplying: 125,
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: 0,
+          multiplying: 65,
+          dotBuff: [
+            {
+              type: dotBuffType.poison,
+              scope: [],
+              duration: 4,
+              dotMultiplying: 215,
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: 0,
+          multiplying: 65,
+          dotBuff: [
+            {
+              type: dotBuffType.poison,
+              scope: [],
+              duration: 4,
+              dotMultiplying: 295,
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 65,
+          dotBuff: [
+            {
+              type: dotBuffType.poison,
+              scope: [],
+              duration: 4,
+              dotMultiplying: 295,
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 65,
+          dotBuff: [
+            {
+              type: dotBuffType.poison,
+              scope: [],
+              duration: 4,
+              dotMultiplying: 365,
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 65,
+          dotBuff: [
+            {
+              type: dotBuffType.poison,
+              scope: [],
+              duration: 4,
+              dotMultiplying: 425,
+            },
+          ],
+        },
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -118,15 +193,80 @@ const gray: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/404125.png',
       description:
-        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。2回合内，敌人防御力减少50%。',
+        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。&-effect/deBuff/0/duration-&回合内，敌人防御力减少&-effect/deBuff/0/DEFReduce-&%。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 35 }, // +0
-        1: { sp: 0, cd: 0, multiplying: 50 }, // +1
-        2: { sp: 0, cd: 0, multiplying: 65 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 65 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 75 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 85 }, // +5
-        // TODO 描述里识别到的效果：减防50%（2回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 35,
+          deBuff: [
+            {
+              duration: 2,
+              DEFReduce: 50,
+              scope: [],
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: 0,
+          multiplying: 50,
+          deBuff: [
+            {
+              duration: 2,
+              DEFReduce: 50,
+              scope: [],
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: 0,
+          multiplying: 65,
+          deBuff: [
+            {
+              duration: 2,
+              DEFReduce: 50,
+              scope: [],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 65,
+          deBuff: [
+            {
+              duration: 2,
+              DEFReduce: 50,
+              scope: [],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 75,
+          deBuff: [
+            {
+              duration: 2,
+              DEFReduce: 50,
+              scope: [],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 85,
+          deBuff: [
+            {
+              duration: 2,
+              DEFReduce: 50,
+              scope: [],
+            },
+          ],
+        },
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -183,14 +323,86 @@ const gray: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/967160.png',
       description:
-        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。4回合内，对敌人应用造成相当于敌人魔法力125%的物理伤害的中毒效果。',
+        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。&-effect/dotBuff/0/duration-&回合内，对敌人应用造成相当于敌人魔法力&-effect/dotBuff/0/dotMultiplying-&的物理伤害的中毒效果。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 25 }, // +0
-        1: { sp: 0, cd: 0, multiplying: 25 }, // +1
-        2: { sp: 0, cd: 0, multiplying: 25 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 25 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 25 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 25 }, // +5
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 25,
+          dotBuff: [
+            {
+              type: dotBuffType.poison,
+              scope: [],
+              duration: 4,
+              dotMultiplying: 125,
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: 0,
+          multiplying: 25,
+          dotBuff: [
+            {
+              type: dotBuffType.poison,
+              scope: [],
+              duration: 4,
+              dotMultiplying: 215,
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: 0,
+          multiplying: 25,
+          dotBuff: [
+            {
+              type: dotBuffType.poison,
+              scope: [],
+              duration: 4,
+              dotMultiplying: 295,
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 25,
+          dotBuff: [
+            {
+              type: dotBuffType.poison,
+              scope: [],
+              duration: 4,
+              dotMultiplying: 295,
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 25,
+          dotBuff: [
+            {
+              type: dotBuffType.poison,
+              scope: [],
+              duration: 4,
+              dotMultiplying: 365,
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 25,
+          dotBuff: [
+            {
+              type: dotBuffType.poison,
+              scope: [],
+              duration: 4,
+              dotMultiplying: 425,
+            },
+          ],
+        },
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -242,15 +454,110 @@ const gray: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/450165.png',
       description:
-        '4回合内，自身致命率增加50%。4回合内，自身致命伤害增加50%。攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。',
+        '&-effect/buff/0/duration-&回合内，自身致命率增加&-effect/buff/0/CRAdd-&%。&-effect/buff/1/duration-&回合内，自身致命伤害增加&-effect/buff/1/critical-&%。攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 100 }, // +0
-        1: { sp: 0, cd: 0, multiplying: 114 }, // +1
-        2: { sp: 0, cd: 0, multiplying: 127 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 127 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 139 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 150 }, // +5
-        // TODO 描述里识别到的效果：自身致命率50%（4回合） | 自身爆伤50%（4回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 100,
+          buff: [
+            {
+              duration: 4,
+              CRAdd: 50,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 4,
+              critical: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: 0,
+          multiplying: 114,
+          buff: [
+            {
+              duration: 4,
+              CRAdd: 50,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 4,
+              critical: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: 0,
+          multiplying: 127,
+          buff: [
+            {
+              duration: 4,
+              CRAdd: 50,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 4,
+              critical: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 127,
+          buff: [
+            {
+              duration: 4,
+              CRAdd: 50,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 4,
+              critical: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 139,
+          buff: [
+            {
+              duration: 4,
+              CRAdd: 50,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 4,
+              critical: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 150,
+          buff: [
+            {
+              duration: 4,
+              CRAdd: 50,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 4,
+              critical: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
       },
       // 技能觉醒效果
       skillPotentials: {

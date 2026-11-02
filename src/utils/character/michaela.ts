@@ -1,6 +1,6 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 633685 / entryId: 162490
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
 
 const michaela: characterDataObj = {
   name: 'michaela',
@@ -65,15 +65,88 @@ const michaela: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/790776.png',
       description:
-        '使用相当于自身当前生命力的80%，并在2回合内，自身魔法力增加200%。对敌人造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。',
+        '使用相当于自身当前生命力的80%，并在&-effect/buff/0/duration-&回合内，自身魔法力增加&-effect/buff/0/attackAdd-&%。对敌人造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 350 }, // +0
-        1: { sp: 1, cd: 0, multiplying: 350 }, // +1
-        2: { sp: 1, cd: 0, multiplying: 400 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 450 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 500 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 550 }, // +5
-        // TODO 描述里识别到的效果：自身魔法力200%（2回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 350,
+          buff: [
+            {
+              duration: 2,
+              attribute: 'matk',
+              attackAdd: 200,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        1: {
+          sp: 1,
+          cd: 0,
+          multiplying: 350,
+          buff: [
+            {
+              duration: 2,
+              attribute: 'matk',
+              attackAdd: 200,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        2: {
+          sp: 1,
+          cd: 0,
+          multiplying: 400,
+          buff: [
+            {
+              duration: 2,
+              attribute: 'matk',
+              attackAdd: 200,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 450,
+          buff: [
+            {
+              duration: 2,
+              attribute: 'matk',
+              attackAdd: 200,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 500,
+          buff: [
+            {
+              duration: 2,
+              attribute: 'matk',
+              attackAdd: 200,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 550,
+          buff: [
+            {
+              duration: 2,
+              attribute: 'matk',
+              attackAdd: 200,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        // TODO 描述里未能识别的效果：使用相当于自身当前生命力的80%，并在
+        // TODO 待人工复核：没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -119,7 +192,7 @@ const michaela: characterDataObj = {
     skill2: {
       name: 'skill2', // TODO: wiki 只有中文名，英文 key 需要人工命名
       cName: '签名女王',
-      target: 'friendly',
+      target: 'enemy',
       sp: -3,
       cd: 7,
       chain: 3,
@@ -149,7 +222,8 @@ const michaela: characterDataObj = {
         3: { sp: 1, cd: 0, multiplying: 290 }, // +3
         4: { sp: 1, cd: 0, multiplying: 330 }, // +4
         5: { sp: 1, cd: 0, multiplying: 370 }, // +5
-        // TODO 描述里识别到的效果：SP变化（1回合）
+        // TODO 描述里未能识别的效果：友军的SP减少6点
+        // TODO 待人工复核：描述里有增益/减益关键词，但没解析成 buff
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -206,15 +280,82 @@ const michaela: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/923107.png',
       description:
-        '4回合内，自身致命伤害增加300%。4回合内，自身防御力和魔法抵抗减少90%。对敌人造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。',
+        '&-effect/buff/0/duration-&回合内，自身致命伤害增加&-effect/buff/0/critical-&%。4回合内，自身防御力和魔法抵抗减少90%。对敌人造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 80 }, // +0
-        1: { sp: 1, cd: 0, multiplying: 80 }, // +1
-        2: { sp: 1, cd: 0, multiplying: 120 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 120 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 120 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 160 }, // +5
-        // TODO 描述里识别到的效果：自身爆伤300%（4回合） | 自身爆伤300%（6回合） | 自身爆伤400%（6回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 80,
+          buff: [
+            {
+              duration: 4,
+              critical: 300,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        1: {
+          sp: 1,
+          cd: 0,
+          multiplying: 80,
+          buff: [
+            {
+              duration: 4,
+              critical: 300,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        2: {
+          sp: 1,
+          cd: 0,
+          multiplying: 120,
+          buff: [
+            {
+              duration: 4,
+              critical: 300,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 120,
+          buff: [
+            {
+              duration: 6,
+              critical: 300,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 120,
+          buff: [
+            {
+              duration: 6,
+              critical: 400,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 160,
+          buff: [
+            {
+              duration: 6,
+              critical: 400,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        // TODO 描述里未能识别的效果：，自身防御力和魔法抵抗减少90%
+        // TODO 待人工复核：没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {

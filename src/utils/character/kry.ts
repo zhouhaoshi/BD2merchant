@@ -1,6 +1,9 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 593645 / entryId: 122337
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
+
+
+import { dotBuffType } from '@/utils/globals'
 
 const kry: characterDataObj = {
   name: 'kry',
@@ -67,15 +70,80 @@ const kry: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/592278.png',
       description:
-        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。4回合内，敌人防御力减少50%。',
+        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。&-effect/deBuff/0/duration-&回合内，敌人防御力减少&-effect/deBuff/0/DEFReduce-&%。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 80 }, // +0
-        1: { sp: 0, cd: -4, multiplying: 80 }, // +1
-        2: { sp: 0, cd: -4, multiplying: 100 }, // +2
-        3: { sp: 1, cd: -4, multiplying: 100 }, // +3
-        4: { sp: 1, cd: -4, multiplying: 140 }, // +4
-        5: { sp: 1, cd: -4, multiplying: 200 }, // +5
-        // TODO 描述里识别到的效果：减防50%（4回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 80,
+          deBuff: [
+            {
+              duration: 4,
+              DEFReduce: 50,
+              scope: [],
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: -4,
+          multiplying: 80,
+          deBuff: [
+            {
+              duration: 4,
+              DEFReduce: 50,
+              scope: [],
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: -4,
+          multiplying: 100,
+          deBuff: [
+            {
+              duration: 4,
+              DEFReduce: 50,
+              scope: [],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: -4,
+          multiplying: 100,
+          deBuff: [
+            {
+              duration: 4,
+              DEFReduce: 50,
+              scope: [],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: -4,
+          multiplying: 140,
+          deBuff: [
+            {
+              duration: 4,
+              DEFReduce: 50,
+              scope: [],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: -4,
+          multiplying: 200,
+          deBuff: [
+            {
+              duration: 4,
+              DEFReduce: 50,
+              scope: [],
+            },
+          ],
+        },
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -102,7 +170,7 @@ const kry: characterDataObj = {
     skill2: {
       name: 'skill2', // TODO: wiki 只有中文名，英文 key 需要人工命名
       cName: '粗暴学生',
-      target: 'friendly',
+      target: 'enemy',
       sp: -2,
       cd: 7,
       chain: 1,
@@ -117,15 +185,136 @@ const kry: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/197654.png',
       description:
-        '友军的SP恢复3。对敌人造成1的物理伤害，并将目标向后方击退2格。对被撞击的敌人造成相当于目标最大生命力100%的物理伤害。6回合内，对敌人应用造成相当于自身攻击力&-effect/multiplying-&%的物理伤害的出血效果。',
+        '友军的SP恢复3。对敌人造成1的物理伤害，并将目标向后方击退&-effect/repellingDistance-&格。对被撞击的敌人造成相当于目标最大生命力&-effect/repellingMultiplying-&%的物理伤害。&-effect/dotBuff/0/duration-&回合内，对敌人应用造成相当于自身攻击力&-effect/dotBuff/0/dotMultiplying-&的物理伤害的出血效果。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 50, special: [{ spAdd: 3 }] }, // +0
-        1: { sp: 0, cd: -4, multiplying: 50, special: [{ spAdd: 3 }] }, // +1
-        2: { sp: 0, cd: -4, multiplying: 65, special: [{ spAdd: 3 }] }, // +2
-        3: { sp: 1, cd: -4, multiplying: 65, special: [{ spAdd: 3 }] }, // +3
-        4: { sp: 1, cd: -4, multiplying: 90, special: [{ spAdd: 3 }] }, // +4
-        5: { sp: 1, cd: -4, multiplying: 130, special: [{ spAdd: 3 }] }, // +5
-        // TODO 描述里识别到的效果：SP变化（1回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          repellingDirection: [0, -1],
+          repellingDistance: 2,
+          repellingMultiplying: 100,
+          special: [
+            {
+              spAdd: 3,
+            },
+          ],
+          dotBuff: [
+            {
+              type: dotBuffType.bleed,
+              scope: [],
+              duration: 6,
+              dotMultiplying: 50,
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: -4,
+          multiplying: 0,
+          repellingDirection: [0, -1],
+          repellingDistance: 2,
+          repellingMultiplying: 100,
+          special: [
+            {
+              spAdd: 3,
+            },
+          ],
+          dotBuff: [
+            {
+              type: dotBuffType.bleed,
+              scope: [],
+              duration: 6,
+              dotMultiplying: 50,
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: -4,
+          multiplying: 0,
+          repellingDirection: [0, -1],
+          repellingDistance: 2,
+          repellingMultiplying: 100,
+          special: [
+            {
+              spAdd: 3,
+            },
+          ],
+          dotBuff: [
+            {
+              type: dotBuffType.bleed,
+              scope: [],
+              duration: 6,
+              dotMultiplying: 65,
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: -4,
+          multiplying: 0,
+          repellingDirection: [0, -1],
+          repellingDistance: 2,
+          repellingMultiplying: 100,
+          special: [
+            {
+              spAdd: 3,
+            },
+          ],
+          dotBuff: [
+            {
+              type: dotBuffType.bleed,
+              scope: [],
+              duration: 6,
+              dotMultiplying: 65,
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: -4,
+          multiplying: 0,
+          repellingDirection: [0, -1],
+          repellingDistance: 2,
+          repellingMultiplying: 100,
+          special: [
+            {
+              spAdd: 3,
+            },
+          ],
+          dotBuff: [
+            {
+              type: dotBuffType.bleed,
+              scope: [],
+              duration: 6,
+              dotMultiplying: 90,
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: -4,
+          multiplying: 0,
+          repellingDirection: [0, -1],
+          repellingDistance: 2,
+          repellingMultiplying: 100,
+          special: [
+            {
+              spAdd: 3,
+            },
+          ],
+          dotBuff: [
+            {
+              type: dotBuffType.bleed,
+              scope: [],
+              duration: 6,
+              dotMultiplying: 130,
+            },
+          ],
+        },
+        // TODO 描述里未能识别的效果：友军的SP恢复3
+        // TODO 待人工复核：没有解析到技能倍率 | 没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {

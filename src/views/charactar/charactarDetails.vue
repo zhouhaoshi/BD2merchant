@@ -50,14 +50,16 @@
               />
             </el-checkbox-group>
           </div>
-          <!-- 爆发技能 -->
+          <!-- 爆发选择 -->
           <div v-if="Object.keys(burstList).length">
-            <div class="title">爆发技能</div>
-            <div v-for="(value, key) in burstList" :key="key" class="burst_box">
-              <div class="burst_name">{{ key }}：消耗 {{ value.sp }} SP</div>
-              <div v-if="value.description">{{ value.description }}</div>
-              <skillScope v-if="value.scope" :scopeList="value.scope as number[][]" />
-            </div>
+            <div class="title">爆发选择</div>
+            <el-checkbox-group v-model="burstCheckList">
+              <div v-for="(value, key) in burstList" :key="key" class="burst_box">
+                <el-checkbox :value="key" :label="`${key}：${value.description}`" />
+                <div class="burst_name">消耗 {{ value.sp }} SP</div>
+                <skillScope v-if="value.scope" :scopeList="value.scope as number[][]" />
+              </div>
+            </el-checkbox-group>
           </div>
           <!-- 技能描述 -->
           <div v-if="data && data.Skill">
@@ -66,6 +68,7 @@
                 data.Skill[selectSkill || Object.keys(data.Skill)[select]],
                 breakthrough,
                 potentials,
+                burstMerged,
               )
             }}
           </div>
@@ -93,16 +96,7 @@
           </div>
           <!-- 范围 -->
           <div v-if="data && data.Skill" style="overflow: hidden">
-            <skillScope
-              :scopeList="
-                conversionScopeCommon(
-                  data.Skill[selectSkill || Object.keys(data.Skill)[select]],
-                  'scope',
-                  breakthrough,
-                  potentials,
-                ) as number[][]
-              "
-            />
+            <skillScope :scopeList="scopeDisplayList" />
           </div>
         </div>
       </el-tab-pane>
@@ -241,6 +235,7 @@ import {
   conversionCommon,
   conversionScopeCommon,
   setPotentials,
+  setBursts,
   calculateMaxValueWithAllocation,
   copyTextToClipboard,
   setEnhancementValue,
@@ -369,6 +364,19 @@ const burstList = computed(() => {
   const skill = props.data.Skill[selectSkill.value || Object.keys(props.data.Skill)[select.value]]
   return (skill?.burst as Record<string, burstObj> | undefined) || {}
 })
+// 已选爆发的勾选列表与合并数值（拼进技能描述/范围一起展示）
+const burstCheckList = ref<string[]>([])
+const burstMerged = computed(() => setBursts(burstCheckList.value, burstList.value))
+// 范围展示：技能基础范围 + 觉醒范围 + 已选爆发的范围改变
+const scopeDisplayList = computed(() => {
+  if (!props.data?.Skill) return []
+  const skill = props.data.Skill[selectSkill.value || Object.keys(props.data.Skill)[select.value]]
+  const base = conversionScopeCommon(skill, 'scope', breakthrough.value, potentials.value)
+  const burstScopes = burstCheckList.value.flatMap(
+    (key) => (burstList.value[key]?.scope as number[][] | undefined) || [],
+  )
+  return [...(base as number[][]), ...burstScopes]
+})
 const changeSkillPotentials = () => {
   const skillPotentials =
     props.data.Skill[selectSkill.value || Object.keys(props.data.Skill)[select.value]]
@@ -381,6 +389,7 @@ const clickSelectSkill = (value: string) => {
 }
 const resetData = () => {
   checkList.value = []
+  burstCheckList.value = []
   breakthrough.value = 0
   potentials.value = undefined
 }

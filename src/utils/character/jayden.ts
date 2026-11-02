@@ -1,6 +1,6 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 593638 / entryId: 122336
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
 
 const jayden: characterDataObj = {
   name: 'jayden',
@@ -61,15 +61,82 @@ const jayden: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/712094.png',
       description:
-        '4回合内，每回合结束时，恢复自身相当于自身最大生命力5%的生命力。4回合内，对自己应用50%的魔法防护罩效果。',
+        '&-effect/buff/0/duration-&回合内，每回合结束时，恢复自身相当于自身最大生命力&-effect/buff/0/HPAdd-&%的生命力。4回合内，对自己应用50%的魔法防护罩效果。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 0 }, // +0
-        1: { sp: 0, cd: -4, multiplying: 0 }, // +1
-        2: { sp: 0, cd: -4, multiplying: 0 }, // +2
-        3: { sp: 1, cd: -4, multiplying: 0 }, // +3
-        4: { sp: 1, cd: -4, multiplying: 0 }, // +4
-        5: { sp: 1, cd: -4, multiplying: 0 }, // +5
-        // TODO 描述里识别到的效果：护盾（4回合） | 护盾（6回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 4,
+              HPAdd: 5,
+              scope: [],
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: -4,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 4,
+              HPAdd: 5,
+              scope: [],
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: -4,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 4,
+              HPAdd: 9,
+              scope: [],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: -4,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 4,
+              HPAdd: 9,
+              scope: [],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: -4,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 4,
+              HPAdd: 17,
+              scope: [],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: -4,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 6,
+              HPAdd: 17,
+              scope: [],
+            },
+          ],
+        },
+        // TODO 描述里未能识别的效果：，对自己应用50%的魔法防护罩效果
+        // TODO 待人工复核：没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {

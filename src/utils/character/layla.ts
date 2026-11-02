@@ -1,6 +1,6 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 593657 / entryId: 122340
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
 
 const layla: characterDataObj = {
   name: 'layla',
@@ -49,7 +49,7 @@ const layla: characterDataObj = {
     skill1: {
       name: 'skill1', // TODO: wiki 只有中文名，英文 key 需要人工命名
       cName: '创造铁砧',
-      target: 'friendly',
+      target: 'enemy',
       sp: -6,
       cd: 7,
       chain: 2,
@@ -67,15 +67,81 @@ const layla: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/520171.png',
       description:
-        '每次攻击命中敌人时，友军的SP恢复1点。攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。',
+        '每次攻击命中敌人时，友军的SP恢复&-effect/hitBuff/0/spAdd-&点。攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 60 }, // +0
-        1: { sp: 0, cd: -4, multiplying: 60 }, // +1
-        2: { sp: 0, cd: -4, multiplying: 80 }, // +2
-        3: { sp: 1, cd: -4, multiplying: 80 }, // +3
-        4: { sp: 1, cd: -4, multiplying: 120 }, // +4
-        5: { sp: 1, cd: -4, multiplying: 180 }, // +5
-        // TODO 描述里识别到的效果：SP变化（1回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 60,
+          hitBuff: [
+            {
+              scope: [],
+              target: 'friendly',
+              spAdd: 1,
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: -4,
+          multiplying: 60,
+          hitBuff: [
+            {
+              scope: [],
+              target: 'friendly',
+              spAdd: 1,
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: -4,
+          multiplying: 80,
+          hitBuff: [
+            {
+              scope: [],
+              target: 'friendly',
+              spAdd: 1,
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: -4,
+          multiplying: 80,
+          hitBuff: [
+            {
+              scope: [],
+              target: 'friendly',
+              spAdd: 1,
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: -4,
+          multiplying: 120,
+          hitBuff: [
+            {
+              scope: [],
+              target: 'friendly',
+              spAdd: 1,
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: -4,
+          multiplying: 180,
+          hitBuff: [
+            {
+              scope: [],
+              target: 'friendly',
+              spAdd: 1,
+            },
+          ],
+        },
+        // TODO 待人工复核：描述里有增益/减益关键词，但没解析成 buff
       },
       // 技能觉醒效果
       skillPotentials: {

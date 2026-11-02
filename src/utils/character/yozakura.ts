@@ -1,6 +1,6 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 637922 / entryId: 167129
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
 
 const yozakura: characterDataObj = {
   name: 'yozakura',
@@ -74,15 +74,19 @@ const yozakura: characterDataObj = {
         3: { sp: 1, cd: 0, multiplying: 150 }, // +3
         4: { sp: 1, cd: 0, multiplying: 240 }, // +4
         5: { sp: 1, cd: 0, multiplying: 240 }, // +5
+        // TODO 描述里未能识别的效果：对自己应用使普通攻击的施加伤害增加400%的增强效果
+        // 　　　　　　　　　　　对自己应用使普通攻击的施加伤害增加650%的增强效果
+        // 　　　　　　　　　　　对自己应用使普通攻击的施加伤害增加900%的增强效果
+        // TODO 待人工复核：描述里有增益/减益关键词，但没解析成 buff
       },
       // 技能觉醒效果
       skillPotentials: {
         potentials1: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
+          increasedDamage: 150,
           description: '增强效果倍率+150%',
         },
         potentials2: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
+          increasedDamage: 150,
           description: '增强效果倍率+150%',
         },
         potentials3: {

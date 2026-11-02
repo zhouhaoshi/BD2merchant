@@ -1,7 +1,7 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 720262 / entryId: 224651
 // TODO wiki 上没有英文名，文件名和 name 暂时用 contentId，请改成游戏里的角色 key
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
 
 const char720262: characterDataObj = {
   name: 'char720262',
@@ -101,29 +101,18 @@ const char720262: characterDataObj = {
         burst1: {
           sp: 2, // 消耗SP
           description: '伤害量+100% 技能范围扩大',
-          scope: [
-            [0, 0],
-            [0, -1],
-            [0, -2],
-            [-1, -1],
-            [-1, 0],
-            [-2, 0],
-            [-1, 1],
-            [0, 1],
-            [0, 2],
-            [1, 1],
-            [1, 0],
-            [2, 0],
-            [1, -1],
-          ], // 爆发后的攻击范围，二维坐标系存储。直接命中目标为[0,0]
+          multiplying: 100,
+          scope: [[0, 0]], // TODO: 范围图没解析出来，请人工确认命中范围
         },
         burst2: {
           sp: 1, // 消耗SP
           description: '伤害量+50%',
+          multiplying: 50,
         },
         burst3: {
           sp: 1, // 消耗SP
           description: '伤害量+50%',
+          multiplying: 50,
         },
       },
       // 服装能力

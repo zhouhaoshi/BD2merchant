@@ -113,6 +113,7 @@
     :team-number="shaftConfig.teamNumber"
     :team-limit="shaftConfig.teamLimit"
     :select-charactar-list="selectCharactarList"
+    :default-team="currentTeamTab"
     @close="charactarSelectClose"
   />
   <SimulationResult

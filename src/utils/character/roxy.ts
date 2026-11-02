@@ -1,6 +1,6 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 622875 / entryId: 150306
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
 
 const roxy: characterDataObj = {
   name: 'roxy',
@@ -83,6 +83,10 @@ const roxy: characterDataObj = {
         3: { sp: 1, cd: 0, multiplying: 280 }, // +3
         4: { sp: 1, cd: 0, multiplying: 280 }, // +4
         5: { sp: 1, cd: 0, multiplying: 350 }, // +5
+        // TODO 描述里未能识别的效果：
+        // 　　　　　　　　　　　条件效果未结构化：若敌人为主要目标，则改为造成相当于自身魔法力300%的魔法伤害
+        // 　　　　　　　　　　　条件效果未结构化：若敌人为主要目标，则改为造成相当于自身魔法力450%的魔法伤害
+        // TODO 待人工复核：没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -134,13 +138,78 @@ const roxy: characterDataObj = {
       description:
         '攻击敌人&-chain-&次，每次攻击时，造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。2回合内，对敌人应用沉默效果。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 30 }, // +0
-        1: { sp: 1, cd: 0, multiplying: 30 }, // +1
-        2: { sp: 1, cd: 0, multiplying: 37 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 44 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 51 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 58 }, // +5
-        // TODO 描述里识别到的效果：沉默（2回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 30,
+          deBuff: [
+            {
+              duration: 2,
+              silence: 1,
+              scope: [],
+            },
+          ],
+        },
+        1: {
+          sp: 1,
+          cd: 0,
+          multiplying: 30,
+          deBuff: [
+            {
+              duration: 2,
+              silence: 1,
+              scope: [],
+            },
+          ],
+        },
+        2: {
+          sp: 1,
+          cd: 0,
+          multiplying: 37,
+          deBuff: [
+            {
+              duration: 2,
+              silence: 1,
+              scope: [],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 44,
+          deBuff: [
+            {
+              duration: 2,
+              silence: 1,
+              scope: [],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 51,
+          deBuff: [
+            {
+              duration: 2,
+              silence: 1,
+              scope: [],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 58,
+          deBuff: [
+            {
+              duration: 2,
+              silence: 1,
+              scope: [],
+            },
+          ],
+        },
       },
       // 技能觉醒效果
       skillPotentials: {

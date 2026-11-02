@@ -1,7 +1,7 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 720274 / entryId: 224650
 // TODO wiki 上没有英文名，文件名和 name 暂时用 contentId，请改成游戏里的角色 key
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
 
 const char720274: characterDataObj = {
   name: 'char720274',
@@ -101,10 +101,12 @@ const char720274: characterDataObj = {
         burst2: {
           sp: 1, // 消耗SP
           description: '伤害量+150%',
+          multiplying: 150,
         },
         burst3: {
           sp: 1, // 消耗SP
           description: '伤害量+150%',
+          multiplying: 150,
         },
       },
       // 服装能力

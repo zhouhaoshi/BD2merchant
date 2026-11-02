@@ -1,6 +1,6 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 593588 / entryId: 122349
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
 
 const sylvia: characterDataObj = {
   name: 'sylvia',
@@ -61,15 +61,153 @@ const sylvia: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/440035.png',
       description:
-        '4回合内，自身遭受攻击时，将进行反击。每次反击时，对敌人造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。4回合内，对自己应用50%的防护罩效果。',
+        '4回合内，自身遭受攻击时，将进行反击。每次反击时，对敌人造成相当于自身攻击力&-effect/hitBuff/0/hitMultiplying-&%的物理伤害。&-effect/buff/1/duration-&回合内，对自己应用&-effect/buff/1/damageReduction-&%的防护罩效果。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 400 }, // +0
-        1: { sp: 0, cd: 0, multiplying: 465 }, // +1
-        2: { sp: 0, cd: 0, multiplying: 530 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 530 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 595 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 660 }, // +5
-        // TODO 描述里识别到的效果：反击（4回合） | 护盾（4回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          hitBuff: [
+            {
+              scope: [],
+              target: 'enemy',
+              hitMultiplying: 400,
+            },
+          ],
+          buff: [
+            {
+              duration: 4,
+              hit: 1,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 4,
+              damageReduction: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          hitBuff: [
+            {
+              scope: [],
+              target: 'enemy',
+              hitMultiplying: 465,
+            },
+          ],
+          buff: [
+            {
+              duration: 4,
+              hit: 1,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 4,
+              damageReduction: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          hitBuff: [
+            {
+              scope: [],
+              target: 'enemy',
+              hitMultiplying: 530,
+            },
+          ],
+          buff: [
+            {
+              duration: 4,
+              hit: 1,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 4,
+              damageReduction: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 0,
+          hitBuff: [
+            {
+              scope: [],
+              target: 'enemy',
+              hitMultiplying: 530,
+            },
+          ],
+          buff: [
+            {
+              duration: 4,
+              hit: 1,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 4,
+              damageReduction: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 0,
+          hitBuff: [
+            {
+              scope: [],
+              target: 'enemy',
+              hitMultiplying: 595,
+            },
+          ],
+          buff: [
+            {
+              duration: 4,
+              hit: 1,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 4,
+              damageReduction: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 0,
+          hitBuff: [
+            {
+              scope: [],
+              target: 'enemy',
+              hitMultiplying: 660,
+            },
+          ],
+          buff: [
+            {
+              duration: 4,
+              hit: 1,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 4,
+              damageReduction: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        // TODO 待人工复核：没有解析到技能倍率 | 没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -121,15 +259,80 @@ const sylvia: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/631581.png',
       description:
-        '对自己应用相当于攻击力400%的能量护盾效果。此效果在遭受3次攻击后将消失。攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。',
+        '对自己应用相当于攻击力&-effect/buff/0/shield-&%的能量护盾效果。此效果在遭受3次攻击后将消失。攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 45 }, // +0
-        1: { sp: 0, cd: 0, multiplying: 67 }, // +1
-        2: { sp: 0, cd: 0, multiplying: 67 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 67 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 85 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 85 }, // +5
-        // TODO 描述里识别到的效果：护盾（1回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 45,
+          buff: [
+            {
+              duration: 99,
+              shield: 400,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: 0,
+          multiplying: 67,
+          buff: [
+            {
+              duration: 99,
+              shield: 400,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: 0,
+          multiplying: 67,
+          buff: [
+            {
+              duration: 99,
+              shield: 550,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 67,
+          buff: [
+            {
+              duration: 99,
+              shield: 550,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 85,
+          buff: [
+            {
+              duration: 99,
+              shield: 550,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 85,
+          buff: [
+            {
+              duration: 99,
+              shield: 700,
+              scope: [[0, 0]],
+            },
+          ],
+        },
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -179,15 +382,86 @@ const sylvia: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/991476.png',
       description:
-        '2回合内，自身攻击力增加100%。攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。',
+        '&-effect/buff/0/duration-&回合内，自身攻击力增加&-effect/buff/0/attackAdd-&%。攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 25 }, // +0
-        1: { sp: 0, cd: 0, multiplying: 30 }, // +1
-        2: { sp: 0, cd: 0, multiplying: 30 }, // +2
-        3: { sp: 0, cd: 0, multiplying: 35 }, // +3
-        4: { sp: 0, cd: 0, multiplying: 40 }, // +4
-        5: { sp: 0, cd: 0, multiplying: 40 }, // +5
-        // TODO 描述里识别到的效果：自身攻击力100%（2回合） | 自身攻击力150%（4回合） | 自身攻击力200%（6回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 25,
+          buff: [
+            {
+              duration: 2,
+              attribute: 'atk',
+              attackAdd: 100,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: 0,
+          multiplying: 30,
+          buff: [
+            {
+              duration: 2,
+              attribute: 'atk',
+              attackAdd: 100,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: 0,
+          multiplying: 30,
+          buff: [
+            {
+              duration: 4,
+              attribute: 'atk',
+              attackAdd: 150,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        3: {
+          sp: 0,
+          cd: 0,
+          multiplying: 35,
+          buff: [
+            {
+              duration: 4,
+              attribute: 'atk',
+              attackAdd: 150,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        4: {
+          sp: 0,
+          cd: 0,
+          multiplying: 40,
+          buff: [
+            {
+              duration: 4,
+              attribute: 'atk',
+              attackAdd: 150,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        5: {
+          sp: 0,
+          cd: 0,
+          multiplying: 40,
+          buff: [
+            {
+              duration: 6,
+              attribute: 'atk',
+              attackAdd: 200,
+              scope: [[0, 0]],
+            },
+          ],
+        },
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -200,7 +474,7 @@ const sylvia: characterDataObj = {
           description: '伤害倍率+2%',
         },
         potentials3: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
+          attackAdd: 25,
           description: '攻击力增加倍率+25%',
         },
       },
@@ -252,6 +526,7 @@ const sylvia: characterDataObj = {
         3: { sp: 1, cd: 0, multiplying: 550 }, // +3
         4: { sp: 1, cd: 0, multiplying: 625 }, // +4
         5: { sp: 1, cd: 0, multiplying: 700 }, // +5
+        // TODO 待人工复核：没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -273,10 +548,12 @@ const sylvia: characterDataObj = {
         burst1: {
           sp: 2, // 消耗SP
           description: '伤害量+300%',
+          multiplying: 300,
         },
         burst2: {
           sp: 1, // 消耗SP
           description: '伤害量+150%',
+          multiplying: 150,
         },
         burst3: {
           sp: 1, // 消耗SP

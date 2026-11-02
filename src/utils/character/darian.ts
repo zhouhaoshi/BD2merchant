@@ -1,6 +1,6 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 678559 / entryId: 195333
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
 
 const darian: characterDataObj = {
   name: 'darian',
@@ -79,6 +79,11 @@ const darian: characterDataObj = {
         3: { sp: 1, cd: 0, multiplying: 600 }, // +3
         4: { sp: 1, cd: 0, multiplying: 700 }, // +4
         5: { sp: 1, cd: 0, multiplying: 700 }, // +5
+        // TODO 描述里未能识别的效果：
+        // 　　　　　　　　　　　条件效果未结构化：若敌人为主要目标，则改为造成相当于自身攻击力775%的物理伤害
+        // 　　　　　　　　　　　条件效果未结构化：若敌人为主要目标，则改为造成相当于自身攻击力950%的物理伤害
+        // 　　　　　　　　　　　条件效果未结构化：若敌人为主要目标，则改为造成相当于自身攻击力1125%的物理伤害
+        // TODO 待人工复核：没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -100,14 +105,17 @@ const darian: characterDataObj = {
         burst1: {
           sp: 2, // 消耗SP
           description: '普通伤害量+200%，增加技能范围。',
+          multiplying: 200,
         },
         burst2: {
           sp: 1, // 消耗SP
           description: '主要目标伤害量+300%，一般伤害量+300%',
+          multiplying: 300,
         },
         burst3: {
           sp: 1, // 消耗SP
           description: '主要目标伤害量+300%，一般伤害量+300%',
+          multiplying: 300,
         },
       },
       // 服装能力
@@ -153,15 +161,24 @@ const darian: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/354975.png',
       description:
-        '每命中一个目标，该技能的冷却时间减少2。对敌人造成相当于自身200%的物理伤害。若敌人处于持续伤害状态，则改为造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。5回合内，对敌人应用每层叠加造成相当于自身攻击110%的物理伤害的冻伤效果。最多可应用叠加至7。',
+        '每命中一个目标，该技能的冷却时间减少2。对敌人造成相当于自身200%的物理伤害。若敌人处于持续伤害状态，则改为造成相当于自身攻击力400%的物理伤害。5回合内，对敌人应用每层叠加造成相当于自身攻击110%的物理伤害的冻伤效果。最多可应用叠加至7。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 400 }, // +0
-        1: { sp: 1, cd: 0, multiplying: 400 }, // +1
-        2: { sp: 1, cd: -2, multiplying: 400 }, // +2
-        3: { sp: 1, cd: -2, multiplying: 475 }, // +3
-        4: { sp: 1, cd: -2, multiplying: 475 }, // +4
-        5: { sp: 1, cd: -2, multiplying: 550 }, // +5
-        // TODO 描述里识别到的效果：持续伤害（1回合）
+        0: { sp: 0, cd: 0, multiplying: 0 }, // +0
+        1: { sp: 1, cd: 0, multiplying: 0 }, // +1
+        2: { sp: 1, cd: -2, multiplying: 0 }, // +2
+        3: { sp: 1, cd: -2, multiplying: 0 }, // +3
+        4: { sp: 1, cd: -2, multiplying: 0 }, // +4
+        5: { sp: 1, cd: -2, multiplying: 0 }, // +5
+        // TODO 描述里未能识别的效果：
+        // 　　　　　　　　　　　条件效果未结构化：若敌人处于持续伤害状态，则改为造成相当于自身攻击力400%的物理伤害
+        // 　　　　　　　　　　　每命中一个目标，该技能的冷却时间减少2
+        // 　　　　　　　　　　　，对敌人应用每层叠加造成相当于自身攻击110%的物理伤害的冻伤效果
+        // 　　　　　　　　　　　最多可应用叠加至7
+        // 　　　　　　　　　　　条件效果未结构化：若敌人处于持续伤害状态，则改为造成相当于自身攻击力475%的物理伤害
+        // 　　　　　　　　　　　，对敌人应用每层叠加造成相当于自身攻击150%的物理伤害的冻伤效果
+        // 　　　　　　　　　　　条件效果未结构化：若敌人处于持续伤害状态，则改为造成相当于自身攻击力550%的物理伤害
+        // TODO 待人工复核：没有解析到技能倍率 | 没有解析到连锁次数
+        // 　　　　　　描述里有增益/减益关键词，但没解析成 buff
       },
       // 技能觉醒效果
       skillPotentials: {

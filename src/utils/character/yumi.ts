@@ -1,6 +1,9 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 638795 / entryId: 167966
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
+
+
+import { dotBuffType } from '@/utils/globals'
 
 const yumi: characterDataObj = {
   name: 'yumi',
@@ -65,14 +68,93 @@ const yumi: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/206343.png',
       description:
-        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。3回合内，对敌人应用每层叠加造成相当于自身魔法力10%的魔法伤害的出血叠加效果。最多可应用叠加至99层。',
+        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。&-effect/dotBuff/0/duration-&回合内，对敌人应用每层叠加造成相当于自身魔法力&-effect/dotBuff/0/dotMultiplying-&的魔法伤害的出血叠加效果。最多可应用叠加至99层。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 30 }, // +0
-        1: { sp: 1, cd: 0, multiplying: 30 }, // +1
-        2: { sp: 1, cd: 0, multiplying: 60 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 60 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 90 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 90 }, // +5
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 30,
+          dotBuff: [
+            {
+              type: dotBuffType.bleed,
+              scope: [],
+              duration: 3,
+              dotMultiplying: 10,
+              dotbuffNumber: 1,
+            },
+          ],
+        },
+        1: {
+          sp: 1,
+          cd: 0,
+          multiplying: 30,
+          dotBuff: [
+            {
+              type: dotBuffType.bleed,
+              scope: [],
+              duration: 3,
+              dotMultiplying: 10,
+              dotbuffNumber: 1,
+            },
+          ],
+        },
+        2: {
+          sp: 1,
+          cd: 0,
+          multiplying: 60,
+          dotBuff: [
+            {
+              type: dotBuffType.bleed,
+              scope: [],
+              duration: 3,
+              dotMultiplying: 10,
+              dotbuffNumber: 1,
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 60,
+          dotBuff: [
+            {
+              type: dotBuffType.bleed,
+              scope: [],
+              duration: 3,
+              dotMultiplying: 15,
+              dotbuffNumber: 1,
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 90,
+          dotBuff: [
+            {
+              type: dotBuffType.bleed,
+              scope: [],
+              duration: 3,
+              dotMultiplying: 15,
+              dotbuffNumber: 1,
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 90,
+          dotBuff: [
+            {
+              type: dotBuffType.bleed,
+              scope: [],
+              duration: 3,
+              dotMultiplying: 20,
+              dotbuffNumber: 1,
+            },
+          ],
+        },
+        // TODO 描述里未能识别的效果：最多可应用叠加至99层
       },
       // 技能觉醒效果
       skillPotentials: {

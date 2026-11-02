@@ -1,6 +1,6 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 597740 / entryId: 124911
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
 
 const angelica: characterDataObj = {
   name: 'angelica',
@@ -64,15 +64,81 @@ const angelica: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/160779.png',
       description:
-        '【生命力最多计算50000】。2回合内，对自己应用50%的防护罩效果。对敌人造成相当于敌人最大生命力&-effect/multiplying-&%的魔法伤害。',
+        '【生命力最多计算50000】。&-effect/buff/0/duration-&回合内，对自己应用&-effect/buff/0/damageReduction-&%的防护罩效果。对敌人造成相当于敌人最大生命力&-effect/multiplying-&%的魔法伤害。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 45 }, // +0
-        1: { sp: 0, cd: 0, multiplying: 55 }, // +1
-        2: { sp: 0, cd: 0, multiplying: 64 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 64 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 72 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 80 }, // +5
-        // TODO 描述里识别到的效果：护盾（2回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 45,
+          buff: [
+            {
+              duration: 2,
+              damageReduction: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: 0,
+          multiplying: 55,
+          buff: [
+            {
+              duration: 2,
+              damageReduction: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: 0,
+          multiplying: 64,
+          buff: [
+            {
+              duration: 2,
+              damageReduction: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 64,
+          buff: [
+            {
+              duration: 2,
+              damageReduction: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 72,
+          buff: [
+            {
+              duration: 2,
+              damageReduction: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 80,
+          buff: [
+            {
+              duration: 2,
+              damageReduction: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        // TODO 待人工复核：没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -98,10 +164,12 @@ const angelica: characterDataObj = {
         burst2: {
           sp: 1, // 消耗SP
           description: '伤害量+20%',
+          multiplying: 20,
         },
         burst3: {
           sp: 1, // 消耗SP
           description: '伤害量+20%',
+          multiplying: 20,
         },
       },
       // 服装能力
@@ -139,15 +207,80 @@ const angelica: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/17225.png',
       description:
-        '【生命力最多计算50000】。2回合内，对自己应用75%的防护罩效果。攻击敌人&-chain-&次，每次攻击时，造成相当于敌人最大生命力&-effect/multiplying-&%的魔法伤害。',
+        '【生命力最多计算50000】。&-effect/buff/0/duration-&回合内，对自己应用&-effect/buff/0/damageReduction-&%的防护罩效果。攻击敌人&-chain-&次，每次攻击时，造成相当于敌人最大生命力&-effect/multiplying-&%的魔法伤害。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 15 }, // +0
-        1: { sp: 0, cd: 0, multiplying: 18 }, // +1
-        2: { sp: 0, cd: 0, multiplying: 21 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 21 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 23 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 25 }, // +5
-        // TODO 描述里识别到的效果：护盾（2回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 15,
+          buff: [
+            {
+              duration: 2,
+              damageReduction: 75,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: 0,
+          multiplying: 18,
+          buff: [
+            {
+              duration: 2,
+              damageReduction: 75,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: 0,
+          multiplying: 21,
+          buff: [
+            {
+              duration: 2,
+              damageReduction: 75,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 21,
+          buff: [
+            {
+              duration: 2,
+              damageReduction: 75,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 23,
+          buff: [
+            {
+              duration: 2,
+              damageReduction: 75,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 25,
+          buff: [
+            {
+              duration: 2,
+              damageReduction: 75,
+              scope: [[0, 0]],
+            },
+          ],
+        },
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -198,15 +331,86 @@ const angelica: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/264548.png',
       description:
-        '【生命力最多计算50000】。2回合内，对自己应用75%的防护罩效果。对敌人造成相当于敌人最大生命力&-effect/multiplying-&%的魔法伤害。8回合内，对敌人应用相当于敌人最大生命力14%的魔法伤害的腐败效果。最多可赋予叠加至3。',
+        '【生命力最多计算50000】。&-effect/buff/0/duration-&回合内，对自己应用&-effect/buff/0/damageReduction-&%的防护罩效果。对敌人造成相当于敌人最大生命力&-effect/multiplying-&%的魔法伤害。8回合内，对敌人应用相当于敌人最大生命力14%的魔法伤害的腐败效果。最多可赋予叠加至3。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 5 }, // +0
-        1: { sp: 0, cd: 0, multiplying: 5 }, // +1
-        2: { sp: 0, cd: 0, multiplying: 5 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 5 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 5 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 5 }, // +5
-        // TODO 描述里识别到的效果：护盾（2回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 5,
+          buff: [
+            {
+              duration: 2,
+              damageReduction: 75,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: 0,
+          multiplying: 5,
+          buff: [
+            {
+              duration: 2,
+              damageReduction: 75,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: 0,
+          multiplying: 5,
+          buff: [
+            {
+              duration: 2,
+              damageReduction: 75,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 5,
+          buff: [
+            {
+              duration: 2,
+              damageReduction: 75,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 5,
+          buff: [
+            {
+              duration: 2,
+              damageReduction: 75,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 5,
+          buff: [
+            {
+              duration: 2,
+              damageReduction: 75,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        // TODO 描述里未能识别的效果：，对敌人应用相当于敌人最大生命力14%的魔法伤害的腐败效果
+        // 　　　　　　　　　　　，对敌人应用相当于敌人最大生命力18%的魔法伤害的腐败效果
+        // 　　　　　　　　　　　，对敌人应用相当于敌人最大生命力21%的魔法伤害的腐败效果
+        // 　　　　　　　　　　　，对敌人应用相当于敌人最大生命力23%的魔法伤害的腐败效果
+        // 　　　　　　　　　　　，对敌人应用相当于敌人最大生命力25%的魔法伤害的腐败效果
+        // TODO 待人工复核：没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {

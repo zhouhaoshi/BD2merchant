@@ -1,6 +1,6 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 689646 / entryId: 202985
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
 
 const granadair: characterDataObj = {
   name: 'granadair',
@@ -61,15 +61,124 @@ const granadair: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/26270.png',
       description:
-        '4回合内，每回合结束时，恢复友军SP1点。4回合内，友军的魔法力增加50%。2回合内，友军的魔法力增加45%。',
+        '4回合内，每回合结束时，恢复友军SP1点。&-effect/buff/0/duration-&回合内，友军的魔法力增加&-effect/buff/0/attackAdd-&%。&-effect/buff/1/duration-&回合内，友军的魔法力增加&-effect/buff/1/attackAdd-&%。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 0 }, // +0
-        1: { sp: 1, cd: 0, multiplying: 0 }, // +1
-        2: { sp: 1, cd: 0, multiplying: 0 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 0 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 0 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 0 }, // +5
-        // TODO 描述里识别到的效果：友军攻击/魔法力50%（4回合） | 友军攻击/魔法力60%（4回合） | 友军攻击/魔法力70%（4回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 4,
+              attribute: 'matk',
+              attackAdd: 50,
+              scope: [],
+            },
+            {
+              duration: 2,
+              attribute: 'matk',
+              attackAdd: 45,
+              scope: [],
+            },
+          ],
+        },
+        1: {
+          sp: 1,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 4,
+              attribute: 'matk',
+              attackAdd: 50,
+              scope: [],
+            },
+            {
+              duration: 2,
+              attribute: 'matk',
+              attackAdd: 45,
+              scope: [],
+            },
+          ],
+        },
+        2: {
+          sp: 1,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 4,
+              attribute: 'matk',
+              attackAdd: 60,
+              scope: [],
+            },
+            {
+              duration: 2,
+              attribute: 'matk',
+              attackAdd: 45,
+              scope: [],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 4,
+              attribute: 'matk',
+              attackAdd: 60,
+              scope: [],
+            },
+            {
+              duration: 2,
+              attribute: 'matk',
+              attackAdd: 55,
+              scope: [],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 4,
+              attribute: 'matk',
+              attackAdd: 70,
+              scope: [],
+            },
+            {
+              duration: 2,
+              attribute: 'matk',
+              attackAdd: 55,
+              scope: [],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 4,
+              attribute: 'matk',
+              attackAdd: 70,
+              scope: [],
+            },
+            {
+              duration: 2,
+              attribute: 'matk',
+              attackAdd: 65,
+              scope: [],
+            },
+          ],
+        },
+        // TODO 描述里未能识别的效果：，每回合结束时，恢复友军SP1点
+        // TODO 待人工复核：没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -141,14 +250,112 @@ const granadair: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/807151.png',
       description:
-        '对友军应用在4回合内，施加伤害增加75%的增强效果。吸收应用于友军的减益效果。此时，4回合内，对友军应用10%的增强效果，每吸收1个效果，可叠加1层。最多可叠加15层。',
+        '对友军应用在&-effect/buff/0/duration-&回合内，施加伤害增加&-effect/buff/0/increasedDamage-&%的增强效果。吸收应用于友军的减益效果。此时，&-effect/buff/1/duration-&回合内，对友军应用&-effect/buff/1/increasedDamage-&%的增强效果，每吸收1个效果，可叠加1层。最多可叠加15层。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 0 }, // +0
-        1: { sp: 1, cd: 0, multiplying: 0 }, // +1
-        2: { sp: 1, cd: 0, multiplying: 0 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 0 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 0 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 0 }, // +5
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 4,
+              increasedDamage: 75,
+              scope: [],
+            },
+            {
+              duration: 4,
+              increasedDamage: 10,
+              scope: [],
+            },
+          ],
+        },
+        1: {
+          sp: 1,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 4,
+              increasedDamage: 75,
+              scope: [],
+            },
+            {
+              duration: 4,
+              increasedDamage: 10,
+              scope: [],
+            },
+          ],
+        },
+        2: {
+          sp: 1,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 4,
+              increasedDamage: 85,
+              scope: [],
+            },
+            {
+              duration: 4,
+              increasedDamage: 10,
+              scope: [],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 4,
+              increasedDamage: 95,
+              scope: [],
+            },
+            {
+              duration: 4,
+              increasedDamage: 10,
+              scope: [],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 4,
+              increasedDamage: 105,
+              scope: [],
+            },
+            {
+              duration: 4,
+              increasedDamage: 10,
+              scope: [],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 4,
+              increasedDamage: 115,
+              scope: [],
+            },
+            {
+              duration: 4,
+              increasedDamage: 10,
+              scope: [],
+            },
+          ],
+        },
+        // TODO 描述里未能识别的效果：吸收应用于友军的减益效果 | ，每吸收1个效果，可叠加1层
+        // TODO 待人工复核：没有解析到技能倍率 | 没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {

@@ -1,6 +1,6 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 611786 / entryId: 139655
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
 
 const granhidr: characterDataObj = {
   name: 'granhidr',
@@ -61,15 +61,117 @@ const granhidr: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/451703.png',
       description:
-        '【先发制人】2回合内，对自己应用挑衅效果。4回合内，对自己应用相当于最大生命力100%的能量护盾效果。',
+        '【先发制人】2回合内，对自己应用挑衅效果。&-effect/buff/1/duration-&回合内，对自己应用相当于最大生命力&-effect/buff/1/shield-&%的能量护盾效果。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 0 }, // +0
-        1: { sp: 0, cd: 0, multiplying: 0 }, // +1
-        2: { sp: 0, cd: -2, multiplying: 0 }, // +2
-        3: { sp: 0, cd: -2, multiplying: 0 }, // +3
-        4: { sp: 0, cd: -2, multiplying: 0 }, // +4
-        5: { sp: 0, cd: -2, multiplying: 0 }, // +5
-        // TODO 描述里识别到的效果：挑衅（2回合） | 护盾（4回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          lifemanship: 1,
+          buff: [
+            {
+              duration: 2,
+              provocation: 1,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 4,
+              shield: 100,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          lifemanship: 1,
+          buff: [
+            {
+              duration: 2,
+              provocation: 1,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 4,
+              shield: 150,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: -2,
+          multiplying: 0,
+          lifemanship: 1,
+          buff: [
+            {
+              duration: 2,
+              provocation: 1,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 4,
+              shield: 150,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        3: {
+          sp: 0,
+          cd: -2,
+          multiplying: 0,
+          lifemanship: 1,
+          buff: [
+            {
+              duration: 2,
+              provocation: 1,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 4,
+              shield: 200,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        4: {
+          sp: 0,
+          cd: -2,
+          multiplying: 0,
+          lifemanship: 1,
+          buff: [
+            {
+              duration: 2,
+              provocation: 1,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 4,
+              shield: 250,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        5: {
+          sp: 0,
+          cd: -2,
+          multiplying: 0,
+          lifemanship: 1,
+          buff: [
+            {
+              duration: 2,
+              provocation: 1,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 4,
+              shield: 300,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        // TODO 待人工复核：没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -115,15 +217,135 @@ const granhidr: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/403074.png',
       description:
-        '【先发制人】自身遭受攻击时，将进行反击。每次反击时，对敌人造成相当于承受伤害200%的物理伤害。此效果在遭受3次攻击后将消失。',
+        '【先发制人】自身遭受攻击时，将进行反击。每次反击时，对敌人造成相当于承受伤害&-effect/hitBuff/0/hitMultiplying-&%的物理伤害。此效果在遭受&-effect/hitBuff/0/triggerCount-&次攻击后将消失。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 0 }, // +0
-        1: { sp: 0, cd: 0, multiplying: 0 }, // +1
-        2: { sp: 0, cd: 0, multiplying: 0 }, // +2
-        3: { sp: 0, cd: 0, multiplying: 0 }, // +3
-        4: { sp: 0, cd: 0, multiplying: 0 }, // +4
-        5: { sp: 0, cd: 0, multiplying: 0 }, // +5
-        // TODO 描述里识别到的效果：反击（1回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          lifemanship: 1,
+          hitBuff: [
+            {
+              scope: [],
+              target: 'enemy',
+              hitMultiplying: 200,
+              triggerCount: 3,
+            },
+          ],
+          buff: [
+            {
+              duration: 99,
+              hit: 1,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          lifemanship: 1,
+          hitBuff: [
+            {
+              scope: [],
+              target: 'enemy',
+              hitMultiplying: 250,
+              triggerCount: 3,
+            },
+          ],
+          buff: [
+            {
+              duration: 99,
+              hit: 1,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          lifemanship: 1,
+          hitBuff: [
+            {
+              scope: [],
+              target: 'enemy',
+              hitMultiplying: 250,
+              triggerCount: 5,
+            },
+          ],
+          buff: [
+            {
+              duration: 99,
+              hit: 1,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        3: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          lifemanship: 1,
+          hitBuff: [
+            {
+              scope: [],
+              target: 'enemy',
+              hitMultiplying: 300,
+              triggerCount: 5,
+            },
+          ],
+          buff: [
+            {
+              duration: 99,
+              hit: 1,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        4: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          lifemanship: 1,
+          hitBuff: [
+            {
+              scope: [],
+              target: 'enemy',
+              hitMultiplying: 350,
+              triggerCount: 5,
+            },
+          ],
+          buff: [
+            {
+              duration: 99,
+              hit: 1,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        5: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          lifemanship: 1,
+          hitBuff: [
+            {
+              scope: [],
+              target: 'enemy',
+              hitMultiplying: 400,
+              triggerCount: 5,
+            },
+          ],
+          buff: [
+            {
+              duration: 99,
+              hit: 1,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        // TODO 待人工复核：没有解析到技能倍率 | 没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -175,15 +397,19 @@ const granhidr: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/797399.png',
       description:
-        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身最大生命力6%的物理伤害。此时，还会额外造成等同于自身拥有的能量护盾的7%的物理伤害。',
+        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身最大生命力&-effect/multiplying-&%的物理伤害。此时，还会额外造成等同于自身拥有的能量护盾的7%的物理伤害。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 0 }, // +0
-        1: { sp: 1, cd: 0, multiplying: 0 }, // +1
-        2: { sp: 1, cd: 0, multiplying: 0 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 0 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 0 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 0 }, // +5
-        // TODO 描述里识别到的效果：护盾（1回合）
+        0: { sp: 0, cd: 0, multiplying: 6 }, // +0
+        1: { sp: 1, cd: 0, multiplying: 6 }, // +1
+        2: { sp: 1, cd: 0, multiplying: 6 }, // +2
+        3: { sp: 1, cd: 0, multiplying: 6 }, // +3
+        4: { sp: 1, cd: 0, multiplying: 6 }, // +4
+        5: { sp: 1, cd: 0, multiplying: 6 }, // +5
+        // TODO 描述里未能识别的效果：此时，还会额外造成等同于自身拥有的能量护盾的7%的物理伤害
+        // 　　　　　　　　　　　此时，还会额外造成等同于自身拥有的能量护盾的8%的物理伤害
+        // 　　　　　　　　　　　此时，还会额外造成等同于自身拥有的能量护盾的9%的物理伤害
+        // 　　　　　　　　　　　此时，还会额外造成等同于自身拥有的能量护盾的10%的物理伤害
+        // 　　　　　　　　　　　此时，还会额外造成等同于自身拥有的能量护盾的11%的物理伤害
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -236,15 +462,81 @@ const granhidr: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/pro/50118/images/w_360/h_381/497891/2026/5/17/84795554mqhgs3f4.png',
       description:
-        '2回合内，自身致命伤害增加100%。拥有的增益效果数量达到5个及以上时，所有增益效果的持续回合数2回合延长。对敌人造成相当于自身最大生命力50%的物理伤害。',
+        '&-effect/buff/0/duration-&回合内，自身致命伤害增加&-effect/buff/0/critical-&%。拥有的增益效果数量达到5个及以上时，所有增益效果的持续回合数2回合延长。对敌人造成相当于自身最大生命力&-effect/multiplying-&%的物理伤害。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 0 }, // +0
-        1: { sp: 1, cd: 0, multiplying: 0 }, // +1
-        2: { sp: 1, cd: 0, multiplying: 0 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 0 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 0 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 0 }, // +5
-        // TODO 描述里识别到的效果：自身爆伤100%（2回合） | 自身爆伤150%（2回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 50,
+          buff: [
+            {
+              duration: 2,
+              critical: 100,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        1: {
+          sp: 1,
+          cd: 0,
+          multiplying: 50,
+          buff: [
+            {
+              duration: 2,
+              critical: 100,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        2: {
+          sp: 1,
+          cd: 0,
+          multiplying: 60,
+          buff: [
+            {
+              duration: 2,
+              critical: 100,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 60,
+          buff: [
+            {
+              duration: 2,
+              critical: 150,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 70,
+          buff: [
+            {
+              duration: 2,
+              critical: 150,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 80,
+          buff: [
+            {
+              duration: 2,
+              critical: 150,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        // TODO 待人工复核：没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {

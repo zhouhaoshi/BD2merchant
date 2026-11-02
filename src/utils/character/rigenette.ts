@@ -1,6 +1,6 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 593607 / entryId: 122332
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
 
 const rigenette: characterDataObj = {
   name: 'rigenette',
@@ -69,6 +69,7 @@ const rigenette: characterDataObj = {
         3: { sp: 1, cd: -4, multiplying: 60 }, // +3
         4: { sp: 1, cd: -4, multiplying: 110 }, // +4
         5: { sp: 1, cd: -4, multiplying: 110 }, // +5
+        // TODO 描述里未能识别的效果：，对敌人应用集中射击效果
       },
       // 技能觉醒效果
       skillPotentials: {

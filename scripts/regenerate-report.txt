@@ -1,0 +1,376 @@
+===== 角色文件重新生成报告（2026/11/1 14:32:32） =====
+模式：write | wiki 角色 87 | 生成成功 87 | 失败 0
+分类：AUTO 62 | HAND保留技能 25 | HAND重建 0 | 新增 0
+
+---- 各角色 ----
+[1] [AUTO] char721512.ts 山城恋（5星）scope复用 1/1
+    技能「让我好好管教你」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=1 notes=1 | 占位符=有 | 自身成功闪避敌人1次前，以100%的概率闪避敌人的攻击。对敌人造成相当于自身魔法力600%的魔法伤害
+[2] [AUTO] char720274.ts 羽前京香（5星）scope复用 1/1
+    技能「受死吧！」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=0 notes=0 | 占位符=有 | 攻击敌人1次，每次攻击时，造成相当于自身攻击力300%的物理伤害。
+[3] [AUTO] char720262.ts 出云天花（5星）scope复用 1/1
+    技能「位置，刚刚好」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=0 notes=0 | 占位符=有 | 攻击敌人3次，每次攻击时，造成相当于自身魔法力240%的魔法伤害。
+[4] [HAND-keep] ancilla.ts 阿奇拉（5星）scope复用 -
+    已使用 &- 占位符，且含手工维护数据，整文件保持不变
+[5] [AUTO] nekyndalia.ts 内肯达莉亚（5星）scope复用 2/2
+    技能「致命战线」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=0 notes=2 | 占位符=有 | 4回合内，对敌人应用【标记】。对敌人进行10次攻击，每次攻击时造成自身魔法力45%的魔法伤害。
+
+【
+    技能「清扫工作，现在开始」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=2 | 占位符=有 | 与战场上处于印记状态的目标共鸣，并为自身施加持续2回合、2%的造成的连携伤害增加效果，每1名目标施加
+[6] [AUTO] mamonir.ts 马莫尼勒（5星）scope复用 2/2
+    技能「去吧，奥克托比乌斯！」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=1 notes=5 | 占位符=有 | 6回合内，释放奥克托比乌斯之力，并进行变身。6回合内，自身致命伤害增加200%。攻击敌人8次，每次攻
+    技能「海洋☆深度意志」: buff=1 deBuff=1 dot=0 hit=0 | uncertain=0 notes=3 | 占位符=有 | 自身遭受攻击时，对敌人应用30%虚弱效果。此效果在遭受8次攻击后将消失。2回合内，虚弱效果将持续，每
+[7] [HAND-keep] liberta.ts 黎维塔（5星）scope复用 -
+    已使用 &- 占位符，且含手工维护数据，整文件保持不变
+[8] [AUTO] ikaruga.ts 斑鸠（5星）scope复用 1/1
+    技能「特级飞燕凤闪·一式」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=0 notes=1 | 占位符=有 | 对自身应用攻击力增加60%的效果。此效果叠加至1。最多可赋予叠加至3。此效果在遭受1次攻击后将消失。
+[9] [AUTO] palette.ts 帕莱特（5星）scope复用 2/2
+    技能「让你见识真正的杰作···！」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=0 | 占位符=有 | 对敌人造成相当于自身魔法力500%的魔法伤害。敌人持有的所有减益效果的持续回合数2回合延长。
+    技能「紫罗兰☆极限突袭」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=0 notes=0 | 占位符=有 | 攻击敌人7次，每次攻击时，造成相当于自身魔法力35%的魔法伤害。此时，敌方的减益效果达到7个及以上时
+[10] [AUTO] granadair.ts 葛拉娜德（5星）scope复用 2/2
+    技能「法力凝聚」: buff=2 deBuff=0 dot=0 hit=0 | uncertain=1 notes=1 | 占位符=有 | 4回合内，每回合结束时，恢复友军SP1点。4回合内，友军的魔法力增加50%。2回合内，友军的魔法力增
+    技能「净化祝福」: buff=2 deBuff=0 dot=0 hit=0 | uncertain=2 notes=2 | 占位符=有 | 对友军应用在4回合内，施加伤害增加75%的增强效果。吸收应用于友军的减益效果。此时，4回合内，对友军
+[11] [AUTO] darian.ts 达丽安（5星）scope复用 2/2
+    技能「为了母亲的梦想」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=1 | 占位符=有 | 对敌人造成相当于自身攻击力500%的物理伤害。若敌人为主要目标，则改为造成相当于自身攻击力775%的
+    技能「雪之花」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=3 notes=4 | 占位符=无 | 每命中一个目标，该技能的冷却时间减少2。对敌人造成相当于自身200%的物理伤害。若敌人处于持续伤害状
+[12] [AUTO] tyr.ts 提尔（5星）scope复用 2/2
+    技能「义无反顾」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=2 notes=1 | 占位符=有 | 6回合内，对自己应用SP消耗增加2的效果。对敌人造成相当于自身攻击力700%的物理伤害。
+    技能「勇往直前！」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=2 notes=1 | 占位符=有 | 8回合期间，对自身应用SP消耗增加2的效果。对敌人造成相当于自身攻击力125%的物理伤害。技能释放时
+[13] [HAND-keep] sonya.ts 索尼娅（5星）scope复用 -
+    已使用 &- 占位符，且含手工维护数据，整文件保持不变
+[14] [AUTO] sylvia.ts 席比雅（5星）scope复用 4/4
+    技能「利剑要塞」: buff=2 deBuff=0 dot=0 hit=1 | uncertain=2 notes=0 | 占位符=有 | 4回合内，自身遭受攻击时，将进行反击。每次反击时，对敌人造成相当于自身攻击力400%的物理伤害。4回
+    技能「制裁者」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=0 notes=0 | 占位符=有 | 对自己应用相当于攻击力400%的能量护盾效果。此效果在遭受3次攻击后将消失。攻击敌人5次，每次攻击时
+    技能「莲花飞剑」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=0 notes=0 | 占位符=有 | 2回合内，自身攻击力增加100%。攻击敌人4次，每次攻击时，造成相当于自身攻击力25%的物理伤害。
+    技能「比基尼爆破手」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=0 | 占位符=有 | 自身持有的所有增益效果的持续回合数2回合延长。对敌人造成相当于自身攻击力400%的物理伤害。
+[15] [HAND-keep] olivier.ts 奥利维耶（5星）scope复用 -
+    已使用 &- 占位符，且含手工维护数据，整文件保持不变
+[16] [HAND-keep] zenith.ts 杰尼斯（5星）scope复用 -
+    已使用 &- 占位符，且含手工维护数据，整文件保持不变
+[17] [HAND-keep] refithea.ts 芮彼泰雅（5星）scope复用 -
+    已使用 &- 占位符，且含手工维护数据，整文件保持不变
+[18] [HAND-keep] wilhelmina.ts 威廉明娜（5星）scope复用 -
+    已使用 &- 占位符，且含手工维护数据，整文件保持不变
+[19] [AUTO] eclipse.ts 伊柯利普斯（5星）scope复用 4/4
+    技能「泰拉抽嗜」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=0 notes=1 | 占位符=有 | 恢复自身相当于自身最大生命力35%的生命力。每次攻击命中敌人时，敌人的SP减少3点。攻击敌人3次，每
+    技能「噬梦者」: buff=0 deBuff=1 dot=0 hit=1 | uncertain=0 notes=1 | 占位符=有 | 每次攻击命中敌人时，友军的SP恢复1点，敌人的SP减少1点。4回合内，敌人魔法抵抗减少15%。攻击敌
+    技能「夏季巅峰」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=0 notes=0 | 占位符=有 | 攻击敌人2次，每次攻击时，造成相当于自身魔法力420%的魔法伤害。
+    技能「蜜月礼包」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=1 notes=0 | 占位符=有 | 6回合内，自身魔法力增加50%。对敌人造成相当于自身魔法力400%的魔法伤害。
+[20] [HAND-keep] lathel.ts 拉德尔（5星）scope复用 -
+    已使用 &- 占位符，且含手工维护数据，整文件保持不变
+[21] [HAND-keep] liatris.ts 莉亚特里斯（5星）scope复用 -
+    已使用 &- 占位符，且含手工维护数据，整文件保持不变
+[22] [AUTO] rubia.ts 露比雅（5星）scope复用 4/4
+    技能「短剑之舞」: buff=0 deBuff=0 dot=1 hit=0 | uncertain=0 notes=0 | 占位符=有 | 攻击敌人3次，每次攻击时，造成相当于自身攻击力40%的物理伤害。7回合内，对敌人应用造成相当于自身攻
+    技能「爆裂子弹」: buff=0 deBuff=1 dot=0 hit=0 | uncertain=0 notes=0 | 占位符=有 | 攻击敌人6次，每次攻击时，造成相当于自身攻击力40%的物理伤害。4回合内，敌人防御力减少25%。
+    技能「秘密服务」: buff=2 deBuff=0 dot=0 hit=0 | uncertain=0 notes=1 | 占位符=有 | 自身成功闪避敌人2次前，以100%的概率闪避敌人的攻击。4回合内，自身攻击力增加50%。攻击敌人2次
+    技能「秘密指令」: buff=0 deBuff=0 dot=1 hit=0 | uncertain=1 notes=1 | 占位符=有 | 对敌人造成相当于自身攻击力150%的物理伤害。2回合内，对敌人应用造成相当于自身攻击力250%的物理
+[23] [AUTO] alec.ts 艾瑞克（5星）scope复用 2/2
+    技能「激愤一击」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=0 | 占位符=有 | 对敌人造成相当于自身攻击力400%的物理固定伤害。
+    技能「破剑攻击」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=0 notes=0 | 占位符=有 | 攻击敌人3次，每次攻击时，造成相当于自身攻击力100%的物理固定伤害。
+[24] [AUTO] anastasia.ts 安娜塔西亚（5星）scope复用 2/2
+    技能「集中炮击」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=0 notes=1 | 占位符=有 | 1回合内，自身致命伤害增加350%。攻击敌人3次，每次攻击时，造成相当于自身攻击力110%的物理伤害
+    技能「扫射，扫射，扫射！」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=0 notes=1 | 占位符=有 | 1回合内，自身致命伤害增加350%。攻击敌人10次，每次攻击时，造成相当于自身攻击力30%的物理伤害
+[25] [AUTO] elise.ts 爱丽洁（5星）scope复用 3/3
+    技能「赴死之爱」: buff=0 deBuff=2 dot=0 hit=0 | uncertain=0 notes=0 | 占位符=有 | 攻击敌人3次，每次攻击时，造成相当于自身攻击力90%的物理伤害。4回合内，敌人防御力减少50%。4回
+    技能「慎重地···砰！」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=2 notes=0 | 占位符=有 | 友军的SP恢复3点。对敌人造成相当于自身攻击力500%的物理伤害。
+    技能「我也想赢嘛！」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=0 notes=1 | 占位符=有 | 对自己在6回合内，应用施加伤害增加70%的增强效果。【共鸣】战场上处于能力值弱化状态的目标，6回合内
+[26] [HAND-keep] loen.ts 罗安（5星）scope复用 -
+    已使用 &- 占位符，且含手工维护数据，整文件保持不变
+[27] [AUTO] eris.ts 艾莉丝（5星）scope复用 2/2
+    技能「红色闪光」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=2 notes=1 | 占位符=有 | 对敌人造成相当于自身攻击力300%的物理伤害。若此攻击对敌人叠加的连携数量为7或7以下，则改为造成相
+    技能「兽人族秘技」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=0 notes=1 | 占位符=有 | 攻击敌人5次，每次攻击时，造成相当于自身攻击力30%的物理伤害。4回合内，对主要目标敌人应用100%
+[28] [HAND-keep] levia.ts 莱维亚（5星）scope复用 -
+    已使用 &- 占位符，且含手工维护数据，整文件保持不变
+[29] [AUTO] goblinSlayer.ts 哥布林杀手（5星）scope复用 1/1
+    技能「杀尽世间哥布林」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=0 notes=0 | 占位符=有 | 2回合内，对自己应用50%的防护罩效果。友军的SP恢复6点。攻击敌人2次，每次攻击时，造成相当于自身
+[30] [AUTO] sWordMaiden.ts 剑之圣女（5星）scope复用 1/1
+    技能「圣击」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=0 notes=0 | 占位符=有 | 攻击敌人5次，每次攻击时，造成相当于自身魔法力65%的魔法伤害。
+[31] [AUTO] priestess.ts 女神官（5星）scope复用 1/1
+    技能「圣光」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=1 | 占位符=有 | 2回合内，对敌人应用50%的魔法脆弱效果。对敌人造成相当于自身魔法力250%的魔法伤害。
+[32] [AUTO] justia.ts 悠丝缇亚（5星）scope复用 5/5
+    技能「月晕砍击」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=0 notes=0 | 占位符=有 | 攻击敌人3次
+每次攻击时，造成相当于自身攻击力75%的物理固定伤害。
+    技能「下弦刺击」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=0 | 占位符=有 | 对敌人造成相当于自身攻击力275%的物理固定伤害。
+    技能「贪食尖齿」: buff=2 deBuff=0 dot=0 hit=0 | uncertain=1 notes=0 | 占位符=有 | 8回合内，自身属性伤害增加200%。恢复自身相当于自身最大生命力35%的生命力。对敌人造成相当于自身
+    技能「樱花砍击」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=0 notes=0 | 占位符=有 | 攻击敌人3次，每次攻击时，造成相当于自身攻击力90%的物理固定伤害。
+    技能「食物战士」: buff=2 deBuff=0 dot=0 hit=0 | uncertain=1 notes=1 | 占位符=有 | 自身成功闪避敌人2次前，以100%的概率闪避敌人的攻击。8回合内，自身攻击力增加150%。
+[33] [HAND-keep] helena.ts 海伦娜（5星）scope复用 -
+    已使用 &- 占位符，且含手工维护数据，整文件保持不变
+[34] [AUTO] angelica.ts 安洁莉卡（5星）scope复用 3/3
+    技能「堕落神罚」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=1 notes=0 | 占位符=有 | 【生命力最多计算50000】。2回合内，对自己应用50%的防护罩效果。对敌人造成相当于敌人最大生命力
+    技能「神圣挥击」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=0 notes=0 | 占位符=有 | 【生命力最多计算50000】。2回合内，对自己应用75%的防护罩效果。攻击敌人3次，每次攻击时，造成
+    技能「约尔门逆转模式」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=1 notes=1 | 占位符=有 | 【生命力最多计算50000】。2回合内，对自己应用75%的防护罩效果。对敌人造成相当于敌人最大生命力
+[35] [HAND-keep] ventana.ts 班塔纳（5星）scope复用 -
+    已使用 &- 占位符，且含手工维护数据，整文件保持不变
+[36] [HAND-keep] yuri.ts 尤里（5星）scope复用 -
+    已使用 &- 占位符，且含手工维护数据，整文件保持不变
+[37] [AUTO] granhidr.ts 格兰希特（5星）scope复用 4/4
+    技能「回归聚光灯」: buff=2 deBuff=0 dot=0 hit=0 | uncertain=1 notes=0 | 占位符=有 | 【先发制人】2回合内，对自己应用挑衅效果。4回合内，对自己应用相当于最大生命力100%的能量护盾效果
+    技能「女神庇护」: buff=1 deBuff=0 dot=0 hit=1 | uncertain=2 notes=0 | 占位符=有 | 【先发制人】自身遭受攻击时，将进行反击。每次反击时，对敌人造成相当于承受伤害200%的物理伤害。此效
+    技能「呀吼，吓到了吧？」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=0 notes=1 | 占位符=有 | 攻击敌人8次，每次攻击时，造成相当于自身最大生命力6%的物理伤害。此时，还会额外造成等同于自身拥有的
+    技能「猛药处方」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=1 notes=0 | 占位符=有 | 2回合内，自身致命伤害增加100%。拥有的增益效果数量达到5个及以上时，所有增益效果的持续回合数2回
+[38] [HAND-keep] sacredJustia.ts 神圣悠丝缇亚（5星）scope复用 -
+    已使用 &- 占位符，且含手工维护数据，整文件保持不变
+[39] [AUTO] michaela.ts 米卡艾拉（5星）scope复用 3/3
+    技能「暴露即是正义」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=1 notes=1 | 占位符=有 | 使用相当于自身当前生命力的80%，并在2回合内，自身魔法力增加200%。对敌人造成相当于自身魔法力3
+    技能「火力赞美」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=1 | 占位符=有 | 友军的SP减少6点。攻击敌人3次，每次攻击时，造成相当于自身魔法力210%的魔法伤害。
+    技能「流血的圣痕」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=1 notes=1 | 占位符=有 | 4回合内，自身致命伤害增加300%。4回合内，自身防御力和魔法抵抗减少90%。对敌人造成相当于自身魔
+[40] [AUTO] morpeah.ts 墨菲亚（5星）scope复用 3/3
+    技能「反派假面」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=2 notes=3 | 占位符=无 | 【先发制人】通过召唤至友军阵营，生成【崇拜假面】1个。生成【诽谤假面】1个。
+崇拜假面：【攻击目标】
+    技能「白日梦召唤」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=3 notes=2 | 占位符=无 | 通过召唤至友军阵营，生成【兔女郎之魂】1个。
+兔女郎之魂：【攻击目标】最前方，【击退】右后方一格，【
+    技能「黑暗密令」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=2 | 占位符=有 | 对敌人造成相当于自身魔法力100%的魔法伤害。2回合内，对主要目标敌人应用集中射击效果。2回合内，对
+[41] [AUTO] scheherazade.ts 莎赫拉查德（5星）scope复用 4/4
+    技能「水流裂破」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=1 | 占位符=有 | 攻击敌人3次，每次攻击时，造成相当于自身魔法力180%的魔法伤害。解除应用于敌人的增益效果。
+    技能「幽静水流」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=1 | 占位符=有 | 攻击敌人7次，每次攻击时，造成相当于自身魔法力35%的魔法伤害。解除应用于敌人的增益效果。
+    技能「蓝宝石回旋镖」: buff=0 deBuff=1 dot=0 hit=0 | uncertain=0 notes=1 | 占位符=有 | 攻击敌人3次，每次攻击时，造成相当于自身魔法力95%的魔法伤害。解除应用于敌人的增益效果。2回合内，
+    技能「盛夏热浪」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=2 | 占位符=有 | 攻击敌人5次，每次攻击时，造成相当于自身魔法力30%的魔法伤害。若此攻击对敌人叠加的连携数量为15或
+[42] [HAND-keep] teresse.ts 泰瑞丝（5星）scope复用 -
+    已使用 &- 占位符，且含手工维护数据，整文件保持不变
+[43] [HAND-keep] rafina.ts 拉菲娜（5星）scope复用 -
+    已使用 &- 占位符，且含手工维护数据，整文件保持不变
+[44] [AUTO] glacia.ts 克蕾西亚（5星）scope复用 3/3
+    技能「永恒茶派对」: buff=2 deBuff=0 dot=0 hit=0 | uncertain=1 notes=3 | 占位符=无 | 2回合内，对自己应用挑衅效果。2回合内，对自己应用相当于自身魔法力200%的能量护盾效果。4回合内，
+    技能「绝对校规！」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=0 notes=1 | 占位符=有 | 2回合内，对自己应用50%的魔法防护罩效果。攻击敌人3次，每次攻击时，造成相当于自身魔法力200%的
+    技能「真龙现影」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=0 notes=1 | 占位符=有 | 攻击敌人5次，每次攻击时，造成相当于自身魔法力100%的魔法固定伤害。4回合内，对敌人应用6的连携保
+[45] [AUTO] roxy.ts 洛琪希（5星）scope复用 2/2
+    技能「豪雷积层云」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=1 | 占位符=有 | 对敌人造成相当于自身魔法力140%的魔法伤害。若敌人为主要目标，则改为造成相当于自身魔法力300%的
+    技能「寂静的夜晚」: buff=0 deBuff=1 dot=0 hit=0 | uncertain=0 notes=0 | 占位符=有 | 攻击敌人3次，每次攻击时，造成相当于自身魔法力30%的魔法伤害。2回合内，对敌人应用沉默效果。
+[46] [AUTO] yumi.ts 雪泉（5星）scope复用 1/1
+    技能「树冰扇」: buff=0 deBuff=0 dot=1 hit=0 | uncertain=0 notes=1 | 占位符=有 | 攻击敌人5次，每次攻击时，造成相当于自身魔法力30%的魔法伤害。3回合内，对敌人应用每层叠加造成相当
+[47] [AUTO] highElfArcher.ts 妖精弓手（5星）scope复用 1/1
+    技能「上森人式弓术」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=0 notes=0 | 占位符=有 | 2回合内，自身暴击率增加100%。
+攻击敌人4次，每次攻击时，造成相当于自身攻击力75%的物理伤害。
+[48] [AUTO] olstein.ts 奥尔施塔因（5星）scope复用 2/2
+    技能「沉默之怒」: buff=0 deBuff=1 dot=0 hit=1 | uncertain=1 notes=1 | 占位符=有 | 每次攻击命中敌人时，友军的SP恢复1点，敌人的SP减少1点。对敌人造成相当于自身魔法力25%的魔法伤
+    技能「云龙到来」: buff=0 deBuff=1 dot=0 hit=0 | uncertain=0 notes=2 | 占位符=有 | 攻击敌人7次，每次攻击时，造成相当于自身魔法力25%的魔法伤害。解除应用于敌人的能力值强化效果。2回
+[49] [AUTO] lecliss.ts 莱克莉斯（5星）scope复用 2/2
+    技能「诅咒复制品」: buff=2 deBuff=0 dot=0 hit=0 | uncertain=1 notes=0 | 占位符=有 | 2回合内，对自己应用45%的防护罩效果。2回合内，对自己应用挑衅效果。
+    技能「自动防御模式」: buff=2 deBuff=0 dot=0 hit=0 | uncertain=1 notes=1 | 占位符=有 | 4回合内，自身遭受攻击时，将进行反击。每次反击时，对敌人造成相当于自身最大生命力15%的物理伤害。4
+[50] [AUTO] gray.ts 格雷（5星）scope复用 4/4
+    技能「三重射击」: buff=0 deBuff=0 dot=1 hit=0 | uncertain=0 notes=0 | 占位符=有 | 攻击敌人3次，每次攻击时，造成相当于自身攻击力65%的物理伤害。4回合内，对敌人应用造成相当于敌人攻
+    技能「狂粉驱散腿」: buff=0 deBuff=1 dot=0 hit=0 | uncertain=0 notes=0 | 占位符=有 | 攻击敌人5次，每次攻击时，造成相当于自身攻击力35%的物理伤害。2回合内，敌人防御力减少50%。
+    技能「光荣旗帜」: buff=0 deBuff=0 dot=1 hit=0 | uncertain=0 notes=0 | 占位符=有 | 攻击敌人5次，每次攻击时，造成相当于自身攻击力25%的物理伤害。4回合内，对敌人应用造成相当于敌人魔
+    技能「水弹发射！」: buff=2 deBuff=0 dot=0 hit=0 | uncertain=0 notes=0 | 占位符=有 | 4回合内，自身致命率增加50%。4回合内，自身致命伤害增加50%。攻击敌人3次，每次攻击时，造成相当
+[51] [HAND-keep] diana.ts 黛安娜（5星）scope复用 -
+    已使用 &- 占位符，且含手工维护数据，整文件保持不变
+[52] [AUTO] dalvi.ts 达非（5星）scope复用 3/3
+    技能「月夜豪谈」: buff=0 deBuff=0 dot=1 hit=0 | uncertain=0 notes=2 | 占位符=有 | 6回合内，释放九尾狐之力，并进行变身。攻击敌人2次，每次攻击时，造成相当于自身魔法力350%的魔法伤
+    技能「妖力风暴」: buff=0 deBuff=0 dot=1 hit=0 | uncertain=0 notes=1 | 占位符=有 | 攻击敌人4次，每次攻击时，造成相当于自身魔法力55%的魔法伤害。6回合内，对敌人应用每层叠加造成相当
+    技能「这场闹剧，也该收场了吧？」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=2 notes=2 | 占位符=有 | 对敌人造成相当于自身魔法力100%的魔法伤害。若敌人处于【出血】状态，则改为根据敌人持有的总量，每拥
+[53] [HAND-keep] venaka.ts 贝那卡（5星）scope复用 -
+    已使用 &- 占位符，且含手工维护数据，整文件保持不变
+[54] [HAND-keep] nebris.ts 内布利斯（5星）scope复用 -
+    已使用 &- 占位符，且含手工维护数据，整文件保持不变
+[55] [AUTO] hikage.ts 日影（5星）scope复用 1/1
+    技能「切割」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=0 notes=0 | 占位符=有 | 攻击敌人12次，每次攻击时，造成相当于自身攻击力40%的物理伤害。
+[56] [AUTO] yomi.ts 咏（5星）scope复用 1/1
+    技能「西格蒙德」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=0 notes=0 | 占位符=有 | 攻击敌人4次，每次攻击时，造成相当于自身攻击力30%的物理伤害。
+[57] [AUTO] yozakura.ts 夜樱（5星）scope复用 1/1
+    技能「地狱极乐万手拳」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=1 | 占位符=有 | 对自己应用使普通攻击的施加伤害增加400%的增强效果。此效果将在接下来1次普通攻击中维持。攻击敌人3
+[58] [AUTO] rou.ts 鲁（5星）scope复用 4/4
+    技能「半月脚」: buff=0 deBuff=0 dot=1 hit=0 | uncertain=2 notes=2 | 占位符=有 | 2回合内，自身有75%的概率闪避敌人的攻击。每次成功闪避时，成功闪避后续攻击的概率将减少5%。对敌人
+    技能「吃零食咯！」: buff=2 deBuff=0 dot=0 hit=0 | uncertain=2 notes=1 | 占位符=有 | 6回合内，友军的暴击率增加30%。6回合内，友军的暴击伤害增加150%。4回合内，队友军应用相当于自
+    技能「追赶游戏开始！」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=2 | 占位符=有 | 2回合内，自身有75%的概率闪避敌人的攻击。每次成功闪避攻击时，成功闪避后续攻击的概率将减少5%。攻
+    技能「泰拉爆发」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=1 notes=0 | 占位符=有 | 1回合内，自身暴击率增加50%。对敌人造成相当于自身攻击力350%的物理伤害。
+[59] [HAND-keep] seir.ts 赛尔（5星）scope复用 -
+    已使用 &- 占位符，且含手工维护数据，整文件保持不变
+[60] [HAND-keep] celia.ts 西利亚（5星）scope复用 -
+    已使用 &- 占位符，且含手工维护数据，整文件保持不变
+[61] [HAND-keep] eleaneer.ts 艾尼尔（5星）scope复用 -
+    已使用 &- 占位符，且含手工维护数据，整文件保持不变
+[62] [AUTO] nartas.ts 纳罗达斯（5星）scope复用 1/1
+    技能「半妖神掌」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=2 | 占位符=有 | 4回合内，对自己应用75%的魔法防护罩效果。对敌人造成相当于自身魔法力300%的魔法伤害。若敌人为物
+[63] [HAND-keep] luvencia.ts 卢班希亚（5星）scope复用 -
+    已使用 &- 占位符，且含手工维护数据，整文件保持不变
+[64] [HAND-keep] blade.ts 布莱德（5星）scope复用 -
+    已使用 &- 占位符，且含手工维护数据，整文件保持不变
+[65] [AUTO] andrew.ts 安德鲁（4星）scope复用 2/2
+    技能「窃取生命」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=0 notes=1 | 占位符=有 | 恢复自身相当于自身最大生命力12%的生命力。每次攻击命中敌人时，敌人的SP减少5点。攻击敌人2次，每
+    技能「你在看哪里？」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=1 notes=2 | 占位符=无 | 2回合内，自身有35%的概率闪避敌人的攻击。每次成功闪避攻击时，成功闪避后续攻击的概率将减少5%。2
+[66] [AUTO] jayden.ts 杰登（4星）scope复用 2/2
+    技能「美少女之力」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=1 notes=1 | 占位符=有 | 4回合内，每回合结束时，恢复自身相当于自身最大生命力5%的生命力。4回合内，对自己应用50%的魔法防
+    技能「流星落下」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=0 notes=0 | 占位符=有 | 攻击敌人3次，每次攻击时，造成相当于自身魔法力50%的魔法伤害。
+[67] [AUTO] layla.ts 蕾拉（4星）scope复用 1/1
+    技能「毁灭铁砧」: buff=0 deBuff=0 dot=0 hit=1 | uncertain=1 notes=0 | 占位符=有 | 每次攻击命中敌人时，友军的SP恢复1点。攻击敌人2次，每次攻击时，造成相当于自身攻击力60%的物理伤
+[68] [AUTO] bernie.ts 维尔尼（4星）scope复用 1/1
+    技能「抽嗜短剑」: buff=0 deBuff=1 dot=0 hit=1 | uncertain=0 notes=0 | 占位符=有 | 每次攻击命中敌人时，友军的SP恢复2点。攻击敌人2次，每次攻击时，造成相当于自身攻击力50%的物理伤
+[69] [AUTO] lisianne.ts 莉西安（4星）scope复用 1/1
+    技能「治愈祈祷」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=2 notes=1 | 占位符=有 | 恢复友军相当于自身魔法力50%的生命力。解除应用于友军的持续伤害效果。
+[70] [AUTO] kry.ts 克莱（4星）scope复用 2/2
+    技能「铁甲袭击」: buff=0 deBuff=1 dot=0 hit=0 | uncertain=0 notes=0 | 占位符=有 | 攻击敌人2次，每次攻击时，造成相当于自身攻击力80%的物理伤害。4回合内，敌人防御力减少50%。
+    技能「相信我」: buff=0 deBuff=0 dot=1 hit=0 | uncertain=2 notes=1 | 占位符=有 | 友军的SP恢复3。对敌人造成1的物理伤害，并将目标向后方击退2格。对被撞击的敌人造成相当于目标最大生
+[71] [AUTO] samay.ts 莎美（4星）scope复用 2/2
+    技能「犹豫之刃」: buff=0 deBuff=1 dot=0 hit=0 | uncertain=0 notes=0 | 占位符=有 | 攻击敌人2次，每次攻击时，造成相当于自身魔法力80%的魔法伤害。4回合内，敌人魔法抵抗减少50%。
+    技能「靠你了！」: buff=3 deBuff=0 dot=0 hit=0 | uncertain=1 notes=0 | 占位符=有 | 2回合内，友军的攻击力增加20%。2回合内，友军的魔法力增加20%。2回合内，每回合结束时，恢复友军
+[72] [AUTO] lucrezia.ts 卢克雷齐亚（4星）scope复用 1/1
+    技能「魅惑之手」: buff=0 deBuff=1 dot=0 hit=1 | uncertain=0 notes=0 | 占位符=有 | 每次攻击命中敌人时，友军的SP恢复1点。攻击敌人2次，每次攻击时，造成相当于自身魔法力20%的魔法伤
+[73] [AUTO] elpis.ts 厄尔比斯（4星）scope复用 1/1
+    技能「圣殿祈祷」: buff=2 deBuff=0 dot=0 hit=0 | uncertain=1 notes=0 | 占位符=有 | 6回合内，友军的魔法力增加25%。6回合内，友军的致命率增加30%。
+[74] [AUTO] beatrice.ts 比阿特丽丝（3星）scope复用 1/1
+    技能「打倒！」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=0 notes=0 | 占位符=有 | 攻击敌人2次，每次攻击时，造成相当于自身攻击力125%的物理固定伤害。
+[75] [AUTO] wiggle.ts 威格（3星）scope复用 2/2
+    技能「威格？爆炸！」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=2 | 占位符=有 | 对敌人自爆，造成相当于自身攻击力300%的物理伤害。自爆攻击无法闪避。
+    技能「与炸弹共舞」: buff=0 deBuff=0 dot=1 hit=0 | uncertain=0 notes=0 | 占位符=有 | 攻击敌人3次，每次攻击时，造成相当于自身攻击力20%的物理伤害。3回合内，对敌人应用造成相当于自身攻
+[76] [AUTO] arines.ts 阿里内斯（3星）scope复用 1/1
+    技能「堂堂正正」: buff=2 deBuff=0 dot=0 hit=0 | uncertain=1 notes=0 | 占位符=有 | 6回合内，友军的攻击力增加25%。6回合内，友军的致命率增加30%。
+[77] [AUTO] emma.ts 艾玛（3星）scope复用 2/2
+    技能「我最棒！」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=1 notes=0 | 占位符=有 | 6回合期内，自身攻击力增加200%。
+    技能「我很忙，快让开！」: buff=0 deBuff=0 dot=1 hit=0 | uncertain=2 notes=1 | 占位符=有 | 友军的SP恢复3点。对敌人造成1的物理伤害，并将目标向左侧击退2格。对被撞击的敌人造成相当于被推开目
+[78] [AUTO] remnunt.ts 雷南特（3星）scope复用 1/1
+    技能「沉着之手」: buff=0 deBuff=1 dot=0 hit=0 | uncertain=0 notes=0 | 占位符=有 | 攻击敌人2次，每次攻击时，造成相当于自身攻击力100%的物理伤害。4回合内，敌人攻击力减少50%。
+[79] [AUTO] carlson.ts 卡森（3星）scope复用 1/1
+    技能「坚定意志」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=1 | 占位符=无 | 2回合内，对自己应用35%的物理防护罩效果。
+[80] [AUTO] lydia.ts 黎迪雅（3星）scope复用 1/1
+    技能「祭祀枪术」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=0 | 占位符=有 | 对敌人造成相当于自身攻击力200%的物理伤害。
+[81] [AUTO] cynthia.ts 辛西亚（3星）scope复用 1/1
+    技能「暴风雪」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=0 notes=2 | 占位符=有 | 攻击敌人2次，每次攻击时，造成相当于自身魔法力25%的魔法伤害。对敌人应用造成相当于自身魔法力75%
+[82] [AUTO] ingrid.ts 英格利得（3星）scope复用 1/1
+    技能「起舞枪管」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=0 notes=0 | 占位符=有 | 攻击敌人3次，每次攻击时，造成相当于自身攻击力60%的物理伤害。
+[83] [AUTO] fred.ts 弗雷德（3星）scope复用 1/1
+    技能「盾牌推击」: buff=0 deBuff=0 dot=1 hit=0 | uncertain=2 notes=0 | 占位符=有 | 友军的SP恢复3点。对敌人造成1的物理伤害，并将目标向后方击退2格。对被撞击的敌人造成相当于被推开目
+[84] [AUTO] gynt.ts 君特（3星）scope复用 1/1
+    技能「跳跃射击」: buff=0 deBuff=1 dot=0 hit=0 | uncertain=0 notes=0 | 占位符=有 | 攻击敌人2次，每次攻击时，造成相当于自身攻击力100%的物理伤害。4回合内，敌人攻击力减少50%。
+[85] [AUTO] julie.ts 茱莉（3星）scope复用 1/1
+    技能「赋予再生」(仅满破): buff=1 deBuff=0 dot=0 hit=0 | uncertain=1 notes=0 | 占位符=有 | 6回合内，每回合结束时，恢复友军相当于自身魔法力155%的生命力。
+[86] [AUTO] rigenette.ts 莉兹内（3星）scope复用 1/1
+    技能「目标就是你！」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=0 notes=1 | 占位符=有 | 攻击敌人2次，每次攻击时，造成相当于自身攻击力35%的物理伤害。4回合内，对敌人应用集中射击效果。
+[87] [AUTO] maria.ts 玛丽亚（3星）scope复用 1/1
+    技能「破坏魔法」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=0 notes=0 | 占位符=有 | 攻击敌人2次，每次攻击时，造成相当于自身魔法力80%的魔法伤害。
+
+---- 汇总：+0 级 uncertain / notes 不为空的技能 ----
+[char721512.ts]
+    技能「让我好好管教你」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=1 notes=1 | 占位符=有 | 自身成功闪避敌人1次前，以100%的概率闪避敌人的攻击。对敌人造成相当于自身魔法力600%的魔法伤害
+[nekyndalia.ts]
+    技能「致命战线」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=0 notes=2 | 占位符=有 | 4回合内，对敌人应用【标记】。对敌人进行10次攻击，每次攻击时造成自身魔法力45%的魔法伤害。
+
+【
+    技能「清扫工作，现在开始」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=2 | 占位符=有 | 与战场上处于印记状态的目标共鸣，并为自身施加持续2回合、2%的造成的连携伤害增加效果，每1名目标施加
+[mamonir.ts]
+    技能「去吧，奥克托比乌斯！」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=1 notes=5 | 占位符=有 | 6回合内，释放奥克托比乌斯之力，并进行变身。6回合内，自身致命伤害增加200%。攻击敌人8次，每次攻
+    技能「海洋☆深度意志」: buff=1 deBuff=1 dot=0 hit=0 | uncertain=0 notes=3 | 占位符=有 | 自身遭受攻击时，对敌人应用30%虚弱效果。此效果在遭受8次攻击后将消失。2回合内，虚弱效果将持续，每
+[ikaruga.ts]
+    技能「特级飞燕凤闪·一式」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=0 notes=1 | 占位符=有 | 对自身应用攻击力增加60%的效果。此效果叠加至1。最多可赋予叠加至3。此效果在遭受1次攻击后将消失。
+[palette.ts]
+    技能「让你见识真正的杰作···！」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=0 | 占位符=有 | 对敌人造成相当于自身魔法力500%的魔法伤害。敌人持有的所有减益效果的持续回合数2回合延长。
+[granadair.ts]
+    技能「法力凝聚」: buff=2 deBuff=0 dot=0 hit=0 | uncertain=1 notes=1 | 占位符=有 | 4回合内，每回合结束时，恢复友军SP1点。4回合内，友军的魔法力增加50%。2回合内，友军的魔法力增
+    技能「净化祝福」: buff=2 deBuff=0 dot=0 hit=0 | uncertain=2 notes=2 | 占位符=有 | 对友军应用在4回合内，施加伤害增加75%的增强效果。吸收应用于友军的减益效果。此时，4回合内，对友军
+[darian.ts]
+    技能「为了母亲的梦想」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=1 | 占位符=有 | 对敌人造成相当于自身攻击力500%的物理伤害。若敌人为主要目标，则改为造成相当于自身攻击力775%的
+    技能「雪之花」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=3 notes=4 | 占位符=无 | 每命中一个目标，该技能的冷却时间减少2。对敌人造成相当于自身200%的物理伤害。若敌人处于持续伤害状
+[tyr.ts]
+    技能「义无反顾」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=2 notes=1 | 占位符=有 | 6回合内，对自己应用SP消耗增加2的效果。对敌人造成相当于自身攻击力700%的物理伤害。
+    技能「勇往直前！」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=2 notes=1 | 占位符=有 | 8回合期间，对自身应用SP消耗增加2的效果。对敌人造成相当于自身攻击力125%的物理伤害。技能释放时
+[sylvia.ts]
+    技能「利剑要塞」: buff=2 deBuff=0 dot=0 hit=1 | uncertain=2 notes=0 | 占位符=有 | 4回合内，自身遭受攻击时，将进行反击。每次反击时，对敌人造成相当于自身攻击力400%的物理伤害。4回
+    技能「比基尼爆破手」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=0 | 占位符=有 | 自身持有的所有增益效果的持续回合数2回合延长。对敌人造成相当于自身攻击力400%的物理伤害。
+[eclipse.ts]
+    技能「泰拉抽嗜」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=0 notes=1 | 占位符=有 | 恢复自身相当于自身最大生命力35%的生命力。每次攻击命中敌人时，敌人的SP减少3点。攻击敌人3次，每
+    技能「噬梦者」: buff=0 deBuff=1 dot=0 hit=1 | uncertain=0 notes=1 | 占位符=有 | 每次攻击命中敌人时，友军的SP恢复1点，敌人的SP减少1点。4回合内，敌人魔法抵抗减少15%。攻击敌
+    技能「蜜月礼包」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=1 notes=0 | 占位符=有 | 6回合内，自身魔法力增加50%。对敌人造成相当于自身魔法力400%的魔法伤害。
+[rubia.ts]
+    技能「秘密服务」: buff=2 deBuff=0 dot=0 hit=0 | uncertain=0 notes=1 | 占位符=有 | 自身成功闪避敌人2次前，以100%的概率闪避敌人的攻击。4回合内，自身攻击力增加50%。攻击敌人2次
+    技能「秘密指令」: buff=0 deBuff=0 dot=1 hit=0 | uncertain=1 notes=1 | 占位符=有 | 对敌人造成相当于自身攻击力150%的物理伤害。2回合内，对敌人应用造成相当于自身攻击力250%的物理
+[alec.ts]
+    技能「激愤一击」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=0 | 占位符=有 | 对敌人造成相当于自身攻击力400%的物理固定伤害。
+[anastasia.ts]
+    技能「集中炮击」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=0 notes=1 | 占位符=有 | 1回合内，自身致命伤害增加350%。攻击敌人3次，每次攻击时，造成相当于自身攻击力110%的物理伤害
+    技能「扫射，扫射，扫射！」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=0 notes=1 | 占位符=有 | 1回合内，自身致命伤害增加350%。攻击敌人10次，每次攻击时，造成相当于自身攻击力30%的物理伤害
+[elise.ts]
+    技能「慎重地···砰！」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=2 notes=0 | 占位符=有 | 友军的SP恢复3点。对敌人造成相当于自身攻击力500%的物理伤害。
+    技能「我也想赢嘛！」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=0 notes=1 | 占位符=有 | 对自己在6回合内，应用施加伤害增加70%的增强效果。【共鸣】战场上处于能力值弱化状态的目标，6回合内
+[eris.ts]
+    技能「红色闪光」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=2 notes=1 | 占位符=有 | 对敌人造成相当于自身攻击力300%的物理伤害。若此攻击对敌人叠加的连携数量为7或7以下，则改为造成相
+    技能「兽人族秘技」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=0 notes=1 | 占位符=有 | 攻击敌人5次，每次攻击时，造成相当于自身攻击力30%的物理伤害。4回合内，对主要目标敌人应用100%
+[priestess.ts]
+    技能「圣光」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=1 | 占位符=有 | 2回合内，对敌人应用50%的魔法脆弱效果。对敌人造成相当于自身魔法力250%的魔法伤害。
+[justia.ts]
+    技能「下弦刺击」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=0 | 占位符=有 | 对敌人造成相当于自身攻击力275%的物理固定伤害。
+    技能「贪食尖齿」: buff=2 deBuff=0 dot=0 hit=0 | uncertain=1 notes=0 | 占位符=有 | 8回合内，自身属性伤害增加200%。恢复自身相当于自身最大生命力35%的生命力。对敌人造成相当于自身
+    技能「食物战士」: buff=2 deBuff=0 dot=0 hit=0 | uncertain=1 notes=1 | 占位符=有 | 自身成功闪避敌人2次前，以100%的概率闪避敌人的攻击。8回合内，自身攻击力增加150%。
+[angelica.ts]
+    技能「堕落神罚」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=1 notes=0 | 占位符=有 | 【生命力最多计算50000】。2回合内，对自己应用50%的防护罩效果。对敌人造成相当于敌人最大生命力
+    技能「约尔门逆转模式」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=1 notes=1 | 占位符=有 | 【生命力最多计算50000】。2回合内，对自己应用75%的防护罩效果。对敌人造成相当于敌人最大生命力
+[granhidr.ts]
+    技能「回归聚光灯」: buff=2 deBuff=0 dot=0 hit=0 | uncertain=1 notes=0 | 占位符=有 | 【先发制人】2回合内，对自己应用挑衅效果。4回合内，对自己应用相当于最大生命力100%的能量护盾效果
+    技能「女神庇护」: buff=1 deBuff=0 dot=0 hit=1 | uncertain=2 notes=0 | 占位符=有 | 【先发制人】自身遭受攻击时，将进行反击。每次反击时，对敌人造成相当于承受伤害200%的物理伤害。此效
+    技能「呀吼，吓到了吧？」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=0 notes=1 | 占位符=有 | 攻击敌人8次，每次攻击时，造成相当于自身最大生命力6%的物理伤害。此时，还会额外造成等同于自身拥有的
+    技能「猛药处方」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=1 notes=0 | 占位符=有 | 2回合内，自身致命伤害增加100%。拥有的增益效果数量达到5个及以上时，所有增益效果的持续回合数2回
+[michaela.ts]
+    技能「暴露即是正义」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=1 notes=1 | 占位符=有 | 使用相当于自身当前生命力的80%，并在2回合内，自身魔法力增加200%。对敌人造成相当于自身魔法力3
+    技能「火力赞美」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=1 | 占位符=有 | 友军的SP减少6点。攻击敌人3次，每次攻击时，造成相当于自身魔法力210%的魔法伤害。
+    技能「流血的圣痕」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=1 notes=1 | 占位符=有 | 4回合内，自身致命伤害增加300%。4回合内，自身防御力和魔法抵抗减少90%。对敌人造成相当于自身魔
+[morpeah.ts]
+    技能「反派假面」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=2 notes=3 | 占位符=无 | 【先发制人】通过召唤至友军阵营，生成【崇拜假面】1个。生成【诽谤假面】1个。
+崇拜假面：【攻击目标】
+    技能「白日梦召唤」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=3 notes=2 | 占位符=无 | 通过召唤至友军阵营，生成【兔女郎之魂】1个。
+兔女郎之魂：【攻击目标】最前方，【击退】右后方一格，【
+    技能「黑暗密令」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=2 | 占位符=有 | 对敌人造成相当于自身魔法力100%的魔法伤害。2回合内，对主要目标敌人应用集中射击效果。2回合内，对
+[scheherazade.ts]
+    技能「水流裂破」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=1 | 占位符=有 | 攻击敌人3次，每次攻击时，造成相当于自身魔法力180%的魔法伤害。解除应用于敌人的增益效果。
+    技能「幽静水流」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=1 | 占位符=有 | 攻击敌人7次，每次攻击时，造成相当于自身魔法力35%的魔法伤害。解除应用于敌人的增益效果。
+    技能「蓝宝石回旋镖」: buff=0 deBuff=1 dot=0 hit=0 | uncertain=0 notes=1 | 占位符=有 | 攻击敌人3次，每次攻击时，造成相当于自身魔法力95%的魔法伤害。解除应用于敌人的增益效果。2回合内，
+    技能「盛夏热浪」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=2 | 占位符=有 | 攻击敌人5次，每次攻击时，造成相当于自身魔法力30%的魔法伤害。若此攻击对敌人叠加的连携数量为15或
+[glacia.ts]
+    技能「永恒茶派对」: buff=2 deBuff=0 dot=0 hit=0 | uncertain=1 notes=3 | 占位符=无 | 2回合内，对自己应用挑衅效果。2回合内，对自己应用相当于自身魔法力200%的能量护盾效果。4回合内，
+    技能「绝对校规！」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=0 notes=1 | 占位符=有 | 2回合内，对自己应用50%的魔法防护罩效果。攻击敌人3次，每次攻击时，造成相当于自身魔法力200%的
+    技能「真龙现影」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=0 notes=1 | 占位符=有 | 攻击敌人5次，每次攻击时，造成相当于自身魔法力100%的魔法固定伤害。4回合内，对敌人应用6的连携保
+[roxy.ts]
+    技能「豪雷积层云」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=1 | 占位符=有 | 对敌人造成相当于自身魔法力140%的魔法伤害。若敌人为主要目标，则改为造成相当于自身魔法力300%的
+[yumi.ts]
+    技能「树冰扇」: buff=0 deBuff=0 dot=1 hit=0 | uncertain=0 notes=1 | 占位符=有 | 攻击敌人5次，每次攻击时，造成相当于自身魔法力30%的魔法伤害。3回合内，对敌人应用每层叠加造成相当
+[olstein.ts]
+    技能「沉默之怒」: buff=0 deBuff=1 dot=0 hit=1 | uncertain=1 notes=1 | 占位符=有 | 每次攻击命中敌人时，友军的SP恢复1点，敌人的SP减少1点。对敌人造成相当于自身魔法力25%的魔法伤
+    技能「云龙到来」: buff=0 deBuff=1 dot=0 hit=0 | uncertain=0 notes=2 | 占位符=有 | 攻击敌人7次，每次攻击时，造成相当于自身魔法力25%的魔法伤害。解除应用于敌人的能力值强化效果。2回
+[lecliss.ts]
+    技能「诅咒复制品」: buff=2 deBuff=0 dot=0 hit=0 | uncertain=1 notes=0 | 占位符=有 | 2回合内，对自己应用45%的防护罩效果。2回合内，对自己应用挑衅效果。
+    技能「自动防御模式」: buff=2 deBuff=0 dot=0 hit=0 | uncertain=1 notes=1 | 占位符=有 | 4回合内，自身遭受攻击时，将进行反击。每次反击时，对敌人造成相当于自身最大生命力15%的物理伤害。4
+[dalvi.ts]
+    技能「月夜豪谈」: buff=0 deBuff=0 dot=1 hit=0 | uncertain=0 notes=2 | 占位符=有 | 6回合内，释放九尾狐之力，并进行变身。攻击敌人2次，每次攻击时，造成相当于自身魔法力350%的魔法伤
+    技能「妖力风暴」: buff=0 deBuff=0 dot=1 hit=0 | uncertain=0 notes=1 | 占位符=有 | 攻击敌人4次，每次攻击时，造成相当于自身魔法力55%的魔法伤害。6回合内，对敌人应用每层叠加造成相当
+    技能「这场闹剧，也该收场了吧？」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=2 notes=2 | 占位符=有 | 对敌人造成相当于自身魔法力100%的魔法伤害。若敌人处于【出血】状态，则改为根据敌人持有的总量，每拥
+[yozakura.ts]
+    技能「地狱极乐万手拳」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=1 | 占位符=有 | 对自己应用使普通攻击的施加伤害增加400%的增强效果。此效果将在接下来1次普通攻击中维持。攻击敌人3
+[rou.ts]
+    技能「半月脚」: buff=0 deBuff=0 dot=1 hit=0 | uncertain=2 notes=2 | 占位符=有 | 2回合内，自身有75%的概率闪避敌人的攻击。每次成功闪避时，成功闪避后续攻击的概率将减少5%。对敌人
+    技能「吃零食咯！」: buff=2 deBuff=0 dot=0 hit=0 | uncertain=2 notes=1 | 占位符=有 | 6回合内，友军的暴击率增加30%。6回合内，友军的暴击伤害增加150%。4回合内，队友军应用相当于自
+    技能「追赶游戏开始！」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=2 | 占位符=有 | 2回合内，自身有75%的概率闪避敌人的攻击。每次成功闪避攻击时，成功闪避后续攻击的概率将减少5%。攻
+    技能「泰拉爆发」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=1 notes=0 | 占位符=有 | 1回合内，自身暴击率增加50%。对敌人造成相当于自身攻击力350%的物理伤害。
+[nartas.ts]
+    技能「半妖神掌」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=2 | 占位符=有 | 4回合内，对自己应用75%的魔法防护罩效果。对敌人造成相当于自身魔法力300%的魔法伤害。若敌人为物
+[andrew.ts]
+    技能「窃取生命」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=0 notes=1 | 占位符=有 | 恢复自身相当于自身最大生命力12%的生命力。每次攻击命中敌人时，敌人的SP减少5点。攻击敌人2次，每
+    技能「你在看哪里？」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=1 notes=2 | 占位符=无 | 2回合内，自身有35%的概率闪避敌人的攻击。每次成功闪避攻击时，成功闪避后续攻击的概率将减少5%。2
+[jayden.ts]
+    技能「美少女之力」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=1 notes=1 | 占位符=有 | 4回合内，每回合结束时，恢复自身相当于自身最大生命力5%的生命力。4回合内，对自己应用50%的魔法防
+[layla.ts]
+    技能「毁灭铁砧」: buff=0 deBuff=0 dot=0 hit=1 | uncertain=1 notes=0 | 占位符=有 | 每次攻击命中敌人时，友军的SP恢复1点。攻击敌人2次，每次攻击时，造成相当于自身攻击力60%的物理伤
+[lisianne.ts]
+    技能「治愈祈祷」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=2 notes=1 | 占位符=有 | 恢复友军相当于自身魔法力50%的生命力。解除应用于友军的持续伤害效果。
+[kry.ts]
+    技能「相信我」: buff=0 deBuff=0 dot=1 hit=0 | uncertain=2 notes=1 | 占位符=有 | 友军的SP恢复3。对敌人造成1的物理伤害，并将目标向后方击退2格。对被撞击的敌人造成相当于目标最大生
+[samay.ts]
+    技能「靠你了！」: buff=3 deBuff=0 dot=0 hit=0 | uncertain=1 notes=0 | 占位符=有 | 2回合内，友军的攻击力增加20%。2回合内，友军的魔法力增加20%。2回合内，每回合结束时，恢复友军
+[elpis.ts]
+    技能「圣殿祈祷」: buff=2 deBuff=0 dot=0 hit=0 | uncertain=1 notes=0 | 占位符=有 | 6回合内，友军的魔法力增加25%。6回合内，友军的致命率增加30%。
+[wiggle.ts]
+    技能「威格？爆炸！」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=2 | 占位符=有 | 对敌人自爆，造成相当于自身攻击力300%的物理伤害。自爆攻击无法闪避。
+[arines.ts]
+    技能「堂堂正正」: buff=2 deBuff=0 dot=0 hit=0 | uncertain=1 notes=0 | 占位符=有 | 6回合内，友军的攻击力增加25%。6回合内，友军的致命率增加30%。
+[emma.ts]
+    技能「我最棒！」: buff=1 deBuff=0 dot=0 hit=0 | uncertain=1 notes=0 | 占位符=有 | 6回合期内，自身攻击力增加200%。
+    技能「我很忙，快让开！」: buff=0 deBuff=0 dot=1 hit=0 | uncertain=2 notes=1 | 占位符=有 | 友军的SP恢复3点。对敌人造成1的物理伤害，并将目标向左侧击退2格。对被撞击的敌人造成相当于被推开目
+[carlson.ts]
+    技能「坚定意志」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=1 | 占位符=无 | 2回合内，对自己应用35%的物理防护罩效果。
+[lydia.ts]
+    技能「祭祀枪术」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=1 notes=0 | 占位符=有 | 对敌人造成相当于自身攻击力200%的物理伤害。
+[cynthia.ts]
+    技能「暴风雪」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=0 notes=2 | 占位符=有 | 攻击敌人2次，每次攻击时，造成相当于自身魔法力25%的魔法伤害。对敌人应用造成相当于自身魔法力75%
+[fred.ts]
+    技能「盾牌推击」: buff=0 deBuff=0 dot=1 hit=0 | uncertain=2 notes=0 | 占位符=有 | 友军的SP恢复3点。对敌人造成1的物理伤害，并将目标向后方击退2格。对被撞击的敌人造成相当于被推开目
+[julie.ts]
+    技能「赋予再生」(仅满破): buff=1 deBuff=0 dot=0 hit=0 | uncertain=1 notes=0 | 占位符=有 | 6回合内，每回合结束时，恢复友军相当于自身魔法力155%的生命力。
+[rigenette.ts]
+    技能「目标就是你！」: buff=0 deBuff=0 dot=0 hit=0 | uncertain=0 notes=1 | 占位符=有 | 攻击敌人2次，每次攻击时，造成相当于自身攻击力35%的物理伤害。4回合内，对敌人应用集中射击效果。

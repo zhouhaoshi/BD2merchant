@@ -1,6 +1,6 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 593635 / entryId: 122335
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
 
 const andrew: characterDataObj = {
   name: 'andrew',
@@ -61,15 +61,81 @@ const andrew: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/713721.png',
       description:
-        '恢复自身相当于自身最大生命力12%的生命力。每次攻击命中敌人时，敌人的SP减少5点。攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。',
+        '恢复自身相当于自身最大生命力&-effect/buff/0/HPAdd-&%的生命力。每次攻击命中敌人时，敌人的SP减少5点。攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 75 }, // +0
-        1: { sp: 0, cd: -4, multiplying: 75 }, // +1
-        2: { sp: 0, cd: -4, multiplying: 100 }, // +2
-        3: { sp: 1, cd: -4, multiplying: 100 }, // +3
-        4: { sp: 1, cd: -4, multiplying: 150 }, // +4
-        5: { sp: 1, cd: -4, multiplying: 225 }, // +5
-        // TODO 描述里识别到的效果：SP变化（1回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 75,
+          buff: [
+            {
+              duration: 0,
+              HPAdd: 12,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: -4,
+          multiplying: 75,
+          buff: [
+            {
+              duration: 0,
+              HPAdd: 12,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: -4,
+          multiplying: 100,
+          buff: [
+            {
+              duration: 0,
+              HPAdd: 12,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: -4,
+          multiplying: 100,
+          buff: [
+            {
+              duration: 0,
+              HPAdd: 12,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: -4,
+          multiplying: 150,
+          buff: [
+            {
+              duration: 0,
+              HPAdd: 12,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: -4,
+          multiplying: 225,
+          buff: [
+            {
+              duration: 0,
+              HPAdd: 12,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        // TODO 描述里未能识别的效果：每次攻击命中敌人时，敌人的SP减少5点
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -110,13 +176,84 @@ const andrew: characterDataObj = {
       description:
         '2回合内，自身有35%的概率闪避敌人的攻击。每次成功闪避攻击时，成功闪避后续攻击的概率将减少5%。2回合内，对自己应用挑衅效果。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 0 }, // +0
-        1: { sp: 0, cd: -4, multiplying: 0 }, // +1
-        2: { sp: 0, cd: -4, multiplying: 0 }, // +2
-        3: { sp: 1, cd: -4, multiplying: 0 }, // +3
-        4: { sp: 1, cd: -4, multiplying: 0 }, // +4
-        5: { sp: 1, cd: -4, multiplying: 0 }, // +5
-        // TODO 描述里识别到的效果：闪避（2回合） | 挑衅（2回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 2,
+              provocation: 1,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: -4,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 2,
+              provocation: 1,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: -4,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 2,
+              provocation: 1,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: -4,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 2,
+              provocation: 1,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: -4,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 2,
+              provocation: 1,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: -4,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 2,
+              provocation: 1,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        // TODO 描述里未能识别的效果：，自身有35%的概率闪避敌人的攻击
+        // 　　　　　　　　　　　每次成功闪避攻击时，成功闪避后续攻击的概率将减少5%
+        // 　　　　　　　　　　　，自身有40%的概率闪避敌人的攻击
+        // 　　　　　　　　　　　，自身有50%的概率闪避敌人的攻击
+        // 　　　　　　　　　　　，自身有65%的概率闪避敌人的攻击
+        // TODO 待人工复核：没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {

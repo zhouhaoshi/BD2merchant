@@ -1,7 +1,7 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 721512 / entryId: 225782
 // TODO wiki 上没有英文名，文件名和 name 暂时用 contentId，请改成游戏里的角色 key
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
 
 const char721512: characterDataObj = {
   name: 'char721512',
@@ -66,15 +66,82 @@ const char721512: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/pro/50118/images/w_360/h_381/497891/2026/8/18/60144766mu6qn8bh.png',
       description:
-        '自身成功闪避敌人1次前，以100%的概率闪避敌人的攻击。对敌人造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。',
+        '自身成功闪避敌人&-effect/buff/0/sidestep-&次前，以100%的概率闪避敌人的攻击。对敌人造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 600 }, // +0
-        1: { sp: 1, cd: 0, multiplying: 600 }, // +1
-        2: { sp: 1, cd: 0, multiplying: 680 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 760 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 840 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 920 }, // +5
-        // TODO 描述里识别到的效果：闪避（1回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 600,
+          buff: [
+            {
+              duration: 99,
+              sidestep: 1,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        1: {
+          sp: 1,
+          cd: 0,
+          multiplying: 600,
+          buff: [
+            {
+              duration: 99,
+              sidestep: 1,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        2: {
+          sp: 1,
+          cd: 0,
+          multiplying: 680,
+          buff: [
+            {
+              duration: 99,
+              sidestep: 1,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 760,
+          buff: [
+            {
+              duration: 99,
+              sidestep: 1,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 840,
+          buff: [
+            {
+              duration: 99,
+              sidestep: 1,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 920,
+          buff: [
+            {
+              duration: 99,
+              sidestep: 1,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        // TODO 描述里未能识别的效果：，以100%的概率闪避敌人的攻击
+        // TODO 待人工复核：没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -96,21 +163,17 @@ const char721512: characterDataObj = {
         burst1: {
           sp: 1, // 消耗SP
           description: '技能范围扩大',
-          scope: [
-            [0, 0],
-            [0, 1],
-            [0, 2],
-            [0, 3],
-            [0, 4],
-          ], // 爆发后的攻击范围，二维坐标系存储。直接命中目标为[0,0]
+          scope: [[0, 0]], // TODO: 范围图没解析出来，请人工确认命中范围
         },
         burst2: {
           sp: 1, // 消耗SP
           description: '伤害量+150%',
+          multiplying: 150,
         },
         burst3: {
           sp: 1, // 消耗SP
           description: '伤害量+150%',
+          multiplying: 150,
         },
       },
       // 服装能力

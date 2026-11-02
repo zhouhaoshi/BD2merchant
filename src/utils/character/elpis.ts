@@ -1,6 +1,6 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 619702 / entryId: 147432
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
 
 const elpis: characterDataObj = {
   name: 'elpis',
@@ -60,20 +60,123 @@ const elpis: characterDataObj = {
       // Q版形象（wiki 原图）
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/491888.png',
-      description: '6回合内，友军的魔法力增加25%。6回合内，友军的致命率增加30%。',
+      description:
+        '&-effect/buff/0/duration-&回合内，友军的魔法力增加&-effect/buff/0/attackAdd-&%。&-effect/buff/1/duration-&回合内，友军的致命率增加&-effect/buff/1/CRAdd-&%。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 0 }, // +0
-        1: { sp: 0, cd: 0, multiplying: 0 }, // +1
-        2: { sp: 1, cd: 0, multiplying: 0 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 0 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 0 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 0 }, // +5
-        // TODO 描述里识别到的效果：友军攻击/魔法力25%（6回合） | 友军攻击/魔法力40%（6回合） | 友军攻击/魔法力55%（6回合） | 友军攻击/魔法力70%（6回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 6,
+              attribute: 'matk',
+              attackAdd: 25,
+              scope: [],
+            },
+            {
+              duration: 6,
+              CRAdd: 30,
+              scope: [],
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 6,
+              attribute: 'matk',
+              attackAdd: 40,
+              scope: [],
+            },
+            {
+              duration: 6,
+              CRAdd: 30,
+              scope: [],
+            },
+          ],
+        },
+        2: {
+          sp: 1,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 6,
+              attribute: 'matk',
+              attackAdd: 40,
+              scope: [],
+            },
+            {
+              duration: 6,
+              CRAdd: 30,
+              scope: [],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 6,
+              attribute: 'matk',
+              attackAdd: 55,
+              scope: [],
+            },
+            {
+              duration: 6,
+              CRAdd: 30,
+              scope: [],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 6,
+              attribute: 'matk',
+              attackAdd: 55,
+              scope: [],
+            },
+            {
+              duration: 6,
+              CRAdd: 35,
+              scope: [],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 6,
+              attribute: 'matk',
+              attackAdd: 70,
+              scope: [],
+            },
+            {
+              duration: 6,
+              CRAdd: 35,
+              scope: [],
+            },
+          ],
+        },
+        // TODO 待人工复核：没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {
         potentials1: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
+          attackAdd: 10,
           description: '魔法力增加倍率+10%',
         },
       },

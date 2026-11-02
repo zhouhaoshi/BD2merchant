@@ -54,6 +54,25 @@ function parseOtherAttr(raw: string): equipmentOtherAttrObj | null {
   }
 }
 
+/** 按主属性推导装备系别：
+ * 盔甲/头盔按物抗（防御力）/魔抗（魔法抵抗）区分，其余部位按攻击力/魔法力区分；
+ * 两者都有或都没有 → 通用系 */
+export function deriveEquipmentFaction(
+  mainAttr: equipmentMainAttrObj | null,
+  part = '',
+): equipmentFaction {
+  if (!mainAttr) return '通用系'
+  const text = `${mainAttr.zynl} ${mainAttr.jbnl1} ${mainAttr.jbnl2}`
+  const isDefensePart = part === '盔甲' || part === '头盔'
+  const physicalWord = isDefensePart ? '防御力' : '攻击力'
+  const magicWord = isDefensePart ? '魔法抵抗' : '魔法力'
+  const hasPhysical = text.includes(physicalWord)
+  const hasMagic = text.includes(magicWord)
+  if (hasPhysical && !hasMagic) return '物理系'
+  if (hasMagic && !hasPhysical) return '魔法系'
+  return '通用系'
+}
+
 /** 解析装备列表：兼容裸数组与 {code,msg,data} 信封两种形态 */
 export function parseEquipmentList(raw: unknown): equipmentDataObj[] {
   const list: equipmentRawItem[] = Array.isArray(raw)
@@ -61,18 +80,23 @@ export function parseEquipmentList(raw: unknown): equipmentDataObj[] {
     : Array.isArray((raw as { data?: unknown })?.data)
       ? (raw as { data: equipmentRawItem[] }).data
       : []
-  return list.map((item) => ({
-    content_id: Number(item.content_id ?? 0),
-    name: String(item.name ?? '').trim(),
-    icon: String(item.icon ?? ''),
-    icon1: String(item.icon1 ?? ''),
-    part: String(item.part ?? ''),
-    type: String(item.type ?? ''),
-    roleName: String(item.role_name ?? '').trim(),
-    roleAvatar: String(item.role_avatar ?? ''),
-    mainAttr: parseAttrJson<equipmentMainAttrObj>(String(item.main_attr ?? '')),
-    otherAttr: parseOtherAttr(String(item.other_attr ?? '')),
-  }))
+  return list.map((item) => {
+    const mainAttr = parseAttrJson<equipmentMainAttrObj>(String(item.main_attr ?? ''))
+    const part = String(item.part ?? '')
+    return {
+      content_id: Number(item.content_id ?? 0),
+      name: String(item.name ?? '').trim(),
+      icon: String(item.icon ?? ''),
+      icon1: String(item.icon1 ?? ''),
+      part,
+      type: String(item.type ?? ''),
+      roleName: String(item.role_name ?? '').trim(),
+      roleAvatar: String(item.role_avatar ?? ''),
+      mainAttr,
+      otherAttr: parseOtherAttr(String(item.other_attr ?? '')),
+      faction: deriveEquipmentFaction(mainAttr, part),
+    }
+  })
 }
 
 /** 从本地装备数据文件加载：glob ./equipmentData/*.ts，每个文件 export default 装备数组 */

@@ -106,6 +106,11 @@ interface burstObj {
   sp: number // 消耗SP
   description: string // 爆发效果
   scope?: number[][] // 爆发后的攻击范围，二维坐标系。没有范围改变的角色无此字段
+  multiplying?: number // 伤害倍率增加（百分比点，选中爆发后加算）
+  extraMultiplying?: number // 额外倍率增加
+  attackAdd?: number // 攻击力/魔法力增加
+  shield?: number // 能量护盾（自身攻击力百分比）
+  duration?: number // 持续回合
 }
 
 // 角色技能数据结构定义
@@ -167,6 +172,8 @@ interface hitBuffObj {
   hitMultiplying?: number // 倍率
   increasingNumber?: number // 递增数量
   maxNumber?: number // 最大递增数量
+  attackAdd?: number // 攻击力/魔法力增加
+  cdReduce?: number // 冷却时间减少
 }
 interface buffElement {
   attackAdd?: number // 效果值

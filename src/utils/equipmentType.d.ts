@@ -32,6 +32,9 @@ interface equipmentOtherAttrObj {
   ur3?: equipmentMainAttrObj // 制作等级 顶级
 }
 
+// 装备系别：魔法系副属性只出魔法力词条，物理系只出攻击力词条，通用系两者都有
+type equipmentFaction = '魔法系' | '物理系' | '通用系'
+
 // 装备解析后的页面数据结构
 interface equipmentDataObj {
   content_id: number
@@ -44,6 +47,7 @@ interface equipmentDataObj {
   roleAvatar: string // 专属角色头像
   mainAttr: equipmentMainAttrObj | null // 解析失败/为空时 null
   otherAttr: equipmentOtherAttrObj | null // 解析失败/为空时 null
+  faction?: equipmentFaction // 装备系别（由主属性推导，本地旧数据缺失时运行时兜底推导）
 }
 
 // 装备属性键
@@ -108,6 +112,14 @@ interface equipmentStatParts {
   base: equipmentStatPanel // 基础属性
   scoreBonus: equipmentStatPanel // 评分加成
   sub: equipmentStatPanel // 副属性词条
+}
+
+// 基础词条展示项（每个词条单独展示：基础值+评分加成值）
+interface equipmentBaseEntryItem {
+  name: string // 属性名（攻击力/致命伤害…）
+  base: number // 基础值
+  score: number // 评分加成值（主词条为 0）
+  isPercent: boolean // 是否百分比
 }
 
 // 角色最终面板（裸面板 + 装备）

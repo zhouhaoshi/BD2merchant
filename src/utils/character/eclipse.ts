@@ -1,6 +1,6 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 593603 / entryId: 122351
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
 
 const eclipse: characterDataObj = {
   name: 'eclipse',
@@ -67,15 +67,81 @@ const eclipse: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/688973.png',
       description:
-        '恢复自身相当于自身最大生命力35%的生命力。每次攻击命中敌人时，敌人的SP减少3点。攻击敌人&-chain-&次，每次攻击时，造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。',
+        '恢复自身相当于自身最大生命力&-effect/buff/0/HPAdd-&%的生命力。每次攻击命中敌人时，敌人的SP减少3点。攻击敌人&-chain-&次，每次攻击时，造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 220 }, // +0
-        1: { sp: 0, cd: 0, multiplying: 250 }, // +1
-        2: { sp: 0, cd: 0, multiplying: 280 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 280 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 310 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 340 }, // +5
-        // TODO 描述里识别到的效果：SP变化（1回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 220,
+          buff: [
+            {
+              duration: 0,
+              HPAdd: 35,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: 0,
+          multiplying: 250,
+          buff: [
+            {
+              duration: 0,
+              HPAdd: 35,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: 0,
+          multiplying: 280,
+          buff: [
+            {
+              duration: 0,
+              HPAdd: 35,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 280,
+          buff: [
+            {
+              duration: 0,
+              HPAdd: 35,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 310,
+          buff: [
+            {
+              duration: 0,
+              HPAdd: 35,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 340,
+          buff: [
+            {
+              duration: 0,
+              HPAdd: 35,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        // TODO 描述里未能识别的效果：每次攻击命中敌人时，敌人的SP减少3点
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -110,7 +176,7 @@ const eclipse: characterDataObj = {
     skill2: {
       name: 'skill2', // TODO: wiki 只有中文名，英文 key 需要人工命名
       cName: '恶梦兔女郎',
-      target: 'friendly',
+      target: 'enemy',
       sp: -3,
       cd: 5,
       chain: 3,
@@ -132,15 +198,123 @@ const eclipse: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/257341.png',
       description:
-        '每次攻击命中敌人时，友军的SP恢复1点，敌人的SP减少1点。4回合内，敌人魔法抵抗减少15%。攻击敌人&-chain-&次，每次攻击时，造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。',
+        '每次攻击命中敌人时，友军的SP恢复&-effect/hitBuff/0/spAdd-&点，敌人的SP减少1点。&-effect/deBuff/0/duration-&回合内，敌人魔法抵抗减少&-effect/deBuff/0/MRESReduce-&%。攻击敌人&-chain-&次，每次攻击时，造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 75 }, // +0
-        1: { sp: 0, cd: 0, multiplying: 100 }, // +1
-        2: { sp: 0, cd: 0, multiplying: 125 }, // +2
-        3: { sp: 0, cd: 0, multiplying: 150 }, // +3
-        4: { sp: 0, cd: 0, multiplying: 175 }, // +4
-        5: { sp: 0, cd: 0, multiplying: 200 }, // +5
-        // TODO 描述里识别到的效果：SP变化（1回合） | 减魔抗15%（4回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 75,
+          hitBuff: [
+            {
+              scope: [],
+              target: 'friendly',
+              spAdd: 1,
+            },
+          ],
+          deBuff: [
+            {
+              duration: 4,
+              MRESReduce: 15,
+              scope: [],
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: 0,
+          multiplying: 100,
+          hitBuff: [
+            {
+              scope: [],
+              target: 'friendly',
+              spAdd: 1,
+            },
+          ],
+          deBuff: [
+            {
+              duration: 4,
+              MRESReduce: 15,
+              scope: [],
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: 0,
+          multiplying: 125,
+          hitBuff: [
+            {
+              scope: [],
+              target: 'friendly',
+              spAdd: 1,
+            },
+          ],
+          deBuff: [
+            {
+              duration: 4,
+              MRESReduce: 15,
+              scope: [],
+            },
+          ],
+        },
+        3: {
+          sp: 0,
+          cd: 0,
+          multiplying: 150,
+          hitBuff: [
+            {
+              scope: [],
+              target: 'friendly',
+              spAdd: 1,
+            },
+          ],
+          deBuff: [
+            {
+              duration: 4,
+              MRESReduce: 15,
+              scope: [],
+            },
+          ],
+        },
+        4: {
+          sp: 0,
+          cd: 0,
+          multiplying: 175,
+          hitBuff: [
+            {
+              scope: [],
+              target: 'friendly',
+              spAdd: 1,
+            },
+          ],
+          deBuff: [
+            {
+              duration: 4,
+              MRESReduce: 15,
+              scope: [],
+            },
+          ],
+        },
+        5: {
+          sp: 0,
+          cd: 0,
+          multiplying: 200,
+          hitBuff: [
+            {
+              scope: [],
+              target: 'friendly',
+              spAdd: 1,
+            },
+          ],
+          deBuff: [
+            {
+              duration: 4,
+              MRESReduce: 15,
+              scope: [],
+            },
+          ],
+        },
+        // TODO 描述里未能识别的效果：，敌人的SP减少1点
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -230,10 +404,12 @@ const eclipse: characterDataObj = {
         burst2: {
           sp: 1, // 消耗SP
           description: '伤害量+160%',
+          multiplying: 160,
         },
         burst3: {
           sp: 1, // 消耗SP
           description: '伤害量+160%',
+          multiplying: 160,
         },
       },
       // 服装能力
@@ -277,15 +453,87 @@ const eclipse: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/397498.png',
       description:
-        '6回合内，自身魔法力增加50%。对敌人造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。',
+        '&-effect/buff/0/duration-&回合内，自身魔法力增加&-effect/buff/0/attackAdd-&%。对敌人造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 400 }, // +0
-        1: { sp: 1, cd: 0, multiplying: 400 }, // +1
-        2: { sp: 1, cd: 0, multiplying: 450 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 500 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 550 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 600 }, // +5
-        // TODO 描述里识别到的效果：自身魔法力50%（6回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 400,
+          buff: [
+            {
+              duration: 6,
+              attribute: 'matk',
+              attackAdd: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        1: {
+          sp: 1,
+          cd: 0,
+          multiplying: 400,
+          buff: [
+            {
+              duration: 6,
+              attribute: 'matk',
+              attackAdd: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        2: {
+          sp: 1,
+          cd: 0,
+          multiplying: 450,
+          buff: [
+            {
+              duration: 6,
+              attribute: 'matk',
+              attackAdd: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 500,
+          buff: [
+            {
+              duration: 6,
+              attribute: 'matk',
+              attackAdd: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 550,
+          buff: [
+            {
+              duration: 6,
+              attribute: 'matk',
+              attackAdd: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 600,
+          buff: [
+            {
+              duration: 6,
+              attribute: 'matk',
+              attackAdd: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        // TODO 待人工复核：没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {

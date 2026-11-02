@@ -1,6 +1,6 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 697006 / entryId: 210629
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
 
 const palette: characterDataObj = {
   name: 'palette',
@@ -75,6 +75,7 @@ const palette: characterDataObj = {
         3: { sp: 1, cd: 0, multiplying: 600 }, // +3
         4: { sp: 1, cd: 0, multiplying: 650 }, // +4
         5: { sp: 1, cd: 0, multiplying: 700 }, // +5
+        // TODO 待人工复核：没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -127,14 +128,14 @@ const palette: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/pro/50118/images/w_360/h_381/50118/497891/2026/4/13/1778639372068_1778638379000_tobmy23doi_wxvpvksncc.png',
       description:
-        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。此时，敌方的减益效果达到7个及以上时，则改为造成相当于自身魔法力110%的魔法伤害。',
+        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。此时，敌方的减益效果达到7个及以上时，则改为造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 35 }, // +0
-        1: { sp: 1, cd: 0, multiplying: 35 }, // +1
-        2: { sp: 1, cd: 0, multiplying: 40 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 45 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 50 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 55 }, // +5
+        0: { sp: 0, cd: 0, multiplying: 110 }, // +0
+        1: { sp: 1, cd: 0, multiplying: 110 }, // +1
+        2: { sp: 1, cd: 0, multiplying: 125 }, // +2
+        3: { sp: 1, cd: 0, multiplying: 140 }, // +3
+        4: { sp: 1, cd: 0, multiplying: 155 }, // +4
+        5: { sp: 1, cd: 0, multiplying: 170 }, // +5
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -160,10 +161,12 @@ const palette: characterDataObj = {
         burst2: {
           sp: 1, // 消耗SP
           description: '条件伤害量+25%',
+          multiplying: 25,
         },
         burst3: {
           sp: 1, // 消耗SP
           description: '条件伤害量+25%',
+          multiplying: 25,
         },
       },
       // 服装能力

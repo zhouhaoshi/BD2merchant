@@ -1,6 +1,6 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 660211 / entryId: 185515
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
 
 const highElfArcher: characterDataObj = {
   name: 'highElfArcher',
@@ -65,15 +65,80 @@ const highElfArcher: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/539099.png',
       description:
-        '2回合内，自身暴击率增加100%。 攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。',
+        '&-effect/buff/0/duration-&回合内，自身暴击率增加&-effect/buff/0/CRAdd-&%。 攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 75 }, // +0
-        1: { sp: 1, cd: 0, multiplying: 75 }, // +1
-        2: { sp: 1, cd: 0, multiplying: 87 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 100 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 112 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 125 }, // +5
-        // TODO 描述里识别到的效果：自身致命率100%（2回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 75,
+          buff: [
+            {
+              duration: 2,
+              CRAdd: 100,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        1: {
+          sp: 1,
+          cd: 0,
+          multiplying: 75,
+          buff: [
+            {
+              duration: 2,
+              CRAdd: 100,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        2: {
+          sp: 1,
+          cd: 0,
+          multiplying: 87,
+          buff: [
+            {
+              duration: 2,
+              CRAdd: 100,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 100,
+          buff: [
+            {
+              duration: 2,
+              CRAdd: 100,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 112,
+          buff: [
+            {
+              duration: 2,
+              CRAdd: 100,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 125,
+          buff: [
+            {
+              duration: 2,
+              CRAdd: 100,
+              scope: [[0, 0]],
+            },
+          ],
+        },
       },
       // 技能觉醒效果
       skillPotentials: {

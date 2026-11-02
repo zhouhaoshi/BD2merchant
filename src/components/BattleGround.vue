@@ -1,26 +1,10 @@
 <template>
   <div ref="BattleGround" class="battle_ground_box">
     <el-form :inline="true" :model="form" label-width="auto">
-      <el-form-item label="场地范围" prop="type" style="width: 200px">
-        <el-select v-model="form.size" placeholder="选择场地范围" @change="setTempEnemyList">
-          <el-option label="3x4" :value="12" />
-          <el-option label="5x5" :value="25" />
-        </el-select>
-      </el-form-item>
-      <el-form-item label="魔兽等级" prop="type" style="width: 200px">
-        <el-select v-model="form.level" placeholder="选择魔兽等级">
-          <el-option
-            v-for="item in Object.keys(warcraftLevelList).map((item) => +item)"
-            :key="item"
-            :label="`${item}级`"
-            :value="item"
-          />
-        </el-select>
-      </el-form-item>
       <el-form-item
         label="魔兽信息"
         prop="type"
-        style="width: calc(100% - 496px)"
+        style="width: 100%"
         v-if="form.level"
       >
         <!-- 伤害气泡框 -->
@@ -194,6 +178,13 @@ interface tempEnemyObj {
 }
 
 const limitSp = ref<number>(props.spLimit) // 最大sp数量
+// 模式切换后同步sp上限
+watch(
+  () => props.spLimit,
+  () => {
+    limitSp.value = props.spLimit
+  },
+)
 const trunReplySp = ref<number>(0) // 本回合回复的sp
 const trunUseSp = ref<number>(0) // 本回合使用技能消耗的sp
 
@@ -235,7 +226,6 @@ const changeLocation = (index: number) => {
   }
 }
 const form = ref<Record<string, number | undefined>>({
-  size: props.groundColumn * props.groundRow,
   level: undefined,
 })
 
@@ -247,7 +237,7 @@ interface scopeWeaknessesObj {
 }
 // 魔兽位置设置
 const setTempEnemyList = () => {
-  tempEnemyList.value = new Array(form.value.size)
+  tempEnemyList.value = new Array(props.groundColumn * props.groundRow)
   const scopeList = props.warcraftData.scope
   // 魔兽不同级别的面板记录
   warcraftLevelList.value = props.warcraftData.levelData
@@ -270,6 +260,21 @@ const setTempEnemyList = () => {
   })
 }
 setTempEnemyList()
+
+// 模式切换后场地尺寸变化，同步boss场地
+watch(
+  () => [props.groundColumn, props.groundRow],
+  () => {
+    setTempEnemyList()
+  },
+)
+// boss变更后按新boss范围重建场地
+watch(
+  () => props.warcraftData,
+  () => {
+    setTempEnemyList()
+  },
+)
 
 // 选择了角色
 const selectCharactarBox = () => {

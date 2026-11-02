@@ -1,6 +1,9 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 593580 / entryId: 122326
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
+
+
+import { dotBuffType } from '@/utils/globals'
 
 const emma: characterDataObj = {
   name: 'emma',
@@ -60,15 +63,87 @@ const emma: characterDataObj = {
       // Q版形象（wiki 原图）
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/442153.png',
-      description: '6回合期内，自身攻击力增加200%。',
+      description: '6回合期内，自身攻击力增加&-effect/buff/0/attackAdd-&%。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 0 }, // +0
-        1: { sp: 0, cd: -4, multiplying: 0 }, // +1
-        2: { sp: 0, cd: -4, multiplying: 0 }, // +2
-        3: { sp: 1, cd: -4, multiplying: 0 }, // +3
-        4: { sp: 1, cd: -4, multiplying: 0 }, // +4
-        5: { sp: 1, cd: -4, multiplying: 0 }, // +5
-        // TODO 描述里识别到的效果：自身攻击力200%（6回合） | 自身攻击力250%（6回合） | 自身攻击力350%（6回合） | 自身攻击力500%（6回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 6,
+              attribute: 'atk',
+              attackAdd: 200,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: -4,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 6,
+              attribute: 'atk',
+              attackAdd: 200,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: -4,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 6,
+              attribute: 'atk',
+              attackAdd: 250,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: -4,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 6,
+              attribute: 'atk',
+              attackAdd: 250,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: -4,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 6,
+              attribute: 'atk',
+              attackAdd: 350,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: -4,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 6,
+              attribute: 'atk',
+              attackAdd: 500,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        // TODO 待人工复核：没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -95,7 +170,7 @@ const emma: characterDataObj = {
     skill2: {
       name: 'skill2', // TODO: wiki 只有中文名，英文 key 需要人工命名
       cName: '校园女王',
-      target: 'friendly',
+      target: 'enemy',
       sp: -3,
       cd: 7,
       chain: 1,
@@ -107,15 +182,142 @@ const emma: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/160265.png',
       description:
-        '友军的SP恢复3点。对敌人造成1的物理伤害，并将目标向左侧击退2格。对被撞击的敌人造成相当于被推开目标最大生命力50%的物理伤害。6回合内，对敌人应用造成相当于自身攻击力&-effect/multiplying-&%的物理伤害的出血效果。',
+        '友军的SP恢复&-effect/special/0/spAdd-&点。对敌人造成1的物理伤害，并将目标向左侧击退2格。对被撞击的敌人造成相当于被推开目标最大生命力&-effect/repellingMultiplying-&%的物理伤害。&-effect/dotBuff/0/duration-&回合内，对敌人应用造成相当于自身攻击力&-effect/dotBuff/0/dotMultiplying-&的物理伤害的出血效果。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 50, special: [{ spAdd: 3 }] }, // +0
-        1: { sp: 0, cd: -4, multiplying: 50, special: [{ spAdd: 3 }] }, // +1
-        2: { sp: 0, cd: -4, multiplying: 50, special: [{ spAdd: 3 }] }, // +2
-        3: { sp: 1, cd: -4, multiplying: 50, special: [{ spAdd: 3 }] }, // +3
-        4: { sp: 1, cd: -4, multiplying: 50, special: [{ spAdd: 3 }] }, // +4
-        5: { sp: 1, cd: -4, multiplying: 100, special: [{ spAdd: 3 }] }, // +5
-        // TODO 描述里识别到的效果：SP变化（1回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          repellingMultiplying: 50,
+          special: [
+            {
+              spAdd: 3,
+            },
+            {
+              spAdd: 3,
+            },
+          ],
+          dotBuff: [
+            {
+              type: dotBuffType.bleed,
+              scope: [],
+              duration: 6,
+              dotMultiplying: 50,
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: -4,
+          multiplying: 0,
+          repellingMultiplying: 50,
+          special: [
+            {
+              spAdd: 3,
+            },
+            {
+              spAdd: 3,
+            },
+          ],
+          dotBuff: [
+            {
+              type: dotBuffType.bleed,
+              scope: [],
+              duration: 6,
+              dotMultiplying: 50,
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: -4,
+          multiplying: 0,
+          repellingMultiplying: 75,
+          special: [
+            {
+              spAdd: 3,
+            },
+            {
+              spAdd: 3,
+            },
+          ],
+          dotBuff: [
+            {
+              type: dotBuffType.bleed,
+              scope: [],
+              duration: 6,
+              dotMultiplying: 50,
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: -4,
+          multiplying: 0,
+          repellingMultiplying: 75,
+          special: [
+            {
+              spAdd: 3,
+            },
+            {
+              spAdd: 3,
+            },
+          ],
+          dotBuff: [
+            {
+              type: dotBuffType.bleed,
+              scope: [],
+              duration: 6,
+              dotMultiplying: 50,
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: -4,
+          multiplying: 0,
+          repellingMultiplying: 125,
+          special: [
+            {
+              spAdd: 3,
+            },
+            {
+              spAdd: 3,
+            },
+          ],
+          dotBuff: [
+            {
+              type: dotBuffType.bleed,
+              scope: [],
+              duration: 6,
+              dotMultiplying: 50,
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: -4,
+          multiplying: 0,
+          repellingMultiplying: 125,
+          special: [
+            {
+              spAdd: 3,
+            },
+            {
+              spAdd: 3,
+            },
+          ],
+          dotBuff: [
+            {
+              type: dotBuffType.bleed,
+              scope: [],
+              duration: 6,
+              dotMultiplying: 100,
+            },
+          ],
+        },
+        // TODO 描述里未能识别的效果：对敌人造成1的物理伤害，并将目标向左侧击退2格
+        // TODO 待人工复核：没有解析到技能倍率 | 没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {

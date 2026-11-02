@@ -1,5 +1,6 @@
 <template>
   <div
+    class="scope_root"
     style="transform: rotateZ(-90deg); position: relative"
     :style="`height: calc(52px * ${sizeList.height});`"
   >
@@ -85,30 +86,41 @@ const calculateSize = () => {
 calculateSize()
 </script>
 <style lang="less" scoped>
+.scope_root {
+  display: inline-block;
+  padding: 3px;
+  background: #191c22;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
 .col_box {
   width: 50px;
   height: 50px;
   line-height: 50px;
-  border: 1px solid #000;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.4);
   text-align: center;
 }
 .center_box::after {
   content: '';
   display: inline-block;
-  width: 25px;
-  height: 12px;
-  display: inline-block;
-  border: 1px solid white;
-  border-width: 0 0 2px 2px;
-  transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-  -moz-transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
-  vertical-align: baseline;
+  width: 15px;
+  height: 15px;
+  border: 2px solid #fff;
+  transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  vertical-align: middle;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
 }
 .scope_box {
-  background-color: #2dd4bfd9;
+  background: linear-gradient(135deg, #f4535f, #c93240);
+  box-shadow:
+    inset 0 0 10px rgba(0, 0, 0, 0.25),
+    0 0 6px rgba(244, 83, 95, 0.5);
   transform: rotateZ(90deg);
 }
 .All_box {

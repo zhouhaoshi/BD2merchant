@@ -1,6 +1,6 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 593571 / entryId: 122344
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
 
 const justia: characterDataObj = {
   name: 'justia',
@@ -125,6 +125,7 @@ const justia: characterDataObj = {
         3: { sp: 1, cd: 0, multiplying: 420 }, // +3
         4: { sp: 1, cd: 0, multiplying: 490 }, // +4
         5: { sp: 1, cd: 0, multiplying: 555 }, // +5
+        // TODO 待人工复核：没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -177,15 +178,111 @@ const justia: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/839306.png',
       description:
-        '8回合内，自身属性伤害增加200%。恢复自身相当于自身最大生命力35%的生命力。对敌人造成相当于自身攻击力&-effect/multiplying-&%的物理固定伤害。',
+        '&-effect/buff/0/duration-&回合内，自身属性伤害增加&-effect/buff/0/attributeDamage-&%。恢复自身相当于自身最大生命力&-effect/buff/1/HPAdd-&%的生命力。对敌人造成相当于自身攻击力&-effect/multiplying-&%的物理固定伤害。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 150 }, // +0
-        1: { sp: 1, cd: 0, multiplying: 150 }, // +1
-        2: { sp: 1, cd: 0, multiplying: 185 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 225 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 260 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 300 }, // +5
-        // TODO 描述里识别到的效果：自身属性伤害200%（8回合） | 自身属性伤害250%（8回合） | 自身属性伤害300%（8回合） | 自身属性伤害350%（8回合） | 自身属性伤害400%（8回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 150,
+          buff: [
+            {
+              duration: 8,
+              attributeDamage: 200,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 0,
+              HPAdd: 35,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        1: {
+          sp: 1,
+          cd: 0,
+          multiplying: 150,
+          buff: [
+            {
+              duration: 8,
+              attributeDamage: 200,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 0,
+              HPAdd: 35,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        2: {
+          sp: 1,
+          cd: 0,
+          multiplying: 185,
+          buff: [
+            {
+              duration: 8,
+              attributeDamage: 250,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 0,
+              HPAdd: 35,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 225,
+          buff: [
+            {
+              duration: 8,
+              attributeDamage: 300,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 0,
+              HPAdd: 35,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 260,
+          buff: [
+            {
+              duration: 8,
+              attributeDamage: 350,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 0,
+              HPAdd: 35,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 300,
+          buff: [
+            {
+              duration: 8,
+              attributeDamage: 400,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 0,
+              HPAdd: 35,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        // TODO 待人工复核：没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -203,14 +300,17 @@ const justia: characterDataObj = {
         burst1: {
           sp: 2, // 消耗SP
           description: '【额外能力】【前置效果】解除套用于主要目标的防护罩和能量护盾。伤害量+45%',
+          multiplying: 45,
         },
         burst2: {
           sp: 1, // 消耗SP
           description: '伤害量+45%',
+          multiplying: 45,
         },
         burst3: {
           sp: 1, // 消耗SP
           description: '伤害量+45%',
+          multiplying: 45,
         },
       },
       // 服装能力
@@ -301,20 +401,123 @@ const justia: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/715790.png',
       description:
-        '自身成功闪避敌人2次前，以100%的概率闪避敌人的攻击。8回合内，自身攻击力增加150%。',
+        '自身成功闪避敌人&-effect/buff/0/sidestep-&次前，以100%的概率闪避敌人的攻击。&-effect/buff/1/duration-&回合内，自身攻击力增加&-effect/buff/1/attackAdd-&%。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 0 }, // +0
-        1: { sp: 0, cd: 0, multiplying: 0 }, // +1
-        2: { sp: 0, cd: 0, multiplying: 0 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 0 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 0 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 0 }, // +5
-        // TODO 描述里识别到的效果：闪避（1回合） | 自身攻击力150%（8回合） | 自身攻击力185%（8回合） | 自身攻击力210%（8回合） | 自身攻击力245%（8回合） | 自身攻击力270%（8回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 99,
+              sidestep: 2,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 8,
+              attribute: 'atk',
+              attackAdd: 150,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 99,
+              sidestep: 2,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 8,
+              attribute: 'atk',
+              attackAdd: 185,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 99,
+              sidestep: 3,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 8,
+              attribute: 'atk',
+              attackAdd: 210,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 99,
+              sidestep: 2,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 8,
+              attribute: 'atk',
+              attackAdd: 210,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 99,
+              sidestep: 2,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 8,
+              attribute: 'atk',
+              attackAdd: 245,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 99,
+              sidestep: 4,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 8,
+              attribute: 'atk',
+              attackAdd: 270,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        // TODO 描述里未能识别的效果：，以100%的概率闪避敌人的攻击
+        // TODO 待人工复核：没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {
         potentials1: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
+          attackAdd: 30,
           description: '攻击力增加倍率+30%',
         },
         potentials2: {

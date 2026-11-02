@@ -1,6 +1,6 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 593623 / entryId: 122357
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
 
 const anastasia: characterDataObj = {
   name: 'anastasia',
@@ -64,15 +64,85 @@ const anastasia: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/791880.png',
       description:
-        '1回合内，自身致命伤害增加350%。攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。若敌人为主要目标，则改为造成相当于自身攻击力250%的物理伤害。',
+        '&-effect/buff/0/duration-&回合内，自身致命伤害增加&-effect/buff/0/critical-&%。攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。若敌人为主要目标，则改为造成相当于自身攻击力250%的物理伤害。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 110 }, // +0
-        1: { sp: 0, cd: 0, multiplying: 110 }, // +1
-        2: { sp: 0, cd: 0, multiplying: 160 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 160 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 210 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 210 }, // +5
-        // TODO 描述里识别到的效果：自身爆伤350%（1回合） | 自身爆伤450%（1回合） | 自身爆伤600%（1回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 110,
+          buff: [
+            {
+              duration: 1,
+              critical: 350,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: 0,
+          multiplying: 110,
+          buff: [
+            {
+              duration: 1,
+              critical: 450,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: 0,
+          multiplying: 160,
+          buff: [
+            {
+              duration: 1,
+              critical: 450,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 160,
+          buff: [
+            {
+              duration: 1,
+              critical: 450,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 210,
+          buff: [
+            {
+              duration: 1,
+              critical: 450,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 210,
+          buff: [
+            {
+              duration: 1,
+              critical: 600,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        // TODO 描述里未能识别的效果：
+        // 　　　　　　　　　　　条件效果未结构化：若敌人为主要目标，则改为造成相当于自身攻击力250%的物理伤害
+        // 　　　　　　　　　　　条件效果未结构化：若敌人为主要目标，则改为造成相当于自身攻击力300%的物理伤害
+        // 　　　　　　　　　　　条件效果未结构化：若敌人为主要目标，则改为造成相当于自身攻击力350%的物理伤害
+        // 　　　　　　　　　　　条件效果未结构化：若敌人为主要目标，则改为造成相当于自身攻击力400%的物理伤害
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -122,15 +192,85 @@ const anastasia: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/9059.png',
       description:
-        '1回合内，自身致命伤害增加350%。攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。若敌人为主要目标，则改为造成相当于自身攻击力55%的物理伤害。',
+        '&-effect/buff/0/duration-&回合内，自身致命伤害增加&-effect/buff/0/critical-&%。攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。若敌人为主要目标，则改为造成相当于自身攻击力55%的物理伤害。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 30 }, // +0
-        1: { sp: 0, cd: 0, multiplying: 30 }, // +1
-        2: { sp: 0, cd: 0, multiplying: 35 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 35 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 40 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 40 }, // +5
-        // TODO 描述里识别到的效果：自身爆伤350%（1回合） | 自身爆伤450%（1回合） | 自身爆伤600%（1回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 30,
+          buff: [
+            {
+              duration: 1,
+              critical: 350,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: 0,
+          multiplying: 30,
+          buff: [
+            {
+              duration: 1,
+              critical: 450,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: 0,
+          multiplying: 35,
+          buff: [
+            {
+              duration: 1,
+              critical: 450,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 35,
+          buff: [
+            {
+              duration: 1,
+              critical: 450,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 40,
+          buff: [
+            {
+              duration: 1,
+              critical: 450,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 40,
+          buff: [
+            {
+              duration: 1,
+              critical: 600,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        // TODO 描述里未能识别的效果：
+        // 　　　　　　　　　　　条件效果未结构化：若敌人为主要目标，则改为造成相当于自身攻击力55%的物理伤害
+        // 　　　　　　　　　　　条件效果未结构化：若敌人为主要目标，则改为造成相当于自身攻击力60%的物理伤害
+        // 　　　　　　　　　　　条件效果未结构化：若敌人为主要目标，则改为造成相当于自身攻击力70%的物理伤害
+        // 　　　　　　　　　　　条件效果未结构化：若敌人为主要目标，则改为造成相当于自身攻击力80%的物理伤害
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -148,10 +288,12 @@ const anastasia: characterDataObj = {
         burst1: {
           sp: 1, // 消耗SP
           description: '主要目标伤害量+45%',
+          multiplying: 45,
         },
         burst2: {
           sp: 1, // 消耗SP
           description: '主要目标伤害量+45%',
+          multiplying: 45,
         },
         burst3: {
           sp: 1, // 消耗SP

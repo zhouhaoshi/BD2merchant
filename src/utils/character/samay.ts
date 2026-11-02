@@ -1,6 +1,6 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 593648 / entryId: 122338
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
 
 const samay: characterDataObj = {
   name: 'samay',
@@ -66,15 +66,80 @@ const samay: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/530592.png',
       description:
-        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。4回合内，敌人魔法抵抗减少50%。',
+        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。&-effect/deBuff/0/duration-&回合内，敌人魔法抵抗减少&-effect/deBuff/0/MRESReduce-&%。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 80 }, // +0
-        1: { sp: 0, cd: -4, multiplying: 80 }, // +1
-        2: { sp: 0, cd: -4, multiplying: 100 }, // +2
-        3: { sp: 1, cd: -4, multiplying: 100 }, // +3
-        4: { sp: 1, cd: -4, multiplying: 140 }, // +4
-        5: { sp: 1, cd: -4, multiplying: 200 }, // +5
-        // TODO 描述里识别到的效果：减魔抗50%（4回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 80,
+          deBuff: [
+            {
+              duration: 4,
+              MRESReduce: 50,
+              scope: [],
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: -4,
+          multiplying: 80,
+          deBuff: [
+            {
+              duration: 4,
+              MRESReduce: 50,
+              scope: [],
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: -4,
+          multiplying: 100,
+          deBuff: [
+            {
+              duration: 4,
+              MRESReduce: 50,
+              scope: [],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: -4,
+          multiplying: 100,
+          deBuff: [
+            {
+              duration: 4,
+              MRESReduce: 50,
+              scope: [],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: -4,
+          multiplying: 140,
+          deBuff: [
+            {
+              duration: 4,
+              MRESReduce: 50,
+              scope: [],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: -4,
+          multiplying: 200,
+          deBuff: [
+            {
+              duration: 4,
+              MRESReduce: 50,
+              scope: [],
+            },
+          ],
+        },
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -113,15 +178,153 @@ const samay: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/654593.png',
       description:
-        '2回合内，友军的攻击力增加20%。2回合内，友军的魔法力增加20%。2回合内，每回合结束时，恢复友军相当于自身魔法力25%的生命力。',
+        '&-effect/buff/0/duration-&回合内，友军的攻击力增加&-effect/buff/0/attackAdd-&%。&-effect/buff/1/duration-&回合内，友军的魔法力增加&-effect/buff/1/attackAdd-&%。&-effect/buff/2/duration-&回合内，每回合结束时，恢复友军相当于自身魔法力&-effect/buff/2/HPAdd-&%的生命力。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 0 }, // +0
-        1: { sp: 3, cd: -4, multiplying: 0 }, // +1
-        2: { sp: 3, cd: -4, multiplying: 0 }, // +2
-        3: { sp: 4, cd: -4, multiplying: 0 }, // +3
-        4: { sp: 4, cd: -4, multiplying: 0 }, // +4
-        5: { sp: 4, cd: -4, multiplying: 0 }, // +5
-        // TODO 描述里识别到的效果：友军攻击/魔法力20%（2回合） | 友军攻击/魔法力25%（2回合） | 友军攻击/魔法力35%（2回合） | 友军攻击/魔法力50%（2回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 2,
+              attribute: 'atk',
+              attackAdd: 20,
+              scope: [],
+            },
+            {
+              duration: 2,
+              attribute: 'matk',
+              attackAdd: 20,
+              scope: [],
+            },
+            {
+              duration: 2,
+              HPAdd: 25,
+              scope: [],
+            },
+          ],
+        },
+        1: {
+          sp: 3,
+          cd: -4,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 2,
+              attribute: 'atk',
+              attackAdd: 20,
+              scope: [],
+            },
+            {
+              duration: 2,
+              attribute: 'matk',
+              attackAdd: 20,
+              scope: [],
+            },
+            {
+              duration: 2,
+              HPAdd: 25,
+              scope: [],
+            },
+          ],
+        },
+        2: {
+          sp: 3,
+          cd: -4,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 2,
+              attribute: 'atk',
+              attackAdd: 25,
+              scope: [],
+            },
+            {
+              duration: 2,
+              attribute: 'matk',
+              attackAdd: 25,
+              scope: [],
+            },
+            {
+              duration: 2,
+              HPAdd: 25,
+              scope: [],
+            },
+          ],
+        },
+        3: {
+          sp: 4,
+          cd: -4,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 2,
+              attribute: 'atk',
+              attackAdd: 25,
+              scope: [],
+            },
+            {
+              duration: 2,
+              attribute: 'matk',
+              attackAdd: 25,
+              scope: [],
+            },
+            {
+              duration: 2,
+              HPAdd: 25,
+              scope: [],
+            },
+          ],
+        },
+        4: {
+          sp: 4,
+          cd: -4,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 2,
+              attribute: 'atk',
+              attackAdd: 35,
+              scope: [],
+            },
+            {
+              duration: 2,
+              attribute: 'matk',
+              attackAdd: 35,
+              scope: [],
+            },
+            {
+              duration: 2,
+              HPAdd: 25,
+              scope: [],
+            },
+          ],
+        },
+        5: {
+          sp: 4,
+          cd: -4,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 2,
+              attribute: 'atk',
+              attackAdd: 50,
+              scope: [],
+            },
+            {
+              duration: 2,
+              attribute: 'matk',
+              attackAdd: 50,
+              scope: [],
+            },
+            {
+              duration: 2,
+              HPAdd: 25,
+              scope: [],
+            },
+          ],
+        },
+        // TODO 待人工复核：没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {

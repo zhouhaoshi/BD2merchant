@@ -1,6 +1,6 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 593624 / entryId: 122358
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
 
 const lecliss: characterDataObj = {
   name: 'lecliss',
@@ -60,15 +60,112 @@ const lecliss: characterDataObj = {
       // Q版形象（wiki 原图）
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/605794.png',
-      description: '2回合内，对自己应用45%的防护罩效果。2回合内，对自己应用挑衅效果。',
+      description:
+        '&-effect/buff/0/duration-&回合内，对自己应用&-effect/buff/0/damageReduction-&%的防护罩效果。2回合内，对自己应用挑衅效果。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 0 }, // +0
-        1: { sp: 0, cd: 0, multiplying: 0 }, // +1
-        2: { sp: 0, cd: 0, multiplying: 0 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 0 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 0 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 0 }, // +5
-        // TODO 描述里识别到的效果：护盾（2回合） | 挑衅（2回合） | 护盾（4回合） | 挑衅（4回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 2,
+              damageReduction: 45,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 2,
+              provocation: 1,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 2,
+              damageReduction: 55,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 2,
+              provocation: 1,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 2,
+              damageReduction: 65,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 2,
+              provocation: 1,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 2,
+              damageReduction: 65,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 2,
+              provocation: 1,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 2,
+              damageReduction: 75,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 2,
+              provocation: 1,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 4,
+              damageReduction: 75,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 4,
+              provocation: 1,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        // TODO 待人工复核：没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -114,15 +211,112 @@ const lecliss: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/272668.png',
       description:
-        '4回合内，自身遭受攻击时，将进行反击。每次反击时，对敌人造成相当于自身最大生命力15%的物理伤害。4回合内，对自己应用相当于最大生命力65%的能量护盾效果。',
+        '4回合内，自身遭受攻击时，将进行反击。每次反击时，对敌人造成相当于自身最大生命力&-effect/multiplying-&%的物理伤害。&-effect/buff/1/duration-&回合内，对自己应用相当于最大生命力&-effect/buff/1/shield-&%的能量护盾效果。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 0 }, // +0
-        1: { sp: 0, cd: 0, multiplying: 0 }, // +1
-        2: { sp: 0, cd: 0, multiplying: 0 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 0 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 0 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 0 }, // +5
-        // TODO 描述里识别到的效果：反击（4回合） | 护盾（4回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 15,
+          buff: [
+            {
+              duration: 4,
+              hit: 1,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 4,
+              shield: 65,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: 0,
+          multiplying: 15,
+          buff: [
+            {
+              duration: 4,
+              hit: 1,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 4,
+              shield: 100,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: 0,
+          multiplying: 25,
+          buff: [
+            {
+              duration: 4,
+              hit: 1,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 4,
+              shield: 100,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 25,
+          buff: [
+            {
+              duration: 4,
+              hit: 1,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 4,
+              shield: 100,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 35,
+          buff: [
+            {
+              duration: 4,
+              hit: 1,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 4,
+              shield: 100,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 35,
+          buff: [
+            {
+              duration: 4,
+              hit: 1,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 4,
+              shield: 125,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        // TODO 描述里未能识别的效果：每次反击时，对敌人
+        // TODO 待人工复核：没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {

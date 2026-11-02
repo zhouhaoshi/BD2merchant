@@ -364,6 +364,92 @@ const blade: characterDataObj = {
         },
       },
     },
+    // 服装：温泉剑客 / 技能：皎月流辉
+    moonlight: {
+      name: 'moonlight',
+      cName: '温泉剑客',
+      target: 'enemy',
+      sp: -4,
+      cd: 5,
+      chain: 1,
+      scope: [
+        [0, 0],
+        [-1, 1],
+        [0, 1],
+        [0, 2],
+        [1, 1],
+      ], // 攻击访问，二维坐标系存储。直接命中目标为[0,0]
+      image: 'Blade_3_idle', // 图片形象
+      qimage: 'Blade_3_idle', // q版形象
+      description:
+        '对敌人造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。此时，敌方的减益效果数量每增加1个时，将额外增加相当于攻击力&-effect/extraMultiplying-&%的伤害量。',
+      effect: {
+        // 技能效果
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 350,
+          extraMultiplying: 70,
+        },
+        1: {
+          sp: -1,
+          cd: 0,
+          multiplying: 350,
+          extraMultiplying: 70,
+        },
+        2: {
+          sp: -1,
+          cd: 0,
+          multiplying: 425,
+          extraMultiplying: 70,
+        },
+        3: {
+          sp: -1,
+          cd: 0,
+          multiplying: 425,
+          extraMultiplying: 90,
+        },
+        4: {
+          sp: -1,
+          cd: 0,
+          multiplying: 500,
+          extraMultiplying: 90,
+        },
+        5: {
+          sp: -1,
+          cd: 0,
+          multiplying: 500,
+          extraMultiplying: 110,
+        },
+      },
+      // 技能觉醒效果
+      skillPotentials: {
+        potentials1: {
+          multiplying: 50,
+          description: '伤害倍率+50%',
+        },
+        potentials2: {
+          multiplying: 50,
+          description: '伤害倍率+50%',
+        },
+        potentials3: {
+          extraMultiplying: 10,
+          description: '额外伤害倍率+10%',
+        },
+      },
+      // 服装能力
+      ability: {
+        Permanent: {
+          // 通用属性
+          PATK: 5.2, // 百分比攻击力
+        },
+        Bonding: {
+          // 绑定属性
+          PATK: 66.2, // 百分比攻击力
+          CDMG: 47.2, // 爆伤
+        },
+      },
+    },
   },
 }
 

@@ -1,6 +1,6 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 600786 / entryId: 127664
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
 
 const glacia: characterDataObj = {
   name: 'glacia',
@@ -63,13 +63,115 @@ const glacia: characterDataObj = {
       description:
         '2回合内，对自己应用挑衅效果。2回合内，对自己应用相当于自身魔法力200%的能量护盾效果。4回合内，对自己应用复活效果。死亡时，将以100%的生命力复活，并在2回合内，对自己应用挑衅效果。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 0 }, // +0
-        1: { sp: 0, cd: 0, multiplying: 0 }, // +1
-        2: { sp: 0, cd: 0, multiplying: 0 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 0 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 0 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 0 }, // +5
-        // TODO 描述里识别到的效果：挑衅（2回合） | 护盾（2回合） | 挑衅（4回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 2,
+              provocation: 1,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 2,
+              provocation: 1,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 2,
+              provocation: 1,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 2,
+              provocation: 1,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 2,
+              provocation: 1,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 2,
+              provocation: 1,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 2,
+              provocation: 1,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 2,
+              provocation: 1,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 2,
+              provocation: 1,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 2,
+              provocation: 1,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 4,
+              provocation: 1,
+              scope: [[0, 0]],
+            },
+            {
+              duration: 2,
+              provocation: 1,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        // TODO 描述里未能识别的效果：，对自己应用相当于自身魔法力200%的能量护盾效果
+        // 　　　　　　　　　　　，对自己应用复活效果 | 死亡时，将以100%的生命力复活，并在
+        // 　　　　　　　　　　　，对自己应用相当于自身魔法力400%的能量护盾效果
+        // 　　　　　　　　　　　，对自己应用相当于自身魔法力600%的能量护盾效果
+        // 　　　　　　　　　　　，对自己应用相当于自身魔法力800%的能量护盾效果
+        // 　　　　　　　　　　　，对自己应用相当于自身魔法力1000%的能量护盾效果
+        // TODO 待人工复核：没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -127,7 +229,7 @@ const glacia: characterDataObj = {
         3: { sp: 1, cd: 0, multiplying: 260 }, // +3
         4: { sp: 1, cd: 0, multiplying: 290 }, // +4
         5: { sp: 1, cd: 0, multiplying: 320 }, // +5
-        // TODO 描述里识别到的效果：护盾（2回合）
+        // TODO 描述里未能识别的效果：，对自己应用50%的魔法防护罩效果
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -191,6 +293,8 @@ const glacia: characterDataObj = {
         3: { sp: 1, cd: 0, multiplying: 120 }, // +3
         4: { sp: 1, cd: 0, multiplying: 120 }, // +4
         5: { sp: 1, cd: 0, multiplying: 140 }, // +5
+        // TODO 描述里未能识别的效果：，对敌人应用6的连携保留效果 | ，对敌人应用9的连携保留效果
+        // 　　　　　　　　　　　，对敌人应用12的连携保留效果
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -220,6 +324,7 @@ const glacia: characterDataObj = {
         burst3: {
           sp: 1, // 消耗SP
           description: '[额外能力]使自身获得1层连携强化，持续2回合',
+          duration: 2,
         },
       },
       // 服装能力

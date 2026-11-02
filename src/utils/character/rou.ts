@@ -1,6 +1,9 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 593586 / entryId: 122347
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
+
+
+import { dotBuffType } from '@/utils/globals'
 
 const rou: characterDataObj = {
   name: 'rou',
@@ -58,28 +61,120 @@ const rou: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/279158.png',
       description:
-        '2回合内，自身有75%的概率闪避敌人的攻击。每次成功闪避时，成功闪避后续攻击的概率将减少5%。对敌人造成1的物理伤害，并将目标向后方击退3格。对被撞击的敌人造成相当于被推开目标最大生命力100%的物理伤害。6回合内，对敌人应用造成相当于自身攻击力&-effect/multiplying-&%的物理伤害的出血效果。',
+        '2回合内，自身有75%的概率闪避敌人的攻击。每次成功闪避时，成功闪避后续攻击的概率将减少5%。对敌人造成1的物理伤害，并将目标向后方击退&-effect/repellingDistance-&格。对被撞击的敌人造成相当于被推开目标最大生命力&-effect/repellingMultiplying-&%的物理伤害。&-effect/dotBuff/0/duration-&回合内，对敌人应用造成相当于自身攻击力&-effect/dotBuff/0/dotMultiplying-&的物理伤害的出血效果。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 75 }, // +0
-        1: { sp: 0, cd: 0, multiplying: 125 }, // +1
-        2: { sp: 0, cd: 0, multiplying: 125 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 125 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 125 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 175 }, // +5
-        // TODO 描述里识别到的效果：闪避（2回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          repellingDirection: [0, -1],
+          repellingDistance: 3,
+          repellingMultiplying: 100,
+          dotBuff: [
+            {
+              type: dotBuffType.bleed,
+              scope: [],
+              duration: 6,
+              dotMultiplying: 75,
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          repellingDirection: [0, -1],
+          repellingDistance: 3,
+          repellingMultiplying: 100,
+          dotBuff: [
+            {
+              type: dotBuffType.bleed,
+              scope: [],
+              duration: 6,
+              dotMultiplying: 125,
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          repellingDirection: [0, -1],
+          repellingDistance: 3,
+          repellingMultiplying: 150,
+          dotBuff: [
+            {
+              type: dotBuffType.bleed,
+              scope: [],
+              duration: 6,
+              dotMultiplying: 125,
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 0,
+          repellingDirection: [0, -1],
+          repellingDistance: 3,
+          repellingMultiplying: 150,
+          dotBuff: [
+            {
+              type: dotBuffType.bleed,
+              scope: [],
+              duration: 6,
+              dotMultiplying: 125,
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 0,
+          repellingDirection: [0, -1],
+          repellingDistance: 3,
+          repellingMultiplying: 200,
+          dotBuff: [
+            {
+              type: dotBuffType.bleed,
+              scope: [],
+              duration: 6,
+              dotMultiplying: 125,
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 0,
+          repellingDirection: [0, -1],
+          repellingDistance: 3,
+          repellingMultiplying: 200,
+          dotBuff: [
+            {
+              type: dotBuffType.bleed,
+              scope: [],
+              duration: 6,
+              dotMultiplying: 175,
+            },
+          ],
+        },
+        // TODO 描述里未能识别的效果：，自身有75%的概率闪避敌人的攻击
+        // 　　　　　　　　　　　每次成功闪避时，成功闪避后续攻击的概率将减少5%
+        // TODO 待人工复核：没有解析到技能倍率 | 没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {
         potentials1: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
+          dotMultiplying: 20,
           description: '出血效果倍率+20%',
         },
         potentials2: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
+          dotMultiplying: 20,
           description: '出血效果倍率+20%',
         },
         potentials3: {
-          // TODO: 该潜力不是通用数值，需要在 buff/deBuff 里手工补
+          repellingMultiplying: 12,
           description: '撞击伤害倍率+12%',
         },
       },
@@ -113,15 +208,116 @@ const rou: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/376597.png',
       description:
-        '6回合内，友军的暴击率增加30%。6回合内，友军的暴击伤害增加150%。4回合内，队友军应用相当于自身最大生命力50%的能量护盾效果。',
+        '&-effect/buff/0/duration-&回合内，友军的暴击率增加&-effect/buff/0/CRAdd-&%。&-effect/buff/1/duration-&回合内，友军的暴击伤害增加&-effect/buff/1/critical-&%。4回合内，队友军应用相当于自身最大生命力50%的能量护盾效果。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 0 }, // +0
-        1: { sp: 0, cd: 0, multiplying: 0 }, // +1
-        2: { sp: 0, cd: 0, multiplying: 0 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 0 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 0 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 0 }, // +5
-        // TODO 描述里识别到的效果：护盾（4回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 6,
+              CRAdd: 30,
+              scope: [],
+            },
+            {
+              duration: 6,
+              critical: 150,
+              scope: [],
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 6,
+              CRAdd: 40,
+              scope: [],
+            },
+            {
+              duration: 6,
+              critical: 150,
+              scope: [],
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 6,
+              CRAdd: 50,
+              scope: [],
+            },
+            {
+              duration: 6,
+              critical: 150,
+              scope: [],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 6,
+              CRAdd: 50,
+              scope: [],
+            },
+            {
+              duration: 6,
+              critical: 150,
+              scope: [],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 6,
+              CRAdd: 50,
+              scope: [],
+            },
+            {
+              duration: 6,
+              critical: 225,
+              scope: [],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 0,
+          buff: [
+            {
+              duration: 6,
+              CRAdd: 50,
+              scope: [],
+            },
+            {
+              duration: 6,
+              critical: 300,
+              scope: [],
+            },
+          ],
+        },
+        // TODO 描述里未能识别的效果：，队友军应用相当于自身最大生命力50%的能量护盾效果
+        // 　　　　　　　　　　　，队友军应用相当于自身最大生命力60%的能量护盾效果
+        // 　　　　　　　　　　　，对友军应用相当于自身最大生命力70%的能量护盾效果
+        // 　　　　　　　　　　　，对友军应用相当于自身最大生命力95%的能量护盾效果
+        // 　　　　　　　　　　　，对友军应用相当于自身最大生命力120%的能量护盾效果
+        // TODO 待人工复核：没有解析到技能倍率 | 没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -175,7 +371,9 @@ const rou: characterDataObj = {
         3: { sp: 1, cd: 0, multiplying: 19 }, // +3
         4: { sp: 1, cd: 0, multiplying: 21 }, // +4
         5: { sp: 1, cd: 0, multiplying: 23 }, // +5
-        // TODO 描述里识别到的效果：闪避（2回合）
+        // TODO 描述里未能识别的效果：，自身有75%的概率闪避敌人的攻击
+        // 　　　　　　　　　　　每次成功闪避攻击时，成功闪避后续攻击的概率将减少5%
+        // TODO 待人工复核：描述里有增益/减益关键词，但没解析成 buff
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -229,15 +427,81 @@ const rou: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/558550.png',
       description:
-        '1回合内，自身暴击率增加50%。对敌人造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。',
+        '&-effect/buff/0/duration-&回合内，自身暴击率增加&-effect/buff/0/CRAdd-&%。对敌人造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 350 }, // +0
-        1: { sp: 0, cd: 0, multiplying: 400 }, // +1
-        2: { sp: 0, cd: 0, multiplying: 450 }, // +2
-        3: { sp: 0, cd: 0, multiplying: 500 }, // +3
-        4: { sp: 0, cd: 0, multiplying: 550 }, // +4
-        5: { sp: 0, cd: 0, multiplying: 600 }, // +5
-        // TODO 描述里识别到的效果：自身致命率50%（1回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 350,
+          buff: [
+            {
+              duration: 1,
+              CRAdd: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: 0,
+          multiplying: 400,
+          buff: [
+            {
+              duration: 1,
+              CRAdd: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: 0,
+          multiplying: 450,
+          buff: [
+            {
+              duration: 1,
+              CRAdd: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        3: {
+          sp: 0,
+          cd: 0,
+          multiplying: 500,
+          buff: [
+            {
+              duration: 1,
+              CRAdd: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        4: {
+          sp: 0,
+          cd: 0,
+          multiplying: 550,
+          buff: [
+            {
+              duration: 1,
+              CRAdd: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        5: {
+          sp: 0,
+          cd: 0,
+          multiplying: 600,
+          buff: [
+            {
+              duration: 1,
+              CRAdd: 50,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        // TODO 待人工复核：没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {

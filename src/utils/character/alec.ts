@@ -1,6 +1,6 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 593614 / entryId: 122354
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
 
 const alec: characterDataObj = {
   name: 'alec',
@@ -71,6 +71,7 @@ const alec: characterDataObj = {
         3: { sp: 1, cd: 0, multiplying: 625 }, // +3
         4: { sp: 1, cd: 0, multiplying: 725 }, // +4
         5: { sp: 1, cd: 0, multiplying: 800 }, // +5
+        // TODO 待人工复核：没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {

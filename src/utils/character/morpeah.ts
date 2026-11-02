@@ -1,6 +1,6 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 632282 / entryId: 160899
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
 
 const morpeah: characterDataObj = {
   name: 'morpeah',
@@ -49,7 +49,7 @@ const morpeah: characterDataObj = {
     skill1: {
       name: 'skill1', // TODO: wiki 只有中文名，英文 key 需要人工命名
       cName: '海滨度假',
-      target: 'friendly',
+      target: 'enemy',
       sp: -6,
       cd: 3,
       chain: 1,
@@ -63,12 +63,16 @@ const morpeah: characterDataObj = {
       description:
         '【先发制人】通过召唤至友军阵营，生成【崇拜假面】1个。生成【诽谤假面】1个。 崇拜假面：【攻击目标】最前方，【击退】左后方一格，【SP消耗】：0，【CD】：0，【技能】：对最前方的目标使用3格左右范围的自爆技能。【伤害】：自身魔法力的300%。 诽谤假面：【攻击目标】最前方，【击退】右后方一格，【SP消耗】：0，【CD】：0，【技能】：对最前方的目标使用3格穿透范围的自爆技能。【伤害】：自身魔法力的300%。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 0 }, // +0
-        1: { sp: 0, cd: 0, multiplying: 0 }, // +1
-        2: { sp: 0, cd: 0, multiplying: 0 }, // +2
-        3: { sp: 0, cd: 0, multiplying: 0 }, // +3
-        4: { sp: 0, cd: 0, multiplying: 0 }, // +4
-        5: { sp: 0, cd: 0, multiplying: 0 }, // +5
+        0: { sp: 0, cd: 0, multiplying: 0, lifemanship: 1 }, // +0
+        1: { sp: 0, cd: 0, multiplying: 0, lifemanship: 1 }, // +1
+        2: { sp: 0, cd: 0, multiplying: 0, lifemanship: 1 }, // +2
+        3: { sp: 0, cd: 0, multiplying: 0, lifemanship: 1 }, // +3
+        4: { sp: 0, cd: 0, multiplying: 0, lifemanship: 1 }, // +4
+        5: { sp: 0, cd: 0, multiplying: 0, lifemanship: 1 }, // +5
+        // TODO 描述里未能识别的效果：通过召唤至友军阵营，生成【崇拜假面】1个
+        // 　　　　　　　　　　　崇拜假面：【攻击目标】最前方，【击退】左后方一格，【SP消耗】：0，【CD】：0…
+        // 　　　　　　　　　　　诽谤假面：【攻击目标】最前方，【击退】右后方一格，【SP消耗】：0，【CD】：0…
+        // TODO 待人工复核：没有解析到技能倍率 | 没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -103,7 +107,7 @@ const morpeah: characterDataObj = {
     skill2: {
       name: 'skill2', // TODO: wiki 只有中文名，英文 key 需要人工命名
       cName: '白日梦兔女郎',
-      target: 'friendly',
+      target: 'enemy',
       sp: -3,
       cd: 5,
       chain: 1,
@@ -123,6 +127,10 @@ const morpeah: characterDataObj = {
         3: { sp: 0, cd: 0, multiplying: 0 }, // +3
         4: { sp: 0, cd: 0, multiplying: 0 }, // +4
         5: { sp: 0, cd: 0, multiplying: 0 }, // +5
+        // TODO 描述里未能识别的效果：通过召唤至友军阵营，生成【兔女郎之魂】1个
+        // 　　　　　　　　　　　兔女郎之魂：【攻击目标】最前方，【击退】右后方一格，【SP消耗】：0，【CD】：…
+        // TODO 待人工复核：没有解析到技能倍率 | 没有解析到连锁次数
+        // 　　　　　　描述里有增益/减益关键词，但没解析成 buff
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -187,6 +195,13 @@ const morpeah: characterDataObj = {
         3: { sp: 1, cd: 0, multiplying: 150 }, // +3
         4: { sp: 1, cd: 0, multiplying: 175 }, // +4
         5: { sp: 1, cd: 0, multiplying: 200 }, // +5
+        // TODO 描述里未能识别的效果：，对主要目标敌人应用集中射击效果
+        // 　　　　　　　　　　　，对敌人应用100%的召唤兽虚弱效果
+        // 　　　　　　　　　　　，对敌人应用115%的召唤兽虚弱效果
+        // 　　　　　　　　　　　，对敌人应用130%的召唤兽虚弱效果
+        // 　　　　　　　　　　　，对敌人应用145%的召唤兽虚弱效果
+        // 　　　　　　　　　　　，对敌人应用160%的召唤兽虚弱效果
+        // TODO 待人工复核：没有解析到连锁次数
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -212,10 +227,12 @@ const morpeah: characterDataObj = {
         burst2: {
           sp: 1, // 消耗SP
           description: '伤害量+200%',
+          multiplying: 200,
         },
         burst3: {
           sp: 2, // 消耗SP
           description: '伤害量+400%',
+          multiplying: 400,
         },
       },
       // 服装能力

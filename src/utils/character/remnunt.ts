@@ -1,6 +1,6 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 593575 / entryId: 122324
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
 
 const remnunt: characterDataObj = {
   name: 'remnunt',
@@ -64,14 +64,86 @@ const remnunt: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_120/h_127/50118/497891/2026/1/3/420951.png',
       description:
-        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。4回合内，敌人攻击力减少50%。',
+        '攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。&-effect/deBuff/0/duration-&回合内，敌人攻击力减少&-effect/deBuff/0/attackReduce-&%。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 100 }, // +0
-        1: { sp: 0, cd: -4, multiplying: 100 }, // +1
-        2: { sp: 0, cd: -4, multiplying: 125 }, // +2
-        3: { sp: 1, cd: -4, multiplying: 125 }, // +3
-        4: { sp: 1, cd: -4, multiplying: 175 }, // +4
-        5: { sp: 1, cd: -4, multiplying: 250 }, // +5
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 100,
+          deBuff: [
+            {
+              duration: 4,
+              attribute: 'atk',
+              attackReduce: 50,
+              scope: [],
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: -4,
+          multiplying: 100,
+          deBuff: [
+            {
+              duration: 4,
+              attribute: 'atk',
+              attackReduce: 50,
+              scope: [],
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: -4,
+          multiplying: 125,
+          deBuff: [
+            {
+              duration: 4,
+              attribute: 'atk',
+              attackReduce: 50,
+              scope: [],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: -4,
+          multiplying: 125,
+          deBuff: [
+            {
+              duration: 4,
+              attribute: 'atk',
+              attackReduce: 50,
+              scope: [],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: -4,
+          multiplying: 175,
+          deBuff: [
+            {
+              duration: 4,
+              attribute: 'atk',
+              attackReduce: 50,
+              scope: [],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: -4,
+          multiplying: 250,
+          deBuff: [
+            {
+              duration: 4,
+              attribute: 'atk',
+              attackReduce: 50,
+              scope: [],
+            },
+          ],
+        },
       },
       // 技能觉醒效果
       skillPotentials: {

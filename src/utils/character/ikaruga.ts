@@ -1,6 +1,6 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 701014 / entryId: 213004
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
 
 const ikaruga: characterDataObj = {
   name: 'ikaruga',
@@ -71,14 +71,87 @@ const ikaruga: characterDataObj = {
       qimage:
         'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_128/h_128/50118/497891/2026/3/9/208689.png',
       description:
-        '对自身应用攻击力增加60%的效果。此效果叠加至1。最多可赋予叠加至3。此效果在遭受1次攻击后将消失。攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。',
+        '对自身应用攻击力增加&-effect/buff/0/attackAdd-&%的效果。此效果叠加至1。最多可赋予叠加至3。此效果在遭受1次攻击后将消失。攻击敌人&-chain-&次，每次攻击时，造成相当于自身攻击力&-effect/multiplying-&%的物理伤害。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 40 }, // +0
-        1: { sp: 1, cd: 0, multiplying: 40 }, // +1
-        2: { sp: 1, cd: 0, multiplying: 40 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 60 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 60 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 80 }, // +5
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 40,
+          buff: [
+            {
+              duration: 99,
+              attribute: 'atk',
+              attackAdd: 60,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        1: {
+          sp: 1,
+          cd: 0,
+          multiplying: 40,
+          buff: [
+            {
+              duration: 99,
+              attribute: 'atk',
+              attackAdd: 60,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        2: {
+          sp: 1,
+          cd: 0,
+          multiplying: 40,
+          buff: [
+            {
+              duration: 99,
+              attribute: 'atk',
+              attackAdd: 80,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 60,
+          buff: [
+            {
+              duration: 99,
+              attribute: 'atk',
+              attackAdd: 80,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 60,
+          buff: [
+            {
+              duration: 99,
+              attribute: 'atk',
+              attackAdd: 100,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 80,
+          buff: [
+            {
+              duration: 99,
+              attribute: 'atk',
+              attackAdd: 100,
+              scope: [[0, 0]],
+            },
+          ],
+        },
+        // TODO 描述里未能识别的效果：此效果叠加至1
       },
       // 技能觉醒效果
       skillPotentials: {

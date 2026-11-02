@@ -1,6 +1,6 @@
 // 本文件由「角色抓取」页面自动生成，数据源：gamekee wiki（zsca2 图鉴）
 // contentId: 593577 / entryId: 122345
-// 注意：技能范围 scope 由 wiki 范围图自动识别，buff/deBuff 需要人工复核，标 TODO 的地方请补齐
+// 注意：技能范围 scope 由 wiki 范围图自动识别，描述与 effect 数值由描述文本解析生成，标 TODO 的地方请人工复核
 
 const scheherazade: characterDataObj = {
   name: 'scheherazade',
@@ -74,6 +74,8 @@ const scheherazade: characterDataObj = {
         3: { sp: 1, cd: 0, multiplying: 230 }, // +3
         4: { sp: 1, cd: 0, multiplying: 255 }, // +4
         5: { sp: 1, cd: 0, multiplying: 280 }, // +5
+        // TODO 描述里未能识别的效果：解除应用于敌人的增益效果
+        // TODO 待人工复核：描述里有增益/减益关键词，但没解析成 buff
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -95,14 +97,17 @@ const scheherazade: characterDataObj = {
         burst1: {
           sp: 2, // 消耗SP
           description: '伤害量+80%，增加技能范围。',
+          multiplying: 80,
         },
         burst2: {
           sp: 1, // 消耗SP
           description: '伤害量+80%',
+          multiplying: 80,
         },
         burst3: {
           sp: 1, // 消耗SP
           description: '伤害量+80%',
+          multiplying: 80,
         },
       },
       // 服装能力
@@ -153,6 +158,8 @@ const scheherazade: characterDataObj = {
         3: { sp: 1, cd: 0, multiplying: 55 }, // +3
         4: { sp: 1, cd: 0, multiplying: 65 }, // +4
         5: { sp: 1, cd: 0, multiplying: 75 }, // +5
+        // TODO 描述里未能识别的效果：解除应用于敌人的增益效果
+        // TODO 待人工复核：描述里有增益/减益关键词，但没解析成 buff
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -206,13 +213,79 @@ const scheherazade: characterDataObj = {
       description:
         '攻击敌人&-chain-&次，每次攻击时，造成相当于自身魔法力&-effect/multiplying-&%的魔法伤害。解除应用于敌人的增益效果。2回合内，对敌人应用沉默效果。',
       effect: {
-        0: { sp: 0, cd: 0, multiplying: 95 }, // +0
-        1: { sp: 0, cd: 0, multiplying: 120 }, // +1
-        2: { sp: 0, cd: 0, multiplying: 145 }, // +2
-        3: { sp: 1, cd: 0, multiplying: 145 }, // +3
-        4: { sp: 1, cd: 0, multiplying: 165 }, // +4
-        5: { sp: 1, cd: 0, multiplying: 185 }, // +5
-        // TODO 描述里识别到的效果：沉默（2回合）
+        0: {
+          sp: 0,
+          cd: 0,
+          multiplying: 95,
+          deBuff: [
+            {
+              duration: 2,
+              silence: 1,
+              scope: [],
+            },
+          ],
+        },
+        1: {
+          sp: 0,
+          cd: 0,
+          multiplying: 120,
+          deBuff: [
+            {
+              duration: 2,
+              silence: 1,
+              scope: [],
+            },
+          ],
+        },
+        2: {
+          sp: 0,
+          cd: 0,
+          multiplying: 145,
+          deBuff: [
+            {
+              duration: 2,
+              silence: 1,
+              scope: [],
+            },
+          ],
+        },
+        3: {
+          sp: 1,
+          cd: 0,
+          multiplying: 145,
+          deBuff: [
+            {
+              duration: 2,
+              silence: 1,
+              scope: [],
+            },
+          ],
+        },
+        4: {
+          sp: 1,
+          cd: 0,
+          multiplying: 165,
+          deBuff: [
+            {
+              duration: 2,
+              silence: 1,
+              scope: [],
+            },
+          ],
+        },
+        5: {
+          sp: 1,
+          cd: 0,
+          multiplying: 185,
+          deBuff: [
+            {
+              duration: 2,
+              silence: 1,
+              scope: [],
+            },
+          ],
+        },
+        // TODO 描述里未能识别的效果：解除应用于敌人的增益效果
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -273,6 +346,14 @@ const scheherazade: characterDataObj = {
         3: { sp: 1, cd: 0, multiplying: 46 }, // +3
         4: { sp: 1, cd: 0, multiplying: 53 }, // +4
         5: { sp: 1, cd: 0, multiplying: 60 }, // +5
+        // TODO 描述里未能识别的效果：
+        // 　　　　　　　　　　　条件效果未结构化：若此攻击对敌人叠加的连携数量为15或以上，则改为造成相当于自身魔法力140%的魔法伤害
+        // 　　　　　　　　　　　解除应用于敌人的增益效果
+        // 　　　　　　　　　　　条件效果未结构化：若此攻击对敌人叠加的连携数量为15或以上，则改为造成相当于自身魔法力160%的魔法伤害
+        // 　　　　　　　　　　　条件效果未结构化：若此攻击对敌人叠加的连携数量为15或以上，则改为造成相当于自身魔法力180%的魔法伤害
+        // 　　　　　　　　　　　条件效果未结构化：若此攻击对敌人叠加的连携数量为15或以上，则改为造成相当于自身魔法力200%的魔法伤害
+        // 　　　　　　　　　　　条件效果未结构化：若此攻击对敌人叠加的连携数量为15或以上，则改为造成相当于自身魔法力220%的魔法伤害
+        // TODO 待人工复核：描述里有增益/减益关键词，但没解析成 buff
       },
       // 技能觉醒效果
       skillPotentials: {
@@ -294,10 +375,12 @@ const scheherazade: characterDataObj = {
         burst1: {
           sp: 2, // 消耗SP
           description: '敌人连携数达到15及以上时，伤害量+160%',
+          multiplying: 160,
         },
         burst2: {
           sp: 1, // 消耗SP
           description: '敌人连携数达到15及以上时，伤害量+80%',
+          multiplying: 80,
         },
         burst3: {
           sp: 1, // 消耗SP
